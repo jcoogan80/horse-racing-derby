@@ -470,6 +470,33 @@
 
   <div id="tb-results"></div>
 
+  <!-- ── Will-Pay Estimator ── -->
+  <div class="card" style="margin-top:4px">
+    <h2>Will-Pay Estimator</h2>
+    <p style="font-size:.78rem;color:var(--dim);margin-bottom:14px">
+      Project a longer Pick exotic from a shorter one's live will-pay. Uses the track selected above.
+    </p>
+    <div class="field-row">
+      <label>Mode</label>
+      <select id="wp-mode" onchange="updateWpLegs()">
+        <option value="p3_to_p4">P3 &rarr; P4</option>
+        <option value="p3_to_p5">P3 &rarr; P5</option>
+        <option value="p4_to_p5">P4 &rarr; P5</option>
+      </select>
+    </div>
+    <div class="field-row">
+      <label>Current Will-Pay ($)</label>
+      <input type="number" id="wp-willpay" inputmode="decimal" min="1" placeholder="250" step="any">
+    </div>
+    <div id="wp-legs"></div>
+    <p style="font-size:.75rem;color:var(--dim);margin-bottom:14px">
+      Odds format: <code>5/2</code> &nbsp; <code>10-1</code> &nbsp; <code>2.5</code> &nbsp; <code>even</code>
+    </p>
+    <button class="btn-primary" onclick="calcWillPay()">ESTIMATE PAYOUT</button>
+  </div>
+
+  <div id="wp-result"></div>
+
 </div>
 
 <!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
@@ -1173,6 +1200,127 @@ function renderProfiles() {
 }
 
 // =============================================================
+//  WILL-PAY ESTIMATOR
+// =============================================================
+const WP_EXTRA_LEGS = { p3_to_p4: 1, p3_to_p5: 2, p4_to_p5: 1 };
+const WP_DEFAULTS   = {
+  p3_to_p4: { mean: 3.0, median: 3.0, max: 6.0,  sample: 0, confidence: 'LOW' },
+  p3_to_p5: { mean: 4.5, median: 4.5, max: 9.0,  sample: 0, confidence: 'LOW' },
+  p4_to_p5: { mean: 1.8, median: 1.8, max: 3.6,  sample: 0, confidence: 'LOW' },
+};
+
+function updateWpLegs() {
+  const mode = document.getElementById('wp-mode').value;
+  const n    = WP_EXTRA_LEGS[mode];
+  const wrap = document.getElementById('wp-legs');
+  let html   = '';
+  for (let i = 1; i <= n; i++) {
+    html += `<div class="field-row">
+      <label>Extra Leg ${i} Odds</label>
+      <input type="text" id="wp-leg-${i}" inputmode="decimal"
+             placeholder="5/2" autocomplete="off" autocorrect="off" spellcheck="false">
+    </div>`;
+  }
+  wrap.innerHTML = html;
+  document.getElementById('wp-result').innerHTML = '';
+}
+
+function calcWillPay() {
+  const track  = document.getElementById('tb-track').value;
+  const mode   = document.getElementById('wp-mode').value;
+  const wpRaw  = parseFloat(document.getElementById('wp-willpay').value);
+  const nLegs  = WP_EXTRA_LEGS[mode];
+
+  if (!track) { alert('Select a track in the Ticket Builder above first.'); return; }
+  if (!wpRaw || wpRaw <= 0) { alert('Enter a Current Will-Pay amount greater than zero.'); return; }
+
+  // Collect remaining leg odds and convert to payoff-per-dollar
+  const legFactors = [];
+  for (let i = 1; i <= nLegs; i++) {
+    const val = (document.getElementById(`wp-leg-${i}`) || {}).value;
+    if (!val || !val.trim()) { alert(`Enter odds for Extra Leg ${i}.`); return; }
+    const m = parseOdds(val.trim());
+    if (m === null || m < 0) { alert(`Invalid odds for Extra Leg ${i}: "${val}"`); return; }
+    legFactors.push(m + 1);
+  }
+  const legFactor = legFactors.reduce((a, b) => a * b, 1);
+
+  // Look up track multiplier data; fall back to cross-track mean; then hardcoded defaults
+  const allWm  = (window._dashData && window._dashData.willpay_multipliers) || {};
+  let mData    = (allWm[track] && allWm[track][mode]) || null;
+  let dataNote;
+
+  if (mData) {
+    dataNote = `${track} historical data (${mData.sample} sample${mData.sample !== 1 ? 's' : ''})`;
+  } else {
+    // Cross-track fallback: average each stat across all tracks that have data for this mode
+    const others = Object.values(allWm).map(t => t[mode]).filter(Boolean);
+    if (others.length) {
+      const avg = arr => arr.reduce((a, b) => a + b, 0) / arr.length;
+      mData = {
+        mean:       Math.round(avg(others.map(o => o.mean))   * 1000) / 1000,
+        median:     Math.round(avg(others.map(o => o.median)) * 1000) / 1000,
+        max:        Math.round(avg(others.map(o => o.max))    * 1000) / 1000,
+        sample:     0,
+        confidence: 'LOW',
+      };
+      dataNote = `Cross-track average (no ${track} data yet — ${others.length} other track${others.length !== 1 ? 's' : ''})`;
+    } else {
+      mData    = WP_DEFAULTS[mode];
+      dataNote = 'Built-in defaults (no historical data available)';
+    }
+  }
+
+  const est  = wpRaw * legFactor * mData.mean;
+  const low  = wpRaw * legFactor * mData.median;
+  const high = wpRaw * legFactor * (mData.max / 2);
+  const conf = mData.confidence;
+
+  let rec, recColor;
+  if (est >= 2000 && conf === 'HIGH') {
+    rec      = 'Strong value signal — consider pressing';
+    recColor = 'var(--green)';
+  } else if (est >= 500) {
+    rec      = 'Moderate — evaluate the field';
+    recColor = 'var(--yellow)';
+  } else {
+    rec      = 'Crowded pool or thin data — hedge carefully';
+    recColor = 'var(--red)';
+  }
+
+  const modeLabel = { p3_to_p4: 'P3 \u2192 P4', p3_to_p5: 'P3 \u2192 P5', p4_to_p5: 'P4 \u2192 P5' }[mode];
+  const fmtM = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 0, maximumFractionDigits: 0 });
+
+  document.getElementById('wp-result').innerHTML = `
+    <div class="card">
+      <h2>Will-Pay Estimate &mdash; ${modeLabel}</h2>
+      <p style="font-size:.76rem;color:var(--dim);margin-bottom:12px">${track} &bull; ${dataNote}</p>
+      <div class="stats-grid">
+        <div class="stat-box" style="grid-column:span 2">
+          <div class="val" style="font-size:1.7rem">${fmtM(est)}</div>
+          <div class="lbl">Estimated Payout (mean multiplier ${mData.mean.toFixed(2)}x)</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" style="color:var(--dim);font-size:1.1rem">${fmtM(low)}</div>
+          <div class="lbl">Low (median ${mData.median.toFixed(2)}x)</div>
+        </div>
+        <div class="stat-box">
+          <div class="val" style="color:var(--gold-lt);font-size:1.1rem">${fmtM(high)}</div>
+          <div class="lbl">High (max/2 &mdash; ${(mData.max / 2).toFixed(2)}x)</div>
+        </div>
+      </div>
+      <div style="margin:12px 0 10px;display:flex;gap:8px;align-items:center;flex-wrap:wrap">
+        <span class="badge badge-${conf}">${conf} CONFIDENCE</span>
+        ${mData.sample > 0 ? `<span style="font-size:.77rem;color:var(--dim)">${mData.sample} overlapping span pair${mData.sample !== 1 ? 's' : ''}</span>` : ''}
+      </div>
+      <div style="background:var(--card2);border-radius:8px;padding:12px;font-size:.9rem;color:${recColor};font-weight:600;line-height:1.4">
+        ${rec}
+      </div>
+    </div>`;
+  document.getElementById('wp-result').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// =============================================================
 //  SERVICE WORKER REGISTRATION
 // =============================================================
 if ('serviceWorker' in navigator) {
@@ -1187,6 +1335,7 @@ if ('serviceWorker' in navigator) {
 // =============================================================
 loadDashboard();
 renderProfiles();
+updateWpLegs();
 </script>
 </body>
 </html>

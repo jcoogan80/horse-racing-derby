@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22 13:42",
+  "last_updated": "2026-04-22 15:40",
   "db_summary": {
     "total_tracks": 4,
     "total_race_days": 23,
@@ -1491,6 +1491,112 @@
           "consistency": "HIGH",
           "thin_sample": true
         }
+      }
+    }
+  },
+  "willpay_multipliers": {
+    "AQU": {
+      "p3_to_p4": {
+        "mean": 5.144,
+        "median": 1.969,
+        "min": 0.67,
+        "max": 40.045,
+        "sample": 20,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 22.141,
+        "median": 7.064,
+        "min": 1.741,
+        "max": 190.724,
+        "sample": 21,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 4.997,
+        "median": 3.731,
+        "min": 1.412,
+        "max": 20.488,
+        "sample": 17,
+        "confidence": "HIGH"
+      }
+    },
+    "GP": {
+      "p3_to_p4": {
+        "mean": 4.249,
+        "median": 1.971,
+        "min": 0.068,
+        "max": 36.482,
+        "sample": 77,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 27.719,
+        "median": 10.23,
+        "min": 0.393,
+        "max": 587.571,
+        "sample": 70,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 6.953,
+        "median": 4.512,
+        "min": 1.136,
+        "max": 20.7,
+        "sample": 44,
+        "confidence": "HIGH"
+      }
+    },
+    "KEE": {
+      "p3_to_p4": {
+        "mean": 4.517,
+        "median": 1.851,
+        "min": 0.197,
+        "max": 40.281,
+        "sample": 40,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 13.172,
+        "median": 1.588,
+        "min": 0.007,
+        "max": 183.019,
+        "sample": 38,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 1.771,
+        "median": 0.15,
+        "min": 0.012,
+        "max": 9.874,
+        "sample": 24,
+        "confidence": "HIGH"
+      }
+    },
+    "SA": {
+      "p3_to_p4": {
+        "mean": 1.642,
+        "median": 1.173,
+        "min": 0.353,
+        "max": 4.052,
+        "sample": 11,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 15.181,
+        "median": 11.593,
+        "min": 0.77,
+        "max": 57.078,
+        "sample": 13,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 6.587,
+        "median": 5.883,
+        "min": 2.182,
+        "max": 16.661,
+        "sample": 7,
+        "confidence": "HIGH"
       }
     }
   }
