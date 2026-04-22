@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22 13:07",
+  "last_updated": "2026-04-22 13:42",
   "db_summary": {
     "total_tracks": 4,
     "total_race_days": 23,
@@ -14,25 +14,29 @@
         "track": "AQU",
         "days": 8,
         "races": 66,
-        "exotics": 355
+        "exotics": 355,
+        "max_race": 10
       },
       {
         "track": "GP",
         "days": 19,
         "races": 189,
-        "exotics": 1040
+        "exotics": 1040,
+        "max_race": 12
       },
       {
         "track": "KEE",
         "days": 12,
         "races": 115,
-        "exotics": 633
+        "exotics": 633,
+        "max_race": 11
       },
       {
         "track": "SA",
         "days": 3,
         "races": 28,
-        "exotics": 149
+        "exotics": 149,
+        "max_race": 10
       }
     ]
   },
@@ -119,5 +123,1375 @@
       ]
     },
     "SA": {}
+  },
+  "sequences": {
+    "AQU": {
+      "DD": {
+        "1-2": {
+          "times_hit": 8,
+          "avg_payout": 19.41,
+          "median_payout": 16.29,
+          "max_payout": 60.48,
+          "is_overlay": false,
+          "overlay_ratio": 0.65,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3": {
+          "times_hit": 8,
+          "avg_payout": 44.08,
+          "median_payout": 24.82,
+          "max_payout": 128.02,
+          "is_overlay": false,
+          "overlay_ratio": 1.48,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4": {
+          "times_hit": 8,
+          "avg_payout": 33.07,
+          "median_payout": 10.62,
+          "max_payout": 166.82,
+          "is_overlay": false,
+          "overlay_ratio": 1.11,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5": {
+          "times_hit": 8,
+          "avg_payout": 13.49,
+          "median_payout": 9.45,
+          "max_payout": 29.61,
+          "is_overlay": false,
+          "overlay_ratio": 0.45,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6": {
+          "times_hit": 8,
+          "avg_payout": 25.42,
+          "median_payout": 23.37,
+          "max_payout": 63.28,
+          "is_overlay": false,
+          "overlay_ratio": 0.85,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7": {
+          "times_hit": 8,
+          "avg_payout": 29.27,
+          "median_payout": 27.16,
+          "max_payout": 51.19,
+          "is_overlay": false,
+          "overlay_ratio": 0.98,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8": {
+          "times_hit": 7,
+          "avg_payout": 43.71,
+          "median_payout": 40.72,
+          "max_payout": 90.81,
+          "is_overlay": false,
+          "overlay_ratio": 1.47,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "8-9": {
+          "times_hit": 2,
+          "avg_payout": 108.08,
+          "median_payout": 108.08,
+          "max_payout": 192.72,
+          "is_overlay": false,
+          "overlay_ratio": 3.63,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "9-10": {
+          "times_hit": 1,
+          "avg_payout": 15.82,
+          "median_payout": 15.82,
+          "max_payout": 15.82,
+          "is_overlay": false,
+          "overlay_ratio": 0.53,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P3": {
+        "1-2-3": {
+          "times_hit": 8,
+          "avg_payout": 188.97,
+          "median_payout": 59.88,
+          "max_payout": 763.42,
+          "is_overlay": false,
+          "overlay_ratio": 0.67,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "2-3-4": {
+          "times_hit": 8,
+          "avg_payout": 192.36,
+          "median_payout": 62.86,
+          "max_payout": 835.3,
+          "is_overlay": false,
+          "overlay_ratio": 0.68,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "3-4-5": {
+          "times_hit": 10,
+          "avg_payout": 902.89,
+          "median_payout": 26.84,
+          "max_payout": 8602.66,
+          "is_overlay": true,
+          "overlay_ratio": 3.2,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "4-5-6": {
+          "times_hit": 10,
+          "avg_payout": 67.58,
+          "median_payout": 41.78,
+          "max_payout": 225.34,
+          "is_overlay": false,
+          "overlay_ratio": 0.24,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6-7": {
+          "times_hit": 9,
+          "avg_payout": 147.69,
+          "median_payout": 91.14,
+          "max_payout": 307.79,
+          "is_overlay": false,
+          "overlay_ratio": 0.52,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7-8": {
+          "times_hit": 8,
+          "avg_payout": 191.1,
+          "median_payout": 147.6,
+          "max_payout": 511.57,
+          "is_overlay": false,
+          "overlay_ratio": 0.68,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8-9": {
+          "times_hit": 2,
+          "avg_payout": 879.03,
+          "median_payout": 879.03,
+          "max_payout": 1628.03,
+          "is_overlay": false,
+          "overlay_ratio": 3.12,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 97.26,
+          "median_payout": 97.26,
+          "max_payout": 97.26,
+          "is_overlay": false,
+          "overlay_ratio": 0.35,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P4": {
+        "2-3-4-5": {
+          "times_hit": 8,
+          "avg_payout": 914.11,
+          "median_payout": 67.31,
+          "max_payout": 6021.75,
+          "is_overlay": false,
+          "overlay_ratio": 1.2,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "5-6-7-8": {
+          "times_hit": 5,
+          "avg_payout": 609.8,
+          "median_payout": 186.24,
+          "max_payout": 2325.12,
+          "is_overlay": false,
+          "overlay_ratio": 0.8,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5-6-7": {
+          "times_hit": 2,
+          "avg_payout": 231.47,
+          "median_payout": 231.47,
+          "max_payout": 352.37,
+          "is_overlay": false,
+          "overlay_ratio": 0.3,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 370.81,
+          "median_payout": 370.81,
+          "max_payout": 370.81,
+          "is_overlay": false,
+          "overlay_ratio": 0.49,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9": {
+          "times_hit": 1,
+          "avg_payout": 3292.31,
+          "median_payout": 3292.31,
+          "max_payout": 3292.31,
+          "is_overlay": false,
+          "overlay_ratio": 4.32,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P5": {
+        "1-2-3-4-5": {
+          "times_hit": 8,
+          "avg_payout": 8040.31,
+          "median_payout": 194.58,
+          "max_payout": 59188.61,
+          "is_overlay": true,
+          "overlay_ratio": 1.51,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "4-5-6-7-8": {
+          "times_hit": 5,
+          "avg_payout": 2638.94,
+          "median_payout": 1531.51,
+          "max_payout": 9182.62,
+          "is_overlay": false,
+          "overlay_ratio": 0.49,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4-5-6-7": {
+          "times_hit": 3,
+          "avg_payout": 635.04,
+          "median_payout": 535.77,
+          "max_payout": 912.08,
+          "is_overlay": false,
+          "overlay_ratio": 0.12,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 7597.17,
+          "median_payout": 7597.17,
+          "max_payout": 7597.17,
+          "is_overlay": false,
+          "overlay_ratio": 1.42,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8-9": {
+          "times_hit": 1,
+          "avg_payout": 10408.05,
+          "median_payout": 10408.05,
+          "max_payout": 10408.05,
+          "is_overlay": false,
+          "overlay_ratio": 1.95,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P6": {
+        "3-4-5-6-7-8": {
+          "times_hit": 5,
+          "avg_payout": 3105.51,
+          "median_payout": 195.35,
+          "max_payout": 13496.42,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "5-6-7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 393.39,
+          "median_payout": 393.39,
+          "max_payout": 393.39,
+          "is_overlay": false,
+          "overlay_ratio": 0.13,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7-8-9": {
+          "times_hit": 1,
+          "avg_payout": 31926.19,
+          "median_payout": 31926.19,
+          "max_payout": 31926.19,
+          "is_overlay": false,
+          "overlay_ratio": 10.28,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "2-3-4-5-6-7": {
+          "times_hit": 1,
+          "avg_payout": 32.38,
+          "median_payout": 32.38,
+          "max_payout": 32.38,
+          "is_overlay": false,
+          "overlay_ratio": 0.01,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      }
+    },
+    "GP": {
+      "DD": {
+        "1-2": {
+          "times_hit": 19,
+          "avg_payout": 32.05,
+          "median_payout": 26.5,
+          "max_payout": 108.7,
+          "is_overlay": false,
+          "overlay_ratio": 0.84,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3": {
+          "times_hit": 19,
+          "avg_payout": 33.47,
+          "median_payout": 15.4,
+          "max_payout": 265.7,
+          "is_overlay": false,
+          "overlay_ratio": 0.88,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4": {
+          "times_hit": 19,
+          "avg_payout": 40.71,
+          "median_payout": 14.2,
+          "max_payout": 204.4,
+          "is_overlay": false,
+          "overlay_ratio": 1.07,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5": {
+          "times_hit": 19,
+          "avg_payout": 40.52,
+          "median_payout": 24.2,
+          "max_payout": 169.7,
+          "is_overlay": false,
+          "overlay_ratio": 1.06,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6": {
+          "times_hit": 19,
+          "avg_payout": 35.74,
+          "median_payout": 26.3,
+          "max_payout": 115.6,
+          "is_overlay": false,
+          "overlay_ratio": 0.94,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7": {
+          "times_hit": 19,
+          "avg_payout": 44.42,
+          "median_payout": 20.4,
+          "max_payout": 356.8,
+          "is_overlay": false,
+          "overlay_ratio": 1.16,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8": {
+          "times_hit": 19,
+          "avg_payout": 37.21,
+          "median_payout": 26.0,
+          "max_payout": 106.3,
+          "is_overlay": false,
+          "overlay_ratio": 0.98,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "8-9": {
+          "times_hit": 17,
+          "avg_payout": 37.45,
+          "median_payout": 32.2,
+          "max_payout": 122.3,
+          "is_overlay": false,
+          "overlay_ratio": 0.98,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "9-10": {
+          "times_hit": 14,
+          "avg_payout": 41.81,
+          "median_payout": 22.25,
+          "max_payout": 136.3,
+          "is_overlay": false,
+          "overlay_ratio": 1.1,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "10-11": {
+          "times_hit": 4,
+          "avg_payout": 54.83,
+          "median_payout": 58.5,
+          "max_payout": 89.8,
+          "is_overlay": false,
+          "overlay_ratio": 1.44,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "11-12": {
+          "times_hit": 2,
+          "avg_payout": 35.05,
+          "median_payout": 35.05,
+          "max_payout": 44.6,
+          "is_overlay": false,
+          "overlay_ratio": 0.92,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P3": {
+        "1-2-3": {
+          "times_hit": 21,
+          "avg_payout": 228.84,
+          "median_payout": 59.9,
+          "max_payout": 2085.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.44,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "2-3-4": {
+          "times_hit": 22,
+          "avg_payout": 140.66,
+          "median_payout": 94.6,
+          "max_payout": 670.1,
+          "is_overlay": false,
+          "overlay_ratio": 0.27,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4-5": {
+          "times_hit": 22,
+          "avg_payout": 191.18,
+          "median_payout": 74.7,
+          "max_payout": 1225.4,
+          "is_overlay": false,
+          "overlay_ratio": 0.37,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5-6": {
+          "times_hit": 24,
+          "avg_payout": 189.1,
+          "median_payout": 100.45,
+          "max_payout": 1086.7,
+          "is_overlay": false,
+          "overlay_ratio": 0.36,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6-7": {
+          "times_hit": 20,
+          "avg_payout": 219.34,
+          "median_payout": 134.75,
+          "max_payout": 798.6,
+          "is_overlay": false,
+          "overlay_ratio": 0.42,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7-8": {
+          "times_hit": 23,
+          "avg_payout": 333.85,
+          "median_payout": 145.9,
+          "max_payout": 3112.8,
+          "is_overlay": false,
+          "overlay_ratio": 0.64,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8-9": {
+          "times_hit": 19,
+          "avg_payout": 276.27,
+          "median_payout": 187.8,
+          "max_payout": 932.2,
+          "is_overlay": false,
+          "overlay_ratio": 0.53,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "8-9-10": {
+          "times_hit": 24,
+          "avg_payout": 615.4,
+          "median_payout": 198.15,
+          "max_payout": 4160.4,
+          "is_overlay": false,
+          "overlay_ratio": 1.18,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10-11": {
+          "times_hit": 6,
+          "avg_payout": 2480.45,
+          "median_payout": 349.95,
+          "max_payout": 13241.4,
+          "is_overlay": true,
+          "overlay_ratio": 4.78,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "10-11-12": {
+          "times_hit": 4,
+          "avg_payout": 838.15,
+          "median_payout": 585.4,
+          "max_payout": 1838.1,
+          "is_overlay": false,
+          "overlay_ratio": 1.61,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P4": {
+        "2-3-4-5": {
+          "times_hit": 19,
+          "avg_payout": 937.85,
+          "median_payout": 229.7,
+          "max_payout": 11287.5,
+          "is_overlay": false,
+          "overlay_ratio": 0.99,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5-6-7": {
+          "times_hit": 14,
+          "avg_payout": 919.38,
+          "median_payout": 415.45,
+          "max_payout": 6068.8,
+          "is_overlay": false,
+          "overlay_ratio": 0.97,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8-9-10": {
+          "times_hit": 10,
+          "avg_payout": 997.07,
+          "median_payout": 221.3,
+          "max_payout": 6408.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.05,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10-11-12": {
+          "times_hit": 2,
+          "avg_payout": 1344.65,
+          "median_payout": 1344.65,
+          "max_payout": 1498.3,
+          "is_overlay": false,
+          "overlay_ratio": 1.41,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9-10-11": {
+          "times_hit": 2,
+          "avg_payout": 523.15,
+          "median_payout": 523.15,
+          "max_payout": 905.95,
+          "is_overlay": false,
+          "overlay_ratio": 0.55,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9": {
+          "times_hit": 4,
+          "avg_payout": 1286.36,
+          "median_payout": 848.7,
+          "max_payout": 3099.3,
+          "is_overlay": false,
+          "overlay_ratio": 1.35,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 347.88,
+          "median_payout": 347.88,
+          "max_payout": 631.95,
+          "is_overlay": false,
+          "overlay_ratio": 0.37,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P5": {
+        "1-2-3-4-5": {
+          "times_hit": 19,
+          "avg_payout": 12209.07,
+          "median_payout": 1136.0,
+          "max_payout": 181794.45,
+          "is_overlay": true,
+          "overlay_ratio": 1.59,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "6-7-8-9-10": {
+          "times_hit": 10,
+          "avg_payout": 3196.27,
+          "median_payout": 1058.65,
+          "max_payout": 19083.7,
+          "is_overlay": false,
+          "overlay_ratio": 0.41,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "3-4-5-6-7": {
+          "times_hit": 4,
+          "avg_payout": 5785.76,
+          "median_payout": 2491.05,
+          "max_payout": 17066.7,
+          "is_overlay": false,
+          "overlay_ratio": 0.75,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9-10-11-12": {
+          "times_hit": 3,
+          "avg_payout": 15941.3,
+          "median_payout": 21014.0,
+          "max_payout": 23107.25,
+          "is_overlay": false,
+          "overlay_ratio": 2.07,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9-10-11": {
+          "times_hit": 3,
+          "avg_payout": 7857.87,
+          "median_payout": 9915.7,
+          "max_payout": 10752.6,
+          "is_overlay": false,
+          "overlay_ratio": 1.02,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 932.33,
+          "median_payout": 932.33,
+          "max_payout": 1647.45,
+          "is_overlay": false,
+          "overlay_ratio": 0.12,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8-9": {
+          "times_hit": 3,
+          "avg_payout": 4057.88,
+          "median_payout": 1909.95,
+          "max_payout": 9041.35,
+          "is_overlay": false,
+          "overlay_ratio": 0.53,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P6": {
+        "5-6-7-8-9-10": {
+          "times_hit": 10,
+          "avg_payout": 10823.16,
+          "median_payout": 2277.54,
+          "max_payout": 77814.84,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "7-8-9-10-11-12": {
+          "times_hit": 2,
+          "avg_payout": 20984.78,
+          "median_payout": 20984.78,
+          "max_payout": 38027.7,
+          "is_overlay": false,
+          "overlay_ratio": 1.94,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9-10-11": {
+          "times_hit": 2,
+          "avg_payout": 22191.89,
+          "median_payout": 22191.89,
+          "max_payout": 31679.8,
+          "is_overlay": false,
+          "overlay_ratio": 2.05,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "3-4-5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 4327.71,
+          "median_payout": 4327.71,
+          "max_payout": 8072.12,
+          "is_overlay": false,
+          "overlay_ratio": 0.4,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7-8-9": {
+          "times_hit": 3,
+          "avg_payout": 5012.02,
+          "median_payout": 1717.36,
+          "max_payout": 11832.88,
+          "is_overlay": false,
+          "overlay_ratio": 0.46,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      }
+    },
+    "KEE": {
+      "DD": {
+        "1-2": {
+          "times_hit": 12,
+          "avg_payout": 24.35,
+          "median_payout": 10.93,
+          "max_payout": 77.13,
+          "is_overlay": false,
+          "overlay_ratio": 0.47,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3": {
+          "times_hit": 12,
+          "avg_payout": 28.7,
+          "median_payout": 16.55,
+          "max_payout": 122.24,
+          "is_overlay": false,
+          "overlay_ratio": 0.56,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4": {
+          "times_hit": 12,
+          "avg_payout": 23.55,
+          "median_payout": 17.66,
+          "max_payout": 48.46,
+          "is_overlay": false,
+          "overlay_ratio": 0.46,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5": {
+          "times_hit": 12,
+          "avg_payout": 31.95,
+          "median_payout": 17.25,
+          "max_payout": 124.77,
+          "is_overlay": false,
+          "overlay_ratio": 0.62,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6": {
+          "times_hit": 12,
+          "avg_payout": 74.55,
+          "median_payout": 38.44,
+          "max_payout": 512.22,
+          "is_overlay": false,
+          "overlay_ratio": 1.44,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7": {
+          "times_hit": 12,
+          "avg_payout": 78.47,
+          "median_payout": 27.77,
+          "max_payout": 409.95,
+          "is_overlay": true,
+          "overlay_ratio": 1.52,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8": {
+          "times_hit": 12,
+          "avg_payout": 71.13,
+          "median_payout": 20.14,
+          "max_payout": 529.68,
+          "is_overlay": false,
+          "overlay_ratio": 1.38,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "8-9": {
+          "times_hit": 11,
+          "avg_payout": 82.31,
+          "median_payout": 21.97,
+          "max_payout": 413.38,
+          "is_overlay": true,
+          "overlay_ratio": 1.59,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10": {
+          "times_hit": 7,
+          "avg_payout": 50.31,
+          "median_payout": 36.07,
+          "max_payout": 123.73,
+          "is_overlay": false,
+          "overlay_ratio": 0.97,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "10-11": {
+          "times_hit": 3,
+          "avg_payout": 44.19,
+          "median_payout": 12.08,
+          "max_payout": 112.14,
+          "is_overlay": false,
+          "overlay_ratio": 0.85,
+          "consistency": "MODERATE",
+          "thin_sample": true
+        }
+      },
+      "P3": {
+        "1-2-3": {
+          "times_hit": 13,
+          "avg_payout": 99.1,
+          "median_payout": 53.29,
+          "max_payout": 614.77,
+          "is_overlay": false,
+          "overlay_ratio": 0.2,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3-4": {
+          "times_hit": 13,
+          "avg_payout": 110.64,
+          "median_payout": 91.33,
+          "max_payout": 388.93,
+          "is_overlay": false,
+          "overlay_ratio": 0.22,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4-5": {
+          "times_hit": 15,
+          "avg_payout": 78.12,
+          "median_payout": 67.55,
+          "max_payout": 246.39,
+          "is_overlay": false,
+          "overlay_ratio": 0.16,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5-6": {
+          "times_hit": 14,
+          "avg_payout": 354.3,
+          "median_payout": 86.42,
+          "max_payout": 2143.59,
+          "is_overlay": false,
+          "overlay_ratio": 0.71,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "5-6-7": {
+          "times_hit": 13,
+          "avg_payout": 447.45,
+          "median_payout": 120.74,
+          "max_payout": 3799.13,
+          "is_overlay": false,
+          "overlay_ratio": 0.9,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "6-7-8": {
+          "times_hit": 17,
+          "avg_payout": 452.05,
+          "median_payout": 190.56,
+          "max_payout": 2287.09,
+          "is_overlay": false,
+          "overlay_ratio": 0.91,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8-9": {
+          "times_hit": 17,
+          "avg_payout": 2084.18,
+          "median_payout": 154.18,
+          "max_payout": 15969.12,
+          "is_overlay": true,
+          "overlay_ratio": 4.19,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "8-9-10": {
+          "times_hit": 15,
+          "avg_payout": 561.13,
+          "median_payout": 311.22,
+          "max_payout": 2116.98,
+          "is_overlay": false,
+          "overlay_ratio": 1.13,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "9-10-11": {
+          "times_hit": 7,
+          "avg_payout": 287.89,
+          "median_payout": 84.99,
+          "max_payout": 1008.27,
+          "is_overlay": false,
+          "overlay_ratio": 0.58,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        }
+      },
+      "P4": {
+        "2-3-4-5": {
+          "times_hit": 12,
+          "avg_payout": 257.35,
+          "median_payout": 219.87,
+          "max_payout": 528.89,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8-9-10": {
+          "times_hit": 3,
+          "avg_payout": 612.13,
+          "median_payout": 240.03,
+          "max_payout": 1374.32,
+          "is_overlay": false,
+          "overlay_ratio": 2.38,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7": {
+          "times_hit": 2,
+          "avg_payout": 705.89,
+          "median_payout": 705.89,
+          "max_payout": 854.12,
+          "is_overlay": false,
+          "overlay_ratio": 2.74,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9-10-11": {
+          "times_hit": 3,
+          "avg_payout": 833.24,
+          "median_payout": 1114.8,
+          "max_payout": 1305.57,
+          "is_overlay": false,
+          "overlay_ratio": 3.24,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 164.47,
+          "median_payout": 164.47,
+          "max_payout": 204.93,
+          "is_overlay": false,
+          "overlay_ratio": 0.64,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9": {
+          "times_hit": 4,
+          "avg_payout": 8655.06,
+          "median_payout": 4778.25,
+          "max_payout": 24981.67,
+          "is_overlay": false,
+          "overlay_ratio": 33.63,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P5": {
+        "1-2-3-4-5": {
+          "times_hit": 12,
+          "avg_payout": 513.39,
+          "median_payout": 96.86,
+          "max_payout": 2403.04,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "6-7-8-9-10": {
+          "times_hit": 3,
+          "avg_payout": 838.81,
+          "median_payout": 314.36,
+          "max_payout": 2192.38,
+          "is_overlay": false,
+          "overlay_ratio": 1.63,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9-10-11": {
+          "times_hit": 3,
+          "avg_payout": 1736.9,
+          "median_payout": 1194.57,
+          "max_payout": 4010.82,
+          "is_overlay": false,
+          "overlay_ratio": 3.38,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 9.84,
+          "median_payout": 9.84,
+          "max_payout": 11.48,
+          "is_overlay": false,
+          "overlay_ratio": 0.02,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8-9": {
+          "times_hit": 4,
+          "avg_payout": 371.48,
+          "median_payout": 382.09,
+          "max_payout": 609.71,
+          "is_overlay": false,
+          "overlay_ratio": 0.72,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P6": {
+        "5-6-7-8-9-10": {
+          "times_hit": 3,
+          "avg_payout": 12324.17,
+          "median_payout": 15564.23,
+          "max_payout": 21368.97,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9-10-11": {
+          "times_hit": 3,
+          "avg_payout": 31709.72,
+          "median_payout": 198.7,
+          "max_payout": 94913.51,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "LOTTERY",
+          "thin_sample": true
+        },
+        "3-4-5-6-7-8": {
+          "times_hit": 2,
+          "avg_payout": 6787.99,
+          "median_payout": 6787.99,
+          "max_payout": 11963.38,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7-8-9": {
+          "times_hit": 4,
+          "avg_payout": 9061.91,
+          "median_payout": 7667.69,
+          "max_payout": 18012.58,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      }
+    },
+    "SA": {
+      "DD": {
+        "1-2": {
+          "times_hit": 3,
+          "avg_payout": 28.33,
+          "median_payout": 26.6,
+          "max_payout": 50.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "2-3": {
+          "times_hit": 3,
+          "avg_payout": 25.4,
+          "median_payout": 28.8,
+          "max_payout": 38.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "3-4": {
+          "times_hit": 3,
+          "avg_payout": 21.73,
+          "median_payout": 17.4,
+          "max_payout": 41.8,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5": {
+          "times_hit": 3,
+          "avg_payout": 30.53,
+          "median_payout": 41.4,
+          "max_payout": 44.4,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6": {
+          "times_hit": 3,
+          "avg_payout": 124.73,
+          "median_payout": 165.0,
+          "max_payout": 202.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7": {
+          "times_hit": 3,
+          "avg_payout": 135.2,
+          "median_payout": 88.0,
+          "max_payout": 300.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8": {
+          "times_hit": 3,
+          "avg_payout": 24.4,
+          "median_payout": 23.8,
+          "max_payout": 34.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9": {
+          "times_hit": 3,
+          "avg_payout": 66.47,
+          "median_payout": 43.5,
+          "max_payout": 127.5,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "9-10": {
+          "times_hit": 1,
+          "avg_payout": 97.5,
+          "median_payout": 97.5,
+          "max_payout": 97.5,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P3": {
+        "1-2-3": {
+          "times_hit": 3,
+          "avg_payout": 39.1,
+          "median_payout": 33.3,
+          "max_payout": 58.1,
+          "is_overlay": false,
+          "overlay_ratio": 0.14,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "2-3-4": {
+          "times_hit": 3,
+          "avg_payout": 39.67,
+          "median_payout": 28.1,
+          "max_payout": 83.9,
+          "is_overlay": false,
+          "overlay_ratio": 0.14,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "3-4-5": {
+          "times_hit": 3,
+          "avg_payout": 53.0,
+          "median_payout": 68.9,
+          "max_payout": 82.6,
+          "is_overlay": false,
+          "overlay_ratio": 0.18,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6": {
+          "times_hit": 3,
+          "avg_payout": 309.4,
+          "median_payout": 314.5,
+          "max_payout": 607.6,
+          "is_overlay": false,
+          "overlay_ratio": 1.08,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7": {
+          "times_hit": 3,
+          "avg_payout": 292.13,
+          "median_payout": 255.5,
+          "max_payout": 598.9,
+          "is_overlay": false,
+          "overlay_ratio": 1.02,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8": {
+          "times_hit": 3,
+          "avg_payout": 297.57,
+          "median_payout": 211.8,
+          "max_payout": 662.7,
+          "is_overlay": false,
+          "overlay_ratio": 1.04,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9": {
+          "times_hit": 6,
+          "avg_payout": 287.25,
+          "median_payout": 103.2,
+          "max_payout": 941.1,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "8-9-10": {
+          "times_hit": 2,
+          "avg_payout": 245.1,
+          "median_payout": 245.1,
+          "max_payout": 250.5,
+          "is_overlay": false,
+          "overlay_ratio": 0.85,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P4": {
+        "2-3-4-5": {
+          "times_hit": 3,
+          "avg_payout": 106.6,
+          "median_payout": 111.8,
+          "max_payout": 199.2,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9": {
+          "times_hit": 2,
+          "avg_payout": 829.48,
+          "median_payout": 829.48,
+          "max_payout": 1619.45,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "4-5-6-7": {
+          "times_hit": 1,
+          "avg_payout": 1035.4,
+          "median_payout": 1035.4,
+          "max_payout": 1035.4,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 174.3,
+          "median_payout": 174.3,
+          "max_payout": 174.3,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P5": {
+        "1-2-3-4-5": {
+          "times_hit": 3,
+          "avg_payout": 527.92,
+          "median_payout": 353.85,
+          "max_payout": 1171.9,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "3-4-5-6-7": {
+          "times_hit": 3,
+          "avg_payout": 13765.07,
+          "median_payout": 6448.2,
+          "max_payout": 34184.3,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8-9": {
+          "times_hit": 2,
+          "avg_payout": 4415.2,
+          "median_payout": 4415.2,
+          "max_payout": 8744.2,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 2904.0,
+          "median_payout": 2904.0,
+          "max_payout": 2904.0,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P6": {
+        "4-5-6-7-8-9": {
+          "times_hit": 2,
+          "avg_payout": 1477.5,
+          "median_payout": 1477.5,
+          "max_payout": 2738.8,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "5-6-7-8-9-10": {
+          "times_hit": 1,
+          "avg_payout": 340.8,
+          "median_payout": 340.8,
+          "max_payout": 340.8,
+          "is_overlay": false,
+          "overlay_ratio": null,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      }
+    }
   }
 }

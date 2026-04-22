@@ -55,11 +55,11 @@
     }
     .tab-btn {
       flex: 1;
-      padding: 13px 6px;
+      padding: 11px 4px;
       border: none;
       background: transparent;
       color: var(--dim);
-      font-size: 0.88rem;
+      font-size: 0.78rem;
       font-weight: 600;
       cursor: pointer;
       border-bottom: 3px solid transparent;
@@ -325,6 +325,34 @@
                     padding: 7px; text-align: center; font-size: 0.78rem; color: var(--yellow); margin-bottom: 10px; }
     .hidden { display: none !important; }
     code { font-family: 'Menlo','Courier New',monospace; color: var(--gold); font-size: .9em; }
+
+    /* ── Select inputs ── */
+    select {
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;
+      min-height: 48px;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+      cursor: pointer;
+    }
+    select:focus { outline: none; border-color: var(--gold); }
+
+    /* ── Ticket result row ── */
+    .tb-alt-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .tb-alt-row:last-child { border-bottom: none; }
+    .tb-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
   </style>
 </head>
 <body>
@@ -336,8 +364,9 @@
 
 <nav class="tabs">
   <button class="tab-btn active"  onclick="showTab('dashboard')">Dashboard</button>
-  <button class="tab-btn"         onclick="showTab('hedge')">Hedge Calc</button>
+  <button class="tab-btn"         onclick="showTab('hedge')">Hedge</button>
   <button class="tab-btn"         onclick="showTab('profiles')">Profiles</button>
+  <button class="tab-btn"         onclick="showTab('ticket')">Tickets</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -406,6 +435,43 @@
 
 </div>
 
+<!-- ─────────────── TICKET BUILDER TAB ─────────────── -->
+<div id="tab-ticket" class="tab-pane">
+
+  <div class="card">
+    <h2>Ticket Builder</h2>
+    <p style="font-size:.78rem;color:var(--dim);margin-bottom:14px">
+      Look up historical payout data for any multi-race sequence at your track.
+    </p>
+    <div class="field-row">
+      <label>Track</label>
+      <select id="tb-track"><option value="">Loading…</option></select>
+    </div>
+    <div class="field-row">
+      <label>Wager Type</label>
+      <select id="tb-wager">
+        <option value="DD">Daily Double (DD)</option>
+        <option value="P3">Pick 3</option>
+        <option value="P4" selected>Pick 4</option>
+        <option value="P5">Pick 5</option>
+        <option value="P6">Pick 6</option>
+      </select>
+    </div>
+    <div class="field-row">
+      <label>Starting Race #</label>
+      <input type="number" id="tb-start" inputmode="numeric" min="1" max="12" value="1">
+    </div>
+    <div class="field-row">
+      <label>Horses per Leg</label>
+      <input type="number" id="tb-horses" inputmode="numeric" min="1" max="6" value="2">
+    </div>
+    <button class="btn-primary" onclick="buildTicket()">ANALYZE SEQUENCE</button>
+  </div>
+
+  <div id="tb-results"></div>
+
+</div>
+
 <!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
 <div id="tab-profiles" class="tab-pane">
   <p class="last-updated">Baseline snapshot &mdash; April 22, 2026 &mdash; KEE &amp; GP (42 race days)</p>
@@ -420,8 +486,8 @@ function showTab(name) {
   document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
-  const btns = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'profiles'];
+  const btns  = document.querySelectorAll('.tab-btn');
+  const names = ['dashboard', 'hedge', 'profiles', 'ticket'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -830,6 +896,8 @@ async function loadDashboard() {
     } catch (_) {}
   }
 
+  if (data) { window._dashData = data; populateTrackSelect(); }
+
   if (!data || !data.db_summary) {
     el.innerHTML = `
       <div class="status-msg">
@@ -897,6 +965,142 @@ async function loadDashboard() {
   }
 
   el.innerHTML = html;
+}
+
+// =============================================================
+//  TICKET BUILDER
+// =============================================================
+const WAGER_LEGS = { DD: 2, P3: 3, P4: 4, P5: 5, P6: 6 };
+const WAGER_BASE = { DD: 1.00, P3: 0.50, P4: 0.50, P5: 0.50, P6: 0.20 };
+
+function populateTrackSelect() {
+  const sel = document.getElementById('tb-track');
+  if (!window._dashData || !window._dashData.db_summary) return;
+  sel.innerHTML = '';
+  for (const t of window._dashData.db_summary.tracks) {
+    const opt = document.createElement('option');
+    opt.value = t.track;
+    opt.textContent = t.track;
+    sel.appendChild(opt);
+  }
+}
+
+function buildTicket() {
+  const track  = document.getElementById('tb-track').value;
+  const wager  = document.getElementById('tb-wager').value;
+  const start  = parseInt(document.getElementById('tb-start').value);
+  const hpl    = parseInt(document.getElementById('tb-horses').value);
+  const el     = document.getElementById('tb-results');
+
+  if (!track || !wager || !start || !hpl || hpl < 1 || hpl > 6) {
+    alert('Please fill in all required fields (horses per leg: 1–6).');
+    return;
+  }
+
+  if (!window._dashData || !window._dashData.sequences) {
+    el.innerHTML = '<div class="card"><p class="no-overlay">No sequence data available. Run <code>python export_dashboard_data.py</code> and push to GitHub.</p></div>';
+    return;
+  }
+
+  const legs     = WAGER_LEGS[wager];
+  const baseUnit = WAGER_BASE[wager];
+  const raceNums = Array.from({ length: legs }, (_, i) => start + i);
+  const spanStr  = raceNums.join('-');
+  const cost     = baseUnit * Math.pow(hpl, legs);
+
+  const trackSeqs = (window._dashData.sequences[track] || {})[wager] || {};
+  const seq       = trackSeqs[spanStr] || null;
+
+  // Top 3 alternatives: all spans for same track/wager, excluding selected, sorted by avg
+  const alts = Object.entries(trackSeqs)
+    .map(([span, s]) => ({ race_span: span, ...s }))
+    .filter(s => s.race_span !== spanStr)
+    .sort((a, b) => b.avg_payout - a.avg_payout)
+    .slice(0, 3);
+
+  let html = '';
+
+  if (!seq) {
+    html += `<div class="card">
+      <h2>No Historical Data</h2>
+      <p class="no-overlay">${track} ${wager} races ${spanStr} — no recorded payouts yet.</p>
+      <p class="thin-note">Try a different starting race, or check that ${track} data has been scraped.</p>
+    </div>`;
+  } else {
+    const ovlBadge = seq.is_overlay
+      ? `<span class="badge badge-HIGH">OVERLAY &nbsp;${seq.overlay_ratio ? seq.overlay_ratio.toFixed(2) + 'x' : ''}</span>`
+      : `<span class="badge badge-MODERATE">FAIR VALUE</span>`;
+    const thinNote = seq.thin_sample
+      ? '<p class="thin-note">&#9888; Small sample (&lt;5 hits) — treat with caution.</p>' : '';
+    const roi = cost > 0 ? (seq.avg_payout / cost).toFixed(1) : 'N/A';
+
+    html += `<div class="card">
+      <h2>${track} &nbsp;${wager} &nbsp;&mdash;&nbsp; Races ${spanStr}</h2>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="val">$${Number(seq.avg_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="lbl">Avg Payout</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">$${Number(seq.median_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="lbl">Median Payout</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">${seq.times_hit}</div>
+          <div class="lbl">Times Hit</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">$${Number(seq.max_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="lbl">Max Payout</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin:12px 0 10px;flex-wrap:wrap">
+        ${ovlBadge}
+        <span class="badge badge-${seq.consistency}">${seq.consistency}</span>
+      </div>
+      <div class="sum-grid">
+        <div class="sum-item">
+          <div class="key">Ticket Cost (${hpl}/leg &times; ${legs} legs)</div>
+          <div class="value" style="color:var(--gold)">$${cost.toFixed(2)}</div>
+        </div>
+        <div class="sum-item">
+          <div class="key">Avg ROI Multiple</div>
+          <div class="value">${roi}x</div>
+        </div>
+      </div>
+      ${thinNote}
+    </div>`;
+  }
+
+  if (alts.length) {
+    html += `<div class="card"><h2>Top Alternatives &mdash; ${track} ${wager}</h2>`;
+    for (const s of alts) {
+      const c2  = s.consistency || 'N/A';
+      const ovl = s.is_overlay
+        ? `<span class="badge badge-HIGH">${s.overlay_ratio ? s.overlay_ratio.toFixed(1) + 'x' : 'OVL'}</span>`
+        : '';
+      html += `<div class="tb-alt-row">
+        <div>
+          <div class="overlay-races">Races ${s.race_span}</div>
+          <div class="overlay-stats">${s.times_hit} hits &bull; med $${Number(s.median_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+        </div>
+        <div style="text-align:right;flex:1">
+          <div class="overlay-ratio">$${Number(s.avg_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
+          <div class="overlay-stats">avg payout</div>
+        </div>
+        <div class="tb-badges">
+          <span class="badge badge-${c2}">${c2}</span>
+          ${ovl}
+        </div>
+      </div>`;
+    }
+    html += '</div>';
+  } else if (seq) {
+    html += `<div class="card"><p class="no-overlay">No other sequences recorded for ${track} ${wager}.</p></div>`;
+  }
+
+  el.innerHTML = html;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 // =============================================================
