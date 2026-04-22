@@ -353,6 +353,42 @@
     }
     .tb-alt-row:last-child { border-bottom: none; }
     .tb-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
+
+    /* ── Parlay Edge tab ── */
+    .badge-EXOTIC { background: rgba(46,204,113,.18); color: var(--green);  border: 1px solid var(--green); }
+    .badge-EVEN   { background: rgba(240,165,0,.18);  color: var(--yellow); border: 1px solid var(--yellow); }
+    .badge-PARLAY { background: rgba(231,76,60,.18);  color: var(--red);    border: 1px solid var(--red); }
+    .pe-wager-block { margin-bottom: 18px; }
+    .pe-wager-block:last-child { margin-bottom: 0; }
+    .pe-summary-row {
+      display: flex; gap: 8px; flex-wrap: wrap; align-items: center;
+      margin-bottom: 10px;
+    }
+    .pe-stat { font-size: .82rem; color: var(--dim); }
+    .pe-stat .tv { color: var(--text); font-weight: 700; }
+    details summary {
+      cursor: pointer;
+      font-size: .8rem;
+      color: var(--gold);
+      padding: 6px 0;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+    details summary::-webkit-details-marker { color: var(--gold); }
+    .pe-table { width: 100%; border-collapse: collapse; font-size: .78rem; min-width: 380px; }
+    .pe-table th {
+      padding: 6px 8px; text-align: right; font-size: .72rem;
+      color: var(--dim); border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    .pe-table th:first-child { text-align: left; }
+    .pe-table td {
+      padding: 7px 8px; text-align: right;
+      border-bottom: 1px solid var(--border); white-space: nowrap;
+    }
+    .pe-table td:first-child { text-align: left; }
+    .pe-table tr:last-child td { border-bottom: none; }
+    .pe-row-exotic { background: rgba(46,204,113,.07); }
+    .pe-row-parlay { background: rgba(231,76,60,.07); }
   </style>
 </head>
 <body>
@@ -367,6 +403,7 @@
   <button class="tab-btn"         onclick="showTab('hedge')">Hedge</button>
   <button class="tab-btn"         onclick="showTab('profiles')">Profiles</button>
   <button class="tab-btn"         onclick="showTab('ticket')">Tickets</button>
+  <button class="tab-btn"         onclick="showTab('parlay')">Parlay Edge</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -499,6 +536,13 @@
 
 </div>
 
+<!-- ─────────────── PARLAY EDGE TAB ─────────────── -->
+<div id="tab-parlay" class="tab-pane">
+  <div id="parlay-content">
+    <div class="status-msg"><div class="icon">&#128225;</div><div>Loading…</div></div>
+  </div>
+</div>
+
 <!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
 <div id="tab-profiles" class="tab-pane">
   <p class="last-updated">Baseline snapshot &mdash; April 22, 2026 &mdash; KEE &amp; GP (42 race days)</p>
@@ -514,7 +558,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'profiles', 'ticket'];
+  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -923,7 +967,7 @@ async function loadDashboard() {
     } catch (_) {}
   }
 
-  if (data) { window._dashData = data; populateTrackSelect(); }
+  if (data) { window._dashData = data; populateTrackSelect(); renderParlayEdge(); }
 
   if (!data || !data.db_summary) {
     el.innerHTML = `
@@ -1197,6 +1241,90 @@ function renderProfiles() {
     html += '</div>';
   }
   document.getElementById('profiles-content').innerHTML = html;
+}
+
+// =============================================================
+//  PARLAY EDGE TAB
+// =============================================================
+function renderParlayEdge() {
+  const el   = document.getElementById('parlay-content');
+  const data = window._dashData && window._dashData.parlay_vs_exotic;
+
+  if (!data || !Object.keys(data).length) {
+    el.innerHTML = `<div class="status-msg">
+      <div class="icon">&#128203;</div>
+      <p><strong>No parlay/exotic comparison data yet.</strong></p>
+      <p style="margin-top:10px;font-size:.82rem;line-height:1.6">
+        Run <code>python export_dashboard_data.py</code> and push to update.
+      </p></div>`;
+    return;
+  }
+
+  const fmtM = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  let html = `<p class="last-updated">Updated: ${window._dashData.last_updated || ''}</p>`;
+
+  for (const track of Object.keys(data).sort()) {
+    const trackData = data[track];
+    html += `<div class="card"><h2>${track} &mdash; Parlay vs Exotic ($2 base)</h2>`;
+
+    for (const wager of ['P4', 'P5', 'P6']) {
+      const s = trackData[wager];
+      if (!s) continue;
+
+      const ratio      = s.mean_ratio;
+      const verdictKey = ratio > 1.1 ? 'EXOTIC' : ratio >= 0.9 ? 'EVEN' : 'PARLAY';
+      const verdictTxt = ratio > 1.1 ? 'Exotic Wins' : ratio >= 0.9 ? 'Roughly Even' : 'Parlay Wins';
+
+      html += `<div class="pe-wager-block">
+        <div style="display:flex;align-items:center;gap:8px;margin-bottom:8px;flex-wrap:wrap">
+          <span class="wager-pill">${wager}</span>
+          <span class="badge badge-${verdictKey}">${verdictTxt}</span>
+          <span style="font-size:.76rem;color:var(--dim)">${s.sample} day${s.sample !== 1 ? 's' : ''}</span>
+        </div>
+        <div class="pe-summary-row">
+          <span class="pe-stat">Mean ratio <span class="tv">${ratio.toFixed(2)}x</span></span>
+          <span class="pe-stat">&bull; Median <span class="tv">${s.median_ratio.toFixed(2)}x</span></span>
+          <span class="pe-stat">&bull; Exotic won <span class="tv">${s.exotic_beat_parlay_pct}%</span></span>
+          <span class="pe-stat">&bull; Avg edge <span class="tv" style="color:${s.avg_edge >= 0 ? 'var(--green)' : 'var(--red)'}">
+            ${s.avg_edge >= 0 ? '+' : ''}${fmtM(s.avg_edge)}
+          </span></span>
+        </div>`;
+
+      if (s.days && s.days.length) {
+        html += `<details><summary>Show day-by-day detail (${s.days.length} race days)</summary>
+          <div class="table-scroll" style="margin-top:6px">
+          <table class="pe-table">
+            <thead><tr>
+              <th>Date</th><th>Span</th>
+              <th>Parlay $</th><th>Exotic $</th><th>Ratio</th><th>Winner</th>
+            </tr></thead><tbody>`;
+
+        for (const d of s.days) {
+          const exoticWon = d.ratio !== null && d.ratio > 1.0;
+          const cls       = exoticWon ? 'pe-row-exotic' : 'pe-row-parlay';
+          const winnerTxt = exoticWon ? 'Exotic' : 'Parlay';
+          const winnerCol = exoticWon ? 'var(--green)' : 'var(--red)';
+          const ratioStr  = d.ratio !== null ? d.ratio.toFixed(2) + 'x' : 'N/A';
+          html += `<tr class="${cls}">
+            <td>${d.date}</td>
+            <td>${d.span}</td>
+            <td>${fmtM(d.parlay)}</td>
+            <td>${fmtM(d.exotic)}</td>
+            <td><strong>${ratioStr}</strong></td>
+            <td style="color:${winnerCol};font-weight:700">${winnerTxt}</td>
+          </tr>`;
+        }
+        html += `</tbody></table></div></details>`;
+      }
+
+      html += `</div>`;  // pe-wager-block
+    }
+
+    html += `</div>`;  // card
+  }
+
+  el.innerHTML = html;
 }
 
 // =============================================================
