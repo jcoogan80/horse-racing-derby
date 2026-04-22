@@ -1291,12 +1291,51 @@ function renderParlayEdge() {
           </span></span>
         </div>`;
 
+      // ── Threshold analysis ──
+      const thresh = s.threshold_analysis || [];
+      if (thresh.length) {
+        const crossover = thresh.find(r => r.exotic_win_pct >= 50);
+        html += `<div style="margin:10px 0 6px">
+          <div style="font-size:.78rem;font-weight:700;color:var(--gold-lt);margin-bottom:6px;letter-spacing:.03em">
+            BREAKEVEN THRESHOLD &mdash; exotic win rate when any leg paid &ge; $X
+          </div>`;
+        if (crossover) {
+          html += `<div style="font-size:.8rem;color:var(--green);margin-bottom:8px;font-weight:600">
+            Crossover at $${crossover.min_leg} — exotic wins ${crossover.exotic_win_pct}% of qualifying days
+          </div>`;
+        } else {
+          html += `<div style="font-size:.8rem;color:var(--dim);margin-bottom:8px">
+            No crossover in range — parlay wins at all thresholds in this dataset
+          </div>`;
+        }
+        html += `<div class="table-scroll"><table class="pe-table">
+          <thead><tr>
+            <th style="text-align:left">Min Leg $</th>
+            <th>Days</th><th>Exotic Win%</th><th>Avg Ratio</th>
+          </tr></thead><tbody>`;
+        for (const row of thresh) {
+          const isCross = row.exotic_win_pct >= 50;
+          const pctCol  = row.exotic_win_pct >= 50 ? 'var(--green)' :
+                          row.exotic_win_pct >= 30 ? 'var(--yellow)' : 'var(--red)';
+          html += `<tr style="${isCross ? 'background:rgba(46,204,113,.1)' : ''}">
+            <td style="text-align:left;font-weight:${isCross ? '700' : '400'}">
+              $${row.min_leg}${isCross ? ' &#9650;' : ''}
+            </td>
+            <td>${row.sample}</td>
+            <td style="color:${pctCol};font-weight:600">${row.exotic_win_pct}%</td>
+            <td>${row.avg_ratio.toFixed(2)}x</td>
+          </tr>`;
+        }
+        html += `</tbody></table></div></div>`;
+      }
+
       if (s.days && s.days.length) {
         html += `<details><summary>Show day-by-day detail (${s.days.length} race days)</summary>
           <div class="table-scroll" style="margin-top:6px">
           <table class="pe-table">
             <thead><tr>
               <th>Date</th><th>Span</th>
+              <th>Max Leg</th><th>Avg Fld</th>
               <th>Parlay $</th><th>Exotic $</th><th>Ratio</th><th>Winner</th>
             </tr></thead><tbody>`;
 
@@ -1306,9 +1345,13 @@ function renderParlayEdge() {
           const winnerTxt = exoticWon ? 'Exotic' : 'Parlay';
           const winnerCol = exoticWon ? 'var(--green)' : 'var(--red)';
           const ratioStr  = d.ratio !== null ? d.ratio.toFixed(2) + 'x' : 'N/A';
+          const mlStr     = d.max_leg != null ? '$' + d.max_leg.toFixed(2) : '—';
+          const fldStr    = d.avg_field != null ? d.avg_field.toFixed(1) : '—';
           html += `<tr class="${cls}">
             <td>${d.date}</td>
             <td>${d.span}</td>
+            <td style="color:${d.max_leg >= 20 ? 'var(--gold)' : 'var(--text)'};font-weight:${d.max_leg >= 20 ? '700' : '400'}">${mlStr}</td>
+            <td>${fldStr}</td>
             <td>${fmtM(d.parlay)}</td>
             <td>${fmtM(d.exotic)}</td>
             <td><strong>${ratioStr}</strong></td>

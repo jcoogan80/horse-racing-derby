@@ -1,5 +1,5 @@
 {
-  "last_updated": "2026-04-22 15:57",
+  "last_updated": "2026-04-22 16:05",
   "db_summary": {
     "total_tracks": 4,
     "total_race_days": 23,
@@ -1608,62 +1608,128 @@
         "median_ratio": 0.342,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -1444.82,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.357
+          },
+          {
+            "min_leg": 8,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.357
+          },
+          {
+            "min_leg": 10,
+            "sample": 7,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.351
+          },
+          {
+            "min_leg": 12,
+            "sample": 7,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.351
+          },
+          {
+            "min_leg": 15,
+            "sample": 5,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.359
+          },
+          {
+            "min_leg": 20,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.354
+          },
+          {
+            "min_leg": 25,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.276
+          },
+          {
+            "min_leg": 30,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.276
+          }
+        ],
         "days": [
           {
             "date": "2026-02-19",
             "span": "5-6-7-8",
             "parlay": 4543.44,
             "exotic": 2325.12,
-            "ratio": 0.512
+            "ratio": 0.512,
+            "max_leg": 21.44,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "5-6-7-8",
             "parlay": 687.82,
             "exotic": 321.56,
-            "ratio": 0.468
+            "ratio": 0.468,
+            "max_leg": 17.78,
+            "avg_field": null
           },
           {
             "date": "2026-02-20",
             "span": "5-6-7-8",
             "parlay": 194.31,
             "exotic": 78.33,
-            "ratio": 0.403
+            "ratio": 0.403,
+            "max_leg": 9.46,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "7-8-9-10",
             "parlay": 1027.41,
             "exotic": 370.81,
-            "ratio": 0.361
+            "ratio": 0.361,
+            "max_leg": 14.52,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "6-7-8-9",
             "parlay": 10223.72,
             "exotic": 3292.31,
-            "ratio": 0.322
+            "ratio": 0.322,
+            "max_leg": 42.38,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "4-5-6-7",
             "parlay": 371.86,
             "exotic": 110.58,
-            "ratio": 0.297
+            "ratio": 0.297,
+            "max_leg": 13.02,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "5-6-7-8",
             "parlay": 518.64,
             "exotic": 137.74,
-            "ratio": 0.266
+            "ratio": 0.266,
+            "max_leg": 17.12,
+            "avg_field": null
           },
           {
             "date": "2026-02-13",
             "span": "5-6-7-8",
             "parlay": 814.07,
             "exotic": 186.24,
-            "ratio": 0.229
+            "ratio": 0.229,
+            "max_leg": 31.66,
+            "avg_field": null
           }
         ]
       },
@@ -1673,62 +1739,128 @@
         "median_ratio": 0.546,
         "exotic_beat_parlay_pct": 12.5,
         "avg_edge": -3334.3,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 8,
+            "exotic_win_pct": 12.5,
+            "avg_ratio": 0.629
+          },
+          {
+            "min_leg": 8,
+            "sample": 8,
+            "exotic_win_pct": 12.5,
+            "avg_ratio": 0.629
+          },
+          {
+            "min_leg": 10,
+            "sample": 7,
+            "exotic_win_pct": 14.3,
+            "avg_ratio": 0.671
+          },
+          {
+            "min_leg": 12,
+            "sample": 7,
+            "exotic_win_pct": 14.3,
+            "avg_ratio": 0.671
+          },
+          {
+            "min_leg": 15,
+            "sample": 6,
+            "exotic_win_pct": 16.7,
+            "avg_ratio": 0.689
+          },
+          {
+            "min_leg": 20,
+            "sample": 3,
+            "exotic_win_pct": 33.3,
+            "avg_ratio": 0.79
+          },
+          {
+            "min_leg": 25,
+            "sample": 2,
+            "exotic_win_pct": 50.0,
+            "avg_ratio": 0.861
+          },
+          {
+            "min_leg": 30,
+            "sample": 2,
+            "exotic_win_pct": 50.0,
+            "avg_ratio": 0.861
+          }
+        ],
         "days": [
           {
             "date": "2026-02-13",
             "span": "4-5-6-7-8",
             "parlay": 1367.64,
             "exotic": 1853.94,
-            "ratio": 1.356
+            "ratio": 1.356,
+            "max_leg": 31.66,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "6-7-8-9-10",
             "parlay": 9000.15,
             "exotic": 7597.17,
-            "ratio": 0.844
+            "ratio": 0.844,
+            "max_leg": 17.52,
+            "avg_field": null
           },
           {
             "date": "2026-02-19",
             "span": "4-5-6-7-8",
             "parlay": 14175.53,
             "exotic": 9182.62,
-            "ratio": 0.648
+            "ratio": 0.648,
+            "max_leg": 21.44,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "3-4-5-6-7",
             "parlay": 814.37,
             "exotic": 457.27,
-            "ratio": 0.562
+            "ratio": 0.562,
+            "max_leg": 13.02,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "4-5-6-7-8",
             "parlay": 2888.84,
             "exotic": 1531.51,
-            "ratio": 0.53
+            "ratio": 0.53,
+            "max_leg": 17.78,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "4-5-6-7-8",
             "parlay": 1255.12,
             "exotic": 491.49,
-            "ratio": 0.392
+            "ratio": 0.392,
+            "max_leg": 17.12,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "5-6-7-8-9",
             "parlay": 28421.93,
             "exotic": 10408.05,
-            "ratio": 0.366
+            "ratio": 0.366,
+            "max_leg": 42.38,
+            "avg_field": null
           },
           {
             "date": "2026-02-20",
             "span": "4-5-6-7-8",
             "parlay": 408.05,
             "exotic": 135.16,
-            "ratio": 0.331
+            "ratio": 0.331,
+            "max_leg": 9.46,
+            "avg_field": null
           }
         ]
       },
@@ -1738,62 +1870,134 @@
         "median_ratio": 0.018,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -81843.25,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.239
+          },
+          {
+            "min_leg": 8,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.239
+          },
+          {
+            "min_leg": 10,
+            "sample": 7,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.154
+          },
+          {
+            "min_leg": 12,
+            "sample": 7,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.154
+          },
+          {
+            "min_leg": 15,
+            "sample": 6,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.177
+          },
+          {
+            "min_leg": 20,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.165
+          },
+          {
+            "min_leg": 25,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.165
+          },
+          {
+            "min_leg": 30,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.165
+          },
+          {
+            "min_leg": 40,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.24
+          }
+        ],
         "days": [
           {
             "date": "2026-02-20",
             "span": "3-4-5-6-7-8",
             "parlay": 1954.56,
             "exotic": 1639.29,
-            "ratio": 0.839
+            "ratio": 0.839,
+            "max_leg": 9.58,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "3-4-5-6-7-8",
             "parlay": 25046.27,
             "exotic": 13496.42,
-            "ratio": 0.539
+            "ratio": 0.539,
+            "max_leg": 17.78,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "4-5-6-7-8-9",
             "parlay": 66507.32,
             "exotic": 31926.19,
-            "ratio": 0.48
+            "ratio": 0.48,
+            "max_leg": 42.38,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "3-4-5-6-7-8",
             "parlay": 9551.47,
             "exotic": 195.35,
-            "ratio": 0.02
+            "ratio": 0.02,
+            "max_leg": 17.12,
+            "avg_field": null
           },
           {
             "date": "2026-02-13",
             "span": "3-4-5-6-7-8",
             "parlay": 4020.85,
             "exotic": 61.49,
-            "ratio": 0.015
+            "ratio": 0.015,
+            "max_leg": 31.66,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "2-3-4-5-6-7",
             "parlay": 2605.99,
             "exotic": 32.38,
-            "ratio": 0.012
+            "ratio": 0.012,
+            "max_leg": 13.02,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "5-6-7-8-9-10",
             "parlay": 43920.73,
             "exotic": 393.39,
-            "ratio": 0.009
+            "ratio": 0.009,
+            "max_leg": 17.52,
+            "avg_field": null
           },
           {
             "date": "2026-02-19",
             "span": "3-4-5-6-7-8",
             "parlay": 549018.29,
             "exotic": 135.01,
-            "ratio": 0.0
+            "ratio": 0.0,
+            "max_leg": 77.46,
+            "avg_field": null
           }
         ]
       }
@@ -1805,139 +2009,227 @@
         "median_ratio": 0.432,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -912.56,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 19,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.478
+          },
+          {
+            "min_leg": 8,
+            "sample": 19,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.478
+          },
+          {
+            "min_leg": 10,
+            "sample": 16,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.468
+          },
+          {
+            "min_leg": 12,
+            "sample": 15,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.476
+          },
+          {
+            "min_leg": 15,
+            "sample": 13,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.468
+          },
+          {
+            "min_leg": 20,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.507
+          },
+          {
+            "min_leg": 25,
+            "sample": 4,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.603
+          },
+          {
+            "min_leg": 30,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.7
+          }
+        ],
         "days": [
           {
             "date": "2026-02-12",
             "span": "7-8-9-10",
             "parlay": 1740.96,
             "exotic": 1738.5,
-            "ratio": 0.999
+            "ratio": 0.999,
+            "max_leg": 36.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-13",
             "span": "7-8-9-10",
             "parlay": 225.14,
             "exotic": 202.8,
-            "ratio": 0.901
+            "ratio": 0.901,
+            "max_leg": 8.2,
+            "avg_field": null
           },
           {
             "date": "2026-02-20",
             "span": "7-8-9-10",
             "parlay": 9004.61,
             "exotic": 6408.0,
-            "ratio": 0.712
+            "ratio": 0.712,
+            "max_leg": 38.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-09",
             "span": "5-6-7-8",
             "parlay": 1002.46,
             "exotic": 631.95,
-            "ratio": 0.63
+            "ratio": 0.63,
+            "max_leg": 13.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "9-10-11-12",
             "parlay": 2474.05,
             "exotic": 1191.0,
-            "ratio": 0.481
+            "ratio": 0.481,
+            "max_leg": 24.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-11",
             "span": "7-8-9-10",
             "parlay": 447.68,
             "exotic": 207.4,
-            "ratio": 0.463
+            "ratio": 0.463,
+            "max_leg": 23.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "7-8-9-10",
             "parlay": 1213.06,
             "exotic": 539.1,
-            "ratio": 0.444
+            "ratio": 0.444,
+            "max_leg": 19.2,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "9-10-11-12",
             "parlay": 3414.01,
             "exotic": 1498.3,
-            "ratio": 0.439
+            "ratio": 0.439,
+            "max_leg": 18.6,
+            "avg_field": null
           },
           {
             "date": "2026-02-19",
             "span": "7-8-9-10",
             "parlay": 957.18,
             "exotic": 418.8,
-            "ratio": 0.438
+            "ratio": 0.438,
+            "max_leg": 21.2,
+            "avg_field": null
           },
           {
             "date": "2026-04-05",
             "span": "7-8-9-10",
             "parlay": 544.05,
             "exotic": 235.2,
-            "ratio": 0.432
+            "ratio": 0.432,
+            "max_leg": 12.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "8-9-10-11",
             "parlay": 326.25,
             "exotic": 140.35,
-            "ratio": 0.43
+            "ratio": 0.43,
+            "max_leg": 17.4,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "6-7-8-9",
             "parlay": 1519.01,
             "exotic": 636.25,
-            "ratio": 0.419
+            "ratio": 0.419,
+            "max_leg": 19.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "6-7-8-9",
             "parlay": 7953.18,
             "exotic": 3099.3,
-            "ratio": 0.39
+            "ratio": 0.39,
+            "max_leg": 71.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "7-8-9-10",
             "parlay": 110.63,
             "exotic": 38.9,
-            "ratio": 0.352
+            "ratio": 0.352,
+            "max_leg": 10.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "5-6-7-8",
             "parlay": 181.12,
             "exotic": 63.8,
-            "ratio": 0.352
+            "ratio": 0.352,
+            "max_leg": 9.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-22",
             "span": "7-8-9-10",
             "parlay": 276.83,
             "exotic": 92.5,
-            "ratio": 0.334
+            "ratio": 0.334,
+            "max_leg": 8.6,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "8-9-10-11",
             "parlay": 2907.22,
             "exotic": 905.95,
-            "ratio": 0.312
+            "ratio": 0.312,
+            "max_leg": 27.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "6-7-8-9",
             "parlay": 1182.72,
             "exotic": 348.75,
-            "ratio": 0.295
+            "ratio": 0.295,
+            "max_leg": 16.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "7-8-9-10",
             "parlay": 344.76,
             "exotic": 89.5,
-            "ratio": 0.26
+            "ratio": 0.26,
+            "max_leg": 20.4,
+            "avg_field": null
           }
         ]
       },
@@ -1947,139 +2239,227 @@
         "median_ratio": 0.541,
         "exotic_beat_parlay_pct": 10.5,
         "avg_edge": -3767.25,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 19,
+            "exotic_win_pct": 10.5,
+            "avg_ratio": 0.64
+          },
+          {
+            "min_leg": 8,
+            "sample": 19,
+            "exotic_win_pct": 10.5,
+            "avg_ratio": 0.64
+          },
+          {
+            "min_leg": 10,
+            "sample": 17,
+            "exotic_win_pct": 5.9,
+            "avg_ratio": 0.615
+          },
+          {
+            "min_leg": 12,
+            "sample": 17,
+            "exotic_win_pct": 5.9,
+            "avg_ratio": 0.615
+          },
+          {
+            "min_leg": 15,
+            "sample": 13,
+            "exotic_win_pct": 7.7,
+            "avg_ratio": 0.584
+          },
+          {
+            "min_leg": 20,
+            "sample": 10,
+            "exotic_win_pct": 10.0,
+            "avg_ratio": 0.623
+          },
+          {
+            "min_leg": 25,
+            "sample": 6,
+            "exotic_win_pct": 16.7,
+            "avg_ratio": 0.752
+          },
+          {
+            "min_leg": 30,
+            "sample": 3,
+            "exotic_win_pct": 33.3,
+            "avg_ratio": 1.022
+          }
+        ],
         "days": [
           {
             "date": "2026-02-12",
             "span": "6-7-8-9-10",
             "parlay": 3133.73,
             "exotic": 5024.0,
-            "ratio": 1.603
+            "ratio": 1.603,
+            "max_leg": 36.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-13",
             "span": "6-7-8-9-10",
             "parlay": 720.45,
             "exotic": 842.9,
-            "ratio": 1.17
+            "ratio": 1.17,
+            "max_leg": 8.2,
+            "avg_field": null
           },
           {
             "date": "2026-02-20",
             "span": "6-7-8-9-10",
             "parlay": 20710.6,
             "exotic": 19083.7,
-            "ratio": 0.921
+            "ratio": 0.921,
+            "max_leg": 38.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-09",
             "span": "4-5-6-7-8",
             "parlay": 1904.67,
             "exotic": 1647.45,
-            "ratio": 0.865
+            "ratio": 0.865,
+            "max_leg": 13.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-22",
             "span": "6-7-8-9-10",
             "parlay": 1744.05,
             "exotic": 1420.5,
-            "ratio": 0.814
+            "ratio": 0.814,
+            "max_leg": 12.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-05",
             "span": "6-7-8-9-10",
             "parlay": 1523.34,
             "exotic": 1154.3,
-            "ratio": 0.758
+            "ratio": 0.758,
+            "max_leg": 12.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "7-8-9-10-11",
             "parlay": 4241.25,
             "exotic": 2905.3,
-            "ratio": 0.685
+            "ratio": 0.685,
+            "max_leg": 26.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-11",
             "span": "6-7-8-9-10",
             "parlay": 1701.18,
             "exotic": 963.0,
-            "ratio": 0.566
+            "ratio": 0.566,
+            "max_leg": 23.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "4-5-6-7-8",
             "parlay": 398.47,
             "exotic": 217.2,
-            "ratio": 0.545
+            "ratio": 0.545,
+            "max_leg": 9.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "5-6-7-8-9",
             "parlay": 16701.69,
             "exotic": 9041.35,
-            "ratio": 0.541
+            "ratio": 0.541,
+            "max_leg": 71.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "5-6-7-8-9",
             "parlay": 2582.32,
             "exotic": 1222.35,
-            "ratio": 0.473
+            "ratio": 0.473,
+            "max_leg": 19.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "8-9-10-11-12",
             "parlay": 7916.95,
             "exotic": 3702.65,
-            "ratio": 0.468
+            "ratio": 0.468,
+            "max_leg": 24.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "5-6-7-8-9",
             "parlay": 4139.52,
             "exotic": 1909.95,
-            "ratio": 0.461
+            "ratio": 0.461,
+            "max_leg": 16.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "8-9-10-11-12",
             "parlay": 47796.16,
             "exotic": 21014.0,
-            "ratio": 0.44
+            "ratio": 0.44,
+            "max_leg": 28.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-19",
             "span": "6-7-8-9-10",
             "parlay": 3828.72,
             "exotic": 1633.1,
-            "ratio": 0.427
+            "ratio": 0.427,
+            "max_leg": 21.2,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "6-7-8-9-10",
             "parlay": 2183.5,
             "exotic": 929.15,
-            "ratio": 0.426
+            "ratio": 0.426,
+            "max_leg": 19.2,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "6-7-8-9-10",
             "parlay": 763.35,
             "exotic": 324.05,
-            "ratio": 0.425
+            "ratio": 0.425,
+            "max_leg": 13.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "7-8-9-10-11",
             "parlay": 30816.58,
             "exotic": 9915.7,
-            "ratio": 0.322
+            "ratio": 0.322,
+            "max_leg": 27.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "6-7-8-9-10",
             "parlay": 2309.89,
             "exotic": 587.95,
-            "ratio": 0.255
+            "ratio": 0.255,
+            "max_leg": 20.4,
+            "avg_field": null
           }
         ]
       },
@@ -2089,139 +2469,227 @@
         "median_ratio": 0.332,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -22153.17,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 19,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.331
+          },
+          {
+            "min_leg": 8,
+            "sample": 19,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.331
+          },
+          {
+            "min_leg": 10,
+            "sample": 18,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.32
+          },
+          {
+            "min_leg": 12,
+            "sample": 18,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.32
+          },
+          {
+            "min_leg": 15,
+            "sample": 14,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.299
+          },
+          {
+            "min_leg": 20,
+            "sample": 11,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.312
+          },
+          {
+            "min_leg": 25,
+            "sample": 6,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.433
+          },
+          {
+            "min_leg": 30,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.506
+          }
+        ],
         "days": [
           {
             "date": "2026-04-09",
             "span": "3-4-5-6-7-8",
             "parlay": 9904.27,
             "exotic": 8072.12,
-            "ratio": 0.815
+            "ratio": 0.815,
+            "max_leg": 13.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-20",
             "span": "5-6-7-8-9-10",
             "parlay": 103552.99,
             "exotic": 77814.84,
-            "ratio": 0.751
+            "ratio": 0.751,
+            "max_leg": 38.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "6-7-8-9-10-11",
             "parlay": 22902.75,
             "exotic": 12703.98,
-            "ratio": 0.555
+            "ratio": 0.555,
+            "max_leg": 26.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "3-4-5-6-7-8",
             "parlay": 1115.73,
             "exotic": 583.3,
-            "ratio": 0.523
+            "ratio": 0.523,
+            "max_leg": 9.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-13",
             "span": "5-6-7-8-9-10",
             "parlay": 5835.61,
             "exotic": 2535.24,
-            "ratio": 0.434
+            "ratio": 0.434,
+            "max_leg": 16.2,
+            "avg_field": null
           },
           {
             "date": "2026-02-12",
             "span": "5-6-7-8-9-10",
             "parlay": 36037.87,
             "exotic": 14201.22,
-            "ratio": 0.394
+            "ratio": 0.394,
+            "max_leg": 36.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "4-5-6-7-8-9",
             "parlay": 31733.21,
             "exotic": 11832.88,
-            "ratio": 0.373
+            "ratio": 0.373,
+            "max_leg": 71.6,
+            "avg_field": null
           },
           {
             "date": "2026-04-11",
             "span": "5-6-7-8-9-10",
             "parlay": 5613.88,
             "exotic": 2019.84,
-            "ratio": 0.36
+            "ratio": 0.36,
+            "max_leg": 23.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-22",
             "span": "5-6-7-8-9-10",
             "parlay": 2790.49,
             "exotic": 997.94,
-            "ratio": 0.358
+            "ratio": 0.358,
+            "max_leg": 12.6,
+            "avg_field": null
           },
           {
             "date": "2026-02-14",
             "span": "7-8-9-10-11-12",
             "parlay": 114710.78,
             "exotic": 38027.7,
-            "ratio": 0.332
+            "ratio": 0.332,
+            "max_leg": 28.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-05",
             "span": "5-6-7-8-9-10",
             "parlay": 9444.73,
             "exotic": 2013.56,
-            "ratio": 0.213
+            "ratio": 0.213,
+            "max_leg": 12.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "4-5-6-7-8-9",
             "parlay": 7746.96,
             "exotic": 1485.82,
-            "ratio": 0.192
+            "ratio": 0.192,
+            "max_leg": 19.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-15",
             "span": "6-7-8-9-10-11",
             "parlay": 166409.56,
             "exotic": 31679.8,
-            "ratio": 0.19
+            "ratio": 0.19,
+            "max_leg": 27.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "5-6-7-8-9-10",
             "parlay": 1526.69,
             "exotic": 289.42,
-            "ratio": 0.19
+            "ratio": 0.19,
+            "max_leg": 13.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-19",
             "span": "5-6-7-8-9-10",
             "parlay": 28332.53,
             "exotic": 4746.98,
-            "ratio": 0.168
+            "ratio": 0.168,
+            "max_leg": 21.2,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "4-5-6-7-8-9",
             "parlay": 13246.46,
             "exotic": 1717.36,
-            "ratio": 0.13
+            "ratio": 0.13,
+            "max_leg": 16.8,
+            "avg_field": null
           },
           {
             "date": "2026-02-27",
             "span": "5-6-7-8-9-10",
             "parlay": 22926.76,
             "exotic": 2800.12,
-            "ratio": 0.122
+            "ratio": 0.122,
+            "max_leg": 21.0,
+            "avg_field": null
           },
           {
             "date": "2026-02-26",
             "span": "5-6-7-8-9-10",
             "parlay": 7853.63,
             "exotic": 812.42,
-            "ratio": 0.103
+            "ratio": 0.103,
+            "max_leg": 20.4,
+            "avg_field": null
           },
           {
             "date": "2026-02-21",
             "span": "7-8-9-10-11-12",
             "parlay": 47501.72,
             "exotic": 3941.86,
-            "ratio": 0.083
+            "ratio": 0.083,
+            "max_leg": 24.8,
+            "avg_field": null
           }
         ]
       }
@@ -2233,90 +2701,176 @@
         "median_ratio": 0.397,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -7292.11,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 12,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.395
+          },
+          {
+            "min_leg": 8,
+            "sample": 11,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.374
+          },
+          {
+            "min_leg": 10,
+            "sample": 11,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.374
+          },
+          {
+            "min_leg": 12,
+            "sample": 10,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.362
+          },
+          {
+            "min_leg": 15,
+            "sample": 8,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.355
+          },
+          {
+            "min_leg": 20,
+            "sample": 6,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.38
+          },
+          {
+            "min_leg": 25,
+            "sample": 5,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.377
+          },
+          {
+            "min_leg": 30,
+            "sample": 5,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.377
+          },
+          {
+            "min_leg": 40,
+            "sample": 4,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.4
+          },
+          {
+            "min_leg": 50,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.381
+          }
+        ],
         "days": [
           {
             "date": "2026-04-08",
             "span": "5-6-7-8",
             "parlay": 199.29,
             "exotic": 124.01,
-            "ratio": 0.622
+            "ratio": 0.622,
+            "max_leg": 6.74,
+            "avg_field": null
           },
           {
             "date": "2026-04-11",
             "span": "8-9-10-11",
             "parlay": 2325.93,
             "exotic": 1305.57,
-            "ratio": 0.561
+            "ratio": 0.561,
+            "max_leg": 66.68,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "8-9-10-11",
             "parlay": 159.93,
             "exotic": 79.34,
-            "ratio": 0.496
+            "ratio": 0.496,
+            "max_leg": 10.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-04",
             "span": "8-9-10-11",
             "parlay": 2435.86,
             "exotic": 1114.8,
-            "ratio": 0.458
+            "ratio": 0.458,
+            "max_leg": 45.36,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "6-7-8-9",
             "parlay": 200.83,
             "exotic": 82.06,
-            "ratio": 0.409
+            "ratio": 0.409,
+            "max_leg": 12.88,
+            "avg_field": null
           },
           {
             "date": "2026-04-09",
             "span": "6-7-8-9",
             "parlay": 62420.86,
             "exotic": 24981.67,
-            "ratio": 0.4
+            "ratio": 0.4,
+            "max_leg": 173.4,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "6-7-8-9",
             "parlay": 749.64,
             "exotic": 295.05,
-            "ratio": 0.394
+            "ratio": 0.394,
+            "max_leg": 24.28,
+            "avg_field": null
           },
           {
             "date": "2026-04-03",
             "span": "7-8-9-10",
             "parlay": 591.32,
             "exotic": 222.04,
-            "ratio": 0.375
+            "ratio": 0.375,
+            "max_leg": 14.16,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "7-8-9-10",
             "parlay": 765.05,
             "exotic": 240.03,
-            "ratio": 0.314
+            "ratio": 0.314,
+            "max_leg": 15.7,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "7-8-9-10",
             "parlay": 4824.02,
             "exotic": 1374.32,
-            "ratio": 0.285
+            "ratio": 0.285,
+            "max_leg": 32.88,
+            "avg_field": null
           },
           {
             "date": "2026-04-15",
             "span": "5-6-7-8",
             "parlay": 837.29,
             "exotic": 204.93,
-            "ratio": 0.245
+            "ratio": 0.245,
+            "max_leg": 19.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "6-7-8-9",
             "parlay": 51280.59,
             "exotic": 9261.45,
-            "ratio": 0.181
+            "ratio": 0.181,
+            "max_leg": 52.46,
+            "avg_field": null
           }
         ]
       },
@@ -2326,90 +2880,176 @@
         "median_ratio": 0.01,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -59543.41,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 12,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.169
+          },
+          {
+            "min_leg": 8,
+            "sample": 11,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.184
+          },
+          {
+            "min_leg": 10,
+            "sample": 11,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.184
+          },
+          {
+            "min_leg": 12,
+            "sample": 10,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.201
+          },
+          {
+            "min_leg": 15,
+            "sample": 9,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.167
+          },
+          {
+            "min_leg": 20,
+            "sample": 7,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.213
+          },
+          {
+            "min_leg": 25,
+            "sample": 6,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.192
+          },
+          {
+            "min_leg": 30,
+            "sample": 5,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.172
+          },
+          {
+            "min_leg": 40,
+            "sample": 5,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.172
+          },
+          {
+            "min_leg": 50,
+            "sample": 4,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.153
+          }
+        ],
         "days": [
           {
             "date": "2026-04-11",
             "span": "7-8-9-10-11",
             "parlay": 6559.13,
             "exotic": 4010.82,
-            "ratio": 0.611
+            "ratio": 0.611,
+            "max_leg": 66.68,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "5-6-7-8-9",
             "parlay": 795.29,
             "exotic": 406.54,
-            "ratio": 0.511
+            "ratio": 0.511,
+            "max_leg": 12.88,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "5-6-7-8-9",
             "parlay": 1791.63,
             "exotic": 609.71,
-            "ratio": 0.34
+            "ratio": 0.34,
+            "max_leg": 24.28,
+            "avg_field": null
           },
           {
             "date": "2026-04-03",
             "span": "6-7-8-9-10",
             "parlay": 7409.3,
             "exotic": 2192.38,
-            "ratio": 0.296
+            "ratio": 0.296,
+            "max_leg": 25.06,
+            "avg_field": null
           },
           {
             "date": "2026-04-04",
             "span": "7-8-9-10-11",
             "parlay": 4896.09,
             "exotic": 1194.57,
-            "ratio": 0.244
+            "ratio": 0.244,
+            "max_leg": 45.36,
+            "avg_field": null
           },
           {
             "date": "2026-04-08",
             "span": "4-5-6-7-8",
             "parlay": 759.29,
             "exotic": 8.19,
-            "ratio": 0.011
+            "ratio": 0.011,
+            "max_leg": 7.62,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "7-8-9-10-11",
             "parlay": 521.39,
             "exotic": 5.32,
-            "ratio": 0.01
+            "ratio": 0.01,
+            "max_leg": 10.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-15",
             "span": "4-5-6-7-8",
             "parlay": 2729.55,
             "exotic": 11.48,
-            "ratio": 0.004
+            "ratio": 0.004,
+            "max_leg": 19.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "6-7-8-9-10",
             "parlay": 2264.55,
             "exotic": 9.69,
-            "ratio": 0.004
+            "ratio": 0.004,
+            "max_leg": 15.7,
+            "avg_field": null
           },
           {
             "date": "2026-04-09",
             "span": "5-6-7-8-9",
             "parlay": 393251.41,
             "exotic": 357.63,
-            "ratio": 0.001
+            "ratio": 0.001,
+            "max_leg": 173.4,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "6-7-8-9-10",
             "parlay": 224316.76,
             "exotic": 314.36,
-            "ratio": 0.001
+            "ratio": 0.001,
+            "max_leg": 93.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "5-6-7-8-9",
             "parlay": 78459.31,
             "exotic": 112.04,
-            "ratio": 0.001
+            "ratio": 0.001,
+            "max_leg": 52.46,
+            "avg_field": null
           }
         ]
       },
@@ -2419,90 +3059,176 @@
         "median_ratio": 0.202,
         "exotic_beat_parlay_pct": 33.3,
         "avg_edge": -359941.83,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 12,
+            "exotic_win_pct": 33.3,
+            "avg_ratio": 0.565
+          },
+          {
+            "min_leg": 8,
+            "sample": 11,
+            "exotic_win_pct": 27.3,
+            "avg_ratio": 0.514
+          },
+          {
+            "min_leg": 10,
+            "sample": 11,
+            "exotic_win_pct": 27.3,
+            "avg_ratio": 0.514
+          },
+          {
+            "min_leg": 12,
+            "sample": 10,
+            "exotic_win_pct": 30.0,
+            "avg_ratio": 0.564
+          },
+          {
+            "min_leg": 15,
+            "sample": 9,
+            "exotic_win_pct": 22.2,
+            "avg_ratio": 0.5
+          },
+          {
+            "min_leg": 20,
+            "sample": 7,
+            "exotic_win_pct": 28.6,
+            "avg_ratio": 0.51
+          },
+          {
+            "min_leg": 25,
+            "sample": 6,
+            "exotic_win_pct": 16.7,
+            "avg_ratio": 0.405
+          },
+          {
+            "min_leg": 30,
+            "sample": 5,
+            "exotic_win_pct": 20.0,
+            "avg_ratio": 0.412
+          },
+          {
+            "min_leg": 40,
+            "sample": 5,
+            "exotic_win_pct": 20.0,
+            "avg_ratio": 0.412
+          },
+          {
+            "min_leg": 50,
+            "sample": 4,
+            "exotic_win_pct": 25.0,
+            "avg_ratio": 0.513
+          }
+        ],
         "days": [
           {
             "date": "2026-04-11",
             "span": "6-7-8-9-10-11",
             "parlay": 47488.07,
             "exotic": 94913.51,
-            "ratio": 1.999
+            "ratio": 1.999,
+            "max_leg": 66.68,
+            "avg_field": null
           },
           {
             "date": "2026-04-12",
             "span": "4-5-6-7-8-9",
             "parlay": 2536.98,
             "exotic": 2899.68,
-            "ratio": 1.143
+            "ratio": 1.143,
+            "max_leg": 12.88,
+            "avg_field": null
           },
           {
             "date": "2026-04-16",
             "span": "4-5-6-7-8-9",
             "parlay": 5912.38,
             "exotic": 6737.94,
-            "ratio": 1.14
+            "ratio": 1.14,
+            "max_leg": 24.28,
+            "avg_field": null
           },
           {
             "date": "2026-04-08",
             "span": "3-4-5-6-7-8",
             "parlay": 1435.05,
             "exotic": 1612.61,
-            "ratio": 1.124
+            "ratio": 1.124,
+            "max_leg": 7.62,
+            "avg_field": null
           },
           {
             "date": "2026-04-15",
             "span": "3-4-5-6-7-8",
             "parlay": 12938.07,
             "exotic": 11963.38,
-            "ratio": 0.925
+            "ratio": 0.925,
+            "max_leg": 19.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-03",
             "span": "5-6-7-8-9-10",
             "parlay": 42233.01,
             "exotic": 15564.23,
-            "ratio": 0.369
+            "ratio": 0.369,
+            "max_leg": 25.06,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "4-5-6-7-8-9",
             "parlay": 534307.87,
             "exotic": 18012.58,
-            "ratio": 0.034
+            "ratio": 0.034,
+            "max_leg": 52.46,
+            "avg_field": null
           },
           {
             "date": "2026-04-10",
             "span": "5-6-7-8-9-10",
             "parlay": 1520867.66,
             "exotic": 21368.97,
-            "ratio": 0.014
+            "ratio": 0.014,
+            "max_leg": 93.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "6-7-8-9-10-11",
             "parlay": 1293.04,
             "exotic": 16.94,
-            "ratio": 0.013
+            "ratio": 0.013,
+            "max_leg": 10.34,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "5-6-7-8-9-10",
             "parlay": 4325.28,
             "exotic": 39.31,
-            "ratio": 0.009
+            "ratio": 0.009,
+            "max_leg": 15.7,
+            "avg_field": null
           },
           {
             "date": "2026-04-04",
             "span": "6-7-8-9-10-11",
             "parlay": 27369.12,
             "exotic": 198.7,
-            "ratio": 0.007
+            "ratio": 0.007,
+            "max_leg": 45.36,
+            "avg_field": null
           },
           {
             "date": "2026-04-09",
             "span": "4-5-6-7-8-9",
             "parlay": 2300520.77,
             "exotic": 8597.44,
-            "ratio": 0.004
+            "ratio": 0.004,
+            "max_leg": 173.4,
+            "avg_field": null
           }
         ]
       }
@@ -2514,27 +3240,53 @@
         "median_ratio": 0.434,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -742.46,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.55
+          },
+          {
+            "min_leg": 8,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.55
+          },
+          {
+            "min_leg": 10,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.685
+          }
+        ],
         "days": [
           {
             "date": "2026-04-18",
             "span": "7-8-9-10",
             "parlay": 186.28,
             "exotic": 174.3,
-            "ratio": 0.936
+            "ratio": 0.936,
+            "max_leg": 11.2,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "6-7-8-9",
             "parlay": 3733.58,
             "exotic": 1619.45,
-            "ratio": 0.434
+            "ratio": 0.434,
+            "max_leg": 38.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "6-7-8-9",
             "parlay": 140.77,
             "exotic": 39.5,
-            "ratio": 0.281
+            "ratio": 0.281,
+            "max_leg": 9.8,
+            "avg_field": null
           }
         ]
       },
@@ -2544,27 +3296,83 @@
         "median_ratio": 0.3,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -7178.17,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.445
+          },
+          {
+            "min_leg": 8,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.445
+          },
+          {
+            "min_leg": 10,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          },
+          {
+            "min_leg": 12,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          },
+          {
+            "min_leg": 15,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          },
+          {
+            "min_leg": 20,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          },
+          {
+            "min_leg": 25,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          },
+          {
+            "min_leg": 30,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.528
+          }
+        ],
         "days": [
           {
             "date": "2026-04-18",
             "span": "6-7-8-9-10",
             "parlay": 3837.34,
             "exotic": 2904.0,
-            "ratio": 0.757
+            "ratio": 0.757,
+            "max_leg": 41.2,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "5-6-7-8-9",
             "parlay": 29121.89,
             "exotic": 8744.2,
-            "ratio": 0.3
+            "ratio": 0.3,
+            "max_leg": 38.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-19",
             "span": "5-6-7-8-9",
             "parlay": 309.69,
             "exotic": 86.2,
-            "ratio": 0.278
+            "ratio": 0.278,
+            "max_leg": 9.8,
+            "avg_field": null
           }
         ]
       },
@@ -2574,27 +3382,83 @@
         "median_ratio": 0.039,
         "exotic_beat_parlay_pct": 0.0,
         "avg_edge": -27746.67,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.157
+          },
+          {
+            "min_leg": 8,
+            "sample": 3,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.157
+          },
+          {
+            "min_leg": 10,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          },
+          {
+            "min_leg": 12,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          },
+          {
+            "min_leg": 15,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          },
+          {
+            "min_leg": 20,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          },
+          {
+            "min_leg": 25,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          },
+          {
+            "min_leg": 30,
+            "sample": 2,
+            "exotic_win_pct": 0.0,
+            "avg_ratio": 0.03
+          }
+        ],
         "days": [
           {
             "date": "2026-04-19",
             "span": "4-5-6-7-8-9",
             "parlay": 526.47,
             "exotic": 216.2,
-            "ratio": 0.411
+            "ratio": 0.411,
+            "max_leg": 9.8,
+            "avg_field": null
           },
           {
             "date": "2026-04-17",
             "span": "4-5-6-7-8-9",
             "parlay": 69892.54,
             "exotic": 2738.8,
-            "ratio": 0.039
+            "ratio": 0.039,
+            "max_leg": 38.0,
+            "avg_field": null
           },
           {
             "date": "2026-04-18",
             "span": "5-6-7-8-9-10",
             "parlay": 16116.81,
             "exotic": 340.8,
-            "ratio": 0.021
+            "ratio": 0.021,
+            "max_leg": 41.2,
+            "avg_field": null
           }
         ]
       }
