@@ -1,0 +1,988 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#1a1a2e">
+  <title>Derby Value</title>
+  <style>
+    :root {
+      --bg:       #1a1a2e;
+      --card:     #16213e;
+      --card2:    #0f3460;
+      --gold:     #c9a84c;
+      --gold-lt:  #e8c97a;
+      --text:     #e8e8e8;
+      --dim:      #8888aa;
+      --green:    #2ecc71;
+      --yellow:   #f0a500;
+      --red:      #e74c3c;
+      --border:   #2a2a4a;
+      --input-bg: #0d1b2a;
+      --radius:   10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; -webkit-text-size-adjust: 100%; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      padding-bottom: env(safe-area-inset-bottom, 24px);
+    }
+
+    /* ── Header ── */
+    header {
+      background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+      border-bottom: 2px solid var(--gold);
+      padding: 14px 16px 10px;
+      text-align: center;
+    }
+    header h1 { font-size: 1.55rem; font-weight: 800; color: var(--gold); letter-spacing: 0.06em; }
+    header p  { font-size: 0.75rem; color: var(--dim); margin-top: 2px; }
+
+    /* ── Tabs ── */
+    .tabs {
+      display: flex;
+      background: var(--card);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 13px 6px;
+      border: none;
+      background: transparent;
+      color: var(--dim);
+      font-size: 0.88rem;
+      font-weight: 600;
+      cursor: pointer;
+      border-bottom: 3px solid transparent;
+      min-height: 48px;
+      transition: color .15s, border-color .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tab-btn.active { color: var(--gold); border-bottom-color: var(--gold); }
+
+    /* ── Tab panes ── */
+    .tab-pane { display: none; padding: 12px; }
+    .tab-pane.active { display: block; }
+
+    /* ── Cards ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .card h2 {
+      font-size: 1rem;
+      color: var(--gold);
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+    .card h3 {
+      font-size: 0.9rem;
+      color: var(--gold-lt);
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    /* ── Stats grid ── */
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .stat-box {
+      background: var(--card2);
+      border-radius: 8px;
+      padding: 10px;
+      text-align: center;
+    }
+    .stat-box .val { font-size: 1.35rem; font-weight: 800; color: var(--gold); }
+    .stat-box .lbl { font-size: 0.7rem; color: var(--dim); margin-top: 2px; }
+
+    /* ── Consistency badges ── */
+    .badge {
+      display: inline-block;
+      padding: 3px 8px;
+      border-radius: 4px;
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      white-space: nowrap;
+    }
+    .badge-HIGH     { background: rgba(46,204,113,.18); color: var(--green);  border: 1px solid var(--green); }
+    .badge-MODERATE { background: rgba(240,165,0,.18);  color: var(--yellow); border: 1px solid var(--yellow); }
+    .badge-LOTTERY  { background: rgba(231,76,60,.18);  color: var(--red);    border: 1px solid var(--red); }
+
+    /* ── Overlay rows ── */
+    .overlay-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 9px 0;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+    .overlay-row:last-child { border-bottom: none; }
+    .overlay-races { font-weight: 700; font-size: 1rem; min-width: 82px; }
+    .overlay-stats { font-size: 0.77rem; color: var(--dim); margin-top: 2px; }
+    .overlay-ratio { font-weight: 800; font-size: 1.05rem; color: var(--gold); text-align: right; }
+
+    /* ── Form inputs ── */
+    .field-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+    .field-row label {
+      min-width: 128px;
+      font-size: 0.82rem;
+      color: var(--dim);
+      flex-shrink: 0;
+    }
+    .field-row .row-group { flex: 1; display: flex; gap: 8px; align-items: center; }
+    .field-row .row-group input { flex: 1; }
+
+    input[type="number"],
+    input[type="text"] {
+      padding: 12px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      color: var(--text);
+      font-size: 1rem;   /* >= 16px prevents iOS zoom */
+      min-height: 48px;
+      appearance: none;
+      -webkit-appearance: none;
+      width: 100%;
+    }
+    .field-row input { flex: 1; }
+    input:focus { outline: none; border-color: var(--gold); }
+
+    /* ── Buttons ── */
+    .btn-primary {
+      display: block;
+      width: 100%;
+      padding: 16px;
+      background: var(--gold);
+      color: #1a1a2e;
+      border: none;
+      border-radius: 8px;
+      font-size: 1rem;
+      font-weight: 800;
+      cursor: pointer;
+      min-height: 52px;
+      margin-top: 14px;
+      letter-spacing: 0.06em;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-primary:active { opacity: .82; }
+
+    .btn-secondary {
+      padding: 12px 14px;
+      background: var(--card2);
+      color: var(--gold);
+      border: 1px solid var(--gold);
+      border-radius: 8px;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      min-height: 48px;
+      white-space: nowrap;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-secondary:active { opacity: .8; }
+
+    /* ── Horse input table ── */
+    .table-scroll {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+    }
+    .horse-input-table {
+      width: 100%;
+      border-collapse: collapse;
+      min-width: 280px;
+    }
+    .horse-input-table th {
+      text-align: left;
+      padding: 7px 10px;
+      font-size: 0.78rem;
+      color: var(--dim);
+      border-bottom: 1px solid var(--border);
+    }
+    .horse-input-table td {
+      padding: 5px 6px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: middle;
+    }
+    .horse-input-table .pgm-cell {
+      font-weight: 800;
+      color: var(--gold);
+      text-align: center;
+      width: 36px;
+    }
+    .horse-input-table .chk-cell { text-align: center; width: 56px; }
+    .horse-input-table input[type="checkbox"] {
+      width: 24px;
+      height: 24px;
+      accent-color: var(--gold);
+      cursor: pointer;
+    }
+    .horse-input-table input[type="text"] {
+      width: 88px;
+      min-height: 42px;
+      padding: 8px 10px;
+      font-size: 1rem;
+    }
+
+    /* ── Results tables ── */
+    .results-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.8rem;
+      min-width: 560px;
+    }
+    .results-table th {
+      padding: 7px 8px;
+      text-align: right;
+      font-size: 0.72rem;
+      color: var(--dim);
+      border-bottom: 2px solid var(--border);
+      white-space: nowrap;
+    }
+    .results-table th:first-child,
+    .results-table th:nth-child(2) { text-align: center; }
+    .results-table td {
+      padding: 8px 8px;
+      text-align: right;
+      border-bottom: 1px solid var(--border);
+      white-space: nowrap;
+    }
+    .results-table td:first-child,
+    .results-table td:nth-child(2) { text-align: center; }
+    .results-table tr:last-child td { border-bottom: none; }
+    .results-table .covered-row { background: rgba(201,168,76,.06); }
+
+    /* ── Money colours ── */
+    .pos { color: var(--green); font-weight: 600; }
+    .neg { color: var(--red);   font-weight: 600; }
+
+    /* ── Summary grid ── */
+    .sum-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 8px;
+      margin-top: 6px;
+    }
+    .sum-item .key   { font-size: 0.75rem; color: var(--dim); }
+    .sum-item .value { font-size: 1rem; font-weight: 700; margin-top: 2px; }
+
+    /* ── Alloc bar ── */
+    .alloc-bar-wrap { height: 5px; background: var(--border); border-radius: 3px; margin-top: 4px; }
+    .alloc-bar      { height: 100%; background: var(--gold); border-radius: 3px; }
+
+    /* ── Wager pill / section ── */
+    .wager-pill {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--card2);
+      border-radius: 4px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-right: 4px;
+    }
+    .wager-section { margin-bottom: 14px; }
+    .wager-section h4 {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+      letter-spacing: .04em;
+    }
+    .no-overlay { font-size: 0.8rem; color: var(--dim); font-style: italic; }
+
+    /* ── Misc ── */
+    .last-updated { text-align: center; font-size: 0.76rem; color: var(--dim); padding: 6px 0 8px; }
+    .totals-row   { margin-top: 8px; font-size: 0.8rem; color: var(--dim); display: flex; gap: 14px; flex-wrap: wrap; }
+    .totals-row .tv { color: var(--text); font-weight: 600; }
+    .status-msg   { text-align: center; padding: 40px 20px; color: var(--dim); }
+    .status-msg .icon { font-size: 2rem; margin-bottom: 8px; }
+    .thin-note    { font-size: 0.74rem; color: var(--dim); font-style: italic; margin-top: 8px; line-height: 1.5; }
+    .offline-bar  { background: rgba(240,165,0,.15); border: 1px solid var(--yellow); border-radius: 8px;
+                    padding: 7px; text-align: center; font-size: 0.78rem; color: var(--yellow); margin-bottom: 10px; }
+    .hidden { display: none !important; }
+    code { font-family: 'Menlo','Courier New',monospace; color: var(--gold); font-size: .9em; }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>DERBY VALUE</h1>
+  <p>Horse Racing Analytics</p>
+</header>
+
+<nav class="tabs">
+  <button class="tab-btn active"  onclick="showTab('dashboard')">Dashboard</button>
+  <button class="tab-btn"         onclick="showTab('hedge')">Hedge Calc</button>
+  <button class="tab-btn"         onclick="showTab('profiles')">Profiles</button>
+</nav>
+
+<!-- ─────────────── DASHBOARD TAB ─────────────── -->
+<div id="tab-dashboard" class="tab-pane active">
+  <div id="dash-content">
+    <div class="status-msg"><div class="icon">&#128225;</div><div>Loading...</div></div>
+  </div>
+</div>
+
+<!-- ─────────────── HEDGE CALCULATOR TAB ─────────────── -->
+<div id="tab-hedge" class="tab-pane">
+
+  <div class="card">
+    <h2>Ticket Details</h2>
+    <div class="field-row">
+      <label>Ticket Cost ($)</label>
+      <input type="number" id="ticketCost" inputmode="decimal" min="1" placeholder="120" step="any">
+    </div>
+    <div class="field-row">
+      <label>Est. Payout ($)</label>
+      <input type="number" id="estPayout" inputmode="decimal" min="1" placeholder="180000" step="any">
+    </div>
+    <div class="field-row">
+      <label>Horses in Field</label>
+      <div class="row-group">
+        <input type="number" id="fieldSize" inputmode="numeric" min="2" max="20" placeholder="10">
+        <button class="btn-secondary" onclick="generateHorseTable()">Generate</button>
+      </div>
+    </div>
+    <div class="field-row">
+      <label>Hedge Budget ($) <span style="color:var(--dim);font-size:.78rem">optional</span></label>
+      <input type="number" id="hedgeBudget" inputmode="decimal" min="0" placeholder="500" step="any">
+    </div>
+  </div>
+
+  <div id="horse-table-wrap" class="hidden">
+    <div class="card">
+      <h3>Check your horses &mdash; enter odds for all</h3>
+      <p style="font-size:.78rem;color:var(--dim);margin-bottom:10px">
+        Odds format: <code>5/2</code> &nbsp; <code>5-2</code> &nbsp; <code>2.5</code> &nbsp; <code>even</code>
+      </p>
+      <div class="table-scroll">
+        <table class="horse-input-table">
+          <thead>
+            <tr><th>#</th><th>Mine</th><th>Odds</th></tr>
+          </thead>
+          <tbody id="horse-tbody"></tbody>
+        </table>
+      </div>
+      <button class="btn-primary" onclick="runCalculation()">CALCULATE HEDGES</button>
+    </div>
+  </div>
+
+  <div id="hedge-results" class="hidden">
+    <div class="card" id="res-summary"></div>
+    <div class="card">
+      <h3>Scenario Table</h3>
+      <p style="font-size:.76rem;color:var(--dim);margin-bottom:8px">
+        Sorted by win probability &mdash; most dangerous uncovered horses first
+      </p>
+      <div class="table-scroll" id="res-scenario"></div>
+      <div class="totals-row" id="res-totals"></div>
+    </div>
+    <div class="card hidden" id="res-budget"></div>
+  </div>
+
+</div>
+
+<!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
+<div id="tab-profiles" class="tab-pane">
+  <p class="last-updated">Baseline snapshot &mdash; April 22, 2026 &mdash; KEE &amp; GP (42 race days)</p>
+  <div id="profiles-content"></div>
+</div>
+
+<script>
+// =============================================================
+//  TAB NAVIGATION
+// =============================================================
+function showTab(name) {
+  document.querySelectorAll('.tab-pane').forEach(p => p.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  const btns = document.querySelectorAll('.tab-btn');
+  const names = ['dashboard', 'hedge', 'profiles'];
+  btns[names.indexOf(name)].classList.add('active');
+}
+
+// =============================================================
+//  MATH HELPERS
+// =============================================================
+function parseOdds(s) {
+  s = String(s).trim().toLowerCase().replace(/\s/g, '');
+  if (['even','evens','e'].includes(s)) return 1.0;
+  s = s.replace('-', '/');
+  if (s.includes('/')) {
+    const parts = s.split('/');
+    const n = parseFloat(parts[0]), d = parseFloat(parts[1]);
+    if (!isNaN(n) && !isNaN(d) && d !== 0) return n / d;
+    return null;
+  }
+  const f = parseFloat(s);
+  return isNaN(f) ? null : f;
+}
+
+function wpd(oddsStr) {          // win payout per dollar  (stake + profit)
+  const m = parseOdds(oddsStr);
+  return m !== null ? m + 1.0 : null;
+}
+
+function ip(oddsStr) {           // implied probability
+  const w = wpd(oddsStr);
+  return (w !== null && w > 0) ? 1.0 / w : null;
+}
+
+function r2(x)      { return Math.round(x * 100) / 100; }
+function rnd2(x)    { return Math.max(2, Math.round(x / 2) * 2); }  // round to $2, min $2
+
+function fmt(val) {
+  if (val === null || val === undefined) return '<span style="color:var(--dim)">N/A</span>';
+  const abs = Math.abs(val);
+  const s = '$' + abs.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return val < 0 ? `<span class="neg">-${s}</span>` : `<span class="pos">${s}</span>`;
+}
+
+function fmtPlain(val) {
+  if (val === null || val === undefined) return 'N/A';
+  const abs = Math.abs(val);
+  const s = '$' + abs.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  return val < 0 ? `-${s}` : s;
+}
+
+// =============================================================
+//  CORE HEDGE LOGIC
+// =============================================================
+function calcHedges(ticketCost, estPayout, myHorses, allHorses, odds, scale = 0.5) {
+  const covered = new Set(myHorses.map(String));
+  const results = [];
+
+  for (const h of allHorses) {
+    const pgm = String(h);
+    if (covered.has(pgm)) continue;
+    const oddsStr = odds[pgm] || 'N/A';
+    const w  = wpd(oddsStr);
+    const iP = ip(oddsStr);
+
+    if (!w) {
+      results.push({ pgm, odds: oddsStr, covered: false, ip: null,
+        breakEven: null, profitNeutral: null, rec: null,
+        netTicket: r2(estPayout - ticketCost), netHedge: null });
+      continue;
+    }
+    const be  = ticketCost / w;
+    const pn  = estPayout  / w;
+    const rec = rnd2(be + scale * (pn - be));
+    results.push({
+      pgm, odds: oddsStr, covered: false, ip: iP, w,
+      breakEven: r2(be), profitNeutral: r2(pn), rec,
+      netTicket: r2(estPayout - ticketCost - rec),
+      netHedge:  r2(rec * w - rec - ticketCost)
+    });
+  }
+  results.sort((a, b) => (b.ip || 0) - (a.ip || 0));
+  return results;
+}
+
+function calcScenario(ticketCost, estPayout, myHorses, allHorses, odds, threshold = 8.0) {
+  const covered = new Set(myHorses.map(String));
+  const hedges  = calcHedges(ticketCost, estPayout, myHorses, allHorses, odds);
+  const hmap    = Object.fromEntries(hedges.map(h => [h.pgm, h]));
+
+  let fullTotal = 0, partTotal = 0;
+  for (const h of hedges) {
+    if (h.rec !== null) {
+      fullTotal += h.rec;
+      const m = parseOdds(h.odds);
+      if (m !== null && m <= threshold) partTotal += h.rec;
+    }
+  }
+
+  const rows = [];
+  for (const horse of allHorses) {
+    const pgm     = String(horse);
+    const oStr    = odds[pgm] || 'N/A';
+    const w       = wpd(oStr);
+    const iP      = ip(oStr);
+    const m       = parseOdds(oStr);
+    const cov     = covered.has(pgm);
+
+    if (cov) {
+      rows.push({ pgm, odds: oStr, ip: iP, covered: true,
+        fullAmt: 0, netFull: r2(estPayout - ticketCost - fullTotal),
+        partAmt: 0, netPart: r2(estPayout - ticketCost - partTotal),
+        netNone: r2(estPayout - ticketCost) });
+    } else {
+      const h        = hmap[pgm];
+      const fullAmt  = h ? h.rec : null;
+      const isThreat = m !== null && m <= threshold;
+      const partAmt  = (h && isThreat) ? fullAmt : null;
+
+      const netFull = (fullAmt && w)
+        ? r2(fullAmt * w - fullTotal - ticketCost)
+        : r2(-fullTotal - ticketCost);
+      const netPart = (isThreat && partAmt && w)
+        ? r2(partAmt * w - partTotal - ticketCost)
+        : r2(-partTotal - ticketCost);
+
+      rows.push({ pgm, odds: oStr, ip: iP, covered: false,
+        fullAmt, netFull, partAmt, netPart, netNone: -ticketCost });
+    }
+  }
+  rows.sort((a, b) => (b.ip || 0) - (a.ip || 0));
+  return { rows, fullTotal, partTotal, hedges };
+}
+
+function calcBudget(ticketCost, estPayout, myHorses, allHorses, odds, budget) {
+  const covered = new Set(myHorses.map(String));
+  const uncov = [];
+  for (const h of allHorses) {
+    const pgm   = String(h);
+    if (covered.has(pgm)) continue;
+    const oStr  = odds[pgm] || 'N/A';
+    const w     = wpd(oStr);
+    const iP    = ip(oStr);
+    if (!w || !iP) continue;
+    uncov.push({ pgm, odds: oStr, ip: iP, w });
+  }
+  if (!uncov.length) return null;
+
+  const totalIp = uncov.reduce((s, h) => s + h.ip, 0);
+  const allocs  = uncov.map(h => ({ ...h, allocated: rnd2(budget * (h.ip / totalIp)) }));
+  const actual  = allocs.reduce((s, a) => s + a.allocated, 0);
+
+  for (const a of allocs) {
+    a.netIfWins       = r2(a.allocated * a.w - actual - ticketCost);
+    a.breakEvenNeeded = r2((ticketCost + actual) / a.w);
+    a.ipPct           = Math.round(a.ip * 1000) / 10;
+  }
+  allocs.sort((a, b) => b.ipPct - a.ipPct);
+
+  return {
+    budget, actual,
+    netIfCovered: r2(estPayout - ticketCost - actual),
+    allocs
+  };
+}
+
+// =============================================================
+//  HEDGE CALCULATOR UI
+// =============================================================
+function generateHorseTable() {
+  const n = parseInt(document.getElementById('fieldSize').value);
+  if (!n || n < 2 || n > 20) { alert('Enter a field size between 2 and 20.'); return; }
+
+  const tbody = document.getElementById('horse-tbody');
+  tbody.innerHTML = '';
+  for (let i = 1; i <= n; i++) {
+    const tr = document.createElement('tr');
+    tr.innerHTML = `
+      <td class="pgm-cell">${i}</td>
+      <td class="chk-cell">
+        <input type="checkbox" id="chk-${i}" value="${i}">
+      </td>
+      <td>
+        <input type="text" id="odds-${i}" placeholder="5/2"
+               inputmode="decimal" autocomplete="off" autocorrect="off"
+               spellcheck="false">
+      </td>`;
+    tbody.appendChild(tr);
+  }
+  document.getElementById('horse-table-wrap').classList.remove('hidden');
+  document.getElementById('hedge-results').classList.add('hidden');
+  document.getElementById('horse-table-wrap').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function runCalculation() {
+  const ticketCost = parseFloat(document.getElementById('ticketCost').value);
+  const estPayout  = parseFloat(document.getElementById('estPayout').value);
+  const budgetRaw  = document.getElementById('hedgeBudget').value.trim();
+  const budget     = budgetRaw ? parseFloat(budgetRaw) : null;
+  const n          = parseInt(document.getElementById('fieldSize').value);
+
+  if (!ticketCost || !estPayout || !n) {
+    alert('Fill in ticket cost, estimated payout, and generate the horse table first.');
+    return;
+  }
+  if (estPayout <= ticketCost) {
+    alert('Estimated payout should be greater than ticket cost.');
+    return;
+  }
+
+  const myHorses  = [];
+  const allHorses = [];
+  const odds      = {};
+
+  for (let i = 1; i <= n; i++) {
+    const pgm = String(i);
+    allHorses.push(pgm);
+    odds[pgm] = (document.getElementById(`odds-${i}`).value.trim()) || 'N/A';
+    if (document.getElementById(`chk-${i}`).checked) myHorses.push(pgm);
+  }
+
+  if (!myHorses.length) { alert('Check at least one horse as "Mine".'); return; }
+
+  const { rows, fullTotal, partTotal, hedges } = calcScenario(
+    ticketCost, estPayout, myHorses, allHorses, odds
+  );
+
+  renderSummary(ticketCost, estPayout, myHorses.length, n - myHorses.length, fullTotal, estPayout - ticketCost);
+  renderScenarioTable(rows, fullTotal, partTotal, n - myHorses.length);
+
+  if (budget && budget > 0) {
+    const bh = calcBudget(ticketCost, estPayout, myHorses, allHorses, odds, budget);
+    renderBudget(bh, ticketCost);
+    document.getElementById('res-budget').classList.remove('hidden');
+  } else {
+    document.getElementById('res-budget').innerHTML = '';
+    document.getElementById('res-budget').classList.add('hidden');
+  }
+
+  document.getElementById('hedge-results').classList.remove('hidden');
+  document.getElementById('res-summary').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function renderSummary(ticketCost, estPayout, nCov, nUncov, fullTotal, doNothing) {
+  document.getElementById('res-summary').innerHTML = `
+    <h2>Summary</h2>
+    <div class="sum-grid">
+      <div class="sum-item">
+        <div class="key">Ticket Cost</div>
+        <div class="value">${fmtPlain(ticketCost)}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">Est. Payout</div>
+        <div class="value" style="color:var(--gold)">${fmtPlain(estPayout)}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">Covered / Uncovered</div>
+        <div class="value">${nCov} <span style="color:var(--dim)">/</span> ${nUncov}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">Do-Nothing Profit</div>
+        <div class="value pos">${fmtPlain(doNothing)}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">Full Hedge Cost</div>
+        <div class="value neg">${fmtPlain(fullTotal)}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">Net if Ticket Hits (hedged)</div>
+        <div class="value pos">${fmtPlain(r2(estPayout - ticketCost - fullTotal))}</div>
+      </div>
+    </div>`;
+}
+
+function renderScenarioTable(rows, fullTotal, partTotal, nUncov) {
+  let html = `<table class="results-table"><thead><tr>
+    <th>#</th><th>Odds</th><th>Win%</th><th>Cov</th>
+    <th>Full $</th><th>Net/Full</th>
+    <th>Part $</th><th>Net/Part</th>
+    <th>Net/None</th>
+  </tr></thead><tbody>`;
+
+  for (const r of rows) {
+    const cls    = r.covered ? ' class="covered-row"' : '';
+    const covStr = r.covered
+      ? '<span style="color:var(--gold);font-weight:700">YES</span>'
+      : '<span style="color:var(--dim)">no</span>';
+    const ipStr  = r.ip ? (r.ip * 100).toFixed(1) + '%' : '&mdash;';
+
+    let fullStr, partStr;
+    if (r.covered) {
+      fullStr = '<span style="color:var(--dim)">&mdash;</span>';
+      partStr = '<span style="color:var(--dim)">&mdash;</span>';
+    } else {
+      fullStr = r.fullAmt
+        ? '$' + r.fullAmt.toLocaleString('en-US', { maximumFractionDigits: 0 })
+        : '<span style="color:var(--dim)">&mdash;</span>';
+      partStr = r.partAmt
+        ? '$' + r.partAmt.toLocaleString('en-US', { maximumFractionDigits: 0 })
+        : (r.partAmt === null
+          ? '<span style="color:var(--dim);font-style:italic">skip</span>'
+          : '<span style="color:var(--dim)">&mdash;</span>');
+    }
+
+    html += `<tr${cls}>
+      <td><strong>${r.pgm}</strong></td>
+      <td>${r.odds}</td>
+      <td>${ipStr}</td>
+      <td>${covStr}</td>
+      <td>${fullStr}</td>
+      <td>${fmt(r.netFull)}</td>
+      <td>${partStr}</td>
+      <td>${fmt(r.netPart)}</td>
+      <td>${fmt(r.netNone)}</td>
+    </tr>`;
+  }
+  html += '</tbody></table>';
+  document.getElementById('res-scenario').innerHTML = html;
+
+  const partCount = rows.filter(r => !r.covered && r.partAmt > 0).length;
+  document.getElementById('res-totals').innerHTML = `
+    <span>Full hedge: <span class="tv">${fmtPlain(fullTotal)}</span> (all ${nUncov})</span>
+    <span>Partial (&le;8/1): <span class="tv">${fmtPlain(partTotal)}</span> (${partCount} horses)</span>`;
+}
+
+function renderBudget(bh, ticketCost) {
+  const el = document.getElementById('res-budget');
+  if (!bh) { el.innerHTML = ''; el.classList.add('hidden'); return; }
+
+  const maxAlloc = Math.max(...bh.allocs.map(a => a.allocated));
+  let html = `
+    <h2>Budget Hedge &mdash; ${fmtPlain(bh.budget)}</h2>
+    <div class="sum-grid" style="margin-bottom:12px">
+      <div class="sum-item">
+        <div class="key">Actual Spend</div>
+        <div class="value neg">${fmtPlain(bh.actual)}</div>
+      </div>
+      <div class="sum-item">
+        <div class="key">If Ticket Hits</div>
+        <div class="value pos">${fmtPlain(bh.netIfCovered)}</div>
+      </div>
+    </div>
+    <div class="table-scroll">
+      <table class="results-table">
+        <thead><tr>
+          <th>#</th><th>Odds</th><th>Win%</th>
+          <th>Allocated</th><th>Net if Wins</th><th>B/E Needed</th><th>Profit?</th>
+        </tr></thead>
+        <tbody>`;
+
+  for (const a of bh.allocs) {
+    const ok  = a.netIfWins >= 0;
+    const okStr = ok
+      ? '<span style="color:var(--green);font-weight:700">YES</span>'
+      : `<span style="color:var(--red)">-$${(a.breakEvenNeeded - a.allocated).toFixed(0)}</span>`;
+    const pct = Math.round((a.allocated / maxAlloc) * 100);
+    html += `<tr>
+      <td><strong>${a.pgm}</strong></td>
+      <td>${a.odds}</td>
+      <td>${a.ipPct.toFixed(1)}%</td>
+      <td style="min-width:90px">
+        $${a.allocated.toLocaleString()}
+        <div class="alloc-bar-wrap"><div class="alloc-bar" style="width:${pct}%"></div></div>
+      </td>
+      <td>${fmt(a.netIfWins)}</td>
+      <td>$${a.breakEvenNeeded.toLocaleString()}</td>
+      <td>${okStr}</td>
+    </tr>`;
+  }
+  html += '</tbody></table></div>';
+
+  const anyProfit = bh.allocs.every(a => a.netIfWins >= 0);
+  if (!anyProfit) {
+    const top = bh.allocs[0];
+    html += `<p class="thin-note">
+      This budget cannot make any uncovered horse scenario profitable after total spend.
+      To break even if #${top.pgm} (${top.odds}) wins, you need ~$${top.breakEvenNeeded.toLocaleString()} on that horse alone.
+    </p>`;
+  }
+  el.innerHTML = html;
+}
+
+// =============================================================
+//  DASHBOARD — load dashboard_data.json
+// =============================================================
+async function loadDashboard() {
+  const el = document.getElementById('dash-content');
+  let data  = null;
+  let fromCache = false;
+
+  // 1. Try network
+  try {
+    const res = await fetch('dashboard_data.json?t=' + Date.now());
+    if (res.ok) {
+      data = await res.json();
+      // Cache for offline
+      if ('caches' in window) {
+        const c = await caches.open('derby-v1');
+        c.put('dashboard_data.json', new Response(JSON.stringify(data),
+          { headers: { 'Content-Type': 'application/json' } }));
+      }
+    }
+  } catch (_) {}
+
+  // 2. Fallback to service worker cache
+  if (!data && 'caches' in window) {
+    try {
+      const cached = await caches.match('dashboard_data.json');
+      if (cached) { data = await cached.json(); fromCache = true; }
+    } catch (_) {}
+  }
+
+  if (!data || !data.db_summary) {
+    el.innerHTML = `
+      <div class="status-msg">
+        <div class="icon">&#128203;</div>
+        <p><strong>No dashboard data yet</strong></p>
+        <p style="margin-top:10px;font-size:.82rem;line-height:1.6">
+          After scraping, run:<br>
+          <code>python export_dashboard_data.py</code><br>
+          then push to GitHub to update this view.
+        </p>
+      </div>`;
+    return;
+  }
+
+  const db = data.db_summary;
+  let html = '';
+  if (fromCache) html += '<div class="offline-bar">Offline &mdash; showing cached data</div>';
+  html += `<p class="last-updated">Updated: ${data.last_updated}</p>
+    <div class="stats-grid">
+      <div class="stat-box"><div class="val">${db.total_races.toLocaleString()}</div><div class="lbl">Races</div></div>
+      <div class="stat-box"><div class="val">${db.total_race_days}</div><div class="lbl">Race Days</div></div>
+      <div class="stat-box"><div class="val">${db.total_tracks}</div><div class="lbl">Tracks</div></div>
+      <div class="stat-box"><div class="val">${db.total_exotics.toLocaleString()}</div><div class="lbl">Exotics</div></div>
+    </div>
+    <p style="font-size:.76rem;color:var(--dim);text-align:center;margin-bottom:12px">
+      ${db.date_range.from} &rarr; ${db.date_range.to}
+    </p>`;
+
+  const overlays = data.overlays || {};
+  const tracks   = Object.keys(overlays).sort();
+
+  if (!tracks.length) {
+    html += '<div class="card"><p class="no-overlay">No overlay data yet &mdash; run the export script after scraping.</p></div>';
+  } else {
+    for (const track of tracks) {
+      const td = overlays[track];
+      let cardBody = '';
+      let hasAny   = false;
+      for (const wager of ['DD','P3','P4','P5','P6']) {
+        const seqs = (td[wager] || []).filter(s => s.overlay_ratio >= 1.5);
+        if (!seqs.length) continue;
+        hasAny = true;
+        cardBody += `<div class="wager-section"><h4><span class="wager-pill">${wager}</span></h4>`;
+        for (const s of seqs.slice(0, 3)) {
+          const c = s.consistency || 'N/A';
+          cardBody += `<div class="overlay-row">
+            <div>
+              <div class="overlay-races">Races ${s.race_span}</div>
+              <div class="overlay-stats">${s.times_hit} hits &bull; median $${Number(s.median_payout).toLocaleString()}</div>
+            </div>
+            <div style="text-align:right;flex:1">
+              <div class="overlay-ratio">${Number(s.overlay_ratio).toFixed(2)}x</div>
+              <div class="overlay-stats">avg $${Number(s.avg_payout).toLocaleString()}</div>
+            </div>
+            <div><span class="badge badge-${c}">${c}</span></div>
+          </div>`;
+        }
+        cardBody += '</div>';
+      }
+      if (!hasAny) {
+        cardBody = `<p class="no-overlay">No overlays above 1.5x threshold yet &mdash; need more race days.</p>`;
+      }
+      html += `<div class="card"><h2>${track}</h2>${cardBody}</div>`;
+    }
+  }
+
+  el.innerHTML = html;
+}
+
+// =============================================================
+//  TRACK PROFILES — static baseline data (April 2026)
+// =============================================================
+const BASELINE = [
+  {
+    track: 'KEE', name: 'Keeneland',
+    note: '12 race days &bull; 115 races &bull; 633 exotic payouts',
+    wagers: [
+      { type: 'DD',  overall_avg: 51.70, overlays: [
+        { race_span: '8-9', times_hit: 11, avg: 82.31,   median: 21.97,   ratio: 1.59, c: 'HIGH'    },
+        { race_span: '6-7', times_hit: 12, avg: 78.47,   median: 27.77,   ratio: 1.52, c: 'HIGH'    },
+      ]},
+      { type: 'P3',  overall_avg: 497.21, overlays: [
+        { race_span: '7-8-9', times_hit: 17, avg: 2084.18, median: 154.18, ratio: 4.19, c: 'LOTTERY' },
+      ]},
+      { type: 'P4',  overall_avg: 257.35, overlays: [] },
+      { type: 'P5',  overall_avg: 513.39, overlays: [] },
+      { type: 'P6',  overall_avg: 0,      overlays: [] },
+    ]
+  },
+  {
+    track: 'GP', name: 'Gulfstream Park',
+    note: '19 race days &bull; 189 races &bull; 1040 exotic payouts',
+    wagers: [
+      { type: 'DD',  overall_avg: 38.15, overlays: [] },
+      { type: 'P3',  overall_avg: 519.45, overlays: [
+        { race_span: '9-10-11', times_hit: 6, avg: 2480.45, median: 349.95, ratio: 4.78, c: 'MODERATE' },
+      ]},
+      { type: 'P4',  overall_avg: 951.43,   overlays: [] },
+      { type: 'P5',  overall_avg: 7702.67,  overlays: [
+        { race_span: '1-2-3-4-5', times_hit: 19, avg: 12209.07, median: 1136.00, ratio: 1.59, c: 'LOTTERY' },
+      ]},
+      { type: 'P6',  overall_avg: 10823.16, overlays: [] },
+    ]
+  }
+];
+
+function renderProfiles() {
+  let html = '';
+  for (const t of BASELINE) {
+    html += `<div class="card"><h2>${t.track} &mdash; ${t.name}</h2>
+      <p style="font-size:.76rem;color:var(--dim);margin-bottom:12px">${t.note}</p>`;
+    for (const w of t.wagers) {
+      html += `<div class="wager-section">
+        <h4><span class="wager-pill">${w.type}</span> overall avg $${w.overall_avg.toLocaleString()}</h4>`;
+      if (!w.overlays.length) {
+        html += `<p class="no-overlay">No overlays above threshold (need &ge;5 hits, avg &gt;1.5x)</p>`;
+      } else {
+        for (const o of w.overlays) {
+          html += `<div class="overlay-row">
+            <div>
+              <div class="overlay-races">Races ${o.race_span}</div>
+              <div class="overlay-stats">${o.times_hit} hits &bull; median $${o.median.toLocaleString()}</div>
+            </div>
+            <div style="text-align:right;flex:1">
+              <div class="overlay-ratio">${o.ratio.toFixed(2)}x</div>
+              <div class="overlay-stats">avg $${o.avg.toLocaleString()}</div>
+            </div>
+            <div><span class="badge badge-${o.c}">${o.c}</span></div>
+          </div>`;
+        }
+      }
+      html += '</div>';
+    }
+    html += '</div>';
+  }
+  document.getElementById('profiles-content').innerHTML = html;
+}
+
+// =============================================================
+//  SERVICE WORKER REGISTRATION
+// =============================================================
+if ('serviceWorker' in navigator) {
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js')
+      .catch(err => console.warn('SW registration failed:', err));
+  });
+}
+
+// =============================================================
+//  INIT
+// =============================================================
+loadDashboard();
+renderProfiles();
+</script>
+</body>
+</html>

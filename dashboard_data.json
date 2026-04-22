@@ -1,0 +1,123 @@
+{
+  "last_updated": "2026-04-22 13:07",
+  "db_summary": {
+    "total_tracks": 4,
+    "total_race_days": 23,
+    "total_races": 398,
+    "total_exotics": 2177,
+    "date_range": {
+      "from": "2026-02-12",
+      "to": "2026-04-19"
+    },
+    "tracks": [
+      {
+        "track": "AQU",
+        "days": 8,
+        "races": 66,
+        "exotics": 355
+      },
+      {
+        "track": "GP",
+        "days": 19,
+        "races": 189,
+        "exotics": 1040
+      },
+      {
+        "track": "KEE",
+        "days": 12,
+        "races": 115,
+        "exotics": 633
+      },
+      {
+        "track": "SA",
+        "days": 3,
+        "races": 28,
+        "exotics": 149
+      }
+    ]
+  },
+  "overlays": {
+    "AQU": {
+      "P3": [
+        {
+          "race_span": "3-4-5",
+          "times_hit": 10,
+          "avg_payout": 902.89,
+          "median_payout": 26.84,
+          "value_score": 33.633,
+          "overlay_ratio": 3.2,
+          "consistency": "LOTTERY"
+        }
+      ],
+      "P5": [
+        {
+          "race_span": "1-2-3-4-5",
+          "times_hit": 8,
+          "avg_payout": 8040.31,
+          "median_payout": 194.58,
+          "value_score": 41.321,
+          "overlay_ratio": 1.51,
+          "consistency": "LOTTERY"
+        }
+      ]
+    },
+    "GP": {
+      "P3": [
+        {
+          "race_span": "9-10-11",
+          "times_hit": 6,
+          "avg_payout": 2480.45,
+          "median_payout": 349.95,
+          "value_score": 7.088,
+          "overlay_ratio": 4.78,
+          "consistency": "MODERATE"
+        }
+      ],
+      "P5": [
+        {
+          "race_span": "1-2-3-4-5",
+          "times_hit": 19,
+          "avg_payout": 12209.07,
+          "median_payout": 1136.0,
+          "value_score": 10.747,
+          "overlay_ratio": 1.59,
+          "consistency": "LOTTERY"
+        }
+      ]
+    },
+    "KEE": {
+      "DD": [
+        {
+          "race_span": "8-9",
+          "times_hit": 11,
+          "avg_payout": 82.31,
+          "median_payout": 21.97,
+          "value_score": 3.747,
+          "overlay_ratio": 1.59,
+          "consistency": "MODERATE"
+        },
+        {
+          "race_span": "6-7",
+          "times_hit": 12,
+          "avg_payout": 78.47,
+          "median_payout": 27.77,
+          "value_score": 2.826,
+          "overlay_ratio": 1.52,
+          "consistency": "HIGH"
+        }
+      ],
+      "P3": [
+        {
+          "race_span": "7-8-9",
+          "times_hit": 17,
+          "avg_payout": 2084.18,
+          "median_payout": 154.18,
+          "value_score": 13.518,
+          "overlay_ratio": 4.19,
+          "consistency": "LOTTERY"
+        }
+      ]
+    },
+    "SA": {}
+  }
+}
