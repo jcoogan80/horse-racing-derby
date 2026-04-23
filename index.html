@@ -1186,18 +1186,22 @@ function buildTicket() {
       : `<span class="badge badge-MODERATE">FAIR VALUE</span>`;
     const thinNote = seq.thin_sample
       ? '<p class="thin-note">&#9888; Small sample (&lt;5 hits) — treat with caution.</p>' : '';
-    const roi = cost > 0 ? (seq.avg_payout / cost).toFixed(1) : 'N/A';
+    const wb       = seq.wager_base || 2.0;
+    const wbLabel  = wb !== 2.0 ? ` (on $${wb.toFixed(2)} base)` : '';
+    const postedAvg = Math.round(seq.avg_payout * wb / 2.0);
+    // ROI: payout_per_2 / (2 × combinations) — wager_base cancels out
+    const roi = (seq.avg_payout / (2 * Math.pow(hpl, legs))).toFixed(1);
 
     html += `<div class="card">
       <h2>${track} &nbsp;${wager} &nbsp;&mdash;&nbsp; Races ${spanStr}</h2>
       <div class="stats-grid">
         <div class="stat-box">
           <div class="val">$${Number(seq.avg_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
-          <div class="lbl">Avg Payout</div>
+          <div class="lbl">Avg Payout ($2 basis)</div>
         </div>
         <div class="stat-box">
           <div class="val">$${Number(seq.median_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
-          <div class="lbl">Median Payout</div>
+          <div class="lbl">Median Payout ($2 basis)</div>
         </div>
         <div class="stat-box">
           <div class="val">${seq.times_hit}</div>
@@ -1205,7 +1209,7 @@ function buildTicket() {
         </div>
         <div class="stat-box">
           <div class="val">$${Number(seq.max_payout).toLocaleString('en-US',{maximumFractionDigits:0})}</div>
-          <div class="lbl">Max Payout</div>
+          <div class="lbl">Max Payout ($2 basis)</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin:12px 0 10px;flex-wrap:wrap">
@@ -1220,6 +1224,10 @@ function buildTicket() {
         <div class="sum-item">
           <div class="key">Avg ROI Multiple</div>
           <div class="value">${roi}x</div>
+        </div>
+        <div class="sum-item" style="grid-column:span 2">
+          <div class="key">As-posted avg${wbLabel}</div>
+          <div class="value" style="color:var(--dim);font-size:.9rem">$${postedAvg.toLocaleString()}</div>
         </div>
       </div>
       ${thinNote}
@@ -1419,7 +1427,7 @@ function renderParlayEdge() {
             <thead><tr>
               <th>Date</th><th>Span</th>
               <th>Max Leg</th><th>Avg Fld</th>
-              <th>Parlay $</th><th>Exotic $</th><th>Ratio</th><th>Winner</th>
+              <th>Parlay $</th><th>Posted</th><th>$2 Equiv</th><th>Ratio</th><th>Winner</th>
             </tr></thead><tbody>`;
 
         for (const d of s.days) {
@@ -1430,13 +1438,17 @@ function renderParlayEdge() {
           const ratioStr  = d.ratio !== null ? d.ratio.toFixed(2) + 'x' : 'N/A';
           const mlStr     = d.max_leg != null ? '$' + d.max_leg.toFixed(2) : '—';
           const fldStr    = d.avg_field != null ? d.avg_field.toFixed(1) : '—';
+          const wb        = d.wager_base != null ? d.wager_base : 2.0;
+          const postedLbl = wb !== 2.0
+            ? `<span style="font-size:.68rem;color:var(--dim)"> @$${wb.toFixed(2)}</span>` : '';
           html += `<tr class="${cls}">
             <td>${d.date}</td>
             <td>${d.span}</td>
             <td style="color:${d.max_leg >= 20 ? 'var(--gold)' : 'var(--text)'};font-weight:${d.max_leg >= 20 ? '700' : '400'}">${mlStr}</td>
             <td>${fldStr}</td>
             <td>${fmtM(d.parlay)}</td>
-            <td>${fmtM(d.exotic)}</td>
+            <td>${fmtM(d.exotic)}${postedLbl}</td>
+            <td style="font-weight:700">${fmtM(d.exotic_p2 != null ? d.exotic_p2 : d.exotic)}</td>
             <td><strong>${ratioStr}</strong></td>
             <td style="color:${winnerCol};font-weight:700">${winnerTxt}</td>
           </tr>`;
