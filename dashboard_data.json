@@ -1,12 +1,12 @@
 {
-  "last_updated": "2026-04-23 11:35",
+  "last_updated": "2026-04-23 14:36",
   "db_summary": {
-    "total_tracks": 4,
-    "total_race_days": 23,
-    "total_races": 398,
-    "total_exotics": 2177,
+    "total_tracks": 5,
+    "total_race_days": 65,
+    "total_races": 805,
+    "total_exotics": 4323,
     "date_range": {
-      "from": "2026-02-12",
+      "from": "2025-04-26",
       "to": "2026-04-19"
     },
     "tracks": [
@@ -16,6 +16,13 @@
         "races": 66,
         "exotics": 355,
         "max_race": 10
+      },
+      {
+        "track": "CD",
+        "days": 42,
+        "races": 407,
+        "exotics": 2146,
+        "max_race": 14
       },
       {
         "track": "GP",
@@ -62,6 +69,63 @@
           "value_score": 41.321,
           "overlay_ratio": 1.51,
           "consistency": "LOTTERY"
+        }
+      ]
+    },
+    "CD": {
+      "DD": [
+        {
+          "race_span": "8-9",
+          "times_hit": 34,
+          "avg_payout": 141.27,
+          "median_payout": 45.07,
+          "value_score": 3.134,
+          "overlay_ratio": 1.53,
+          "consistency": "MODERATE"
+        }
+      ],
+      "P3": [
+        {
+          "race_span": "5-6-7",
+          "times_hit": 42,
+          "avg_payout": 1415.61,
+          "median_payout": 261.38,
+          "value_score": 5.416,
+          "overlay_ratio": 1.91,
+          "consistency": "MODERATE"
+        }
+      ],
+      "P4": [
+        {
+          "race_span": "4-5-6-7",
+          "times_hit": 10,
+          "avg_payout": 33540.8,
+          "median_payout": 1012.5,
+          "value_score": 33.127,
+          "overlay_ratio": 3.84,
+          "consistency": "LOTTERY"
+        }
+      ],
+      "P5": [
+        {
+          "race_span": "4-5-6-7-8",
+          "times_hit": 17,
+          "avg_payout": 64525.92,
+          "median_payout": 15478.68,
+          "value_score": 4.169,
+          "overlay_ratio": 2.39,
+          "consistency": "MODERATE"
+        }
+      ],
+      "P6": [
+        {
+          "race_span": "3-4-5-6-7-8",
+          "times_hit": 7,
+          "avg_payout": 531536.39,
+          "median_payout": 200609.4,
+          "value_score": 2.65,
+          "overlay_ratio": 2.27,
+          "consistency": "HIGH"
         }
       ]
     },
@@ -475,6 +539,546 @@
           "overlay_ratio": 0.01,
           "consistency": "HIGH",
           "thin_sample": true
+        }
+      }
+    },
+    "CD": {
+      "DD": {
+        "1-2": {
+          "times_hit": 42,
+          "avg_payout": 56.82,
+          "median_payout": 31.01,
+          "max_payout": 435.84,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.61,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3": {
+          "times_hit": 42,
+          "avg_payout": 82.72,
+          "median_payout": 40.38,
+          "max_payout": 763.52,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.9,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4": {
+          "times_hit": 42,
+          "avg_payout": 89.83,
+          "median_payout": 42.47,
+          "max_payout": 940.12,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.97,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5": {
+          "times_hit": 42,
+          "avg_payout": 83.49,
+          "median_payout": 43.78,
+          "max_payout": 497.9,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.9,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "5-6": {
+          "times_hit": 42,
+          "avg_payout": 99.9,
+          "median_payout": 50.35,
+          "max_payout": 703.52,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.08,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7": {
+          "times_hit": 42,
+          "avg_payout": 115.33,
+          "median_payout": 56.87,
+          "max_payout": 841.82,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.25,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "7-8": {
+          "times_hit": 42,
+          "avg_payout": 132.27,
+          "median_payout": 52.48,
+          "max_payout": 1054.92,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.43,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "8-9": {
+          "times_hit": 34,
+          "avg_payout": 141.27,
+          "median_payout": 45.07,
+          "max_payout": 2769.78,
+          "wager_base": 2.0,
+          "is_overlay": true,
+          "overlay_ratio": 1.53,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10": {
+          "times_hit": 19,
+          "avg_payout": 79.34,
+          "median_payout": 43.66,
+          "max_payout": 768.98,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.86,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "10-11": {
+          "times_hit": 11,
+          "avg_payout": 42.94,
+          "median_payout": 41.92,
+          "max_payout": 103.2,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.46,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "11-12": {
+          "times_hit": 4,
+          "avg_payout": 40.15,
+          "median_payout": 40.33,
+          "max_payout": 53.92,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.43,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "12-13": {
+          "times_hit": 2,
+          "avg_payout": 42.26,
+          "median_payout": 42.26,
+          "max_payout": 45.84,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.46,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "13-14": {
+          "times_hit": 1,
+          "avg_payout": 10.8,
+          "median_payout": 10.8,
+          "max_payout": 10.8,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.12,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P3": {
+        "1-2-3": {
+          "times_hit": 42,
+          "avg_payout": 314.32,
+          "median_payout": 141.68,
+          "max_payout": 2584.04,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.42,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "2-3-4": {
+          "times_hit": 42,
+          "avg_payout": 874.77,
+          "median_payout": 219.3,
+          "max_payout": 22564.32,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.18,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "3-4-5": {
+          "times_hit": 42,
+          "avg_payout": 507.85,
+          "median_payout": 224.9,
+          "max_payout": 6010.32,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.68,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "4-5-6": {
+          "times_hit": 42,
+          "avg_payout": 740.36,
+          "median_payout": 240.68,
+          "max_payout": 5874.36,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.0,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "5-6-7": {
+          "times_hit": 42,
+          "avg_payout": 1415.61,
+          "median_payout": 261.38,
+          "max_payout": 26128.36,
+          "wager_base": 2.0,
+          "is_overlay": true,
+          "overlay_ratio": 1.91,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "6-7-8": {
+          "times_hit": 43,
+          "avg_payout": 1031.56,
+          "median_payout": 319.8,
+          "max_payout": 9147.84,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.39,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "7-8-9": {
+          "times_hit": 34,
+          "avg_payout": 1005.81,
+          "median_payout": 300.44,
+          "max_payout": 12178.04,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.36,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "8-9-10": {
+          "times_hit": 19,
+          "avg_payout": 250.9,
+          "median_payout": 162.68,
+          "max_payout": 903.68,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.34,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "9-10-11": {
+          "times_hit": 12,
+          "avg_payout": 977.03,
+          "median_payout": 171.57,
+          "max_payout": 9752.0,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.32,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "10-11-12": {
+          "times_hit": 7,
+          "avg_payout": 299.57,
+          "median_payout": 173.52,
+          "max_payout": 1131.8,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.4,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "11-12-13": {
+          "times_hit": 2,
+          "avg_payout": 165.2,
+          "median_payout": 165.2,
+          "max_payout": 172.56,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.22,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "12-13-14": {
+          "times_hit": 1,
+          "avg_payout": 107.92,
+          "median_payout": 107.92,
+          "max_payout": 107.92,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.15,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P4": {
+        "2-3-4-5": {
+          "times_hit": 42,
+          "avg_payout": 3208.6,
+          "median_payout": 974.4,
+          "max_payout": 55176.32,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.37,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5-6-7": {
+          "times_hit": 10,
+          "avg_payout": 33540.8,
+          "median_payout": 1012.5,
+          "max_payout": 281259.2,
+          "wager_base": 2.0,
+          "is_overlay": true,
+          "overlay_ratio": 3.84,
+          "consistency": "LOTTERY",
+          "thin_sample": false
+        },
+        "7-8-9-10": {
+          "times_hit": 8,
+          "avg_payout": 2011.34,
+          "median_payout": 1040.14,
+          "max_payout": 5220.2,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.23,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7-8-9": {
+          "times_hit": 16,
+          "avg_payout": 4902.35,
+          "median_payout": 1631.8,
+          "max_payout": 41871.64,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.56,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "5-6-7-8": {
+          "times_hit": 17,
+          "avg_payout": 7407.09,
+          "median_payout": 1696.04,
+          "max_payout": 33302.52,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.85,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10-11-12": {
+          "times_hit": 3,
+          "avg_payout": 909.05,
+          "median_payout": 945.56,
+          "max_payout": 1136.08,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.1,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "8-9-10-11": {
+          "times_hit": 8,
+          "avg_payout": 1375.22,
+          "median_payout": 1147.4,
+          "max_payout": 2957.8,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.16,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "10-11-12-13": {
+          "times_hit": 1,
+          "avg_payout": 428.92,
+          "median_payout": 428.92,
+          "max_payout": 428.92,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.05,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "11-12-13-14": {
+          "times_hit": 1,
+          "avg_payout": 468.04,
+          "median_payout": 468.04,
+          "max_payout": 468.04,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.05,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P5": {
+        "1-2-3-4-5": {
+          "times_hit": 42,
+          "avg_payout": 8531.97,
+          "median_payout": 4156.88,
+          "max_payout": 36511.48,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.32,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "3-4-5-6-7": {
+          "times_hit": 5,
+          "avg_payout": 8854.82,
+          "median_payout": 5006.72,
+          "max_payout": 27172.4,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.33,
+          "consistency": "HIGH",
+          "thin_sample": false
+        },
+        "6-7-8-9-10": {
+          "times_hit": 10,
+          "avg_payout": 22383.97,
+          "median_payout": 5710.46,
+          "max_payout": 148615.0,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.83,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "5-6-7-8-9": {
+          "times_hit": 17,
+          "avg_payout": 37364.74,
+          "median_payout": 10446.68,
+          "max_payout": 196460.84,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 1.38,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5-6-7-8": {
+          "times_hit": 17,
+          "avg_payout": 64525.92,
+          "median_payout": 15478.68,
+          "max_payout": 367683.72,
+          "wager_base": 2.0,
+          "is_overlay": true,
+          "overlay_ratio": 2.39,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "8-9-10-11-12": {
+          "times_hit": 4,
+          "avg_payout": 9654.68,
+          "median_payout": 5382.06,
+          "max_payout": 26377.52,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.36,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "7-8-9-10-11": {
+          "times_hit": 8,
+          "avg_payout": 20539.13,
+          "median_payout": 5635.66,
+          "max_payout": 110417.08,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.76,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "9-10-11-12-13": {
+          "times_hit": 1,
+          "avg_payout": 5541.32,
+          "median_payout": 5541.32,
+          "max_payout": 5541.32,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.2,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "10-11-12-13-14": {
+          "times_hit": 1,
+          "avg_payout": 2221.68,
+          "median_payout": 2221.68,
+          "max_payout": 2221.68,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.08,
+          "consistency": "HIGH",
+          "thin_sample": true
+        }
+      },
+      "P6": {
+        "5-6-7-8-9-10": {
+          "times_hit": 7,
+          "avg_payout": 54573.76,
+          "median_payout": 12730.2,
+          "max_payout": 199135.1,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.23,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "4-5-6-7-8-9": {
+          "times_hit": 14,
+          "avg_payout": 133226.15,
+          "median_payout": 23264.6,
+          "max_payout": 1074696.3,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.57,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "7-8-9-10-11-12": {
+          "times_hit": 4,
+          "avg_payout": 9268.25,
+          "median_payout": 8166.5,
+          "max_payout": 20624.7,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.04,
+          "consistency": "HIGH",
+          "thin_sample": true
+        },
+        "6-7-8-9-10-11": {
+          "times_hit": 6,
+          "avg_payout": 218219.68,
+          "median_payout": 48403.75,
+          "max_payout": 1107126.5,
+          "wager_base": 2.0,
+          "is_overlay": false,
+          "overlay_ratio": 0.93,
+          "consistency": "MODERATE",
+          "thin_sample": false
+        },
+        "3-4-5-6-7-8": {
+          "times_hit": 7,
+          "avg_payout": 531536.39,
+          "median_payout": 200609.4,
+          "max_payout": 2569827.8,
+          "wager_base": 2.0,
+          "is_overlay": true,
+          "overlay_ratio": 2.27,
+          "consistency": "HIGH",
+          "thin_sample": false
         }
       }
     },
@@ -1653,6 +2257,32 @@
         "confidence": "HIGH"
       }
     },
+    "CD": {
+      "p3_to_p4": {
+        "mean": 8.619,
+        "median": 4.571,
+        "min": 0.221,
+        "max": 178.226,
+        "sample": 111,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 61.674,
+        "median": 23.377,
+        "min": 0.384,
+        "max": 1407.872,
+        "sample": 112,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 7.872,
+        "median": 5.341,
+        "min": 0.042,
+        "max": 42.649,
+        "sample": 101,
+        "confidence": "HIGH"
+      }
+    },
     "GP": {
       "p3_to_p4": {
         "mean": 4.249,
@@ -2178,6 +2808,1524 @@
             "ratio": 0.002,
             "max_leg": 77.46,
             "avg_field": null
+          }
+        ]
+      }
+    },
+    "CD": {
+      "P4": {
+        "sample": 42,
+        "mean_ratio": 1.921,
+        "median_ratio": 1.761,
+        "exotic_beat_parlay_pct": 92.9,
+        "avg_edge": -99.91,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 41,
+            "exotic_win_pct": 92.7,
+            "avg_ratio": 1.888
+          },
+          {
+            "min_leg": 8,
+            "sample": 41,
+            "exotic_win_pct": 92.7,
+            "avg_ratio": 1.888
+          },
+          {
+            "min_leg": 10,
+            "sample": 37,
+            "exotic_win_pct": 91.9,
+            "avg_ratio": 1.821
+          },
+          {
+            "min_leg": 12,
+            "sample": 31,
+            "exotic_win_pct": 90.3,
+            "avg_ratio": 1.822
+          },
+          {
+            "min_leg": 15,
+            "sample": 24,
+            "exotic_win_pct": 87.5,
+            "avg_ratio": 1.874
+          },
+          {
+            "min_leg": 20,
+            "sample": 18,
+            "exotic_win_pct": 88.9,
+            "avg_ratio": 1.885
+          },
+          {
+            "min_leg": 25,
+            "sample": 16,
+            "exotic_win_pct": 87.5,
+            "avg_ratio": 1.936
+          },
+          {
+            "min_leg": 30,
+            "sample": 9,
+            "exotic_win_pct": 77.8,
+            "avg_ratio": 1.784
+          },
+          {
+            "min_leg": 40,
+            "sample": 5,
+            "exotic_win_pct": 80.0,
+            "avg_ratio": 1.338
+          },
+          {
+            "min_leg": 50,
+            "sample": 2,
+            "exotic_win_pct": 50.0,
+            "avg_ratio": 0.65
+          }
+        ],
+        "days": [
+          {
+            "date": "2025-05-30",
+            "span": "6-7-8-9",
+            "parlay": 188.27,
+            "exotic": 638.84,
+            "exotic_p2": 638.84,
+            "wager_base": 2.0,
+            "ratio": 3.393,
+            "max_leg": 9.04,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-09",
+            "span": "6-7-8-9",
+            "parlay": 872.41,
+            "exotic": 2869.52,
+            "exotic_p2": 2869.52,
+            "wager_base": 2.0,
+            "ratio": 3.289,
+            "max_leg": 27.92,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-05-10",
+            "span": "8-9-10-11",
+            "parlay": 101.9,
+            "exotic": 331.24,
+            "exotic_p2": 331.24,
+            "wager_base": 2.0,
+            "ratio": 3.251,
+            "max_leg": 5.9,
+            "avg_field": 11.5
+          },
+          {
+            "date": "2025-06-12",
+            "span": "5-6-7-8",
+            "parlay": 9134.86,
+            "exotic": 29180.56,
+            "exotic_p2": 29180.56,
+            "wager_base": 2.0,
+            "ratio": 3.194,
+            "max_leg": 33.46,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-06-28",
+            "span": "9-10-11-12",
+            "parlay": 387.58,
+            "exotic": 1136.08,
+            "exotic_p2": 1136.08,
+            "wager_base": 2.0,
+            "ratio": 2.931,
+            "max_leg": 11.9,
+            "avg_field": 8.5
+          },
+          {
+            "date": "2025-06-20",
+            "span": "6-7-8-9",
+            "parlay": 406.01,
+            "exotic": 1181.96,
+            "exotic_p2": 1181.96,
+            "wager_base": 2.0,
+            "ratio": 2.911,
+            "max_leg": 28.44,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-05-25",
+            "span": "7-8-9-10",
+            "parlay": 387.55,
+            "exotic": 1097.8,
+            "exotic_p2": 1097.8,
+            "wager_base": 2.0,
+            "ratio": 2.833,
+            "max_leg": 15.7,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-05-08",
+            "span": "5-6-7-8",
+            "parlay": 5601.1,
+            "exotic": 15442.2,
+            "exotic_p2": 15442.2,
+            "wager_base": 2.0,
+            "ratio": 2.757,
+            "max_leg": 38.48,
+            "avg_field": 10.5
+          },
+          {
+            "date": "2025-05-17",
+            "span": "8-9-10-11",
+            "parlay": 135.57,
+            "exotic": 371.96,
+            "exotic_p2": 371.96,
+            "wager_base": 2.0,
+            "ratio": 2.744,
+            "max_leg": 9.0,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-05-15",
+            "span": "5-6-7-8",
+            "parlay": 2966.27,
+            "exotic": 7732.36,
+            "exotic_p2": 7732.36,
+            "wager_base": 2.0,
+            "ratio": 2.607,
+            "max_leg": 26.24,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-06-08",
+            "span": "6-7-8-9",
+            "parlay": 4688.73,
+            "exotic": 11792.52,
+            "exotic_p2": 11792.52,
+            "wager_base": 2.0,
+            "ratio": 2.515,
+            "max_leg": 36.16,
+            "avg_field": 10.5
+          },
+          {
+            "date": "2025-05-16",
+            "span": "6-7-8-9",
+            "parlay": 270.85,
+            "exotic": 663.04,
+            "exotic_p2": 663.04,
+            "wager_base": 2.0,
+            "ratio": 2.448,
+            "max_leg": 10.9,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-06-19",
+            "span": "5-6-7-8",
+            "parlay": 141.07,
+            "exotic": 325.04,
+            "exotic_p2": 325.04,
+            "wager_base": 2.0,
+            "ratio": 2.304,
+            "max_leg": 9.96,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-04-29",
+            "span": "6-7-8-9",
+            "parlay": 1346.47,
+            "exotic": 3063.32,
+            "exotic_p2": 3063.32,
+            "wager_base": 2.0,
+            "ratio": 2.275,
+            "max_leg": 19.86,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-05-22",
+            "span": "5-6-7-8",
+            "parlay": 524.64,
+            "exotic": 1181.56,
+            "exotic_p2": 1181.56,
+            "wager_base": 2.0,
+            "ratio": 2.252,
+            "max_leg": 18.96,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-06-29",
+            "span": "8-9-10-11",
+            "parlay": 642.09,
+            "exotic": 1377.68,
+            "exotic_p2": 1377.68,
+            "wager_base": 2.0,
+            "ratio": 2.146,
+            "max_leg": 26.36,
+            "avg_field": 10.5
+          },
+          {
+            "date": "2025-06-01",
+            "span": "7-8-9-10",
+            "parlay": 104.76,
+            "exotic": 215.12,
+            "exotic_p2": 215.12,
+            "wager_base": 2.0,
+            "ratio": 2.053,
+            "max_leg": 12.5,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-05-01",
+            "span": "9-10-11-12",
+            "parlay": 316.71,
+            "exotic": 645.52,
+            "exotic_p2": 645.52,
+            "wager_base": 2.0,
+            "ratio": 2.038,
+            "max_leg": 14.54,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-06-25",
+            "span": "6-7-8-9",
+            "parlay": 20722.79,
+            "exotic": 41871.64,
+            "exotic_p2": 41871.64,
+            "wager_base": 2.0,
+            "ratio": 2.021,
+            "max_leg": 43.32,
+            "avg_field": 10.5
+          },
+          {
+            "date": "2025-05-24",
+            "span": "7-8-9-10",
+            "parlay": 336.83,
+            "exotic": 651.16,
+            "exotic_p2": 651.16,
+            "wager_base": 2.0,
+            "ratio": 1.933,
+            "max_leg": 13.6,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-06-15",
+            "span": "7-8-9-10",
+            "parlay": 1890.23,
+            "exotic": 3471.68,
+            "exotic_p2": 3471.68,
+            "wager_base": 2.0,
+            "ratio": 1.837,
+            "max_leg": 42.26,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-05-26",
+            "span": "6-7-8-9",
+            "parlay": 879.04,
+            "exotic": 1482.28,
+            "exotic_p2": 1482.28,
+            "wager_base": 2.0,
+            "ratio": 1.686,
+            "max_leg": 13.76,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-06-04",
+            "span": "6-7-8-9",
+            "parlay": 1109.27,
+            "exotic": 1781.32,
+            "exotic_p2": 1781.32,
+            "wager_base": 2.0,
+            "ratio": 1.606,
+            "max_leg": 29.54,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-04-30",
+            "span": "7-8-9-10",
+            "parlay": 2593.72,
+            "exotic": 4162.16,
+            "exotic_p2": 4162.16,
+            "wager_base": 2.0,
+            "ratio": 1.605,
+            "max_leg": 20.22,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-29",
+            "span": "5-6-7-8",
+            "parlay": 442.36,
+            "exotic": 705.0,
+            "exotic_p2": 705.0,
+            "wager_base": 2.0,
+            "ratio": 1.594,
+            "max_leg": 17.46,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-13",
+            "span": "6-7-8-9",
+            "parlay": 206.57,
+            "exotic": 328.72,
+            "exotic_p2": 328.72,
+            "wager_base": 2.0,
+            "ratio": 1.591,
+            "max_leg": 8.1,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-05-18",
+            "span": "6-7-8-9",
+            "parlay": 2713.16,
+            "exotic": 4151.16,
+            "exotic_p2": 4151.16,
+            "wager_base": 2.0,
+            "ratio": 1.53,
+            "max_leg": 43.68,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-06-06",
+            "span": "6-7-8-9",
+            "parlay": 425.01,
+            "exotic": 646.24,
+            "exotic_p2": 646.24,
+            "wager_base": 2.0,
+            "ratio": 1.521,
+            "max_leg": 10.82,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-06-22",
+            "span": "6-7-8-9",
+            "parlay": 291.11,
+            "exotic": 435.36,
+            "exotic_p2": 435.36,
+            "wager_base": 2.0,
+            "ratio": 1.496,
+            "max_leg": 11.18,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-06-21",
+            "span": "8-9-10-11",
+            "parlay": 629.93,
+            "exotic": 917.12,
+            "exotic_p2": 917.12,
+            "wager_base": 2.0,
+            "ratio": 1.456,
+            "max_leg": 12.04,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-23",
+            "span": "6-7-8-9",
+            "parlay": 2508.41,
+            "exotic": 3379.96,
+            "exotic_p2": 3379.96,
+            "wager_base": 2.0,
+            "ratio": 1.347,
+            "max_leg": 21.74,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-05-02",
+            "span": "10-11-12-13",
+            "parlay": 328.24,
+            "exotic": 428.92,
+            "exotic_p2": 428.92,
+            "wager_base": 2.0,
+            "ratio": 1.307,
+            "max_leg": 11.42,
+            "avg_field": 12.2
+          },
+          {
+            "date": "2025-05-11",
+            "span": "7-8-9-10",
+            "parlay": 4090.6,
+            "exotic": 5220.2,
+            "exotic_p2": 5220.2,
+            "wager_base": 2.0,
+            "ratio": 1.276,
+            "max_leg": 71.44,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-06-05",
+            "span": "5-6-7-8",
+            "parlay": 911.72,
+            "exotic": 1148.68,
+            "exotic_p2": 1148.68,
+            "wager_base": 2.0,
+            "ratio": 1.26,
+            "max_leg": 13.4,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-18",
+            "span": "6-7-8-9",
+            "parlay": 1136.21,
+            "exotic": 1405.56,
+            "exotic_p2": 1405.56,
+            "wager_base": 2.0,
+            "ratio": 1.237,
+            "max_leg": 27.58,
+            "avg_field": 8.5
+          },
+          {
+            "date": "2025-05-03",
+            "span": "11-12-13-14",
+            "parlay": 388.33,
+            "exotic": 468.04,
+            "exotic_p2": 468.04,
+            "wager_base": 2.0,
+            "ratio": 1.205,
+            "max_leg": 17.96,
+            "avg_field": 15.0
+          },
+          {
+            "date": "2025-06-14",
+            "span": "7-8-9-10",
+            "parlay": 244.29,
+            "exotic": 290.08,
+            "exotic_p2": 290.08,
+            "wager_base": 2.0,
+            "ratio": 1.187,
+            "max_leg": 11.04,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-05-31",
+            "span": "8-9-10-11",
+            "parlay": 2620.64,
+            "exotic": 2957.8,
+            "exotic_p2": 2957.8,
+            "wager_base": 2.0,
+            "ratio": 1.129,
+            "max_leg": 28.78,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-04-26",
+            "span": "7-8-9-10",
+            "parlay": 896.24,
+            "exotic": 982.48,
+            "exotic_p2": 982.48,
+            "wager_base": 2.0,
+            "ratio": 1.096,
+            "max_leg": 14.98,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-06-26",
+            "span": "5-6-7-8",
+            "parlay": 3555.76,
+            "exotic": 3193.52,
+            "exotic_p2": 3193.52,
+            "wager_base": 2.0,
+            "ratio": 0.898,
+            "max_leg": 36.38,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-06-27",
+            "span": "8-9-10-11",
+            "parlay": 2948.36,
+            "exotic": 2588.96,
+            "exotic_p2": 2588.96,
+            "wager_base": 2.0,
+            "ratio": 0.878,
+            "max_leg": 18.46,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-06-07",
+            "span": "8-9-10-11",
+            "parlay": 88176.74,
+            "exotic": 2151.84,
+            "exotic_p2": 2151.84,
+            "wager_base": 2.0,
+            "ratio": 0.024,
+            "max_leg": 107.98,
+            "avg_field": 11.2
+          }
+        ]
+      },
+      "P5": {
+        "sample": 42,
+        "mean_ratio": 2.494,
+        "median_ratio": 2.223,
+        "exotic_beat_parlay_pct": 97.6,
+        "avg_edge": -727.72,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 42,
+            "exotic_win_pct": 97.6,
+            "avg_ratio": 2.494
+          },
+          {
+            "min_leg": 8,
+            "sample": 42,
+            "exotic_win_pct": 97.6,
+            "avg_ratio": 2.494
+          },
+          {
+            "min_leg": 10,
+            "sample": 42,
+            "exotic_win_pct": 97.6,
+            "avg_ratio": 2.494
+          },
+          {
+            "min_leg": 12,
+            "sample": 37,
+            "exotic_win_pct": 97.3,
+            "avg_ratio": 2.451
+          },
+          {
+            "min_leg": 15,
+            "sample": 29,
+            "exotic_win_pct": 96.6,
+            "avg_ratio": 2.609
+          },
+          {
+            "min_leg": 20,
+            "sample": 23,
+            "exotic_win_pct": 95.7,
+            "avg_ratio": 2.738
+          },
+          {
+            "min_leg": 25,
+            "sample": 20,
+            "exotic_win_pct": 95.0,
+            "avg_ratio": 2.831
+          },
+          {
+            "min_leg": 30,
+            "sample": 12,
+            "exotic_win_pct": 91.7,
+            "avg_ratio": 2.547
+          },
+          {
+            "min_leg": 40,
+            "sample": 6,
+            "exotic_win_pct": 83.3,
+            "avg_ratio": 1.743
+          },
+          {
+            "min_leg": 50,
+            "sample": 2,
+            "exotic_win_pct": 50.0,
+            "avg_ratio": 1.097
+          }
+        ],
+        "days": [
+          {
+            "date": "2025-05-15",
+            "span": "4-5-6-7-8",
+            "parlay": 17827.26,
+            "exotic": 108246.76,
+            "exotic_p2": 108246.76,
+            "wager_base": 2.0,
+            "ratio": 6.072,
+            "max_leg": 26.24,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-06-12",
+            "span": "4-5-6-7-8",
+            "parlay": 74540.44,
+            "exotic": 367683.72,
+            "exotic_p2": 367683.72,
+            "wager_base": 2.0,
+            "ratio": 4.933,
+            "max_leg": 33.46,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-06-28",
+            "span": "8-9-10-11-12",
+            "parlay": 1015.45,
+            "exotic": 4746.36,
+            "exotic_p2": 4746.36,
+            "wager_base": 2.0,
+            "ratio": 4.674,
+            "max_leg": 11.9,
+            "avg_field": 8.4
+          },
+          {
+            "date": "2025-05-09",
+            "span": "5-6-7-8-9",
+            "parlay": 2303.17,
+            "exotic": 10446.68,
+            "exotic_p2": 10446.68,
+            "wager_base": 2.0,
+            "ratio": 4.536,
+            "max_leg": 27.92,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-08",
+            "span": "5-6-7-8-9",
+            "parlay": 42386.09,
+            "exotic": 178177.24,
+            "exotic_p2": 178177.24,
+            "wager_base": 2.0,
+            "ratio": 4.204,
+            "max_leg": 36.16,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-05-08",
+            "span": "4-5-6-7-8",
+            "parlay": 34782.8,
+            "exotic": 124081.88,
+            "exotic_p2": 124081.88,
+            "wager_base": 2.0,
+            "ratio": 3.567,
+            "max_leg": 38.48,
+            "avg_field": 10.4
+          },
+          {
+            "date": "2025-05-25",
+            "span": "6-7-8-9-10",
+            "parlay": 5576.77,
+            "exotic": 19525.56,
+            "exotic_p2": 19525.56,
+            "wager_base": 2.0,
+            "ratio": 3.501,
+            "max_leg": 28.78,
+            "avg_field": 11.0
+          },
+          {
+            "date": "2025-05-10",
+            "span": "7-8-9-10-11",
+            "parlay": 1631.37,
+            "exotic": 5304.76,
+            "exotic_p2": 5304.76,
+            "wager_base": 2.0,
+            "ratio": 3.252,
+            "max_leg": 32.02,
+            "avg_field": 11.6
+          },
+          {
+            "date": "2025-06-20",
+            "span": "5-6-7-8-9",
+            "parlay": 722.7,
+            "exotic": 2260.08,
+            "exotic_p2": 2260.08,
+            "wager_base": 2.0,
+            "ratio": 3.127,
+            "max_leg": 28.44,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-05-16",
+            "span": "5-6-7-8-9",
+            "parlay": 1256.76,
+            "exotic": 3769.6,
+            "exotic_p2": 3769.6,
+            "wager_base": 2.0,
+            "ratio": 2.999,
+            "max_leg": 10.9,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-06-29",
+            "span": "7-8-9-10-11",
+            "parlay": 2850.88,
+            "exotic": 8395.68,
+            "exotic_p2": 8395.68,
+            "wager_base": 2.0,
+            "ratio": 2.945,
+            "max_leg": 26.36,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-04-29",
+            "span": "5-6-7-8-9",
+            "parlay": 4618.39,
+            "exotic": 13186.96,
+            "exotic_p2": 13186.96,
+            "wager_base": 2.0,
+            "ratio": 2.855,
+            "max_leg": 19.86,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-06-18",
+            "span": "5-6-7-8-9",
+            "parlay": 19724.55,
+            "exotic": 51382.04,
+            "exotic_p2": 51382.04,
+            "wager_base": 2.0,
+            "ratio": 2.605,
+            "max_leg": 34.72,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-05-30",
+            "span": "5-6-7-8-9",
+            "parlay": 1630.42,
+            "exotic": 4177.24,
+            "exotic_p2": 4177.24,
+            "wager_base": 2.0,
+            "ratio": 2.562,
+            "max_leg": 17.32,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-06-04",
+            "span": "5-6-7-8-9",
+            "parlay": 2651.14,
+            "exotic": 6729.96,
+            "exotic_p2": 6729.96,
+            "wager_base": 2.0,
+            "ratio": 2.539,
+            "max_leg": 29.54,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-05-17",
+            "span": "7-8-9-10-11",
+            "parlay": 744.3,
+            "exotic": 1852.16,
+            "exotic_p2": 1852.16,
+            "wager_base": 2.0,
+            "ratio": 2.488,
+            "max_leg": 10.98,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-06-01",
+            "span": "6-7-8-9-10",
+            "parlay": 456.76,
+            "exotic": 1102.64,
+            "exotic_p2": 1102.64,
+            "wager_base": 2.0,
+            "ratio": 2.414,
+            "max_leg": 12.5,
+            "avg_field": 10.4
+          },
+          {
+            "date": "2025-06-15",
+            "span": "6-7-8-9-10",
+            "parlay": 4971.32,
+            "exotic": 11539.56,
+            "exotic_p2": 11539.56,
+            "wager_base": 2.0,
+            "ratio": 2.321,
+            "max_leg": 42.26,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-23",
+            "span": "5-6-7-8-9",
+            "parlay": 7525.22,
+            "exotic": 17278.36,
+            "exotic_p2": 17278.36,
+            "wager_base": 2.0,
+            "ratio": 2.296,
+            "max_leg": 21.74,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-06-19",
+            "span": "4-5-6-7-8",
+            "parlay": 828.08,
+            "exotic": 1892.36,
+            "exotic_p2": 1892.36,
+            "wager_base": 2.0,
+            "ratio": 2.285,
+            "max_leg": 11.74,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-05-24",
+            "span": "6-7-8-9-10",
+            "parlay": 1879.48,
+            "exotic": 4195.08,
+            "exotic_p2": 4195.08,
+            "wager_base": 2.0,
+            "ratio": 2.232,
+            "max_leg": 13.6,
+            "avg_field": 9.8
+          },
+          {
+            "date": "2025-05-26",
+            "span": "5-6-7-8-9",
+            "parlay": 9537.55,
+            "exotic": 21117.64,
+            "exotic_p2": 21117.64,
+            "wager_base": 2.0,
+            "ratio": 2.214,
+            "max_leg": 21.7,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-05-18",
+            "span": "5-6-7-8-9",
+            "parlay": 10120.09,
+            "exotic": 22169.6,
+            "exotic_p2": 22169.6,
+            "wager_base": 2.0,
+            "ratio": 2.191,
+            "max_leg": 43.68,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-05-11",
+            "span": "6-7-8-9-10",
+            "parlay": 67903.95,
+            "exotic": 148615.0,
+            "exotic_p2": 148615.0,
+            "wager_base": 2.0,
+            "ratio": 2.189,
+            "max_leg": 71.44,
+            "avg_field": 10.6
+          },
+          {
+            "date": "2025-06-25",
+            "span": "5-6-7-8-9",
+            "parlay": 90558.58,
+            "exotic": 196460.84,
+            "exotic_p2": 196460.84,
+            "wager_base": 2.0,
+            "ratio": 2.169,
+            "max_leg": 43.32,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-06-21",
+            "span": "7-8-9-10-11",
+            "parlay": 1366.95,
+            "exotic": 2961.48,
+            "exotic_p2": 2961.48,
+            "wager_base": 2.0,
+            "ratio": 2.166,
+            "max_leg": 12.04,
+            "avg_field": 10.4
+          },
+          {
+            "date": "2025-06-06",
+            "span": "5-6-7-8-9",
+            "parlay": 3259.84,
+            "exotic": 6534.12,
+            "exotic_p2": 6534.12,
+            "wager_base": 2.0,
+            "ratio": 2.004,
+            "max_leg": 15.34,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-05-01",
+            "span": "8-9-10-11-12",
+            "parlay": 737.93,
+            "exotic": 1477.08,
+            "exotic_p2": 1477.08,
+            "wager_base": 2.0,
+            "ratio": 2.002,
+            "max_leg": 14.54,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-05-02",
+            "span": "9-10-11-12-13",
+            "parlay": 2796.61,
+            "exotic": 5541.32,
+            "exotic_p2": 5541.32,
+            "wager_base": 2.0,
+            "ratio": 1.981,
+            "max_leg": 17.04,
+            "avg_field": 12.2
+          },
+          {
+            "date": "2025-05-22",
+            "span": "4-5-6-7-8",
+            "parlay": 7093.07,
+            "exotic": 13857.32,
+            "exotic_p2": 13857.32,
+            "wager_base": 2.0,
+            "ratio": 1.954,
+            "max_leg": 27.04,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-04-30",
+            "span": "6-7-8-9-10",
+            "parlay": 14965.79,
+            "exotic": 27643.04,
+            "exotic_p2": 27643.04,
+            "wager_base": 2.0,
+            "ratio": 1.847,
+            "max_leg": 20.22,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-05-29",
+            "span": "4-5-6-7-8",
+            "parlay": 3361.95,
+            "exotic": 5916.48,
+            "exotic_p2": 5916.48,
+            "wager_base": 2.0,
+            "ratio": 1.76,
+            "max_leg": 17.46,
+            "avg_field": 9.4
+          },
+          {
+            "date": "2025-06-05",
+            "span": "4-5-6-7-8",
+            "parlay": 3218.37,
+            "exotic": 5575.56,
+            "exotic_p2": 5575.56,
+            "wager_base": 2.0,
+            "ratio": 1.732,
+            "max_leg": 13.4,
+            "avg_field": 9.4
+          },
+          {
+            "date": "2025-06-14",
+            "span": "6-7-8-9-10",
+            "parlay": 842.81,
+            "exotic": 1352.48,
+            "exotic_p2": 1352.48,
+            "wager_base": 2.0,
+            "ratio": 1.605,
+            "max_leg": 11.04,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-06-27",
+            "span": "7-8-9-10-11",
+            "parlay": 69728.8,
+            "exotic": 110417.08,
+            "exotic_p2": 110417.08,
+            "wager_base": 2.0,
+            "ratio": 1.584,
+            "max_leg": 47.3,
+            "avg_field": 10.8
+          },
+          {
+            "date": "2025-06-26",
+            "span": "4-5-6-7-8",
+            "parlay": 9991.68,
+            "exotic": 15478.68,
+            "exotic_p2": 15478.68,
+            "wager_base": 2.0,
+            "ratio": 1.549,
+            "max_leg": 36.38,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-04-26",
+            "span": "6-7-8-9-10",
+            "parlay": 4669.39,
+            "exotic": 7225.84,
+            "exotic_p2": 7225.84,
+            "wager_base": 2.0,
+            "ratio": 1.547,
+            "max_leg": 14.98,
+            "avg_field": 9.6
+          },
+          {
+            "date": "2025-05-03",
+            "span": "10-11-12-13-14",
+            "parlay": 1452.34,
+            "exotic": 2221.68,
+            "exotic_p2": 2221.68,
+            "wager_base": 2.0,
+            "ratio": 1.53,
+            "max_leg": 17.96,
+            "avg_field": 14.8
+          },
+          {
+            "date": "2025-06-13",
+            "span": "5-6-7-8-9",
+            "parlay": 1336.52,
+            "exotic": 1962.76,
+            "exotic_p2": 1962.76,
+            "wager_base": 2.0,
+            "ratio": 1.469,
+            "max_leg": 12.94,
+            "avg_field": 9.4
+          },
+          {
+            "date": "2025-06-22",
+            "span": "5-6-7-8-9",
+            "parlay": 1924.2,
+            "exotic": 2825.44,
+            "exotic_p2": 2825.44,
+            "wager_base": 2.0,
+            "ratio": 1.468,
+            "max_leg": 13.22,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-05-31",
+            "span": "7-8-9-10-11",
+            "parlay": 20178.93,
+            "exotic": 27703.52,
+            "exotic_p2": 27703.52,
+            "wager_base": 2.0,
+            "ratio": 1.373,
+            "max_leg": 28.78,
+            "avg_field": 9.4
+          },
+          {
+            "date": "2025-06-07",
+            "span": "7-8-9-10-11",
+            "parlay": 1054593.77,
+            "exotic": 5966.56,
+            "exotic_p2": 5966.56,
+            "wager_base": 2.0,
+            "ratio": 0.006,
+            "max_leg": 107.98,
+            "avg_field": 10.4
+          }
+        ]
+      },
+      "P6": {
+        "sample": 35,
+        "mean_ratio": 3.909,
+        "median_ratio": 2.753,
+        "exotic_beat_parlay_pct": 91.4,
+        "avg_edge": 122603.84,
+        "threshold_analysis": [
+          {
+            "min_leg": 6,
+            "sample": 35,
+            "exotic_win_pct": 91.4,
+            "avg_ratio": 3.909
+          },
+          {
+            "min_leg": 8,
+            "sample": 35,
+            "exotic_win_pct": 91.4,
+            "avg_ratio": 3.909
+          },
+          {
+            "min_leg": 10,
+            "sample": 35,
+            "exotic_win_pct": 91.4,
+            "avg_ratio": 3.909
+          },
+          {
+            "min_leg": 12,
+            "sample": 30,
+            "exotic_win_pct": 90.0,
+            "avg_ratio": 4.1
+          },
+          {
+            "min_leg": 15,
+            "sample": 22,
+            "exotic_win_pct": 86.4,
+            "avg_ratio": 4.717
+          },
+          {
+            "min_leg": 20,
+            "sample": 19,
+            "exotic_win_pct": 89.5,
+            "avg_ratio": 5.267
+          },
+          {
+            "min_leg": 25,
+            "sample": 16,
+            "exotic_win_pct": 87.5,
+            "avg_ratio": 5.947
+          },
+          {
+            "min_leg": 30,
+            "sample": 8,
+            "exotic_win_pct": 75.0,
+            "avg_ratio": 3.313
+          },
+          {
+            "min_leg": 40,
+            "sample": 4,
+            "exotic_win_pct": 50.0,
+            "avg_ratio": 2.382
+          }
+        ],
+        "days": [
+          {
+            "date": "2025-05-15",
+            "span": "3-4-5-6-7-8",
+            "parlay": 83253.32,
+            "exotic": 2569827.8,
+            "exotic_p2": 2569827.8,
+            "wager_base": 2.0,
+            "ratio": 30.868,
+            "max_leg": 26.24,
+            "avg_field": 10.3
+          },
+          {
+            "date": "2025-05-25",
+            "span": "5-6-7-8-9-10",
+            "parlay": 9145.91,
+            "exotic": 79738.5,
+            "exotic_p2": 79738.5,
+            "wager_base": 2.0,
+            "ratio": 8.718,
+            "max_leg": 28.78,
+            "avg_field": 11.0
+          },
+          {
+            "date": "2025-05-10",
+            "span": "6-7-8-9-10-11",
+            "parlay": 9771.89,
+            "exotic": 77095.0,
+            "exotic_p2": 77095.0,
+            "wager_base": 2.0,
+            "ratio": 7.889,
+            "max_leg": 32.02,
+            "avg_field": 11.7
+          },
+          {
+            "date": "2025-05-09",
+            "span": "4-5-6-7-8-9",
+            "parlay": 8015.04,
+            "exotic": 58098.1,
+            "exotic_p2": 58098.1,
+            "wager_base": 2.0,
+            "ratio": 7.249,
+            "max_leg": 27.92,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-06-20",
+            "span": "4-5-6-7-8-9",
+            "parlay": 2283.74,
+            "exotic": 15474.3,
+            "exotic_p2": 15474.3,
+            "wager_base": 2.0,
+            "ratio": 6.776,
+            "max_leg": 28.44,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-05-22",
+            "span": "3-4-5-6-7-8",
+            "parlay": 43480.54,
+            "exotic": 240940.3,
+            "exotic_p2": 240940.3,
+            "wager_base": 2.0,
+            "ratio": 5.541,
+            "max_leg": 27.04,
+            "avg_field": 9.3
+          },
+          {
+            "date": "2025-06-28",
+            "span": "7-8-9-10-11-12",
+            "parlay": 1370.85,
+            "exotic": 6815.5,
+            "exotic_p2": 6815.5,
+            "wager_base": 2.0,
+            "ratio": 4.972,
+            "max_leg": 11.9,
+            "avg_field": 7.8
+          },
+          {
+            "date": "2025-06-15",
+            "span": "5-6-7-8-9-10",
+            "parlay": 45537.27,
+            "exotic": 199135.1,
+            "exotic_p2": 199135.1,
+            "wager_base": 2.0,
+            "ratio": 4.373,
+            "max_leg": 42.26,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-06-12",
+            "span": "3-4-5-6-7-8",
+            "parlay": 153553.32,
+            "exotic": 671398.5,
+            "exotic_p2": 671398.5,
+            "wager_base": 2.0,
+            "ratio": 4.372,
+            "max_leg": 33.46,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-01",
+            "span": "5-6-7-8-9-10",
+            "parlay": 977.47,
+            "exotic": 3975.3,
+            "exotic_p2": 3975.3,
+            "wager_base": 2.0,
+            "ratio": 4.067,
+            "max_leg": 12.5,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-18",
+            "span": "4-5-6-7-8-9",
+            "parlay": 38355.14,
+            "exotic": 145916.3,
+            "exotic_p2": 145916.3,
+            "wager_base": 2.0,
+            "ratio": 3.804,
+            "max_leg": 43.68,
+            "avg_field": 8.8
+          },
+          {
+            "date": "2025-06-29",
+            "span": "6-7-8-9-10-11",
+            "parlay": 26655.74,
+            "exotic": 95242.8,
+            "exotic_p2": 95242.8,
+            "wager_base": 2.0,
+            "ratio": 3.573,
+            "max_leg": 26.36,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-06-21",
+            "span": "6-7-8-9-10-11",
+            "parlay": 6014.59,
+            "exotic": 19712.5,
+            "exotic_p2": 19712.5,
+            "wager_base": 2.0,
+            "ratio": 3.277,
+            "max_leg": 12.04,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-06-08",
+            "span": "4-5-6-7-8-9",
+            "parlay": 334426.23,
+            "exotic": 1074696.3,
+            "exotic_p2": 1074696.3,
+            "wager_base": 2.0,
+            "ratio": 3.214,
+            "max_leg": 36.16,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-05-30",
+            "span": "4-5-6-7-8-9",
+            "parlay": 21961.77,
+            "exotic": 67320.6,
+            "exotic_p2": 67320.6,
+            "wager_base": 2.0,
+            "ratio": 3.065,
+            "max_leg": 26.94,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-06-14",
+            "span": "5-6-7-8-9-10",
+            "parlay": 4306.78,
+            "exotic": 12602.5,
+            "exotic_p2": 12602.5,
+            "wager_base": 2.0,
+            "ratio": 2.926,
+            "max_leg": 11.04,
+            "avg_field": 8.3
+          },
+          {
+            "date": "2025-06-04",
+            "span": "4-5-6-7-8-9",
+            "parlay": 6230.19,
+            "exotic": 17844.6,
+            "exotic_p2": 17844.6,
+            "wager_base": 2.0,
+            "ratio": 2.864,
+            "max_leg": 29.54,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-06-22",
+            "span": "4-5-6-7-8-9",
+            "parlay": 3694.47,
+            "exotic": 10169.3,
+            "exotic_p2": 10169.3,
+            "wager_base": 2.0,
+            "ratio": 2.753,
+            "max_leg": 13.22,
+            "avg_field": 8.7
+          },
+          {
+            "date": "2025-06-19",
+            "span": "3-4-5-6-7-8",
+            "parlay": 1912.86,
+            "exotic": 4974.9,
+            "exotic_p2": 4974.9,
+            "wager_base": 2.0,
+            "ratio": 2.601,
+            "max_leg": 11.74,
+            "avg_field": 8.5
+          },
+          {
+            "date": "2025-05-24",
+            "span": "5-6-7-8-9-10",
+            "parlay": 5356.53,
+            "exotic": 12485.2,
+            "exotic_p2": 12485.2,
+            "wager_base": 2.0,
+            "ratio": 2.331,
+            "max_leg": 13.6,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-05",
+            "span": "3-4-5-6-7-8",
+            "parlay": 12004.52,
+            "exotic": 24596.6,
+            "exotic_p2": 24596.6,
+            "wager_base": 2.0,
+            "ratio": 2.049,
+            "max_leg": 13.4,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-05-01",
+            "span": "7-8-9-10-11-12",
+            "parlay": 4693.24,
+            "exotic": 9517.5,
+            "exotic_p2": 9517.5,
+            "wager_base": 2.0,
+            "ratio": 2.028,
+            "max_leg": 14.54,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-04-29",
+            "span": "4-5-6-7-8-9",
+            "parlay": 14455.57,
+            "exotic": 28684.6,
+            "exotic_p2": 28684.6,
+            "wager_base": 2.0,
+            "ratio": 1.984,
+            "max_leg": 19.86,
+            "avg_field": 10.2
+          },
+          {
+            "date": "2025-05-26",
+            "span": "4-5-6-7-8-9",
+            "parlay": 58369.83,
+            "exotic": 108129.0,
+            "exotic_p2": 108129.0,
+            "wager_base": 2.0,
+            "ratio": 1.852,
+            "max_leg": 21.7,
+            "avg_field": 10.3
+          },
+          {
+            "date": "2025-05-16",
+            "span": "4-5-6-7-8-9",
+            "parlay": 4398.66,
+            "exotic": 7665.4,
+            "exotic_p2": 7665.4,
+            "wager_base": 2.0,
+            "ratio": 1.743,
+            "max_leg": 10.9,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-05-29",
+            "span": "3-4-5-6-7-8",
+            "parlay": 5009.3,
+            "exotic": 8407.2,
+            "exotic_p2": 8407.2,
+            "wager_base": 2.0,
+            "ratio": 1.678,
+            "max_leg": 17.46,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-05-17",
+            "span": "6-7-8-9-10-11",
+            "parlay": 3952.22,
+            "exotic": 6125.4,
+            "exotic_p2": 6125.4,
+            "wager_base": 2.0,
+            "ratio": 1.55,
+            "max_leg": 10.98,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-04-30",
+            "span": "5-6-7-8-9-10",
+            "parlay": 39809.0,
+            "exotic": 61349.5,
+            "exotic_p2": 61349.5,
+            "wager_base": 2.0,
+            "ratio": 1.541,
+            "max_leg": 20.22,
+            "avg_field": 10.0
+          },
+          {
+            "date": "2025-05-23",
+            "span": "4-5-6-7-8-9",
+            "parlay": 10460.05,
+            "exotic": 15941.1,
+            "exotic_p2": 15941.1,
+            "wager_base": 2.0,
+            "ratio": 1.524,
+            "max_leg": 21.74,
+            "avg_field": 9.0
+          },
+          {
+            "date": "2025-06-18",
+            "span": "4-5-6-7-8-9",
+            "parlay": 203360.12,
+            "exotic": 304857.0,
+            "exotic_p2": 304857.0,
+            "wager_base": 2.0,
+            "ratio": 1.499,
+            "max_leg": 34.72,
+            "avg_field": 9.2
+          },
+          {
+            "date": "2025-06-13",
+            "span": "4-5-6-7-8-9",
+            "parlay": 7096.93,
+            "exotic": 9754.7,
+            "exotic_p2": 9754.7,
+            "wager_base": 2.0,
+            "ratio": 1.374,
+            "max_leg": 12.94,
+            "avg_field": 9.3
+          },
+          {
+            "date": "2025-04-26",
+            "span": "5-6-7-8-9-10",
+            "parlay": 9385.47,
+            "exotic": 12730.2,
+            "exotic_p2": 12730.2,
+            "wager_base": 2.0,
+            "ratio": 1.356,
+            "max_leg": 14.98,
+            "avg_field": 9.5
+          },
+          {
+            "date": "2025-06-27",
+            "span": "6-7-8-9-10-11",
+            "parlay": 1469185.82,
+            "exotic": 1107126.5,
+            "exotic_p2": 1107126.5,
+            "wager_base": 2.0,
+            "ratio": 0.754,
+            "max_leg": 47.3,
+            "avg_field": 10.7
+          },
+          {
+            "date": "2025-06-26",
+            "span": "3-4-5-6-7-8",
+            "parlay": 335121.08,
+            "exotic": 200609.4,
+            "exotic_p2": 200609.4,
+            "wager_base": 2.0,
+            "ratio": 0.599,
+            "max_leg": 67.08,
+            "avg_field": 9.7
+          },
+          {
+            "date": "2025-06-06",
+            "span": "4-5-6-7-8-9",
+            "parlay": 14832.29,
+            "exotic": 614.8,
+            "exotic_p2": 614.8,
+            "wager_base": 2.0,
+            "ratio": 0.041,
+            "max_leg": 15.34,
+            "avg_field": 9.0
           }
         ]
       }
