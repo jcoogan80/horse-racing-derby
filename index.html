@@ -354,6 +354,50 @@
     .tb-alt-row:last-child { border-bottom: none; }
     .tb-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 
+    /* ── Today's Card tab ── */
+    .tc-leg {
+      background: var(--card2);
+      border-radius: 8px;
+      padding: 12px;
+      margin-bottom: 10px;
+    }
+    .tc-leg-label {
+      display: block;
+      font-size: .78rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      letter-spacing: .04em;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .tc-horse-row {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+      margin-bottom: 6px;
+    }
+    .tc-pgm  { width: 52px !important; min-height: 42px !important; padding: 8px 6px !important; text-align: center; font-size: .95rem !important; }
+    .tc-odds { flex: 1; min-height: 42px !important; padding: 8px 10px !important; font-size: .95rem !important; }
+    .tc-remove {
+      width: 36px; height: 36px; flex-shrink: 0;
+      border: 1px solid var(--border); background: transparent;
+      color: var(--dim); border-radius: 6px; font-size: 1.2rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tc-remove:active { opacity: .7; }
+    .tc-add-btn { margin-top: 4px; font-size: .8rem; padding: 8px 12px; min-height: 38px; }
+    .tc-ip { font-size: .72rem; color: var(--dim); }
+    .combo-row-highlight { background: rgba(201,168,76,.09); }
+    .tc-signal {
+      background: var(--card2);
+      border-radius: 8px;
+      padding: 14px;
+      margin-top: 2px;
+    }
+    .tc-signal-icon { font-size: 1.2rem; margin-bottom: 6px; }
+    .tc-signal-text { font-size: .9rem; font-weight: 600; line-height: 1.5; }
+
     /* ── Parlay Edge tab ── */
     .badge-EXOTIC { background: rgba(46,204,113,.18); color: var(--green);  border: 1px solid var(--green); }
     .badge-EVEN   { background: rgba(240,165,0,.18);  color: var(--yellow); border: 1px solid var(--yellow); }
@@ -404,6 +448,7 @@
   <button class="tab-btn"         onclick="showTab('profiles')">Profiles</button>
   <button class="tab-btn"         onclick="showTab('ticket')">Tickets</button>
   <button class="tab-btn"         onclick="showTab('parlay')">Parlay Edge</button>
+  <button class="tab-btn"         onclick="showTab('today')">Today</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -543,6 +588,44 @@
   </div>
 </div>
 
+<!-- ─────────────── TODAY'S CARD TAB ─────────────── -->
+<div id="tab-today" class="tab-pane">
+
+  <div class="card">
+    <h2>Morning Line Overlay Detector</h2>
+    <p style="font-size:.78rem;color:var(--dim);margin-bottom:14px">
+      Enter today's morning line odds to see whether this sequence is priced as a longshot or chalk setup, then compare against historical data.
+    </p>
+    <div class="field-row">
+      <label>Track</label>
+      <select id="tc-track"><option value="">Loading…</option></select>
+    </div>
+    <div class="field-row">
+      <label>Wager Type</label>
+      <select id="tc-wager" onchange="buildTodayLegs()">
+        <option value="P3">Pick 3</option>
+        <option value="P4" selected>Pick 4</option>
+        <option value="P5">Pick 5</option>
+        <option value="P6">Pick 6</option>
+      </select>
+    </div>
+    <div class="field-row">
+      <label>Starting Race #</label>
+      <input type="number" id="tc-start" inputmode="numeric" min="1" max="12" value="1"
+             onchange="buildTodayLegs()">
+    </div>
+    <p style="font-size:.75rem;color:var(--dim);margin-bottom:12px">
+      Odds: <code>5/2</code> &nbsp; <code>10-1</code> &nbsp; <code>2.5</code> &nbsp; <code>even</code>
+      &nbsp;&mdash;&nbsp; Program # is optional
+    </p>
+    <div id="tc-legs"></div>
+    <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:4px">ANALYZE</button>
+  </div>
+
+  <div id="tc-results"></div>
+
+</div>
+
 <!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
 <div id="tab-profiles" class="tab-pane">
   <p class="last-updated">Baseline snapshot &mdash; April 22, 2026 &mdash; KEE &amp; GP (42 race days)</p>
@@ -558,7 +641,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay'];
+  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay', 'today'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -967,7 +1050,7 @@ async function loadDashboard() {
     } catch (_) {}
   }
 
-  if (data) { window._dashData = data; populateTrackSelect(); renderParlayEdge(); }
+  if (data) { window._dashData = data; populateTrackSelect(); populateTcTrackSelect(); renderParlayEdge(); }
 
   if (!data || !data.db_summary) {
     el.innerHTML = `
@@ -1492,6 +1575,302 @@ function calcWillPay() {
 }
 
 // =============================================================
+//  TODAY'S CARD — MORNING LINE OVERLAY DETECTOR
+// =============================================================
+const TC_LEGS = { P3: 3, P4: 4, P5: 5, P6: 6 };
+
+function populateTcTrackSelect() {
+  const sel = document.getElementById('tc-track');
+  if (!window._dashData || !window._dashData.db_summary) return;
+  const cur = sel.value;
+  sel.innerHTML = '';
+  for (const t of window._dashData.db_summary.tracks) {
+    const opt = document.createElement('option');
+    opt.value = t.track;
+    opt.textContent = t.track;
+    if (t.track === cur) opt.selected = true;
+    sel.appendChild(opt);
+  }
+  if (!cur && sel.options.length) sel.value = sel.options[0].value;
+}
+
+function buildTodayLegs() {
+  const wager = document.getElementById('tc-wager').value;
+  const start = parseInt(document.getElementById('tc-start').value) || 1;
+  const n     = TC_LEGS[wager] || 4;
+  const wrap  = document.getElementById('tc-legs');
+  wrap.innerHTML = '';
+  document.getElementById('tc-results').innerHTML = '';
+  for (let i = 0; i < n; i++) {
+    const legDiv = document.createElement('div');
+    legDiv.className = 'tc-leg';
+    legDiv.dataset.leg = i;
+    legDiv.innerHTML = `
+      <span class="tc-leg-label">Race ${start + i} &mdash; Leg ${i + 1}</span>
+      <div class="tc-horses"></div>
+      <button class="btn-secondary tc-add-btn" onclick="tcAddHorse(${i})">+ Add Horse</button>`;
+    wrap.appendChild(legDiv);
+    tcAddHorse(i);
+  }
+}
+
+function tcAddHorse(legIdx) {
+  const container = document.querySelector(`.tc-leg[data-leg="${legIdx}"] .tc-horses`);
+  if (!container || container.children.length >= 8) return;
+  const row = document.createElement('div');
+  row.className = 'tc-horse-row';
+  row.innerHTML = `
+    <input type="text" class="tc-pgm" placeholder="#"
+           inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input type="text" class="tc-odds" placeholder="5/2"
+           inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false">
+    <button class="tc-remove" onclick="tcRemoveHorse(this)" title="Remove">&times;</button>`;
+  container.appendChild(row);
+}
+
+function tcRemoveHorse(btn) {
+  const container = btn.closest('.tc-horses');
+  if (container.children.length <= 1) return;
+  btn.closest('.tc-horse-row').remove();
+}
+
+function tcCartesian(arrays) {
+  return arrays.reduce(
+    (acc, arr) => acc.flatMap(a => arr.map(b => [...a, b])),
+    [[]]
+  );
+}
+
+function analyzeMorningLine() {
+  const track = document.getElementById('tc-track').value;
+  const wager = document.getElementById('tc-wager').value;
+  const start = parseInt(document.getElementById('tc-start').value) || 1;
+  const n     = TC_LEGS[wager] || 4;
+
+  if (!track) { alert('Select a track.'); return; }
+
+  // Collect legs — array of arrays of horse objects
+  const legs = [];
+  for (let i = 0; i < n; i++) {
+    const container = document.querySelector(`.tc-leg[data-leg="${i}"] .tc-horses`);
+    if (!container) { alert(`Leg ${i + 1} missing.`); return; }
+    const horses = [];
+    for (const row of container.querySelectorAll('.tc-horse-row')) {
+      const pgmRaw  = row.querySelector('.tc-pgm').value.trim();
+      const oddsStr = row.querySelector('.tc-odds').value.trim();
+      if (!oddsStr) continue;
+      const m = parseOdds(oddsStr);
+      if (m === null || m < 0) { alert(`Invalid odds in Leg ${i + 1}: "${oddsStr}"`); return; }
+      horses.push({ pgm: pgmRaw || String(horses.length + 1), odds: m });
+    }
+    if (!horses.length) { alert(`Enter at least one horse with odds in Leg ${i + 1}.`); return; }
+    legs.push(horses);
+  }
+
+  // Generate all one-per-leg combinations and compute $2 theoretical parlay
+  // $2 parlay = 2 × ∏(odds_i + 1)  because mlPayout = (odds+1)×2 and parlay = 2×∏(mlPayout/2)
+  const rawCombos = tcCartesian(legs);
+  const combos = rawCombos
+    .map(horses => ({ horses, parlay: 2 * horses.reduce((p, h) => p * (h.odds + 1), 1) }))
+    .sort((a, b) => b.parlay - a.parlay);
+
+  const parlays  = combos.map(c => c.parlay);
+  const avgPar   = parlays.reduce((s, v) => s + v, 0) / parlays.length;
+  const bestPar  = parlays[0];
+  const worstPar = parlays[parlays.length - 1];
+  const ticketCost = 2 * combos.length;
+
+  // Look up historical sequence data
+  const raceNums = Array.from({ length: n }, (_, i) => start + i);
+  const spanStr  = raceNums.join('-');
+  const allSeqs  = (window._dashData && window._dashData.sequences) || {};
+  const hist     = ((allSeqs[track] || {})[wager] || {})[spanStr] || null;
+
+  const fmtD  = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtI  = v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  let html = '';
+
+  // ── Card 1: Theoretical Parlay Value ──
+  html += `<div class="card"><h2>Theoretical Parlay Value</h2>
+    <p style="font-size:.76rem;color:var(--dim);margin-bottom:12px">
+      ${track} ${wager} &mdash; Races ${spanStr} &mdash;
+      ${combos.length} combination${combos.length !== 1 ? 's' : ''}
+    </p>`;
+
+  for (let i = 0; i < legs.length; i++) {
+    html += `<div style="margin-bottom:10px">
+      <div style="font-size:.78rem;font-weight:700;color:var(--gold-lt);margin-bottom:4px;text-transform:uppercase;letter-spacing:.03em">
+        Race ${start + i} &mdash; Leg ${i + 1}
+      </div>`;
+    for (const h of legs[i]) {
+      const ipPct = (1 / (h.odds + 1) * 100).toFixed(1);
+      const mlStr = h.odds === 1 ? 'Even' : (h.odds % 1 === 0 ? h.odds + '-1' : h.odds.toFixed(2));
+      html += `<div style="display:flex;gap:12px;padding:3px 0;font-size:.82rem;align-items:center">
+        <span style="font-weight:700;min-width:28px;color:var(--gold)">#${h.pgm}</span>
+        <span>${mlStr}</span>
+        <span class="tc-ip">${ipPct}% win prob</span>
+      </div>`;
+    }
+    html += `</div>`;
+  }
+
+  html += `<div class="stats-grid" style="margin-top:8px">
+    <div class="stat-box">
+      <div class="val" style="font-size:1.1rem">${fmtI(bestPar)}</div>
+      <div class="lbl">Best Combo Parlay</div>
+    </div>
+    <div class="stat-box">
+      <div class="val" style="font-size:1.1rem">${fmtI(avgPar)}</div>
+      <div class="lbl">Avg Combo Parlay</div>
+    </div>
+    <div class="stat-box">
+      <div class="val" style="font-size:1.1rem">${fmtI(worstPar)}</div>
+      <div class="lbl">Worst Combo Parlay</div>
+    </div>
+    <div class="stat-box">
+      <div class="val" style="font-size:1.1rem">${fmtI(ticketCost)}</div>
+      <div class="lbl">Est. Ticket Cost</div>
+    </div>
+  </div></div>`;
+
+  // ── Card 2: Sequence History ──
+  if (hist) {
+    const ovlBadge = hist.is_overlay
+      ? `<span class="badge badge-HIGH">OVERLAY ${hist.overlay_ratio ? hist.overlay_ratio.toFixed(1) + 'x' : ''}</span>`
+      : `<span class="badge badge-MODERATE">FAIR VALUE</span>`;
+    const thinNote = hist.thin_sample
+      ? '<p class="thin-note" style="margin-top:8px">&#9888; Small sample (&lt;5 hits) — treat with caution.</p>' : '';
+    html += `<div class="card"><h2>Sequence History</h2>
+      <p style="font-size:.76rem;color:var(--dim);margin-bottom:10px">${track} ${wager} &mdash; Races ${spanStr}</p>
+      <div class="stats-grid">
+        <div class="stat-box">
+          <div class="val">${fmtI(hist.avg_payout)}</div>
+          <div class="lbl">Avg Payout</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">${fmtI(hist.median_payout)}</div>
+          <div class="lbl">Median Payout</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">${hist.times_hit}</div>
+          <div class="lbl">Times Hit</div>
+        </div>
+        <div class="stat-box">
+          <div class="val">${fmtI(hist.max_payout)}</div>
+          <div class="lbl">Max Payout</div>
+        </div>
+      </div>
+      <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
+        ${ovlBadge}
+        <span class="badge badge-${hist.consistency}">${hist.consistency}</span>
+      </div>
+      ${thinNote}
+    </div>`;
+
+    // ── Card 3: Gap Analysis ──
+    const histAvg  = hist.avg_payout;
+    const avgRatio = avgPar / histAvg;
+    const bstRatio = bestPar / histAvg;
+
+    let signal, sigColor, sigIcon;
+    if (avgRatio > 1.5) {
+      signal  = 'LONGSHOT SETUP: morning lines suggest this sequence could significantly outperform historical average. Strong overlay candidate.';
+      sigColor = 'var(--green)';
+      sigIcon  = '&#9650;&#9650;';
+    } else if (avgRatio >= 0.8) {
+      signal  = 'NEUTRAL: morning lines in line with historical pricing. Play based on overlay rating alone.';
+      sigColor = 'var(--yellow)';
+      sigIcon  = '&#8212;';
+    } else {
+      signal  = 'CHALK ALERT: morning lines suggest heavy favorites dominate this sequence. Exotic likely to underperform historical average. Consider skipping or waiting for better price.';
+      sigColor = 'var(--red)';
+      sigIcon  = '&#9660;&#9660;';
+    }
+
+    const avgRatioColor = avgRatio > 1.5 ? 'var(--green)' : avgRatio >= 0.8 ? 'var(--text)' : 'var(--red)';
+    const bstRatioColor = bstRatio > 1.0 ? 'var(--green)' : 'var(--dim)';
+
+    html += `<div class="card"><h2>Gap Analysis</h2>
+      <div class="sum-grid" style="margin-bottom:14px">
+        <div class="sum-item">
+          <div class="key">Avg combo vs hist. avg</div>
+          <div class="value" style="color:${avgRatioColor}">${avgRatio.toFixed(2)}x
+            <span style="font-size:.8rem;color:var(--dim);font-weight:400">
+              &nbsp;${fmtI(avgPar)} vs ${fmtI(histAvg)}
+            </span>
+          </div>
+        </div>
+        <div class="sum-item">
+          <div class="key">Best combo vs hist. avg</div>
+          <div class="value" style="color:${bstRatioColor}">${bstRatio.toFixed(2)}x
+            <span style="font-size:.8rem;color:var(--dim);font-weight:400">&nbsp;${fmtI(bestPar)}</span>
+          </div>
+        </div>
+        <div class="sum-item">
+          <div class="key">Combinations &times; $2</div>
+          <div class="value" style="color:var(--gold)">${fmtD(ticketCost)}</div>
+        </div>
+      </div>
+      <div class="tc-signal">
+        <div class="tc-signal-icon">${sigIcon}</div>
+        <div class="tc-signal-text" style="color:${sigColor}">${signal}</div>
+      </div>
+    </div>`;
+  } else {
+    html += `<div class="card"><h2>Sequence History</h2>
+      <p class="no-overlay">No historical data for ${track} ${wager} races ${spanStr}.</p>
+      <p class="thin-note" style="margin-top:8px">
+        Gap analysis requires historical data. The theoretical parlay values above still apply.
+        Run the scraper for ${track} to build this sequence's history.
+      </p>
+    </div>`;
+  }
+
+  // ── Combo Table (collapsible) ──
+  const CAP        = 50;
+  const displayed  = combos.slice(0, CAP);
+  const overflow   = combos.length > CAP
+    ? `<p class="thin-note" style="margin-bottom:8px">Showing ${CAP} of ${combos.length} combinations.</p>` : '';
+  const histAvg    = hist ? hist.avg_payout : null;
+  const vsHeader   = histAvg ? '<th>vs Hist Avg</th>' : '';
+
+  let tableRows = '';
+  for (const c of displayed) {
+    const label    = c.horses.map(h => '#' + h.pgm).join(' / ');
+    const isAbove  = histAvg !== null && c.parlay > histAvg;
+    const rowCls   = isAbove ? ' class="combo-row-highlight"' : '';
+    const vsCell   = histAvg !== null
+      ? `<td style="color:${isAbove ? 'var(--gold)' : 'var(--dim)'}">${(c.parlay / histAvg).toFixed(2)}x</td>`
+      : '';
+    tableRows += `<tr${rowCls}>
+      <td style="text-align:left">${label}</td>
+      <td>${fmtD(c.parlay)}</td>
+      ${vsCell}
+    </tr>`;
+  }
+
+  html += `<details><summary>Show all combinations (${combos.length})</summary>
+    <div class="card" style="margin-top:4px">
+      ${overflow}
+      <div class="table-scroll">
+      <table class="results-table">
+        <thead><tr>
+          <th style="text-align:left">Combination</th>
+          <th>$2 Parlay</th>
+          ${vsHeader}
+        </tr></thead>
+        <tbody>${tableRows}</tbody>
+      </table>
+      </div>
+    </div>
+  </details>`;
+
+  const el = document.getElementById('tc-results');
+  el.innerHTML = html;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+// =============================================================
 //  SERVICE WORKER REGISTRATION
 // =============================================================
 if ('serviceWorker' in navigator) {
@@ -1507,6 +1886,7 @@ if ('serviceWorker' in navigator) {
 loadDashboard();
 renderProfiles();
 updateWpLegs();
+buildTodayLegs();
 </script>
 </body>
 </html>
