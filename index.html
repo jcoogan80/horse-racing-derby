@@ -473,7 +473,7 @@
 <nav class="tabs">
   <button class="tab-btn active"  onclick="showTab('dashboard')">Dashboard</button>
   <button class="tab-btn"         onclick="showTab('hedge')">Hedge</button>
-  <button class="tab-btn"         onclick="showTab('profiles')">Profiles</button>
+  <button class="tab-btn"         onclick="showTab('trackguide')">Track Guide</button>
   <button class="tab-btn"         onclick="showTab('ticket')">Tickets</button>
   <button class="tab-btn"         onclick="showTab('parlay')">Parlay Edge</button>
   <button class="tab-btn"         onclick="showTab('today')">Today</button>
@@ -656,10 +656,76 @@
 
 </div>
 
-<!-- ─────────────── TRACK PROFILES TAB ─────────────── -->
-<div id="tab-profiles" class="tab-pane">
-  <p class="last-updated">Baseline snapshot &mdash; April 22, 2026 &mdash; KEE &amp; GP (42 race days)</p>
-  <div id="profiles-content"></div>
+<!-- ─────────────── TRACK GUIDE TAB ─────────────── -->
+<div id="tab-trackguide" class="tab-pane">
+  <style>
+    .tg-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+    .tg-header {
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .tg-track {
+      font-size: 1.15rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: 0.04em;
+    }
+    .tg-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .tg-days {
+      margin-left: auto;
+      font-size: 0.75rem;
+      color: var(--dim);
+    }
+    .tg-rows { display: flex; flex-direction: column; gap: 7px; margin-bottom: 11px; }
+    .tg-row {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.86rem;
+    }
+    .tg-label {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      border-radius: 4px;
+      padding: 2px 7px;
+      min-width: 46px;
+      text-align: center;
+    }
+    .tg-label.best  { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.35); }
+    .tg-label.skip  { background: rgba(231,76,60,.15);  color: #e74c3c; border: 1px solid rgba(231,76,60,.35); }
+    .tg-label.weak  { background: rgba(240,165,0,.12);  color: #f0a500; border: 1px solid rgba(240,165,0,.35); }
+    .tg-label.low   { background: var(--card2); color: var(--dim); border: 1px solid var(--border); }
+    .tg-bet {
+      font-weight: 700;
+      color: var(--gold-lt);
+      min-width: 22px;
+    }
+    .tg-stat { color: var(--dim); font-size: 0.82rem; }
+    .tg-context {
+      font-size: 0.86rem;
+      color: var(--text);
+      line-height: 1.6;
+      border-top: 1px solid var(--border);
+      padding-top: 10px;
+      margin: 0;
+    }
+  </style>
+  <p class="last-updated" id="tg-updated"></p>
+  <div id="trackguide-content"></div>
 </div>
 
 <div id="tab-howto" class="tab-pane">
@@ -1025,9 +1091,9 @@
           <td>See the data behind why exotic pools beat parlays</td>
         </tr>
         <tr>
-          <td class="tab-name">Profiles</td>
+          <td class="tab-name">Track Guide</td>
           <td class="when-cell">Reference</td>
-          <td>Track-by-track overlay summaries</td>
+          <td>Best and worst bet per track, pulled from live data</td>
         </tr>
       </tbody>
     </table>
@@ -1049,7 +1115,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay', 'today', 'howto'];
+  const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -1735,36 +1801,85 @@ const BASELINE = [
   }
 ];
 
-function renderProfiles() {
+function renderTrackGuide() {
+  const data = window._dashData && window._dashData.parlay_vs_exotic;
+  const el   = document.getElementById('trackguide-content');
+  if (!data) { el.innerHTML = ''; return; }
+
+  const TRACK_NAMES = {
+    AQU: 'Aqueduct',
+    CD:  'Churchill Downs',
+    FG:  'Fair Grounds',
+    GP:  'Gulfstream Park',
+    KEE: 'Keeneland',
+    OP:  'Oaklawn Park',
+    SA:  'Santa Anita',
+  };
+  const CONTEXT = {
+    AQU: 'Deep pools generate consistent multi-race value; the Pick 6 is a small-pool lottery — skip it.',
+    CD:  'All pick bets favor the exotic pool; Play the Pick 5 every race day.',
+    FG:  'One of the strongest Pick 5 returns in the data; the Pick 6 parlay wins 9 of 10 days — avoid.',
+    GP:  'Largest pool in the dataset; Pick 4 and Pick 5 beat the parlay on every single race day.',
+    KEE: 'Small pool size caps value; the parlay outperforms the Pick 5 two out of three race days.',
+    OP:  'Consistently exotic-favorable across all bet types; the Pick 5 is among the best values in the data.',
+    SA:  'Highest Pick 5 return ratio in the dataset at 13.4x the parlay; avoid the Pick 6.',
+  };
+
+  const dbTracks = (window._dashData.db_summary && window._dashData.db_summary.tracks) || [];
+  const daysMap  = {};
+  for (const t of dbTracks) daysMap[t.track] = t.days;
+
+  document.getElementById('tg-updated').textContent =
+    'Updated: ' + (window._dashData.last_updated || '');
+
   let html = '';
-  for (const t of BASELINE) {
-    html += `<div class="card"><h2>${t.track} &mdash; ${t.name}</h2>
-      <p style="font-size:.76rem;color:var(--dim);margin-bottom:12px">${t.note}</p>`;
-    for (const w of t.wagers) {
-      html += `<div class="wager-section">
-        <h4><span class="wager-pill">${w.type}</span> overall avg $${w.overall_avg.toLocaleString()}</h4>`;
-      if (!w.overlays.length) {
-        html += `<p class="no-overlay">No overlays above threshold (need &ge;5 hits, avg &gt;1.5x)</p>`;
-      } else {
-        for (const o of w.overlays) {
-          html += `<div class="overlay-row">
-            <div>
-              <div class="overlay-races">Races ${o.race_span}</div>
-              <div class="overlay-stats">${o.times_hit} hits &bull; median $${o.median.toLocaleString()}</div>
-            </div>
-            <div style="text-align:right;flex:1">
-              <div class="overlay-ratio">${o.ratio.toFixed(2)}x</div>
-              <div class="overlay-stats">avg $${o.avg.toLocaleString()}</div>
-            </div>
-            <div><span class="badge badge-${o.c}">${o.c}</span></div>
-          </div>`;
-        }
-      }
-      html += '</div>';
-    }
-    html += '</div>';
+  for (const track of Object.keys(data).sort()) {
+    const bets    = data[track];
+    const wagers  = Object.keys(bets);
+    const days    = daysMap[track] || '';
+
+    // Best: highest exotic_beat_parlay_pct, tie-break by mean_ratio
+    const sorted  = [...wagers].sort((a, b) =>
+      bets[b].exotic_beat_parlay_pct - bets[a].exotic_beat_parlay_pct ||
+      bets[b].mean_ratio - bets[a].mean_ratio
+    );
+    const best    = sorted[0];
+    const worst   = sorted[sorted.length - 1];
+    const bestPct = bets[best].exotic_beat_parlay_pct;
+    const worstPct = bets[worst].exotic_beat_parlay_pct;
+
+    // Label for worst
+    let worstLabel, worstCls;
+    if (worstPct < 50)      { worstLabel = 'Skip';    worstCls = 'skip'; }
+    else if (worstPct < 80) { worstLabel = 'Weak';    worstCls = 'weak'; }
+    else                    { worstLabel = 'Weakest'; worstCls = 'low';  }
+
+    const fmtPct  = p => p === 100 ? '100%' : p.toFixed(1) + '%';
+    const fmtRat  = r => r.toFixed(1) + 'x avg';
+
+    html += `
+    <div class="tg-card">
+      <div class="tg-header">
+        <span class="tg-track">${track}</span>
+        <span class="tg-name">${TRACK_NAMES[track] || ''}</span>
+        ${days ? `<span class="tg-days">${days} days</span>` : ''}
+      </div>
+      <div class="tg-rows">
+        <div class="tg-row">
+          <span class="tg-label best">Best</span>
+          <span class="tg-bet">${best}</span>
+          <span class="tg-stat">beats parlay ${fmtPct(bestPct)} of days &middot; ${fmtRat(bets[best].mean_ratio)}</span>
+        </div>
+        <div class="tg-row">
+          <span class="tg-label ${worstCls}">${worstLabel}</span>
+          <span class="tg-bet">${worst}</span>
+          <span class="tg-stat">beats parlay ${fmtPct(worstPct)} of days &middot; ${fmtRat(bets[worst].mean_ratio)}</span>
+        </div>
+      </div>
+      <p class="tg-context">${CONTEXT[track] || ''}</p>
+    </div>`;
   }
-  document.getElementById('profiles-content').innerHTML = html;
+  el.innerHTML = html;
 }
 
 // =============================================================
@@ -2442,7 +2557,7 @@ if ('serviceWorker' in navigator) {
 //  INIT
 // =============================================================
 loadDashboard();
-renderProfiles();
+renderTrackGuide();
 updateWpLegs();
 buildTodayLegs();
 </script>
