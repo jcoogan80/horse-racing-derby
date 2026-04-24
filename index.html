@@ -461,6 +461,69 @@
     .pe-table tr:last-child td { border-bottom: none; }
     .pe-row-exotic { background: rgba(46,204,113,.07); }
     .pe-row-parlay { background: rgba(231,76,60,.07); }
+    /* Collapsible track sections */
+    .pe-track { margin-bottom: 10px; }
+    .pe-track-header {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 13px 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color .15s;
+    }
+    .pe-track-header:hover { border-color: var(--gold); }
+    .pe-track-header.open {
+      border-bottom-left-radius: 0;
+      border-bottom-right-radius: 0;
+      border-color: var(--gold);
+    }
+    .pe-track-code {
+      font-size: 1.05rem;
+      font-weight: 900;
+      color: var(--gold);
+      letter-spacing: .04em;
+      min-width: 38px;
+    }
+    .pe-track-hname {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+    .pe-track-meta {
+      margin-left: auto;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      font-size: .78rem;
+      color: var(--dim);
+      flex-shrink: 0;
+    }
+    .pe-track-best {
+      font-weight: 700;
+      color: var(--green);
+      font-size: .78rem;
+    }
+    .pe-chevron {
+      flex-shrink: 0;
+      transition: transform .2s;
+      color: var(--dim);
+    }
+    .pe-track-header.open .pe-chevron { transform: rotate(180deg); }
+    .pe-track-body {
+      display: none;
+      border: 1px solid var(--gold);
+      border-top: none;
+      border-bottom-left-radius: var(--radius);
+      border-bottom-right-radius: var(--radius);
+      padding: 16px;
+      background: var(--card);
+    }
+    .pe-track-body.open { display: block; }
   </style>
 </head>
 <body>
@@ -1901,11 +1964,46 @@ function renderParlayEdge() {
 
   const fmtM = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
 
+  const TRACK_FULL = {
+    AQU: 'Aqueduct', CD: 'Churchill Downs', FG: 'Fair Grounds',
+    GP: 'Gulfstream Park', KEE: 'Keeneland', OP: 'Oaklawn Park', SA: 'Santa Anita',
+  };
+  const dbTracks = (window._dashData.db_summary && window._dashData.db_summary.tracks) || [];
+  const daysMap  = {};
+  for (const t of dbTracks) daysMap[t.track] = t.days;
+
+  const chevron = `<svg class="pe-chevron" width="16" height="16" viewBox="0 0 16 16" fill="none">
+    <polyline points="3,5 8,11 13,5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>`;
+
   let html = `<p class="last-updated">Updated: ${window._dashData.last_updated || ''}</p>`;
 
   for (const track of Object.keys(data).sort()) {
     const trackData = data[track];
-    html += `<div class="card"><h2>${track} &mdash; Parlay vs Exotic ($2 base)</h2>`;
+
+    // Compute best wager for header summary
+    const wagerKeys = ['P4', 'P5', 'P6'].filter(w => trackData[w]);
+    const bestWager = wagerKeys.length
+      ? wagerKeys.reduce((a, b) =>
+          trackData[b].exotic_beat_parlay_pct > trackData[a].exotic_beat_parlay_pct ? b : a)
+      : null;
+    const bestPct   = bestWager ? trackData[bestWager].exotic_beat_parlay_pct : null;
+    const days      = daysMap[track] || '';
+    const bestLabel = bestWager
+      ? `Best: ${bestWager} ${bestPct === 100 ? '100%' : bestPct.toFixed(1) + '%'}`
+      : '';
+
+    html += `<div class="pe-track">
+      <div class="pe-track-header" onclick="togglePeTrack(this)">
+        <span class="pe-track-code">${track}</span>
+        <span class="pe-track-hname">${TRACK_FULL[track] || ''}</span>
+        <span class="pe-track-meta">
+          ${bestLabel ? `<span class="pe-track-best">${bestLabel}</span>` : ''}
+          ${days ? `<span>${days} days</span>` : ''}
+        </span>
+        ${chevron}
+      </div>
+      <div class="pe-track-body">`;
 
     for (const wager of ['P4', 'P5', 'P6']) {
       const s = trackData[wager];
@@ -2007,10 +2105,17 @@ function renderParlayEdge() {
       html += `</div>`;  // pe-wager-block
     }
 
-    html += `</div>`;  // card
+    html += `</div></div>`;  // pe-track-body, pe-track
   }
 
   el.innerHTML = html;
+}
+
+function togglePeTrack(header) {
+  const body = header.nextElementSibling;
+  const opening = !header.classList.contains('open');
+  header.classList.toggle('open', opening);
+  body.classList.toggle('open', opening);
 }
 
 // =============================================================
