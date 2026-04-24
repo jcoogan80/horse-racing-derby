@@ -1587,7 +1587,7 @@ async function loadDashboard() {
     } catch (_) {}
   }
 
-  if (data) { window._dashData = data; populateTrackSelect(); populateTcTrackSelect(); renderParlayEdge(); }
+  if (data) { window._dashData = data; populateTrackSelect(); populateTcTrackSelect(); renderParlayEdge(); renderTrackGuide(); }
 
   if (!data || !data.db_summary) {
     el.innerHTML = `
