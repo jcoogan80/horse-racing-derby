@@ -449,6 +449,7 @@
   <button class="tab-btn"         onclick="showTab('ticket')">Tickets</button>
   <button class="tab-btn"         onclick="showTab('parlay')">Parlay Edge</button>
   <button class="tab-btn"         onclick="showTab('today')">Today</button>
+  <button class="tab-btn"         onclick="showTab('howto')">How To Use</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -632,6 +633,337 @@
   <div id="profiles-content"></div>
 </div>
 
+<div id="tab-howto" class="tab-pane">
+  <style>
+    /* ── How To Use tab styles ── */
+    .htu-hero {
+      background: linear-gradient(135deg, #0f3460 0%, #1a1a2e 100%);
+      border: 1px solid var(--gold);
+      border-radius: var(--radius);
+      padding: 20px 16px;
+      margin-bottom: 16px;
+      text-align: center;
+    }
+    .htu-hero h2 {
+      font-size: 1.3rem;
+      font-weight: 800;
+      color: var(--gold);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+    .htu-hero p {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.65;
+    }
+    .htu-section-title {
+      font-size: 1.05rem;
+      font-weight: 800;
+      color: var(--gold);
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      margin: 20px 0 10px;
+      padding-left: 4px;
+      border-left: 3px solid var(--gold);
+      padding-left: 10px;
+    }
+    /* Step cards */
+    .htu-step {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 16px;
+      margin-bottom: 12px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .htu-step-num {
+      font-size: 2rem;
+      font-weight: 900;
+      color: var(--gold);
+      line-height: 1;
+      min-width: 36px;
+      text-align: center;
+    }
+    .htu-step-body { flex: 1; }
+    .htu-step-title {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 6px;
+    }
+    .htu-step-when {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      background: var(--card2);
+      color: var(--dim);
+      border-radius: 4px;
+      padding: 2px 7px;
+      margin-bottom: 8px;
+    }
+    .htu-step-body p {
+      font-size: 0.9rem;
+      color: var(--text);
+      line-height: 1.65;
+      margin-bottom: 6px;
+    }
+    .htu-step-body p:last-child { margin-bottom: 0; }
+    .htu-step-body strong { color: var(--gold-lt); }
+    .htu-signal {
+      display: inline-block;
+      font-size: 0.82rem;
+      font-weight: 700;
+      border-radius: 5px;
+      padding: 3px 9px;
+      margin: 2px 2px 2px 0;
+    }
+    .htu-signal.good  { background: rgba(46,204,113,.15); color: #2ecc71; border: 1px solid rgba(46,204,113,.4); }
+    .htu-signal.warn  { background: rgba(240,165,0,.12);  color: #f0a500; border: 1px solid rgba(240,165,0,.35); }
+    /* Rule cards */
+    .htu-rules {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-bottom: 4px;
+    }
+    .htu-rule {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 14px 16px;
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+    }
+    .htu-rule-icon {
+      flex-shrink: 0;
+      width: 36px;
+      height: 36px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .htu-rule-icon.green-bg { background: rgba(46,204,113,.15); }
+    .htu-rule-icon.red-bg   { background: rgba(231,76,60,.15); }
+    .htu-rule-icon.gold-bg  { background: rgba(201,168,76,.15); }
+    .htu-rule-body {}
+    .htu-rule-title {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--gold-lt);
+      margin-bottom: 4px;
+    }
+    .htu-rule-body p {
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.55;
+    }
+    /* Quick reference table */
+    .htu-ref {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 0.85rem;
+      margin-bottom: 4px;
+    }
+    .htu-ref th {
+      background: var(--card2);
+      color: var(--gold);
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      padding: 8px 10px;
+      text-align: left;
+      border-bottom: 1px solid var(--border);
+    }
+    .htu-ref td {
+      padding: 10px 10px;
+      border-bottom: 1px solid var(--border);
+      color: var(--text);
+      vertical-align: top;
+      line-height: 1.5;
+    }
+    .htu-ref tr:last-child td { border-bottom: none; }
+    .htu-ref .tab-name {
+      font-weight: 700;
+      color: var(--gold-lt);
+      white-space: nowrap;
+    }
+    .htu-ref .when-cell {
+      color: var(--dim);
+      font-size: 0.78rem;
+      white-space: nowrap;
+    }
+    .htu-footer {
+      text-align: center;
+      font-size: 0.75rem;
+      color: var(--dim);
+      padding: 16px 0 8px;
+      line-height: 1.6;
+    }
+  </style>
+
+  <!-- Section 1: What is Derby Value -->
+  <div class="htu-hero">
+    <h2>What is Derby Value?</h2>
+    <p>Derby Value analyzes 17,000+ historical exotic wager payouts from 7 racetracks to find sequences where the payout pools have historically overpaid. It tells you which bets have an edge based on real data — not gut feel.</p>
+  </div>
+
+  <!-- Section 2: Derby Day Step by Step -->
+  <div class="htu-section-title">Derby Day: Step by Step</div>
+
+  <div class="htu-step">
+    <div class="htu-step-num">1</div>
+    <div class="htu-step-body">
+      <div class="htu-step-when">Derby Morning — before you leave</div>
+      <div class="htu-step-title">Check if today is worth betting</div>
+      <p>Open the <strong>Today's Card</strong> tab. Select <strong>CD</strong>, select <strong>P5</strong>, select <strong>Race 4</strong> as your starting race.</p>
+      <p>Enter the morning line odds for your top horses in each of races 4, 5, 6, 7, and 8.</p>
+      <p>Look for the signal at the bottom:<br>
+        <span class="htu-signal good">LONGSHOT SETUP</span> The pool is set up for value today.<br>
+        <span class="htu-signal warn">CHALK ALERT</span> Favorites are expected to dominate — the pool may not pay well. Reduce your bet size or skip.
+      </p>
+    </div>
+  </div>
+
+  <div class="htu-step">
+    <div class="htu-step-num">2</div>
+    <div class="htu-step-body">
+      <div class="htu-step-when">At the betting windows — 30 min before Race 4</div>
+      <div class="htu-step-title">Decide how much to spend</div>
+      <p>Open the <strong>Ticket Builder</strong> tab. Select <strong>CD</strong>, <strong>P5</strong>, starting race 4.</p>
+      <p>This shows the historical average payout (<strong>$64,000</strong>), median payout (<strong>$15,000</strong>), and an overlay rating.</p>
+      <p>Use the historical <strong>median</strong> as your realistic target — not the average, which is skewed by rare big hits. Size your ticket accordingly.</p>
+    </div>
+  </div>
+
+  <div class="htu-step">
+    <div class="htu-step-num">3</div>
+    <div class="htu-step-body">
+      <div class="htu-step-when">During the races — if you're alive in your ticket</div>
+      <div class="htu-step-title">Estimate what you'll win</div>
+      <p>If you win races 4, 5, and 6 and are still live: open <strong>Ticket Builder</strong>, scroll down to <strong>Will-Pay Estimator</strong>.</p>
+      <p>Enter the will-pay amount showing on the tote board and the odds of your horses in the remaining legs. It estimates what your ticket will pay if you finish.</p>
+      <p>Use this to decide whether to hedge before the final race.</p>
+    </div>
+  </div>
+
+  <div class="htu-step">
+    <div class="htu-step-num">4</div>
+    <div class="htu-step-body">
+      <div class="htu-step-when">Final leg — if you're alive going into Race 8</div>
+      <div class="htu-step-title">Lock in a guaranteed profit</div>
+      <p>Open the <strong>Hedge Calc</strong> tab. Enter your ticket cost, the estimated payout, and the odds of every horse in the field.</p>
+      <p>It calculates how much to bet on each horse so you profit regardless of who wins.</p>
+      <p>This is not about breaking even — it's about <strong>locking in a guaranteed return</strong> on a winning ticket.</p>
+    </div>
+  </div>
+
+  <!-- Section 3: The Three Rules -->
+  <div class="htu-section-title">The Three Rules</div>
+  <div class="htu-rules">
+
+    <div class="htu-rule">
+      <div class="htu-rule-icon green-bg">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="9" stroke="#2ecc71" stroke-width="1.5"/>
+          <polyline points="5,10 9,14 15,7" stroke="#2ecc71" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="htu-rule-body">
+        <div class="htu-rule-title">Play P5 at Churchill Downs</div>
+        <p>The Pick 5 at CD beats a straight parlay 97.6% of race days. The pool generates structural value — bet it every time.</p>
+      </div>
+    </div>
+
+    <div class="htu-rule">
+      <div class="htu-rule-icon red-bg">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <circle cx="10" cy="10" r="9" stroke="#e74c3c" stroke-width="1.5"/>
+          <line x1="6" y1="6" x2="14" y2="14" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+          <line x1="14" y1="6" x2="6" y2="14" stroke="#e74c3c" stroke-width="2" stroke-linecap="round"/>
+        </svg>
+      </div>
+      <div class="htu-rule-body">
+        <div class="htu-rule-title">Never play P5 at Keeneland</div>
+        <p>The parlay beats the KEE Pick 5 pool two out of three days. The pool is too small to generate value — skip it.</p>
+      </div>
+    </div>
+
+    <div class="htu-rule">
+      <div class="htu-rule-icon gold-bg">
+        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="11" width="3" height="6" rx="1" fill="#c9a84c"/>
+          <rect x="8.5" y="7" width="3" height="10" rx="1" fill="#c9a84c"/>
+          <rect x="14" y="3" width="3" height="14" rx="1" fill="#c9a84c"/>
+        </svg>
+      </div>
+      <div class="htu-rule-body">
+        <div class="htu-rule-title">Bigger pools = better odds for you</div>
+        <p>Churchill Downs and Gulfstream Park show exotic-favorable results across all wager types. Smaller tracks do not — stick to the big pools.</p>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Section 4: Quick Tab Reference -->
+  <div class="htu-section-title">Quick Tab Reference</div>
+  <div class="card" style="padding: 0; overflow: hidden;">
+    <table class="htu-ref">
+      <thead>
+        <tr>
+          <th>Tab</th>
+          <th>When</th>
+          <th>What it does</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="tab-name">Dashboard</td>
+          <td class="when-cell">After each race day</td>
+          <td>See which bet sequences have historically paid well</td>
+        </tr>
+        <tr>
+          <td class="tab-name">Ticket Builder</td>
+          <td class="when-cell">Night before / morning of</td>
+          <td>Look up historical payouts for your target bet</td>
+        </tr>
+        <tr>
+          <td class="tab-name">Today's Card</td>
+          <td class="when-cell">Derby morning</td>
+          <td>Check if today's odds favor an exotic overlay</td>
+        </tr>
+        <tr>
+          <td class="tab-name">Hedge Calc</td>
+          <td class="when-cell">Final leg of your ticket</td>
+          <td>Calculate how to guarantee a profit</td>
+        </tr>
+        <tr>
+          <td class="tab-name">Parlay Edge</td>
+          <td class="when-cell">Reference</td>
+          <td>See the data behind why exotic pools beat parlays</td>
+        </tr>
+        <tr>
+          <td class="tab-name">Profiles</td>
+          <td class="when-cell">Reference</td>
+          <td>Track-by-track overlay summaries</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="htu-footer">
+    Derby Value · 17,542 exotic payouts · 7 tracks · updated daily<br>
+    Good luck on May 3.
+  </div>
+
+</div>
+
 <script>
 // =============================================================
 //  TAB NAVIGATION
@@ -641,7 +973,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay', 'today'];
+  const names = ['dashboard', 'hedge', 'profiles', 'ticket', 'parlay', 'today', 'howto'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
