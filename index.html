@@ -397,6 +397,34 @@
     }
     .tc-signal-icon { font-size: 1.2rem; margin-bottom: 6px; }
     .tc-signal-text { font-size: .9rem; font-weight: 600; line-height: 1.5; }
+    /* ── AE Alert ── */
+    .ae-alert-banner {
+      display: flex; gap: 10px; align-items: flex-start;
+      background: rgba(240,165,0,.1);
+      border: 1px solid rgba(240,165,0,.45);
+      border-radius: 8px;
+      padding: 12px 14px;
+      margin-bottom: 8px;
+    }
+    .ae-alert-icon { font-size: 1.1rem; flex-shrink: 0; line-height: 1.4; }
+    .ae-alert-title { font-size: .88rem; font-weight: 700; color: var(--yellow); margin-bottom: 3px; }
+    .ae-alert-note  { font-size: .78rem; color: var(--dim); line-height: 1.5; }
+    /* ML auto-fill badge on leg labels */
+    .ml-badge {
+      display: inline-block; margin-left: 7px;
+      font-size: .65rem; font-weight: 700; letter-spacing: .05em;
+      background: rgba(46,204,113,.15); color: var(--green);
+      border: 1px solid rgba(46,204,113,.35);
+      border-radius: 4px; padding: 1px 5px;
+      vertical-align: middle; text-transform: uppercase;
+    }
+    .ml-auto-note { font-size: .74rem; color: var(--dim); margin: 6px 0 10px; font-style: italic; }
+    /* AE row in dashboard */
+    .ae-dash-row {
+      display: flex; gap: 10px; align-items: flex-start;
+      padding: 10px 0; border-bottom: 1px solid var(--border);
+    }
+    .ae-dash-row:last-child { border-bottom: none; }
 
     /* ── Parlay Edge tab ── */
     .badge-EXOTIC { background: rgba(46,204,113,.18); color: var(--green);  border: 1px solid var(--green); }
@@ -599,7 +627,7 @@
     </p>
     <div class="field-row">
       <label>Track</label>
-      <select id="tc-track"><option value="">Loading…</option></select>
+      <select id="tc-track" onchange="tcOnTrackChange()"><option value="">Loading…</option></select>
     </div>
     <div class="field-row">
       <label>Wager Type</label>
@@ -623,6 +651,7 @@
     <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:4px">ANALYZE</button>
   </div>
 
+  <div id="tc-ae-banner"></div>
   <div id="tc-results"></div>
 
 </div>
@@ -1450,6 +1479,31 @@ async function loadDashboard() {
     }
   }
 
+  // ── AE Alerts Today section ──────────────────────────────────────────────
+  const todayEntries = data.today_entries || {};
+  const todayStr     = new Date().toISOString().slice(0, 10);
+  let aeHtml = '<div class="card"><h2>&#9888; AE Alerts Today</h2>';
+  let aeCount = 0;
+  for (const [trk, td] of Object.entries(todayEntries)) {
+    if (td.date !== todayStr || !td.ae_alerts || !td.ae_alerts.length) continue;
+    for (const ae of td.ae_alerts) {
+      const ml = ae.morning_line != null ? ` &bull; ${fmtML(ae.morning_line)}-1 ML` : '';
+      aeHtml += `<div class="ae-dash-row">
+        <span class="wager-pill" style="background:rgba(240,165,0,.12);color:var(--yellow);border-color:rgba(240,165,0,.4)">${trk}</span>
+        <div>
+          <div style="font-weight:700;font-size:.9rem;color:var(--yellow)">Race ${ae.race_num}: #${ae.program_num} ${ae.horse_name}${ml}</div>
+          <div style="font-size:.76rem;color:var(--dim);margin-top:3px;line-height:1.5">${ae.note}</div>
+        </div>
+      </div>`;
+      aeCount++;
+    }
+  }
+  if (!aeCount) {
+    aeHtml += '<p class="no-overlay">No AE entries detected for today.</p>';
+  }
+  aeHtml += '</div>';
+  html = aeHtml + html;
+
   el.innerHTML = html;
 }
 
@@ -1936,6 +1990,13 @@ function populateTcTrackSelect() {
     sel.appendChild(opt);
   }
   if (!cur && sel.options.length) sel.value = sel.options[0].value;
+  // Data just arrived — fill in morning lines and AE alerts
+  autoFillMorningLines();
+  renderAeAlerts();
+}
+
+function tcOnTrackChange() {
+  buildTodayLegs();
 }
 
 function buildTodayLegs() {
@@ -1945,6 +2006,9 @@ function buildTodayLegs() {
   const wrap  = document.getElementById('tc-legs');
   wrap.innerHTML = '';
   document.getElementById('tc-results').innerHTML = '';
+  // Remove any prior auto-fill note
+  const oldNote = document.querySelector('#tab-today .card .ml-auto-note');
+  if (oldNote) oldNote.remove();
   for (let i = 0; i < n; i++) {
     const legDiv = document.createElement('div');
     legDiv.className = 'tc-leg';
@@ -1956,6 +2020,109 @@ function buildTodayLegs() {
     wrap.appendChild(legDiv);
     tcAddHorse(i);
   }
+  autoFillMorningLines();
+  renderAeAlerts();
+}
+
+// ── Convert stored decimal ML odds back to a display string ──────────────────
+function fmtML(d) {
+  if (d === null || d === undefined) return '';
+  if (d === 1.0) return 'even';
+  if (Number.isInteger(d)) return String(d);
+  // Common half-point fractions
+  const map = { 1.5:'3/2', 2.5:'5/2', 3.5:'7/2', 4.5:'9/2',
+                0.2:'1/5', 0.4:'2/5', 0.6:'3/5', 0.8:'4/5',
+                1.2:'6/5', 1.4:'7/5', 1.6:'8/5', 1.8:'9/5' };
+  if (map[d] !== undefined) return map[d];
+  return String(d);
+}
+
+// ── Auto-fill morning line odds from today_entries ────────────────────────────
+function autoFillMorningLines() {
+  const track = document.getElementById('tc-track').value;
+  const wager = document.getElementById('tc-wager').value;
+  const start = parseInt(document.getElementById('tc-start').value) || 1;
+  const n     = TC_LEGS[wager] || 4;
+  const today = new Date().toISOString().slice(0, 10);
+
+  const trackData = (window._dashData && window._dashData.today_entries &&
+                     window._dashData.today_entries[track]) || null;
+  if (!trackData || trackData.date !== today) return;
+
+  let anyFilled = false;
+  for (let i = 0; i < n; i++) {
+    const raceNum  = start + i;
+    const raceData = trackData.races.find(r => r.race_num === raceNum);
+    if (!raceData || !raceData.horses.length) continue;
+
+    const legDiv = document.querySelector(`.tc-leg[data-leg="${i}"]`);
+    if (!legDiv) continue;
+    const horsesDiv = legDiv.querySelector('.tc-horses');
+    if (!horsesDiv) continue;
+
+    // Mark the label
+    const label = legDiv.querySelector('.tc-leg-label');
+    if (label && !label.querySelector('.ml-badge')) {
+      label.insertAdjacentHTML('beforeend', '<span class="ml-badge">ML</span>');
+    }
+
+    // Replace the single empty placeholder row with pre-filled entries
+    horsesDiv.innerHTML = '';
+    const starters = raceData.horses.filter(h => !h.is_ae).slice(0, 8);
+    for (const h of starters) {
+      const row = document.createElement('div');
+      row.className = 'tc-horse-row';
+      row.innerHTML = `
+        <input type="text" class="tc-pgm" placeholder="#"
+               inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false"
+               value="${h.program_num || ''}">
+        <input type="text" class="tc-odds" placeholder="5/2"
+               inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false"
+               value="${fmtML(h.morning_line)}">
+        <button class="tc-remove" onclick="tcRemoveHorse(this)" title="Remove">&times;</button>`;
+      horsesDiv.appendChild(row);
+    }
+    anyFilled = true;
+  }
+
+  if (anyFilled) {
+    const card  = document.querySelector('#tab-today .card');
+    const btnEl = card && card.querySelector('.btn-primary');
+    if (btnEl && !card.querySelector('.ml-auto-note')) {
+      const note = document.createElement('p');
+      note.className = 'ml-auto-note';
+      note.textContent = `Morning lines loaded for ${track} — edit freely.`;
+      card.insertBefore(note, btnEl);
+    }
+  }
+}
+
+// ── Render AE alert banner in Today's Card ────────────────────────────────────
+function renderAeAlerts() {
+  const track  = document.getElementById('tc-track').value;
+  const banner = document.getElementById('tc-ae-banner');
+  if (!banner) return;
+
+  const today     = new Date().toISOString().slice(0, 10);
+  const trackData = (window._dashData && window._dashData.today_entries &&
+                     window._dashData.today_entries[track]) || null;
+
+  if (!trackData || trackData.date !== today ||
+      !trackData.ae_alerts || !trackData.ae_alerts.length) {
+    banner.innerHTML = '';
+    return;
+  }
+
+  banner.innerHTML = trackData.ae_alerts.map(ae => {
+    const ml = ae.morning_line != null ? ` (${fmtML(ae.morning_line)}-1 ML)` : '';
+    return `<div class="ae-alert-banner">
+      <span class="ae-alert-icon">⚠</span>
+      <div>
+        <div class="ae-alert-title">AE ALERT &mdash; Race ${ae.race_num}: #${ae.program_num} ${ae.horse_name}${ml}</div>
+        <div class="ae-alert-note">${ae.note}</div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 function tcAddHorse(legIdx) {
