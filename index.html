@@ -398,6 +398,32 @@
       padding: 8px 2px 2px; border-top: 1px solid var(--border); margin-top: 8px;
     }
     .tc-legs-hint { font-size: .74rem; color: var(--dim); margin: 6px 0 0; font-style: italic; }
+    /* ── Screenshot import ── */
+    .tc-import-divider {
+      text-align: center; font-size: .72rem; color: var(--dim);
+      margin: 14px 0 10px; letter-spacing: .05em;
+    }
+    .btn-screenshot {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: var(--card2); border: 1.5px solid var(--gold);
+      color: var(--gold); border-radius: 8px;
+      padding: 11px 16px; font-size: .88rem; font-weight: 700;
+      cursor: pointer; letter-spacing: .03em;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-screenshot:active { opacity: .72; }
+    .tc-screenshot-status { font-size: .78rem; color: var(--dim); margin: 8px 0 4px; min-height: 1.2em; }
+    .tc-extracted-list { display: flex; flex-direction: column; gap: 6px; margin-top: 4px; }
+    .tc-extracted-item {
+      background: var(--card2); border: 1px solid var(--border);
+      border-radius: 8px; padding: 10px 14px;
+      font-family: monospace; font-size: .92rem; letter-spacing: .04em;
+      color: var(--text); cursor: pointer;
+      -webkit-tap-highlight-color: transparent;
+      transition: border-color .15s, color .15s;
+    }
+    .tc-extracted-item:active { opacity: .75; }
+    .tc-extracted-item.selected { border-color: var(--gold); color: var(--gold); }
     .combo-row-highlight { background: rgba(201,168,76,.09); }
     .tc-signal {
       background: var(--card2);
@@ -727,7 +753,17 @@
       </p>
     </div>
     <div id="tc-parsed-preview"></div>
-    <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:8px">ANALYZE</button>
+
+    <div class="tc-import-divider">&#9135;&#9135; or import from screenshot &#9135;&#9135;</div>
+    <input type="file" id="tc-screenshot-file" accept="image/*" style="display:none"
+           onchange="tcImportScreenshot(event)">
+    <button class="btn-screenshot" onclick="document.getElementById('tc-screenshot-file').click()">
+      &#128247; Import Tickets from Screenshot
+    </button>
+    <div class="tc-screenshot-status" id="tc-screenshot-status"></div>
+    <div id="tc-extracted-tickets"></div>
+
+    <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:12px">ANALYZE</button>
   </div>
 
   <div id="tc-ae-banner"></div>
@@ -2298,6 +2334,68 @@ function fmtML(d) {
                 1.2:'6/5', 1.4:'7/5', 1.6:'8/5', 1.8:'9/5' };
   if (map[d] !== undefined) return map[d];
   return String(d);
+}
+
+// ── Screenshot import: send image to Netlify function, display extracted tickets ──
+async function tcImportScreenshot(event) {
+  const file = event.target.files[0];
+  const fileInput = event.target;
+  if (!file) return;
+
+  const statusEl  = document.getElementById('tc-screenshot-status');
+  const ticketsEl = document.getElementById('tc-extracted-tickets');
+  statusEl.textContent  = 'Analyzing image\u2026';
+  ticketsEl.innerHTML   = '';
+
+  const reader = new FileReader();
+  reader.onload = async function (e) {
+    const base64   = e.target.result.split(',')[1];
+    const mimeType = file.type || 'image/jpeg';
+    fileInput.value = '';   // reset so same file can be re-uploaded
+
+    try {
+      const resp = await fetch('/.netlify/functions/extract-tickets', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ image: base64, mimeType })
+      });
+      const data = await resp.json();
+
+      if (!resp.ok || data.error) {
+        statusEl.innerHTML = `<span style="color:var(--red)">Error: ${data.error || 'Unknown error'}</span>`;
+        return;
+      }
+
+      const tickets = data.tickets || [];
+      if (!tickets.length) {
+        statusEl.textContent = 'No tickets found in image.';
+        return;
+      }
+
+      statusEl.textContent = `${tickets.length} ticket${tickets.length !== 1 ? 's' : ''} found \u2014 tap to select:`;
+      ticketsEl.innerHTML = `<div class="tc-extracted-list">
+        ${tickets.map(t => `<div class="tc-extracted-item" data-ticket="${t}" onclick="tcSelectTicket(this)">${t}</div>`).join('')}
+      </div>`;
+    } catch (err) {
+      statusEl.innerHTML = `<span style="color:var(--red)">Failed to analyze image. Check network and try again.</span>`;
+    }
+  };
+  reader.readAsDataURL(file);
+}
+
+function tcSelectTicket(el) {
+  // Highlight selection
+  document.querySelectorAll('.tc-extracted-item').forEach(item => item.classList.remove('selected'));
+  el.classList.add('selected');
+
+  // Populate the ticket input and parse
+  const ticket = el.dataset.ticket;
+  const input  = document.getElementById('tc-ticket-input');
+  input.value  = ticket;
+  tcParseTicket();
+
+  // Scroll up to the ticket input so user can see the preview
+  input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
 // ── Parse ticket string and render live preview ───────────────────────────────
