@@ -2311,11 +2311,12 @@ function autoFillMorningLines() {
   const wager = document.getElementById('tc-wager').value;
   const start = parseInt(document.getElementById('tc-start').value) || 1;
   const n     = TC_LEGS[wager] || 4;
-  const today = new Date().toISOString().slice(0, 10);
+  const today    = new Date().toISOString().slice(0, 10);
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
 
   const trackData = (window._dashData && window._dashData.today_entries &&
                      window._dashData.today_entries[track]) || null;
-  if (!trackData || trackData.date !== today) return;
+  if (!trackData || (trackData.date !== today && trackData.date !== tomorrow)) return;
 
   let anyFilled = false;
   for (let i = 0; i < n; i++) {
