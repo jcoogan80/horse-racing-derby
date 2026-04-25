@@ -356,6 +356,15 @@
     .tb-badges { display: flex; flex-direction: column; gap: 4px; align-items: flex-end; }
 
     /* ── Today's Card tab ── */
+    .tc-ticket-input {
+      width: 100%; box-sizing: border-box;
+      font-size: 1rem; font-family: monospace; letter-spacing: .04em;
+      padding: 10px 12px;
+      background: var(--bg); border: 1px solid var(--border);
+      border-radius: 8px; color: var(--text);
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tc-ticket-input:focus { outline: none; border-color: var(--gold); }
     .tc-leg {
       background: var(--card2);
       border-radius: 8px;
@@ -373,22 +382,22 @@
     }
     .tc-horse-row {
       display: flex;
-      gap: 6px;
+      gap: 8px;
       align-items: center;
       margin-bottom: 6px;
     }
-    .tc-pgm  { width: 52px !important; min-height: 42px !important; padding: 8px 6px !important; text-align: center; font-size: .95rem !important; }
-    .tc-odds { flex: 1; min-height: 42px !important; padding: 8px 10px !important; font-size: .95rem !important; }
-    .tc-remove {
-      width: 36px; height: 36px; flex-shrink: 0;
-      border: 1px solid var(--border); background: transparent;
-      color: var(--dim); border-radius: 6px; font-size: 1.2rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      -webkit-tap-highlight-color: transparent;
+    .tc-pgm-label { font-weight: 700; color: var(--gold); min-width: 34px; font-size: .9rem; }
+    .tc-name-label { flex: 1; font-size: .85rem; color: var(--text); }
+    .tc-ml-label { font-size: .82rem; color: var(--dim); white-space: nowrap; }
+    .tc-ml-missing { font-size: .75rem; color: var(--dim); font-style: italic; }
+    /* manual-fallback odds input inside preview */
+    .tc-odds { flex: 1; min-height: 38px !important; padding: 6px 10px !important; font-size: .9rem !important; }
+    .tc-ip { font-size: .72rem; color: var(--dim); margin-left: 4px; }
+    .tc-combo-summary {
+      font-size: .82rem; color: var(--dim);
+      padding: 8px 2px 2px; border-top: 1px solid var(--border); margin-top: 8px;
     }
-    .tc-remove:active { opacity: .7; }
-    .tc-add-btn { margin-top: 4px; font-size: .8rem; padding: 8px 12px; min-height: 38px; }
-    .tc-ip { font-size: .72rem; color: var(--dim); }
+    .tc-legs-hint { font-size: .74rem; color: var(--dim); margin: 6px 0 0; font-style: italic; }
     .combo-row-highlight { background: rgba(201,168,76,.09); }
     .tc-signal {
       background: var(--card2);
@@ -687,7 +696,7 @@
   <div class="card">
     <h2>Morning Line Overlay Detector</h2>
     <p style="font-size:.78rem;color:var(--dim);margin-bottom:14px">
-      Enter today's morning line odds to see whether this sequence is priced as a longshot or chalk setup, then compare against historical data.
+      Type your ticket below — morning line odds are pulled automatically from today's entries.
     </p>
     <div class="field-row">
       <label>Track</label>
@@ -707,12 +716,18 @@
       <input type="number" id="tc-start" inputmode="numeric" min="1" max="12" value="1"
              onchange="buildTodayLegs()">
     </div>
-    <p style="font-size:.75rem;color:var(--dim);margin-bottom:12px">
-      Odds: <code>5/2</code> &nbsp; <code>10-1</code> &nbsp; <code>2.5</code> &nbsp; <code>even</code>
-      &nbsp;&mdash;&nbsp; Program # is optional
-    </p>
-    <div id="tc-legs"></div>
-    <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:4px">ANALYZE</button>
+    <div style="margin-bottom:14px">
+      <label style="display:block;font-size:.78rem;font-weight:700;color:var(--dim);margin-bottom:6px">Your Ticket</label>
+      <input type="text" id="tc-ticket-input" class="tc-ticket-input"
+             placeholder="e.g. 4,6/1,3,5/2/7,8/3"
+             autocomplete="off" autocorrect="off" spellcheck="false"
+             oninput="tcParseTicket()">
+      <p style="font-size:.72rem;color:var(--dim);margin:5px 0 0">
+        Commas separate horses within a leg &bull; Slashes separate legs
+      </p>
+    </div>
+    <div id="tc-parsed-preview"></div>
+    <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:8px">ANALYZE</button>
   </div>
 
   <div id="tc-ae-banner"></div>
@@ -2258,8 +2273,8 @@ function populateTcTrackSelect() {
     sel.appendChild(opt);
   }
   if (!cur && sel.options.length) sel.value = sel.options[0].value;
-  // Data just arrived — fill in morning lines and AE alerts
-  autoFillMorningLines();
+  // Data just arrived — re-parse ticket with new entries data
+  tcParseTicket();
   renderAeAlerts();
 }
 
@@ -2268,27 +2283,8 @@ function tcOnTrackChange() {
 }
 
 function buildTodayLegs() {
-  const wager = document.getElementById('tc-wager').value;
-  const start = parseInt(document.getElementById('tc-start').value) || 1;
-  const n     = TC_LEGS[wager] || 4;
-  const wrap  = document.getElementById('tc-legs');
-  wrap.innerHTML = '';
   document.getElementById('tc-results').innerHTML = '';
-  // Remove any prior auto-fill note
-  const oldNote = document.querySelector('#tab-today .card .ml-auto-note');
-  if (oldNote) oldNote.remove();
-  for (let i = 0; i < n; i++) {
-    const legDiv = document.createElement('div');
-    legDiv.className = 'tc-leg';
-    legDiv.dataset.leg = i;
-    legDiv.innerHTML = `
-      <span class="tc-leg-label">Race ${start + i} &mdash; Leg ${i + 1}</span>
-      <div class="tc-horses"></div>
-      <button class="btn-secondary tc-add-btn" onclick="tcAddHorse(${i})">+ Add Horse</button>`;
-    wrap.appendChild(legDiv);
-    tcAddHorse(i);
-  }
-  autoFillMorningLines();
+  tcParseTicket();
   renderAeAlerts();
 }
 
@@ -2297,7 +2293,6 @@ function fmtML(d) {
   if (d === null || d === undefined) return '';
   if (d === 1.0) return 'even';
   if (Number.isInteger(d)) return String(d);
-  // Common half-point fractions
   const map = { 1.5:'3/2', 2.5:'5/2', 3.5:'7/2', 4.5:'9/2',
                 0.2:'1/5', 0.4:'2/5', 0.6:'3/5', 0.8:'4/5',
                 1.2:'6/5', 1.4:'7/5', 1.6:'8/5', 1.8:'9/5' };
@@ -2305,65 +2300,90 @@ function fmtML(d) {
   return String(d);
 }
 
-// ── Auto-fill morning line odds from today_entries ────────────────────────────
-function autoFillMorningLines() {
+// ── Parse ticket string and render live preview ───────────────────────────────
+function tcParseTicket() {
+  const inputEl = document.getElementById('tc-ticket-input');
+  const preview = document.getElementById('tc-parsed-preview');
+  if (!inputEl || !preview) return;
+  const val = inputEl.value.trim();
+  document.getElementById('tc-results').innerHTML = '';
+  if (!val) { preview.innerHTML = ''; return; }
+
   const track = document.getElementById('tc-track').value;
   const wager = document.getElementById('tc-wager').value;
   const start = parseInt(document.getElementById('tc-start').value) || 1;
   const n     = TC_LEGS[wager] || 4;
+
   const today    = new Date().toISOString().slice(0, 10);
   const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
-
   const trackData = (window._dashData && window._dashData.today_entries &&
                      window._dashData.today_entries[track]) || null;
-  if (!trackData || (trackData.date !== today && trackData.date !== tomorrow)) return;
+  const hasEntries = !!(trackData && (trackData.date === today || trackData.date === tomorrow));
 
-  let anyFilled = false;
-  for (let i = 0; i < n; i++) {
-    const raceNum  = start + i;
-    const raceData = trackData.races.find(r => r.race_num === raceNum);
-    if (!raceData || !raceData.horses.length) continue;
+  const legStrs = val.split('/');
+  let html = '';
+  const comboPerLeg = [];
 
-    const legDiv = document.querySelector(`.tc-leg[data-leg="${i}"]`);
-    if (!legDiv) continue;
-    const horsesDiv = legDiv.querySelector('.tc-horses');
-    if (!horsesDiv) continue;
+  for (let i = 0; i < Math.min(legStrs.length, n); i++) {
+    const raceNum = start + i;
+    const pgms    = legStrs[i].split(',').map(s => s.trim()).filter(Boolean);
+    if (!pgms.length) continue;
 
-    // Mark the label
-    const label = legDiv.querySelector('.tc-leg-label');
-    if (label && !label.querySelector('.ml-badge')) {
-      label.insertAdjacentHTML('beforeend', '<span class="ml-badge">ML</span>');
+    const raceData = hasEntries ? (trackData.races.find(r => r.race_num === raceNum) || null) : null;
+    comboPerLeg.push(pgms.length);
+
+    const mlBadge = (hasEntries && raceData) ? ' <span class="ml-badge">ML</span>' : '';
+    html += `<div class="tc-leg" data-leg="${i}">
+      <span class="tc-leg-label">Race ${raceNum} &mdash; Leg ${i + 1}${mlBadge}</span>`;
+
+    for (const pgm of pgms) {
+      const horse = raceData
+        ? raceData.horses.find(h => String(h.program_num) === pgm && !h.is_ae)
+        : null;
+      const ml    = horse != null ? horse.morning_line : null;
+      const mlStr = ml !== null ? fmtML(ml) + '-1' : '';
+      const ipStr = ml !== null ? (1 / (ml + 1) * 100).toFixed(1) + '%' : '';
+      const name  = horse ? horse.horse_name : '';
+
+      if (hasEntries) {
+        // Entries available — display only, odds in data attribute
+        html += `<div class="tc-horse-row" data-pgm="${pgm}" data-odds="${ml !== null ? ml : ''}">
+          <span class="tc-pgm-label">#${pgm}</span>
+          ${name ? `<span class="tc-name-label">${name}</span>` : '<span class="tc-name-label" style="color:var(--dim)">—</span>'}
+          ${mlStr
+            ? `<span class="tc-ml-label">${mlStr}</span><span class="tc-ip">${ipStr} win prob</span>`
+            : '<span class="tc-ml-missing">not in entries</span>'}
+        </div>`;
+      } else {
+        // No entries — manual odds input fallback
+        html += `<div class="tc-horse-row" data-pgm="${pgm}">
+          <span class="tc-pgm-label">#${pgm}</span>
+          <input type="text" class="tc-odds" placeholder="5/2"
+                 inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false">
+        </div>`;
+      }
     }
-
-    // Replace the single empty placeholder row with pre-filled entries
-    horsesDiv.innerHTML = '';
-    const starters = raceData.horses.filter(h => !h.is_ae);
-    for (const h of starters) {
-      const row = document.createElement('div');
-      row.className = 'tc-horse-row';
-      row.innerHTML = `
-        <input type="text" class="tc-pgm" placeholder="#"
-               inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false"
-               value="${h.program_num || ''}">
-        <input type="text" class="tc-odds" placeholder="5/2"
-               inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false"
-               value="${fmtML(h.morning_line)}">
-        <button class="tc-remove" onclick="tcRemoveHorse(this)" title="Remove">&times;</button>`;
-      horsesDiv.appendChild(row);
-    }
-    anyFilled = true;
+    html += `</div>`;
   }
 
-  if (anyFilled) {
-    const card  = document.querySelector('#tab-today .card');
-    const btnEl = card && card.querySelector('.btn-primary');
-    if (btnEl && !card.querySelector('.ml-auto-note')) {
-      const note = document.createElement('p');
-      note.className = 'ml-auto-note';
-      note.textContent = `Morning lines loaded for ${track} — edit freely.`;
-      card.insertBefore(note, btnEl);
-    }
+  if (comboPerLeg.length) {
+    const totalCombos = comboPerLeg.reduce((p, c) => p * c, 1);
+    const cost = totalCombos * 2;
+    html += `<div class="tc-combo-summary">
+      ${comboPerLeg.join(' &times; ')} = <strong>${totalCombos}</strong> combination${totalCombos !== 1 ? 's' : ''}
+      &bull; Est. cost: <strong>$${cost.toFixed(2)}</strong>
+    </div>`;
   }
+
+  if (legStrs.length < n) {
+    html += `<p class="tc-legs-hint">${legStrs.length} of ${n} legs entered for ${wager}</p>`;
+  }
+
+  if (!hasEntries) {
+    html = `<p style="font-size:.74rem;color:var(--dim);margin-bottom:10px;font-style:italic">No entries data for ${track} — enter odds manually (e.g. 5/2, 10-1, 3).</p>` + html;
+  }
+
+  preview.innerHTML = html;
 }
 
 // ── Render AE alert banner in Today's Card ────────────────────────────────────
@@ -2394,26 +2414,6 @@ function renderAeAlerts() {
   }).join('');
 }
 
-function tcAddHorse(legIdx) {
-  const container = document.querySelector(`.tc-leg[data-leg="${legIdx}"] .tc-horses`);
-  if (!container) return;
-  const row = document.createElement('div');
-  row.className = 'tc-horse-row';
-  row.innerHTML = `
-    <input type="text" class="tc-pgm" placeholder="#"
-           inputmode="text" autocomplete="off" autocorrect="off" spellcheck="false">
-    <input type="text" class="tc-odds" placeholder="5/2"
-           inputmode="decimal" autocomplete="off" autocorrect="off" spellcheck="false">
-    <button class="tc-remove" onclick="tcRemoveHorse(this)" title="Remove">&times;</button>`;
-  container.appendChild(row);
-}
-
-function tcRemoveHorse(btn) {
-  const container = btn.closest('.tc-horses');
-  if (container.children.length <= 1) return;
-  btn.closest('.tc-horse-row').remove();
-}
-
 function tcCartesian(arrays) {
   return arrays.reduce(
     (acc, arr) => acc.flatMap(a => arr.map(b => [...a, b])),
@@ -2429,21 +2429,39 @@ function analyzeMorningLine() {
 
   if (!track) { alert('Select a track.'); return; }
 
-  // Collect legs — array of arrays of horse objects
+  // Collect legs from the parsed ticket preview
+  const legDivs = document.querySelectorAll('#tc-parsed-preview .tc-leg');
+  if (!legDivs.length) { alert('Enter your ticket above first.'); return; }
+  if (legDivs.length < n) {
+    alert(`${wager} needs ${n} legs — only ${legDivs.length} entered so far.`); return;
+  }
+
   const legs = [];
-  for (let i = 0; i < n; i++) {
-    const container = document.querySelector(`.tc-leg[data-leg="${i}"] .tc-horses`);
-    if (!container) { alert(`Leg ${i + 1} missing.`); return; }
+  for (const legDiv of legDivs) {
+    const legIdx = parseInt(legDiv.dataset.leg);
     const horses = [];
-    for (const row of container.querySelectorAll('.tc-horse-row')) {
-      const pgmRaw  = row.querySelector('.tc-pgm').value.trim();
-      const oddsStr = row.querySelector('.tc-odds').value.trim();
-      if (!oddsStr) continue;
-      const m = parseOdds(oddsStr);
-      if (m === null || m < 0) { alert(`Invalid odds in Leg ${i + 1}: "${oddsStr}"`); return; }
-      horses.push({ pgm: pgmRaw || String(horses.length + 1), odds: m });
+    for (const row of legDiv.querySelectorAll('.tc-horse-row')) {
+      const pgm = row.dataset.pgm || String(horses.length + 1);
+      const oddsAttr = row.dataset.odds;
+      let m;
+      if (oddsAttr !== undefined && oddsAttr !== '') {
+        // Entries mode: odds stored as decimal in data attribute
+        m = parseFloat(oddsAttr);
+        if (isNaN(m) || m < 0) continue;
+      } else {
+        // Manual fallback: read from text input
+        const inp = row.querySelector('.tc-odds');
+        if (!inp || !inp.value.trim()) continue;
+        m = parseOdds(inp.value.trim());
+        if (m === null || m < 0) {
+          alert(`Invalid odds for #${pgm} in Leg ${legIdx + 1}: "${inp.value}"`); return;
+        }
+      }
+      horses.push({ pgm, odds: m });
     }
-    if (!horses.length) { alert(`Enter at least one horse with odds in Leg ${i + 1}.`); return; }
+    if (!horses.length) {
+      alert(`Leg ${legIdx + 1} has no valid horses with odds. Check entries data or enter odds manually.`); return;
+    }
     legs.push(horses);
   }
 
