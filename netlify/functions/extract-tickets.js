@@ -1,6 +1,7 @@
 // Netlify serverless function — extracts exotic wager tickets from a screenshot
 // Called by the Today's Card "Import Tickets from Screenshot" feature.
-// Requires ANTHROPIC_API_KEY set in Netlify environment variables.
+// Requires ANTHROPIC_API_KEY set in Netlify environment variables (Site Settings → Env vars).
+// Node 18+ required for built-in fetch — enforced via netlify.toml NODE_VERSION.
 
 exports.handler = async function (event) {
   if (event.httpMethod !== 'POST') {
