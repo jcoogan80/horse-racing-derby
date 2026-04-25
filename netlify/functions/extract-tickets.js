@@ -39,20 +39,17 @@ exports.handler = async function (event) {
 
   const prompt = `You are analyzing a horse racing ticket screenshot. Extract every exotic wager ticket combination visible in the image.
 
-For each ticket, format it as:
-- Horses within a leg separated by commas
-- Legs separated by forward slashes
+For each ticket, produce an object with two keys:
+- "ticket": the combination string — horses within a leg separated by commas, legs separated by forward slashes
+- "base": the wager base amount as a number (e.g. 0.50, 0.20, 1.00, 2.00). Look for a dollar amount printed on the ticket such as "$0.50", "$.50", "$0.20", "$2.00". If you cannot find a base amount, use null.
 
-Example: 7,8/1,7/3,5/2,3/3,7
+Rules for the ticket string:
+- Use only the program numbers printed on the ticket
+- Each "/" moves to the next race/leg; multiple horses in the same leg are separated by commas
+- Do NOT include wager type names, race labels, or dollar amounts inside the ticket string itself
 
-Rules:
-- Use only the program numbers (the numbers printed on the ticket)
-- Each "/" represents moving to the next race/leg
-- Multiple horses in the same leg are listed with commas between them
-- Do NOT include the wager type name, dollar amount, or race labels — only the horse numbers
-
-Return ONLY a valid JSON array of ticket strings and nothing else.
-Example response: ["7,8/1,7/3,5/2,3/3,7","1/2,3/4/5,6/7"]
+Return ONLY a valid JSON array of these objects and nothing else.
+Example response: [{"ticket":"7,8/1,7/3,5/2,3/3,7","base":0.50},{"ticket":"1/2,3/4/5,6/7","base":0.50}]
 If no tickets are visible, return: []`;
 
   try {
@@ -95,12 +92,17 @@ If no tickets are visible, return: []`;
 
     // Strip markdown code fences if the model wrapped the JSON
     const cleaned = rawText.replace(/^```[a-z]*\n?/i, '').replace(/\n?```$/i, '').trim();
-    const tickets = JSON.parse(cleaned);
+    const parsed  = JSON.parse(cleaned);
+
+    // Normalize: handle plain strings in case the model ignores the new format
+    const tickets = Array.isArray(parsed) ? parsed.map(t =>
+      typeof t === 'string' ? { ticket: t, base: null } : t
+    ) : [];
 
     return {
       statusCode: 200,
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ tickets: Array.isArray(tickets) ? tickets : [] })
+      body: JSON.stringify({ tickets })
     };
   } catch (err) {
     return {

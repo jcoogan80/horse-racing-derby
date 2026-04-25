@@ -2295,6 +2295,7 @@ function calcWillPay() {
 //  TODAY'S CARD — MORNING LINE OVERLAY DETECTOR
 // =============================================================
 const TC_LEGS = { P3: 3, P4: 4, P5: 5, P6: 6 };
+const TC_BASE = { P3: 1.00, P4: 0.50, P5: 0.50, P6: 0.20 };  // default wager base amounts
 
 function populateTcTrackSelect() {
   const sel = document.getElementById('tc-track');
@@ -2320,6 +2321,9 @@ function tcOnTrackChange() {
 
 function buildTodayLegs() {
   document.getElementById('tc-results').innerHTML = '';
+  // Clear any screenshot-imported base so the wager default takes over
+  const inp = document.getElementById('tc-ticket-input');
+  if (inp) delete inp.dataset.base;
   tcParseTicket();
   renderAeAlerts();
 }
@@ -2374,7 +2378,12 @@ async function tcImportScreenshot(event) {
 
       statusEl.textContent = `${tickets.length} ticket${tickets.length !== 1 ? 's' : ''} found \u2014 tap to select:`;
       ticketsEl.innerHTML = `<div class="tc-extracted-list">
-        ${tickets.map(t => `<div class="tc-extracted-item" data-ticket="${t}" onclick="tcSelectTicket(this)">${t}</div>`).join('')}
+        ${tickets.map(t => {
+          const baseLabel = t.base != null
+            ? ` <span style="font-size:.75rem;color:var(--dim);margin-left:8px;font-family:sans-serif">$${Number(t.base).toFixed(2)} base</span>`
+            : '';
+          return `<div class="tc-extracted-item" data-ticket="${t.ticket}" data-base="${t.base ?? ''}" onclick="tcSelectTicket(this)">${t.ticket}${baseLabel}</div>`;
+        }).join('')}
       </div>`;
     } catch (err) {
       statusEl.innerHTML = `<span style="color:var(--red)">Failed to analyze image. Check network and try again.</span>`;
@@ -2384,17 +2393,18 @@ async function tcImportScreenshot(event) {
 }
 
 function tcSelectTicket(el) {
-  // Highlight selection
   document.querySelectorAll('.tc-extracted-item').forEach(item => item.classList.remove('selected'));
   el.classList.add('selected');
 
-  // Populate the ticket input and parse
-  const ticket = el.dataset.ticket;
-  const input  = document.getElementById('tc-ticket-input');
-  input.value  = ticket;
-  tcParseTicket();
+  const input = document.getElementById('tc-ticket-input');
+  input.value = el.dataset.ticket;
 
-  // Scroll up to the ticket input so user can see the preview
+  // Store extracted base so tcParseTicket uses it instead of the wager default
+  const base = parseFloat(el.dataset.base);
+  if (!isNaN(base) && base > 0) input.dataset.base = base;
+  else delete input.dataset.base;
+
+  tcParseTicket();
   input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
@@ -2411,6 +2421,8 @@ function tcParseTicket() {
   const wager = document.getElementById('tc-wager').value;
   const start = parseInt(document.getElementById('tc-start').value) || 1;
   const n     = TC_LEGS[wager] || 4;
+  const storedBase = parseFloat(inputEl.dataset.base);
+  const base  = (!isNaN(storedBase) && storedBase > 0) ? storedBase : (TC_BASE[wager] || 0.50);
 
   const today    = new Date().toISOString().slice(0, 10);
   const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
@@ -2466,10 +2478,10 @@ function tcParseTicket() {
 
   if (comboPerLeg.length) {
     const totalCombos = comboPerLeg.reduce((p, c) => p * c, 1);
-    const cost = totalCombos * 2;
+    const cost = totalCombos * base;
     html += `<div class="tc-combo-summary">
       ${comboPerLeg.join(' &times; ')} = <strong>${totalCombos}</strong> combination${totalCombos !== 1 ? 's' : ''}
-      &bull; Est. cost: <strong>$${cost.toFixed(2)}</strong>
+      &times; <strong>$${base.toFixed(2)}</strong> = <strong>$${cost.toFixed(2)}</strong>
     </div>`;
   }
 
@@ -2574,7 +2586,10 @@ function analyzeMorningLine() {
   const avgPar   = parlays.reduce((s, v) => s + v, 0) / parlays.length;
   const bestPar  = parlays[0];
   const worstPar = parlays[parlays.length - 1];
-  const ticketCost = 2 * combos.length;
+  const inputEl2   = document.getElementById('tc-ticket-input');
+  const storedBase2 = parseFloat(inputEl2?.dataset.base);
+  const wagerBase  = (!isNaN(storedBase2) && storedBase2 > 0) ? storedBase2 : (TC_BASE[wager] || 0.50);
+  const ticketCost = wagerBase * combos.length;
 
   // Look up historical sequence data
   const raceNums = Array.from({ length: n }, (_, i) => start + i);
@@ -2703,7 +2718,7 @@ function analyzeMorningLine() {
           </div>
         </div>
         <div class="sum-item">
-          <div class="key">Combinations &times; $2</div>
+          <div class="key">Combinations &times; $${wagerBase.toFixed(2)}</div>
           <div class="value" style="color:var(--gold)">${fmtD(ticketCost)}</div>
         </div>
       </div>
