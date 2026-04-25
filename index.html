@@ -434,6 +434,16 @@
       -webkit-tap-highlight-color: transparent;
     }
     .btn-analyze-all:active { opacity: .72; }
+    .tc-portfolio-actions { display: flex; gap: 8px; margin-bottom: 12px; }
+    .btn-portfolio-action {
+      flex: 1; padding: 8px 6px;
+      background: var(--card); border: 1px solid var(--border);
+      color: var(--dim); border-radius: 6px;
+      font-size: .76rem; font-weight: 600; cursor: pointer; text-align: center;
+      -webkit-tap-highlight-color: transparent; line-height: 1.3;
+    }
+    .btn-portfolio-action:active { opacity: .7; }
+    .btn-portfolio-action.copied { border-color: var(--green); color: var(--green); }
     .tc-portfolio-card {
       border: 1px solid rgba(201,168,76,.4); border-radius: 8px;
       padding: 14px; margin-bottom: 14px;
@@ -2331,6 +2341,7 @@ function calcWillPay() {
 // =============================================================
 const TC_LEGS = { P3: 3, P4: 4, P5: 5, P6: 6 };
 const TC_BASE = { P3: 1.00, P4: 0.50, P5: 0.50, P6: 0.20 };  // default wager base amounts
+let _portfolioData = null;  // populated by analyzeAllTickets(), read by download/copy
 
 function populateTcTrackSelect() {
   const sel = document.getElementById('tc-track');
@@ -2516,7 +2527,7 @@ function analyzeAllTickets() {
       else               { signal = 'CHALK';    sigColor = 'var(--red)'; }
     }
 
-    results.push({ ticketStr, base, combos: parlays.length, cost, avgPar, bestPar, signal, sigColor });
+    results.push({ ticketStr, base, legs, combos: parlays.length, cost, avgPar, bestPar, signal, sigColor });
   }
 
   // Sort valid tickets by avgPar descending; errors go last
@@ -2526,11 +2537,18 @@ function analyzeAllTickets() {
     return (b.avgPar || 0) - (a.avgPar || 0);
   });
 
+  // Store for download / copy
+  _portfolioData = { results, track, wager, spanStr, hist };
+
   let html = `<div class="tc-portfolio-card">
     <h2 style="font-size:1rem;margin-bottom:2px">Portfolio Ranking</h2>
     <p style="font-size:.74rem;color:var(--dim);margin-bottom:12px">
       ${track} ${wager} &mdash; Races ${spanStr} &mdash; tap any row to load ticket
-    </p>`;
+    </p>
+    <div class="tc-portfolio-actions">
+      <button class="btn-portfolio-action" onclick="tcDownloadSummary()">&#11015; Download Summary</button>
+      <button class="btn-portfolio-action" id="tc-copy-btn" onclick="tcCopyToClipboard()">&#9113; Copy to Clipboard</button>
+    </div>`;
 
   let rank = 1;
   for (const r of results) {
@@ -2558,6 +2576,191 @@ function analyzeAllTickets() {
   const el = document.getElementById('tc-portfolio-results');
   el.innerHTML = html;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function tcDownloadSummary() {
+  if (!_portfolioData) return;
+  const { results, track, wager, spanStr, hist } = _portfolioData;
+  const date     = new Date().toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+  const fmtMoney = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtRound = v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  const valid = results.filter(r => !r.error);
+  const best  = valid[0] || null;
+
+  // Best ticket callout text
+  let bestHtml = '';
+  if (best) {
+    const lsCount  = best.legs.flat().filter(h => h.odds >= 5).length;
+    const totalH   = best.legs.flat().length;
+    const sigDesc  = best.signal === 'LONGSHOT'
+      ? 'prices above the historical average payout — strong overlay candidate.'
+      : best.signal === 'CHALK'
+      ? 'prices below the historical average — chalk-heavy sequence.'
+      : hist ? 'in line with historical average pricing.'
+             : 'no historical data available for comparison.';
+    bestHtml = `
+      <div class="best-box">
+        <div class="best-label">&#9733; Best Ticket</div>
+        <div class="best-ticket">${best.ticketStr}</div>
+        <div class="best-detail">
+          ${best.combos} combinations &times; ${fmtMoney(best.base)} = <strong>${fmtMoney(best.cost)}</strong>
+          &nbsp;&bull;&nbsp; Avg parlay: <strong>${fmtRound(best.avgPar)}</strong>
+          &nbsp;&bull;&nbsp; Best combo: <strong>${fmtRound(best.bestPar)}</strong>
+        </div>
+        <div class="best-explain">
+          ${lsCount} of ${totalH} horse selection${totalH !== 1 ? 's' : ''} are longshots (5-1 or longer).
+          Signal: <strong>${best.signal}</strong> &mdash; this sequence ${sigDesc}
+        </div>
+      </div>`;
+  }
+
+  // Table rows
+  let rows = '';
+  let rank = 1;
+  for (const r of results) {
+    if (r.error) {
+      rows += `<tr class="err-row"><td>—</td><td class="mono">${r.ticketStr}</td><td colspan="5" class="note">${r.error}</td></tr>`;
+    } else {
+      const ls   = r.legs.flat().filter(h => h.odds >= 5).length;
+      const sig  = r.signal === 'LONGSHOT' ? 'LONGSHOT ▲▲' : r.signal === 'CHALK' ? 'CHALK ▼▼' : r.signal;
+      rows += `<tr>
+        <td class="rank">#${rank++}</td>
+        <td class="mono">${r.ticketStr}</td>
+        <td>${fmtMoney(r.cost)}</td>
+        <td>${fmtRound(r.avgPar)}</td>
+        <td>${fmtRound(r.bestPar)}</td>
+        <td class="center">${ls}</td>
+        <td class="sig sig-${r.signal.toLowerCase()}">${sig}</td>
+      </tr>`;
+    }
+  }
+
+  const histNote = hist
+    ? `Historical avg payout: ${fmtRound(hist.avg_payout)} &bull; ${hist.times_hit} hit${hist.times_hit !== 1 ? 's' : ''} on record`
+    : 'No historical sequence data available for this race span.';
+
+  const doc = `<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Derby Value \u2014 ${track} ${wager} Races ${spanStr}</title>
+<style>
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: Georgia, 'Times New Roman', serif; font-size: 11pt; color: #111; background: #fff; padding: 0.5in; }
+  .dv-header { border-bottom: 3px solid #111; padding-bottom: 10px; margin-bottom: 18px; }
+  .dv-title  { font-size: 22pt; font-weight: bold; letter-spacing: .04em; }
+  .dv-sub    { font-size: 10pt; color: #444; margin-top: 4px; }
+  .best-box  { border: 2px solid #111; border-radius: 4px; padding: 14px 16px; margin-bottom: 20px; background: #f8f8f8; }
+  .best-label  { font-size: 8pt; font-weight: bold; letter-spacing: .1em; text-transform: uppercase; color: #555; margin-bottom: 6px; }
+  .best-ticket { font-family: 'Courier New', monospace; font-size: 15pt; font-weight: bold; margin-bottom: 6px; }
+  .best-detail { font-size: 10pt; color: #333; margin-bottom: 6px; }
+  .best-explain{ font-size: 9.5pt; color: #444; line-height: 1.5; }
+  table  { width: 100%; border-collapse: collapse; margin-bottom: 16px; font-size: 9.5pt; }
+  thead  { background: #111; color: #fff; }
+  th     { padding: 7px 8px; text-align: left; font-size: 8pt; letter-spacing: .05em; text-transform: uppercase; }
+  td     { padding: 6px 8px; border-bottom: 1px solid #ddd; vertical-align: middle; }
+  .rank  { font-weight: bold; width: 36px; }
+  .mono  { font-family: 'Courier New', monospace; font-size: 9pt; }
+  .center{ text-align: center; }
+  .note  { color: #888; font-style: italic; font-size: 8.5pt; }
+  .err-row td { color: #aaa; }
+  .sig   { font-weight: bold; font-size: 8.5pt; }
+  .sig-longshot { color: #1a7a40; }
+  .sig-neutral  { color: #7a6010; }
+  .sig-chalk    { color: #8b1a1a; }
+  .sig-no { color: #888; }
+  .hist-note { font-size: 8.5pt; color: #555; margin-bottom: 20px; font-style: italic; }
+  .dv-footer { border-top: 1px solid #ccc; padding-top: 8px; font-size: 8pt; color: #888; margin-top: 16px; }
+  @media print {
+    @page { size: letter portrait; margin: 0.65in 0.75in; }
+    body  { padding: 0; font-size: 10pt; }
+    .no-print { display: none; }
+    thead { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+</head>
+<body>
+  <div class="dv-header">
+    <div class="dv-title">Derby Value</div>
+    <div class="dv-sub">${track} &bull; ${wager} &bull; Races ${spanStr} &bull; ${date}</div>
+  </div>
+
+  ${bestHtml}
+
+  <table>
+    <thead>
+      <tr>
+        <th>Rank</th><th>Ticket</th><th>Cost</th>
+        <th>Avg Parlay</th><th>Best Combo</th><th class="center">Longshots</th><th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>${rows}</tbody>
+  </table>
+
+  <p class="hist-note">${histNote}</p>
+
+  <div class="dv-footer">
+    Generated by Derby Value &bull; horse-racing-derby.netlify.app &bull; ${date}
+  </div>
+
+  <script>window.onload = function(){ window.print(); };<\/script>
+</body>
+</html>`;
+
+  const win = window.open('', '_blank', 'width=850,height=1100');
+  if (!win) { alert('Allow pop-ups for this site to use Download Summary.'); return; }
+  win.document.write(doc);
+  win.document.close();
+}
+
+async function tcCopyToClipboard() {
+  if (!_portfolioData) return;
+  const { results, track, wager, spanStr } = _portfolioData;
+  const date = new Date().toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
+
+  const fmtM = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtR = v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+  const sep  = '─'.repeat(52);
+
+  let lines = [
+    `Derby Value — ${track} ${wager} Races ${spanStr} — ${date}`,
+    sep,
+  ];
+
+  let rank = 1;
+  for (const r of results) {
+    if (r.error) {
+      lines.push(`  —  ${r.ticketStr}  [${r.error}]`);
+    } else {
+      const ls = r.legs.flat().filter(h => h.odds >= 5).length;
+      lines.push(`#${rank++}  ${r.ticketStr}`);
+      lines.push(`    ${r.combos} combos × ${fmtM(r.base)} = ${fmtM(r.cost)}  |  avg ${fmtR(r.avgPar)}  |  best ${fmtR(r.bestPar)}  |  ${ls} longshot${ls !== 1 ? 's' : ''}  |  ${r.signal}`);
+    }
+  }
+
+  lines.push(sep);
+  lines.push('Derby Value | horse-racing-derby.netlify.app');
+
+  const text = lines.join('\n');
+  const btn  = document.getElementById('tc-copy-btn');
+
+  try {
+    await navigator.clipboard.writeText(text);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = '&#9113; Copy to Clipboard'; btn.classList.remove('copied'); }, 2200);
+  } catch {
+    // Fallback for browsers that block clipboard without interaction
+    const ta = document.createElement('textarea');
+    ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
+    document.body.appendChild(ta); ta.select();
+    document.execCommand('copy');
+    document.body.removeChild(ta);
+    btn.textContent = '✓ Copied!';
+    btn.classList.add('copied');
+    setTimeout(() => { btn.innerHTML = '&#9113; Copy to Clipboard'; btn.classList.remove('copied'); }, 2200);
+  }
 }
 
 function tcLoadTicket(ticketStr, base) {
