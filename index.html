@@ -424,6 +424,38 @@
     }
     .tc-extracted-item:active { opacity: .75; }
     .tc-extracted-item.selected { border-color: var(--gold); color: var(--gold); }
+    /* ── Analyze All / Portfolio ── */
+    .btn-analyze-all {
+      width: 100%; display: flex; align-items: center; justify-content: center; gap: 8px;
+      background: rgba(201,168,76,.12); border: 1.5px solid var(--gold);
+      color: var(--gold-lt); border-radius: 8px;
+      padding: 11px 16px; font-size: .88rem; font-weight: 700;
+      cursor: pointer; letter-spacing: .03em; margin-top: 8px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .btn-analyze-all:active { opacity: .72; }
+    .tc-portfolio-card {
+      border: 1px solid rgba(201,168,76,.4); border-radius: 8px;
+      padding: 14px; margin-bottom: 14px;
+      background: linear-gradient(160deg, var(--card2) 0%, rgba(201,168,76,.06) 100%);
+    }
+    .tc-portfolio-row {
+      display: flex; align-items: center; gap: 10px;
+      padding: 9px 6px; border-bottom: 1px solid var(--border);
+      cursor: pointer; border-radius: 4px;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .tc-portfolio-row:last-child { border-bottom: none; }
+    .tc-portfolio-row:active { background: rgba(201,168,76,.07); }
+    .tc-portfolio-rank { font-size: .75rem; font-weight: 800; color: var(--gold); min-width: 22px; text-align: center; }
+    .tc-portfolio-ticket { font-family: monospace; font-size: .8rem; flex: 1; color: var(--text); letter-spacing: .02em; word-break: break-all; }
+    .tc-portfolio-meta { display: flex; flex-direction: column; align-items: flex-end; gap: 3px; flex-shrink: 0; }
+    .tc-portfolio-cost { font-size: .68rem; color: var(--dim); white-space: nowrap; }
+    .tc-portfolio-parlay { font-size: .78rem; font-weight: 700; color: var(--text); white-space: nowrap; }
+    .tc-portfolio-sig {
+      font-size: .62rem; font-weight: 700; letter-spacing: .04em;
+      padding: 2px 5px; border-radius: 4px; white-space: nowrap;
+    }
     .combo-row-highlight { background: rgba(201,168,76,.09); }
     .tc-signal {
       background: var(--card2);
@@ -742,6 +774,7 @@
       <input type="number" id="tc-start" inputmode="numeric" min="1" max="12" value="1"
              onchange="buildTodayLegs()">
     </div>
+    <div id="tc-portfolio-results"></div>
     <div style="margin-bottom:14px">
       <label style="display:block;font-size:.78rem;font-weight:700;color:var(--dim);margin-bottom:6px">Your Ticket</label>
       <input type="text" id="tc-ticket-input" class="tc-ticket-input"
@@ -762,6 +795,8 @@
     </button>
     <div class="tc-screenshot-status" id="tc-screenshot-status"></div>
     <div id="tc-extracted-tickets"></div>
+    <button id="tc-analyze-all-btn" class="btn-analyze-all" style="display:none"
+            onclick="analyzeAllTickets()">&#9654; Analyze All Tickets</button>
 
     <button class="btn-primary" onclick="analyzeMorningLine()" style="margin-top:12px">ANALYZE</button>
   </div>
@@ -2321,6 +2356,7 @@ function tcOnTrackChange() {
 
 function buildTodayLegs() {
   document.getElementById('tc-results').innerHTML = '';
+  document.getElementById('tc-portfolio-results').innerHTML = '';
   // Clear any screenshot-imported base so the wager default takes over
   const inp = document.getElementById('tc-ticket-input');
   if (inp) delete inp.dataset.base;
@@ -2346,10 +2382,13 @@ async function tcImportScreenshot(event) {
   const fileInput = event.target;
   if (!file) return;
 
-  const statusEl  = document.getElementById('tc-screenshot-status');
-  const ticketsEl = document.getElementById('tc-extracted-tickets');
+  const statusEl    = document.getElementById('tc-screenshot-status');
+  const ticketsEl   = document.getElementById('tc-extracted-tickets');
+  const analyzeBtn  = document.getElementById('tc-analyze-all-btn');
   statusEl.textContent  = 'Analyzing image\u2026';
   ticketsEl.innerHTML   = '';
+  analyzeBtn.style.display = 'none';
+  document.getElementById('tc-portfolio-results').innerHTML = '';
 
   const reader = new FileReader();
   reader.onload = async function (e) {
@@ -2385,6 +2424,7 @@ async function tcImportScreenshot(event) {
           return `<div class="tc-extracted-item" data-ticket="${t.ticket}" data-base="${t.base ?? ''}" onclick="tcSelectTicket(this)">${t.ticket}${baseLabel}</div>`;
         }).join('')}
       </div>`;
+      analyzeBtn.style.display = 'flex';
     } catch (err) {
       statusEl.innerHTML = `<span style="color:var(--red)">Failed to analyze image. Check network and try again.</span>`;
     }
@@ -2404,6 +2444,131 @@ function tcSelectTicket(el) {
   if (!isNaN(base) && base > 0) input.dataset.base = base;
   else delete input.dataset.base;
 
+  tcParseTicket();
+  input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── Portfolio: rank all extracted tickets by avg theoretical parlay ───────────
+function analyzeAllTickets() {
+  const track = document.getElementById('tc-track').value;
+  const wager = document.getElementById('tc-wager').value;
+  const start = parseInt(document.getElementById('tc-start').value) || 1;
+  const n     = TC_LEGS[wager] || 4;
+  if (!track) { alert('Select a track.'); return; }
+
+  const items = document.querySelectorAll('#tc-extracted-tickets .tc-extracted-item');
+  if (!items.length) return;
+
+  const today    = new Date().toISOString().slice(0, 10);
+  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  const trackData = (window._dashData && window._dashData.today_entries &&
+                     window._dashData.today_entries[track]) || null;
+  const hasEntries = !!(trackData && (trackData.date === today || trackData.date === tomorrow));
+
+  const raceNums = Array.from({ length: n }, (_, i) => start + i);
+  const spanStr  = raceNums.join('-');
+  const hist     = (((window._dashData || {}).sequences || {})[track] || {})[wager]?.[spanStr] || null;
+
+  const fmtD = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const fmtI = v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
+
+  const results = [];
+
+  for (const item of items) {
+    const ticketStr = item.dataset.ticket;
+    const base      = parseFloat(item.dataset.base) || (TC_BASE[wager] || 0.50);
+    const legStrs   = ticketStr.split('/').slice(0, n);
+
+    if (legStrs.length < n) {
+      results.push({ ticketStr, base, error: `${legStrs.length}/${n} legs` });
+      continue;
+    }
+
+    const legs = [];
+    let parseErr = null;
+    for (let i = 0; i < n && !parseErr; i++) {
+      const raceNum  = start + i;
+      const pgms     = legStrs[i].split(',').map(s => s.trim()).filter(Boolean);
+      const raceData = hasEntries ? (trackData.races.find(r => r.race_num === raceNum) || null) : null;
+      const horses   = [];
+      for (const pgm of pgms) {
+        const horse = raceData ? raceData.horses.find(h => String(h.program_num) === pgm && !h.is_ae) : null;
+        const ml    = horse ? horse.morning_line : null;
+        if (ml === null) { parseErr = `Leg ${i + 1} #${pgm}: no ML`; break; }
+        horses.push({ pgm, odds: ml });
+      }
+      if (!horses.length && !parseErr) parseErr = `Leg ${i + 1}: empty`;
+      if (!parseErr) legs.push(horses);
+    }
+
+    if (parseErr) { results.push({ ticketStr, base, error: parseErr }); continue; }
+
+    const parlays = tcCartesian(legs).map(hs => 2 * hs.reduce((p, h) => p * (h.odds + 1), 1));
+    const avgPar  = parlays.reduce((s, v) => s + v, 0) / parlays.length;
+    const bestPar = Math.max(...parlays);
+    const cost    = parlays.length * base;
+
+    let signal = 'NO HIST', sigColor = 'var(--dim)';
+    if (hist) {
+      const r = avgPar / hist.avg_payout;
+      if      (r > 1.5)  { signal = 'LONGSHOT'; sigColor = 'var(--green)'; }
+      else if (r >= 0.8) { signal = 'NEUTRAL';  sigColor = 'var(--yellow)'; }
+      else               { signal = 'CHALK';    sigColor = 'var(--red)'; }
+    }
+
+    results.push({ ticketStr, base, combos: parlays.length, cost, avgPar, bestPar, signal, sigColor });
+  }
+
+  // Sort valid tickets by avgPar descending; errors go last
+  results.sort((a, b) => {
+    if (a.error && !b.error) return 1;
+    if (!a.error && b.error) return -1;
+    return (b.avgPar || 0) - (a.avgPar || 0);
+  });
+
+  let html = `<div class="tc-portfolio-card">
+    <h2 style="font-size:1rem;margin-bottom:2px">Portfolio Ranking</h2>
+    <p style="font-size:.74rem;color:var(--dim);margin-bottom:12px">
+      ${track} ${wager} &mdash; Races ${spanStr} &mdash; tap any row to load ticket
+    </p>`;
+
+  let rank = 1;
+  for (const r of results) {
+    const safeTicket = r.ticketStr.replace(/'/g, "\\'");
+    if (r.error) {
+      html += `<div class="tc-portfolio-row" onclick="tcLoadTicket('${safeTicket}',${r.base})">
+        <span class="tc-portfolio-rank" style="color:var(--dim)">—</span>
+        <span class="tc-portfolio-ticket">${r.ticketStr}</span>
+        <span style="font-size:.7rem;color:var(--dim);font-style:italic;flex-shrink:0">${r.error}</span>
+      </div>`;
+    } else {
+      html += `<div class="tc-portfolio-row" onclick="tcLoadTicket('${safeTicket}',${r.base})">
+        <span class="tc-portfolio-rank">#${rank++}</span>
+        <span class="tc-portfolio-ticket">${r.ticketStr}</span>
+        <div class="tc-portfolio-meta">
+          <span class="tc-portfolio-cost">${r.combos} &times; $${r.base.toFixed(2)} = ${fmtD(r.cost)}</span>
+          <span class="tc-portfolio-parlay">avg ${fmtI(r.avgPar)} / best ${fmtI(r.bestPar)}</span>
+          <span class="tc-portfolio-sig" style="background:rgba(0,0,0,.25);color:${r.sigColor};border:1px solid ${r.sigColor}">${r.signal}</span>
+        </div>
+      </div>`;
+    }
+  }
+
+  html += `</div>`;
+  const el = document.getElementById('tc-portfolio-results');
+  el.innerHTML = html;
+  el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function tcLoadTicket(ticketStr, base) {
+  const input = document.getElementById('tc-ticket-input');
+  input.value = ticketStr;
+  if (!isNaN(base) && base > 0) input.dataset.base = base;
+  else delete input.dataset.base;
+  // Mirror selection highlight in the extracted list
+  document.querySelectorAll('.tc-extracted-item').forEach(item =>
+    item.classList.toggle('selected', item.dataset.ticket === ticketStr)
+  );
   tcParseTicket();
   input.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
