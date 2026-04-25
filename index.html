@@ -2337,7 +2337,7 @@ function autoFillMorningLines() {
 
     // Replace the single empty placeholder row with pre-filled entries
     horsesDiv.innerHTML = '';
-    const starters = raceData.horses.filter(h => !h.is_ae).slice(0, 8);
+    const starters = raceData.horses.filter(h => !h.is_ae);
     for (const h of starters) {
       const row = document.createElement('div');
       row.className = 'tc-horse-row';
@@ -2396,7 +2396,7 @@ function renderAeAlerts() {
 
 function tcAddHorse(legIdx) {
   const container = document.querySelector(`.tc-leg[data-leg="${legIdx}"] .tc-horses`);
-  if (!container || container.children.length >= 8) return;
+  if (!container) return;
   const row = document.createElement('div');
   row.className = 'tc-horse-row';
   row.innerHTML = `
