@@ -1,8 +1,8 @@
 // Derby Value — Service Worker
 // Caches the app shell on install; serves offline after first load.
-// Network-first for dashboard_data.json so fresh data always loads when online.
+// dashboard_data.json is NEVER cached — always fetched live from the network.
 
-const CACHE_NAME = 'derby-v2';
+const CACHE_NAME = 'derby-v3';
 const SHELL = [
   '/',
   '/index.html',
@@ -35,12 +35,17 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // index.html and dashboard_data.json: network first, fall back to cache
-  if (url.pathname === '/' || url.pathname.endsWith('/index.html') || url.pathname.includes('dashboard_data.json')) {
+  // dashboard_data.json: always network, never cache, no fallback
+  if (url.pathname.includes('dashboard_data.json')) {
+    event.respondWith(fetch(event.request));
+    return;
+  }
+
+  // index.html: network first, fall back to cache
+  if (url.pathname === '/' || url.pathname.endsWith('/index.html')) {
     event.respondWith(
       fetch(event.request)
         .then(response => {
-          // Clone and cache the fresh response
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));
           return response;
@@ -55,7 +60,6 @@ self.addEventListener('fetch', event => {
     caches.match(event.request).then(cached => {
       if (cached) return cached;
       return fetch(event.request).then(response => {
-        // Cache successful GET responses
         if (event.request.method === 'GET' && response.status === 200) {
           const clone = response.clone();
           caches.open(CACHE_NAME).then(cache => cache.put(event.request, clone));

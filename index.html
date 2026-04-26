@@ -1667,12 +1667,6 @@ async function loadDashboard() {
     const res = await fetch('dashboard_data.json?t=' + Date.now());
     if (res.ok) {
       data = await res.json();
-      // Cache for offline
-      if ('caches' in window) {
-        const c = await caches.open('derby-v1');
-        c.put('dashboard_data.json', new Response(JSON.stringify(data),
-          { headers: { 'Content-Type': 'application/json' } }));
-      }
     }
   } catch (_) {}
 
