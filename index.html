@@ -2514,14 +2514,19 @@ function analyzeAllTickets() {
 
     if (parseErr) { results.push({ ticketStr, base, error: parseErr }); continue; }
 
-    const parlays = tcCartesian(legs).map(hs => 2 * hs.reduce((p, h) => p * (h.odds + 1), 1));
+    // Compound odds as direct multipliers (e.g. 5/2 stored as 2.5 = 2.5× return per $1).
+    // Multiply across all legs then × base for the estimated payout at the actual ticket cost.
+    // NOT (odds + 1): that double-counts the stake and inflates numbers ~3–5× vs real will-pays.
+    const parlays = tcCartesian(legs).map(hs => base * hs.reduce((p, h) => p * h.odds, 1));
     const avgPar  = parlays.reduce((s, v) => s + v, 0) / parlays.length;
     const bestPar = Math.max(...parlays);
     const cost    = parlays.length * base;
 
+    // hist.avg_payout is stored at $2 base; scale to same base as parlays for the ratio
     let signal = 'NO HIST', sigColor = 'var(--dim)';
     if (hist) {
-      const r = avgPar / hist.avg_payout;
+      const histAtBase = hist.avg_payout * (base / 2);
+      const r = avgPar / histAtBase;
       if      (r > 1.5)  { signal = 'LONGSHOT'; sigColor = 'var(--green)'; }
       else if (r >= 0.8) { signal = 'NEUTRAL';  sigColor = 'var(--yellow)'; }
       else               { signal = 'CHALK';    sigColor = 'var(--red)'; }
