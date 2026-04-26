@@ -2464,8 +2464,10 @@ function analyzeAllTickets() {
   const items = document.querySelectorAll('#tc-extracted-tickets .tc-extracted-item');
   if (!items.length) return;
 
-  const today    = new Date().toISOString().slice(0, 10);
-  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  const _now     = new Date();
+  const today    = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
+  const _tom     = new Date(_now); _tom.setDate(_tom.getDate() + 1);
+  const tomorrow = `${_tom.getFullYear()}-${String(_tom.getMonth()+1).padStart(2,'0')}-${String(_tom.getDate()).padStart(2,'0')}`;
   const trackData = (window._dashData && window._dashData.today_entries &&
                      window._dashData.today_entries[track]) || null;
   const hasEntries = !!(trackData && (trackData.date === today || trackData.date === tomorrow));
@@ -2791,8 +2793,10 @@ function tcParseTicket() {
   const storedBase = parseFloat(inputEl.dataset.base);
   const base  = (!isNaN(storedBase) && storedBase > 0) ? storedBase : (TC_BASE[wager] || 0.50);
 
-  const today    = new Date().toISOString().slice(0, 10);
-  const tomorrow = new Date(Date.now() + 864e5).toISOString().slice(0, 10);
+  const _now     = new Date();
+  const today    = `${_now.getFullYear()}-${String(_now.getMonth()+1).padStart(2,'0')}-${String(_now.getDate()).padStart(2,'0')}`;
+  const _tom     = new Date(_now); _tom.setDate(_tom.getDate() + 1);
+  const tomorrow = `${_tom.getFullYear()}-${String(_tom.getMonth()+1).padStart(2,'0')}-${String(_tom.getDate()).padStart(2,'0')}`;
   const trackData = (window._dashData && window._dashData.today_entries &&
                      window._dashData.today_entries[track]) || null;
   const hasEntries = !!(trackData && (trackData.date === today || trackData.date === tomorrow));
@@ -2869,7 +2873,8 @@ function renderAeAlerts() {
   const banner = document.getElementById('tc-ae-banner');
   if (!banner) return;
 
-  const today     = new Date().toISOString().slice(0, 10);
+  const _now2     = new Date();
+  const today     = `${_now2.getFullYear()}-${String(_now2.getMonth()+1).padStart(2,'0')}-${String(_now2.getDate()).padStart(2,'0')}`;
   const trackData = (window._dashData && window._dashData.today_entries &&
                      window._dashData.today_entries[track]) || null;
 
