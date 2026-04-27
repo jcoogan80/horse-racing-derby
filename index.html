@@ -602,6 +602,132 @@
       background: var(--card);
     }
     .pe-track-body.open { display: block; }
+
+    /* ── OptixEQ tab ── */
+    .oeq-sub-nav { display: flex; gap: 8px; margin-bottom: 14px; }
+    .oeq-sub-btn {
+      flex: 1; padding: 10px 8px;
+      background: var(--card2); color: var(--dim);
+      border: 1px solid var(--border); border-radius: 8px;
+      font-size: .85rem; font-weight: 700; cursor: pointer;
+      min-height: 44px; letter-spacing: .03em;
+      transition: color .15s, border-color .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .oeq-sub-btn.active { color: var(--gold); border-color: var(--gold); background: rgba(201,168,76,.1); }
+    .oeq-source-note {
+      font-size: .74rem; color: var(--dim); font-style: italic;
+      margin-bottom: 14px; padding: 8px 12px;
+      background: rgba(201,168,76,.07);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 6px 6px 0; line-height: 1.5;
+    }
+    .oeq-race-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); margin-bottom: 10px; overflow: hidden;
+    }
+    .oeq-race-header {
+      display: flex; align-items: center; gap: 10px;
+      padding: 13px 16px; cursor: pointer; user-select: none;
+      -webkit-tap-highlight-color: transparent;
+      flex-wrap: wrap; row-gap: 4px;
+    }
+    .oeq-race-header:hover { background: rgba(201,168,76,.05); }
+    .oeq-race-num { font-size: 1.1rem; font-weight: 900; color: var(--gold); min-width: 28px; }
+    .oeq-race-info { flex: 1; min-width: 0; }
+    .oeq-race-title { font-size: .88rem; font-weight: 700; color: var(--text); }
+    .oeq-race-meta { font-size: .73rem; color: var(--dim); margin-top: 2px; }
+    .oeq-race-right { display: flex; align-items: center; gap: 7px; flex-shrink: 0; }
+    .oeq-grade-badge {
+      display: inline-block; padding: 2px 7px; border-radius: 4px;
+      font-size: .7rem; font-weight: 800; letter-spacing: .05em;
+    }
+    .oeq-grade-G1  { background: rgba(201,168,76,.25);   color: var(--gold);  border: 1px solid var(--gold); }
+    .oeq-grade-G2  { background: rgba(180,190,210,.12);  color: #b8c8e0;      border: 1px solid #6888a8; }
+    .oeq-grade-G3  { background: rgba(180,120,70,.18);   color: #d4956a;      border: 1px solid #a06040; }
+    .oeq-grade-ALW { background: rgba(100,149,237,.15);  color: #7eb8f7;      border: 1px solid #4a7ab5; }
+    .oeq-grade-MSW { background: rgba(100,100,120,.15);  color: var(--dim);   border: 1px solid var(--border); }
+    .oeq-contention { font-size: .9rem; }
+    .oeq-chevron { color: var(--dim); transition: transform .2s; font-size: .85rem; }
+    .oeq-race-card.open .oeq-chevron { transform: rotate(180deg); }
+    .oeq-race-body { display: none; padding: 0 14px 14px; border-top: 1px solid var(--border); }
+    .oeq-race-card.open .oeq-race-body { display: block; }
+    .oeq-table { width: 100%; border-collapse: collapse; font-size: .78rem; min-width: 430px; margin-top: 8px; }
+    .oeq-table th {
+      padding: 7px 8px; text-align: left; font-size: .71rem;
+      color: var(--dim); border-bottom: 2px solid var(--border); white-space: nowrap;
+    }
+    .oeq-table td { padding: 8px 8px; border-bottom: 1px solid var(--border); vertical-align: top; }
+    .oeq-table tr:last-child td { border-bottom: none; }
+    .oeq-horse-name { font-weight: 600; color: var(--text); font-size: .82rem; }
+    .oeq-fig-high { color: var(--green); font-weight: 700; }
+    .oeq-fig-mid  { color: #7eb8f7;      font-weight: 700; }
+    .oeq-fig-low  { color: var(--dim); }
+    .oeq-fig-null { color: var(--dim); font-style: italic; font-size: .75rem; }
+    .oeq-notes { font-size: .71rem; color: var(--dim); line-height: 1.45; }
+    .oeq-tags { display: flex; flex-wrap: wrap; gap: 3px; margin-top: 3px; }
+    .oeq-tag {
+      display: inline-block; padding: 1px 5px; border-radius: 3px;
+      font-size: .62rem; font-weight: 800; letter-spacing: .04em; white-space: nowrap;
+    }
+    .oeq-tag-KEY     { background: rgba(201,168,76,.2);   color: var(--gold);  border: 1px solid rgba(201,168,76,.5); }
+    .oeq-tag-VALUE   { background: rgba(46,204,113,.18);  color: var(--green); border: 1px solid rgba(46,204,113,.5); }
+    .oeq-tag-FADE    { background: rgba(231,76,60,.18);   color: var(--red);   border: 1px solid rgba(231,76,60,.5); }
+    .oeq-tag-IMPROVE { background: rgba(100,149,237,.18); color: #7eb8f7;      border: 1px solid rgba(100,149,237,.5); }
+    .oeq-tag-LAYOFF  { background: rgba(230,126,34,.18);  color: #e67e22;      border: 1px solid rgba(230,126,34,.5); }
+    .oeq-tag-FTS     { background: rgba(100,100,120,.15); color: var(--dim);   border: 1px solid var(--border); }
+    .oeq-tag-BOMB    { background: rgba(155,89,182,.2);   color: #c39bd3;      border: 1px solid rgba(155,89,182,.5); }
+    .oeq-verdict {
+      margin-top: 10px; font-size: .8rem; color: var(--gold-lt);
+      font-style: italic; border-top: 1px solid var(--border);
+      padding-top: 8px; line-height: 1.5;
+    }
+    .oeq-ticket-card {
+      background: var(--card); border: 1px solid var(--border);
+      border-radius: var(--radius); padding: 16px; margin-bottom: 12px;
+    }
+    .oeq-ticket-header { display: flex; align-items: flex-start; gap: 8px; margin-bottom: 12px; flex-wrap: wrap; }
+    .oeq-ticket-title { font-size: .95rem; font-weight: 800; color: var(--gold); flex: 1; min-width: 0; }
+    .oeq-overlay-badge {
+      display: inline-block; padding: 3px 9px; border-radius: 4px;
+      font-size: .7rem; font-weight: 800; letter-spacing: .04em;
+      white-space: nowrap; flex-shrink: 0;
+    }
+    .oeq-ov-HIGH     { background: rgba(46,204,113,.18);  color: var(--green);  border: 1px solid var(--green); }
+    .oeq-ov-MODERATE { background: rgba(240,165,0,.18);   color: var(--yellow); border: 1px solid var(--yellow); }
+    .oeq-ov-LONGSHOT { background: rgba(230,126,34,.18);  color: #e67e22;       border: 1px solid #e67e22; }
+    .oeq-ov-LOTTERY  { background: rgba(155,89,182,.2);   color: #c39bd3;       border: 1px solid #9b59b6; }
+    .oeq-ticket-leg { padding: 9px 0; border-bottom: 1px solid var(--border); }
+    .oeq-ticket-leg:last-of-type { border-bottom: none; }
+    .oeq-leg-label {
+      font-size: .71rem; font-weight: 700; color: var(--gold-lt);
+      letter-spacing: .04em; text-transform: uppercase; margin-bottom: 5px;
+    }
+    .oeq-leg-horse-row { display: flex; align-items: center; gap: 8px; padding: 2px 0; font-size: .8rem; }
+    .oeq-leg-hname { flex: 1; color: var(--text); }
+    .oeq-leg-fig { white-space: nowrap; font-size: .75rem; }
+    .oeq-ticket-math {
+      font-size: .78rem; color: var(--dim); margin: 12px 0 10px;
+      padding: 8px 10px; background: var(--card2); border-radius: 6px; line-height: 1.6;
+    }
+    .oeq-ticket-cost { color: var(--gold); font-weight: 800; font-size: .92rem; }
+    .oeq-copy-area {
+      width: 100%; display: block; background: var(--bg);
+      border: 1px solid var(--border); border-radius: 6px;
+      color: var(--text); font-family: 'Menlo','Courier New',monospace;
+      font-size: .72rem; padding: 9px 11px; resize: none;
+      margin-bottom: 7px; line-height: 1.6;
+    }
+    .oeq-copy-area:focus { outline: none; border-color: var(--gold); }
+    .oeq-copy-btn {
+      padding: 9px 18px; background: var(--card2); color: var(--gold);
+      border: 1px solid var(--gold); border-radius: 7px;
+      font-size: .82rem; font-weight: 700; cursor: pointer;
+      letter-spacing: .04em; transition: color .15s, border-color .15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .oeq-copy-btn:active { opacity: .8; }
+    .oeq-copy-btn.copied { border-color: var(--green); color: var(--green); }
   </style>
 </head>
 <body>
@@ -619,6 +745,7 @@
   <button class="tab-btn"         onclick="showTab('parlay')">Parlay Edge</button>
   <button class="tab-btn"         onclick="showTab('today')">Today</button>
   <button class="tab-btn"         onclick="showTab('howto')">How To Use</button>
+  <button class="tab-btn"         onclick="showTab('optixeq')">OptixEQ</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -1278,6 +1405,16 @@
 
 </div>
 
+<!-- ─────────────── OPTIXEQ TAB ─────────────── -->
+<div id="tab-optixeq" class="tab-pane">
+  <div class="oeq-sub-nav">
+    <button class="oeq-sub-btn active" id="oeq-btn-race"    onclick="oeqSwitch('race')">&#128202; Race Analysis</button>
+    <button class="oeq-sub-btn"        id="oeq-btn-tickets" onclick="oeqSwitch('tickets')">&#127915; Exotic Tickets</button>
+  </div>
+  <div id="oeq-race-section"></div>
+  <div id="oeq-tickets-section" style="display:none"></div>
+</div>
+
 <script>
 // =============================================================
 //  TAB NAVIGATION
@@ -1287,7 +1424,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto'];
+  const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -3166,6 +3303,395 @@ function analyzeMorningLine() {
 }
 
 // =============================================================
+//  OPTIXEQ — DATA
+// =============================================================
+const RACES = [
+  { num:1, name:"Maiden Sp Wt", type:"MSW", dist:"8.5f Dirt", purse:"$120k", contention:"soft", verdict:"Phantom Blue · Episist",
+    horses:[
+      {name:"Phantom Blue",     ml:28,  ofig:91, ong:"B-", notes:"WARM_UP TROUBLE_S RUSH",         tags:["KEY"]},
+      {name:"Episist",          ml:27,  ofig:88, ong:"B",  notes:"WEATHER SAVED MOVE HOT",         tags:["KEY"]},
+      {name:"Mass",             ml:41,  ofig:80, ong:"B-", notes:"GATE PRESSED SAVED FLOW",        tags:[]},
+      {name:"Sister Jean",      ml:48,  ofig:73, ong:"C+", notes:"SLOG TROUBLE- SAVED MOVE",       tags:[]},
+      {name:"Soaring High",     ml:218, ofig:69, ong:"C+", notes:"COVER",                          tags:["LAYOFF"]},
+      {name:"Haywinii",         ml:20,  ofig:69, ong:"C+", notes:"TROUBLE_S SAVED DROP?",          tags:["FADE"]},
+      {name:"Butterfly Jasmine",ml:"FTS",ofig:null,ong:null,notes:"No data",                       tags:["FTS"]}
+    ]},
+  { num:2, name:"OClm 80000n2x", type:"ALW", dist:"8f Dirt", purse:"$134k", contention:"soft", verdict:"Five A Side · Sudden Switch · Anna's Promise",
+    horses:[
+      {name:"Five A Side",    ml:41,  ofig:90, ong:"B-", notes:"WIDE NO_LEAD",              tags:["VALUE"]},
+      {name:"Sudden Switch",  ml:23,  ofig:89, ong:"B-", notes:"RUSH SAVED",                tags:["KEY"]},
+      {name:"Anna's Promise", ml:36,  ofig:87, ong:"B-", notes:"Blank — clean effort",      tags:[]},
+      {name:"Decadent",       ml:56,  ofig:86, ong:"B-", notes:"TROUBLE- WIDE",             tags:[]},
+      {name:"Quantum Burst",  ml:50,  ofig:84, ong:"B-", notes:"TACTIC- WIDE",              tags:[]},
+      {name:"Amalfi Drive",   ml:27,  ofig:80, ong:"C+", notes:"WARM NO_COVER TROUBLE-",   tags:[]},
+      {name:"Chopsticks",     ml:209, ofig:71, ong:"C",  notes:"KICKBACK-",                 tags:["LAYOFF"]},
+      {name:"White Rocks",    ml:48,  ofig:65, ong:"C+", notes:"NO_COVER FREE NO_LEAD",     tags:[]},
+      {name:"Carmel Rose",    ml:22,  ofig:null,ong:null, notes:"No oFIG available",        tags:[]}
+    ]},
+  { num:3, name:"OClm 125000n1x", type:"ALW", dist:"8.5f Dirt", purse:"$127k", contention:"avg", verdict:"Miss Call · Leinani · Joyful Justice",
+    horses:[
+      {name:"Miss Call",       ml:28,  ofig:91, ong:"B+", notes:"TACTIC+ POCKET MOVE",               tags:["KEY"]},
+      {name:"Leinani",         ml:61,  ofig:91, ong:"B+", notes:"MOVE NO_PUSH",                      tags:["VALUE"]},
+      {name:"Joyful Justice",  ml:47,  ofig:89, ong:"B",  notes:"PRESSED",                           tags:[]},
+      {name:"Betty's Pearl",   ml:34,  ofig:87, ong:"C+", notes:"BUNCHED POCKET SAVED NO_KEEP",      tags:[]},
+      {name:"Feisty Red Head", ml:33,  ofig:86, ong:"B",  notes:"SAVED MOVE BLANKET",                tags:[]},
+      {name:"Star Actress",    ml:28,  ofig:83, ong:"B-", notes:"PRERACE+ COVER MOVE",               tags:[]},
+      {name:"Measure",         ml:176, ofig:81, ong:"B",  notes:"NASAL_S TACTIC+ SLOG MOVE",         tags:["LAYOFF"]},
+      {name:"Ur Desire",       ml:48,  ofig:74, ong:"C+", notes:"RUSH TROUBLE+ SAVED",               tags:[]},
+      {name:"Maximum Offer",   ml:41,  ofig:73, ong:"C",  notes:"FTQ SAVED NO_PUSH",                 tags:[]},
+      {name:"Making Daisys",   ml:49,  ofig:69, ong:"C+", notes:"WIDE",                              tags:[]},
+      {name:"Krissys Star",    ml:28,  ofig:67, ong:"B-", notes:"TACTIC- SHUFFLE PLODDY",            tags:["FADE"]}
+    ]},
+  { num:4, name:"Maiden Sp Wt", type:"MSW", dist:"7f Dirt", purse:"$120k", contention:"avg", verdict:"Hedge Book · Lexi V. · Serena's Surprise",
+    horses:[
+      {name:"Hedge Book",         ml:35,  ofig:82, ong:"B",  notes:"TROUBLE_S MOVE",               tags:["KEY"]},
+      {name:"Lexi V.",            ml:57,  ofig:80, ong:"B-", notes:"WIDE BUNCHED",                 tags:["IMPROVE?"]},
+      {name:"Bella Ella",         ml:27,  ofig:79, ong:"C+", notes:"WEATHER RUSH WIDE",            tags:[]},
+      {name:"Serena's Surprise",  ml:35,  ofig:77, ong:"B-", notes:"BOS SAVED",                   tags:[]},
+      {name:"Zengraya",           ml:41,  ofig:74, ong:"C+", notes:"RUSH / SLOG CLOSE",            tags:[]},
+      {name:"Rose of San Antone", ml:20,  ofig:70, ong:"C+", notes:"NASAL_S SAVED TROUBLE-",      tags:["FADE"]},
+      {name:"Tramuntana",         ml:198, ofig:68, ong:"C+", notes:"COVER SHUFFLE MOVE",           tags:["LAYOFF"]},
+      {name:"Gerber Daisy",       ml:76,  ofig:61, ong:"C",  notes:"WIDE",                         tags:[]},
+      {name:"Power to Glory",     ml:"FTS",ofig:null,ong:null,notes:"No data",                     tags:["FTS"]},
+      {name:"Battis Grove",       ml:"FTS",ofig:null,ong:null,notes:"No data",                     tags:["FTS"]},
+      {name:"Couplet",            ml:"FTS",ofig:null,ong:null,notes:"No data",                     tags:["FTS"]},
+      {name:"Passerine",          ml:"FTS",ofig:null,ong:null,notes:"No data",                     tags:["FTS"]},
+      {name:"Tammy's Kiss",       ml:"FTS",ofig:null,ong:null,notes:"No data",                     tags:["FTS"]}
+    ]},
+  { num:5, name:"Maiden Sp Wt", type:"MSW", dist:"8f Turf", purse:"$120k", contention:"soft", verdict:"Flick · Bridgesong · Executive",
+    horses:[
+      {name:"Flick",              ml:37,  ofig:90, ong:"B",  notes:"SLOG TACTIC- TRAFFIC TROUBLE",      tags:["KEY"]},
+      {name:"Bridgesong",         ml:34,  ofig:83, ong:"B-", notes:"TROUBLES+ KICKBACK-",               tags:[]},
+      {name:"Executive",          ml:76,  ofig:83, ong:"B-", notes:"TROUBLE_S",                         tags:[]},
+      {name:"War and Majesty",    ml:340, ofig:82, ong:"B",  notes:"TACTIC+ COVER SAVED MOVE",          tags:["LAYOFF"]},
+      {name:"Wembley Avenue",     ml:180, ofig:81, ong:"B-", notes:"SLOG SHUFFLE SAVED FLOW",           tags:["LAYOFF"]},
+      {name:"Drop Shot",          ml:28,  ofig:80, ong:"B-", notes:"NASAL_S COVER",                     tags:[]},
+      {name:"Apollo's Glory",     ml:41,  ofig:80, ong:"B-", notes:"NASAL_S WARM RUSH POCKET",          tags:[]},
+      {name:"Powell River (ON)",  ml:40,  ofig:79, ong:"B-", notes:"COVER",                             tags:[]},
+      {name:"Cash Bonus",         ml:28,  ofig:78, ong:"C+", notes:"PRERACE+ WARM_UP TACTIC+",          tags:[]},
+      {name:"Prepped",            ml:41,  ofig:78, ong:null,  notes:"3 runner-up finishes",             tags:[]},
+      {name:"Timayyyy",           ml:246, ofig:75, ong:"C+", notes:"SHUFFLE COVER SAVED MOVE",          tags:[]},
+      {name:"Royal Guard",        ml:243, ofig:75, ong:"B-", notes:"X_FLOW SLOG TROUBLE_S WIDE",        tags:["LAYOFF"]},
+      {name:"Grande Sorpreso",    ml:27,  ofig:72, ong:"C+", notes:"PRERACE+ WARM_UP WIDE",             tags:[]},
+      {name:"Clark's Corner",     ml:153, ofig:70, ong:"C+", notes:"SAVED COVER TROUBLE-",              tags:[]},
+      {name:"Hill Country",       ml:21,  ofig:56, ong:"C+", notes:"RUSH COLD PREP?",                   tags:["FADE"]},
+      {name:"Culture War",        ml:44,  ofig:63, ong:"C",  notes:"POCKET SAVED NO_KEEP",              tags:[]}
+    ]},
+  { num:6, name:"OClm 125000n1x", type:"ALW", dist:"6.5f Dirt", purse:"$127k", contention:"avg", verdict:"Where Luck Lives · Paige Turner · Getting Closer",
+    horses:[
+      {name:"Where Luck Lives",  ml:28,  ofig:93, ong:"B",  notes:"NASAL_S RUSH PRESSED",            tags:["KEY"]},
+      {name:"Paige Turner",      ml:153, ofig:91, ong:"B-", notes:"TROUBLE_S RUSH SAVED",             tags:["VALUE"]},
+      {name:"Nimah",             ml:146, ofig:86, ong:"B-", notes:"WARM TROUBLE_S RUSH",              tags:[]},
+      {name:"Getting Closer",    ml:16,  ofig:84, ong:"B",  notes:"PRESSED SAVED",                   tags:["KEY"]},
+      {name:"Blue Flame Six",    ml:34,  ofig:83, ong:"B-", notes:"NASAL_S RUSH WIDE",               tags:[]},
+      {name:"Don't Do It Lucy",  ml:36,  ofig:82, ong:"B",  notes:"TACTIC+",                         tags:[]},
+      {name:"Steer Clear",       ml:209, ofig:81, ong:"C+", notes:"NO_COVER MOVE",                   tags:["LAYOFF"]},
+      {name:"Our Two Girls",     ml:27,  ofig:78, ong:"C+", notes:"SLOG SAVED TROUBLE-",             tags:[]},
+      {name:"Carmel Coast",      ml:209, ofig:77, ong:"C+", notes:"PRESSED",                         tags:["LAYOFF"]},
+      {name:"Kayla's Komet",     ml:49,  ofig:77, ong:"B",  notes:"WIDE RUSH",                       tags:[]},
+      {name:"Camila Catalina",   ml:113, ofig:76, ong:"C+", notes:"TROUBLE_S MOVE TRAFFIC",          tags:[]},
+      {name:"French Blue",       ml:27,  ofig:64, ong:"C+", notes:"PRESSED SAVED NO_KEEP",           tags:["FADE"]},
+      {name:"Heaven's Bolt",     ml:84,  ofig:54, ong:"C",  notes:"NASAL_S WARM NO_COVER",           tags:[]},
+      {name:"Color Comin' In",   ml:68,  ofig:36, ong:"C",  notes:"TROUBLE_S RUSH WIDE",             tags:["FADE"]},
+      {name:"Essential Coffee",  ml:153, ofig:null,ong:null, notes:"TROUBLES+ — no recent fig",      tags:[]}
+    ]},
+  { num:7, name:"Unbridled Sandra G2", type:"G2", dist:"5.5f Turf", purse:"$500k", contention:"soft", verdict:"Shisospicy · Haulin Ice · Creed's Gold",
+    horses:[
+      {name:"Shisospicy",     ml:181, ofig:106, ong:"B",  notes:"NASAL_S LONE SAVED · BC Turf Sprint G1",  tags:["KEY","BOMB"]},
+      {name:"Haulin Ice",     ml:35,  ofig:98,  ong:"B",  notes:"NASAL_S BOS · A- grade prior race",       tags:["KEY"]},
+      {name:"Creed's Gold",   ml:19,  ofig:94,  ong:"B-", notes:"TROUBLE_S COVER STRETCH?",               tags:[]},
+      {name:"Queen Maxima",   ml:27,  ofig:92,  ong:"B-", notes:"NASAL_S COVER MOVE",                     tags:[]},
+      {name:"Time to Dazzle", ml:19,  ofig:91,  ong:"B-", notes:"SLOG WIDE",                              tags:[]},
+      {name:"Buttercream Babe",ml:27, ofig:89,  ong:"B",  notes:"NASAL_S TACTIC+ COVER",                  tags:[]},
+      {name:"Shoot It True",  ml:27,  ofig:87,  ong:"B-", notes:"GATE TACTIC- MOVE",                      tags:[]},
+      {name:"Mae Town",       ml:299, ofig:86,  ong:"B+", notes:"X_WIDE CLOSE GALLOP- · best grade",      tags:["BOMB"]},
+      {name:"Moon Spun",      ml:48,  ofig:85,  ong:"C+", notes:"SCARED SAVED NO_KEEP",                   tags:[]}
+    ]},
+  { num:8, name:"8 Belles G2", type:"G2", dist:"7f Dirt", purse:"$700k", contention:"high", verdict:"Goodall · Sippin Pretty · On Time Girl",
+    horses:[
+      {name:"Goodall",          ml:48, ofig:95, ong:"B",  notes:"PERFECT · OP win",                  tags:["KEY","VALUE"]},
+      {name:"Sippin Pretty",    ml:27, ofig:91, ong:"B",  notes:"WARM_UP PRESSED · KEY+",            tags:["KEY"]},
+      {name:"River Wind",       ml:48, ofig:88, ong:"B-", notes:"TROUBLE_S RUSH",                    tags:[]},
+      {name:"On Time Girl",     ml:62, ofig:84, ong:"B-", notes:"WIDE · 3 straight wins",            tags:["VALUE"]},
+      {name:"Paradise",         ml:27, ofig:84, ong:"C+", notes:"POCKET NO_KEEP",                    tags:[]},
+      {name:"Luv Your Neighbor",ml:41, ofig:82, ong:"C+", notes:"COVER",                             tags:[]},
+      {name:"Solemn Vow",       ml:27, ofig:81, ong:"B-", notes:"NASAL_S WARM_UP",                   tags:[]},
+      {name:"Front Runnin",     ml:28, ofig:74, ong:"C",  notes:"PRERACE+ NO_KEEP",                  tags:["FADE"]},
+      {name:"French Friction",  ml:28, ofig:72, ong:"C+", notes:"NASAL_S PRESSED · prior best 94 B+", tags:[]}
+    ]},
+  { num:9, name:"Alysheba G2", type:"G2", dist:"8.5f Dirt", purse:"$750k", contention:"soft", verdict:"Navajo Warrior · Grande · Skippylongstocking · Disruptor",
+    horses:[
+      {name:"Navajo Warrior",     ml:41,  ofig:107, ong:"B",  notes:"WARM SLOG MOVE",                            tags:["KEY"]},
+      {name:"Baeza",              ml:181, ofig:105, ong:"C+", notes:"SLOG TROUBLE_S · BCClassic runner",         tags:["BOMB","LAYOFF"]},
+      {name:"Disruptor",          ml:55,  ofig:103, ong:"B+", notes:"BIAS win · best grade",                     tags:["KEY"]},
+      {name:"Grande",             ml:34,  ofig:97,  ong:"B",  notes:"EASY_LEAD · most consistent",               tags:[]},
+      {name:"Skippylongstocking", ml:41,  ofig:97,  ong:"B",  notes:"WARM_UP WARM · 3 wins",                     tags:[]},
+      {name:"Corporate Power",    ml:41,  ofig:95,  ong:"B",  notes:"Blank last race",                           tags:[]},
+      {name:"Nu What's New",      ml:34,  ofig:92,  ong:"B",  notes:"NASAL_S WARM WARM_UP · 3 wins",             tags:[]},
+      {name:"East Avenue",        ml:34,  ofig:91,  ong:"B-", notes:"WIDE",                                      tags:[]},
+      {name:"Tappan Street",      ml:97,  ofig:75,  ong:"C",  notes:"KICKBACK-",                                 tags:["FADE"]}
+    ]},
+  { num:10, name:"Modesty G3", type:"G3", dist:"9f Turf", purse:"$500k", contention:"soft", verdict:"Gezora · Kathynmarissa · Stylish Sue",
+    horses:[
+      {name:"Gezora (FR)",          ml:181, ofig:107, ong:"B+", notes:"NO_COVER CLOSE · BC F&M Turf G1",    tags:["KEY","BOMB"]},
+      {name:"Kathynmarissa",        ml:246, ofig:100, ong:"B+", notes:"PERFECT NO_LEAD · Am Oaks G1",       tags:["KEY","BOMB"]},
+      {name:"Ramsey Pond",          ml:34,  ofig:100, ong:"C+", notes:"Blank last race",                    tags:[]},
+      {name:"Stylish Sue",          ml:41,  ofig:95,  ong:"B",  notes:"EASY_LEAD PRESSED",                  tags:[]},
+      {name:"Dona Clota (CHI)",     ml:34,  ofig:97,  ong:"C",  notes:"RANK SHORTER?",                      tags:[]},
+      {name:"Pin Up Betty",         ml:20,  ofig:89,  ong:"C+", notes:"WARM SAVED DROP?",                   tags:["FADE"]},
+      {name:"Queens Command (IRE)", ml:34,  ofig:88,  ong:"B-", notes:"Blank last race",                    tags:[]},
+      {name:"Whiskey Decision",     ml:55,  ofig:87,  ong:"B",  notes:"BLANKET",                            tags:[]},
+      {name:"Proctor Street",       ml:55,  ofig:86,  ong:"B",  notes:"BLANKET",                            tags:[]},
+      {name:"Adrasteia",            ml:132, ofig:85,  ong:"B-", notes:"TRAFFIC",                            tags:[]}
+    ]},
+  { num:11, name:"La Troienne G1", type:"G1", dist:"8.5f Dirt", purse:"$1M", contention:"soft", verdict:"Fully Subscribed · Dry Powder · Take Charge Omaha · Scalable",
+    horses:[
+      {name:"Fully Subscribed",  ml:145, ofig:100, ong:"B+", notes:"BUNCHED CLOSE",         tags:["VALUE","LAYOFF"]},
+      {name:"Chasten",           ml:48,  ofig:99,  ong:null,  notes:"99 oFIG · no grade",   tags:[]},
+      {name:"Dry Powder",        ml:50,  ofig:96,  ong:"B",   notes:"MOVE WIDE",             tags:["KEY"]},
+      {name:"Bless the Broken",  ml:55,  ofig:92,  ong:"B-",  notes:"DUEL NO_KEEP",          tags:[]},
+      {name:"Take Charge Omaha", ml:19,  ofig:90,  ong:"B",   notes:"TROUBLE_S COVER",       tags:["KEY"]},
+      {name:"Scalable",          ml:33,  ofig:90,  ong:"B",   notes:"WEAK · 3 wins",         tags:[]},
+      {name:"Snowyte",           ml:33,  ofig:88,  ong:"B-",  notes:"WEAK",                  tags:[]},
+      {name:"Miss Justify",      ml:329, ofig:87,  ong:"C+",  notes:"NO_KEEP",               tags:["LAYOFF"]},
+      {name:"Drexel Hill",       ml:76,  ofig:85,  ong:"C+",  notes:"Blank last race",       tags:[]},
+      {name:"Nerazurri",         ml:20,  ofig:84,  ong:"C+",  notes:"NASAL_S TROUBLE-",      tags:[]},
+      {name:"Shred the Gnar",    ml:76,  ofig:77,  ong:"C",   notes:"Blank last race",       tags:["FADE"]}
+    ]},
+  { num:12, name:"Edgewood G2", type:"G2", dist:"8.5f Turf", purse:"$600k", contention:"avg", verdict:"Storm's Wake · Lorelei Lee · Imaginationthelady · Tam Tam",
+    horses:[
+      {name:"Storm's Wake",          ml:27, ofig:91, ong:"B",  notes:"NASAL_S WARM · Appalachian G2 win",    tags:["KEY"]},
+      {name:"Lorelei Lee",           ml:41, ofig:91, ong:"B",  notes:"TROUBLE_S RUSH · Brbntk win",          tags:["KEY"]},
+      {name:"Imaginationthelady",    ml:27, ofig:91, ong:"B-", notes:"SLOG WIDE CLOSE · BC JuvFilly Turf",   tags:[]},
+      {name:"Lion Lake (IRE)",       ml:27, ofig:91, ong:"B-", notes:"TRAFFIC SHUFFLE",                      tags:[]},
+      {name:"Just Aloof",            ml:27, ofig:90, ong:"B-", notes:"TROUBLE_S SAVED · 2 wins",             tags:[]},
+      {name:"Lovely Grey",           ml:41, ofig:90, ong:"B",  notes:"SLOG X_WIDE CLOSE",                    tags:[]},
+      {name:"Dandona",               ml:55, ofig:90, ong:"B",  notes:"MOVE FLOW · Fla Oaks G3 win",          tags:[]},
+      {name:"Time to Dream",         ml:55, ofig:89, ong:"B-", notes:"FLOW · BC JuvFilly Turf",              tags:[]},
+      {name:"Tam Tam",               ml:34, ofig:88, ong:"B",  notes:"TACTIC+ · 2 wins",                     tags:[]},
+      {name:"Connect the Stars",     ml:34, ofig:88, ong:"B",  notes:"WIDE CLOSE",                           tags:[]},
+      {name:"To a Flame",            ml:27, ofig:87, ong:"C+", notes:"NASAL_S TROUBLE_S",                    tags:[]},
+      {name:"Indigo Woods (IRE)",    ml:55, ofig:86, ong:"B",  notes:"TACTIC+ COVER · 2 wins",               tags:[]},
+      {name:"Bohemian",              ml:55, ofig:83, ong:"B-", notes:"TACTIC- TROUBLE",                      tags:[]},
+      {name:"Taken by the Wind",     ml:35, ofig:76, ong:"C+", notes:"PRERACE+ WIDE",                        tags:[]}
+    ]},
+  { num:13, name:"Kentucky Oaks G1", type:"G1", dist:"9f Dirt", purse:"$1.5M", contention:"high", verdict:"Always a Runner · Prom Queen · Counting Stars · Meaning · Percy's Bar",
+    horses:[
+      {name:"Always a Runner",  ml:27, ofig:95, ong:"B+", notes:"CLOSE NO_LEAD · Gazelle win",                  tags:["KEY"]},
+      {name:"Prom Queen",       ml:34, ofig:95, ong:"B",  notes:"BUNCHED PERFECT · GP Oaks win",                tags:["KEY"]},
+      {name:"Counting Stars",   ml:35, ofig:94, ong:"B",  notes:"NASAL_S WARM_UP PERFECT · 3 wins",             tags:["VALUE"]},
+      {name:"Pashmina",         ml:27, ofig:93, ong:"B",  notes:"LONE · Gazelle runner",                        tags:[]},
+      {name:"Meaning",          ml:27, ofig:92, ong:"B",  notes:"PERFECT POCKET MOVE · SA Oaks win",            tags:[]},
+      {name:"Bottle of Rouge",  ml:48, ofig:92, ong:"B",  notes:"POCKET TACTIC+ · Baffert · VA Oaks",           tags:["BOMB"]},
+      {name:"My Miss Mo",       ml:34, ofig:92, ong:"B-", notes:"BUNCHED TACTIC+",                              tags:[]},
+      {name:"Percy's Bar",      ml:28, ofig:90, ong:"B",  notes:"PERFECT SAVED MOVE · 3 straight",              tags:[]},
+      {name:"Brooklyn Blonde",  ml:27, ofig:90, ong:"B-", notes:"NASAL_S WARM WIDE",                            tags:[]},
+      {name:"Explora",          ml:61, ofig:90, ong:"B",  notes:"PERFECT · Baffert · Honeybee win",              tags:["VALUE"]},
+      {name:"Lovely Grey",      ml:41, ofig:90, ong:"B",  notes:"SLOG X_WIDE CLOSE",                            tags:[]},
+      {name:"Resist",           ml:41, ofig:88, ong:"B-", notes:"RUSH SAVED COVER",                             tags:[]},
+      {name:"Dazzling Dame",    ml:48, ofig:87, ong:"B-", notes:"Blank last race · prior B+",                   tags:[]},
+      {name:"Bella Ballerina",  ml:41, ofig:87, ong:"B-", notes:"BOS NO_LEAD · FG Oaks win",                    tags:["BOMB"]},
+      {name:"Zany",             ml:28, ofig:87, ong:"B",  notes:"WARM_UP TROUBLE_S",                            tags:[]},
+      {name:"Search Party",     ml:35, ofig:87, ong:"B-", notes:"NASAL_S BTL TROUBLE_S",                        tags:[]},
+      {name:"Nycon",            ml:27, ofig:84, ong:"C+", notes:"TRAFFIC",                                      tags:["FADE"]}
+    ]}
+];
+
+const TICKETS = [
+  { title:"Pick 5 · R7–R11", overlay:"HIGH OVERLAY", overlayKey:"HIGH",
+    math:"3×3×3×3×3 = 243 combos × $0.50", cost:"$121.50",
+    legs:[
+      { label:"R7",  raceNum:7,  horses:["Shisospicy","Haulin Ice","Creed's Gold"] },
+      { label:"R8",  raceNum:8,  horses:["Goodall","Sippin Pretty","On Time Girl"] },
+      { label:"R9",  raceNum:9,  horses:["Navajo Warrior","Grande","Skippylongstocking"] },
+      { label:"R10", raceNum:10, horses:["Gezora (FR)","Kathynmarissa","Stylish Sue"] },
+      { label:"R11", raceNum:11, horses:["Take Charge Omaha","Scalable","Dry Powder"] }
+    ]},
+  { title:"Pick 3 · R11–R13", overlay:"HIGH OVERLAY", overlayKey:"HIGH",
+    math:"4×4×4 = 64 combos × $0.50", cost:"$32.00",
+    legs:[
+      { label:"R11", raceNum:11, horses:["Take Charge Omaha","Scalable","Fully Subscribed","Dry Powder"] },
+      { label:"R12", raceNum:12, horses:["Storm's Wake","Lorelei Lee","Imaginationthelady","Tam Tam"] },
+      { label:"R13", raceNum:13, horses:["Always a Runner","Prom Queen","Counting Stars","Meaning"] }
+    ]},
+  { title:"Pick 4 · R8–R11", overlay:"MODERATE", overlayKey:"MODERATE",
+    math:"4×4×4×3 = 192 combos × $0.50", cost:"$96.00",
+    legs:[
+      { label:"R8",  raceNum:8,  horses:["Goodall","Sippin Pretty","River Wind","On Time Girl"] },
+      { label:"R9",  raceNum:9,  horses:["Navajo Warrior","Grande","Skippylongstocking","Nu What's New"] },
+      { label:"R10", raceNum:10, horses:["Gezora (FR)","Kathynmarissa","Stylish Sue","Ramsey Pond"] },
+      { label:"R11", raceNum:11, horses:["Take Charge Omaha","Scalable","Dry Powder"] }
+    ]},
+  { title:"Daily Double · R12–R13", overlay:"LONGSHOT", overlayKey:"LONGSHOT",
+    math:"5×4 = 20 combos × $2.00", cost:"$40.00",
+    legs:[
+      { label:"R12", raceNum:12, horses:["Storm's Wake","Lorelei Lee","Imaginationthelady","Just Aloof","Tam Tam"] },
+      { label:"R13", raceNum:13, horses:["Explora","Bottle of Rouge","Bella Ballerina","Dazzling Dame"] }
+    ]},
+  { title:"Pick 3 · R7–R9", overlay:"LOTTERY", overlayKey:"LOTTERY",
+    math:"4×2×3 = 24 combos × $0.50", cost:"$12.00",
+    legs:[
+      { label:"R7", raceNum:7, horses:["Shisospicy","Haulin Ice","Creed's Gold","Mae Town"] },
+      { label:"R8", raceNum:8, horses:["Goodall","Sippin Pretty"] },
+      { label:"R9", raceNum:9, horses:["Navajo Warrior","Grande","Baeza"] }
+    ]}
+];
+
+// Build lookup: raceNum → horseName → horseObj
+const OEQ_LOOKUP = {};
+for (const race of RACES) {
+  OEQ_LOOKUP[race.num] = {};
+  for (const h of race.horses) OEQ_LOOKUP[race.num][h.name] = h;
+}
+
+// =============================================================
+//  OPTIXEQ — RENDERING
+// =============================================================
+function oeqFmtML(ml) {
+  if (ml === 'FTS') return 'FTS';
+  return (ml / 10).toFixed(1) + '-1';
+}
+
+function oeqFigClass(ofig) {
+  if (ofig === null) return 'oeq-fig-null';
+  if (ofig >= 95)   return 'oeq-fig-high';
+  if (ofig >= 85)   return 'oeq-fig-mid';
+  return 'oeq-fig-low';
+}
+
+function oeqTagHtml(tag) {
+  const cls = tag === 'IMPROVE?' ? 'IMPROVE' : tag;
+  return `<span class="oeq-tag oeq-tag-${cls}">${tag}</span>`;
+}
+
+function oeqContentionHtml(c) {
+  if (c === 'soft') return '<span class="oeq-contention" title="Soft contention">\u2744</span>';
+  if (c === 'high') return '<span class="oeq-contention" title="High contention">&#x1f4b0;</span>';
+  return '<span class="oeq-contention" title="Average contention">\u2600</span>';
+}
+
+function renderOptixEQ() {
+  // ── Race Analysis ──────────────────────────────────────────
+  let raceHtml = `<p class="oeq-source-note">ML odds extracted from OptixEQ PDF &middot; Program numbers added after 9am Friday</p>`;
+
+  for (const race of RACES) {
+    const sorted = [...race.horses].sort((a, b) => {
+      if (a.ofig === null && b.ofig === null) return 0;
+      if (a.ofig === null) return 1;
+      if (b.ofig === null) return -1;
+      return b.ofig - a.ofig;
+    });
+
+    let rows = '';
+    for (const h of sorted) {
+      const figCls = oeqFigClass(h.ofig);
+      const figTxt = h.ofig !== null ? h.ofig : '\u2014';
+      const ongTxt = h.ong  !== null ? h.ong  : '\u2014';
+      const tagsHtml = h.tags.length
+        ? `<div class="oeq-tags">${h.tags.map(oeqTagHtml).join('')}</div>` : '';
+      rows += `<tr>
+        <td><div class="oeq-horse-name">${h.name}</div>${tagsHtml}</td>
+        <td style="white-space:nowrap;font-size:.78rem;color:var(--dim)">${oeqFmtML(h.ml)}</td>
+        <td><span class="${figCls}">${figTxt}</span></td>
+        <td style="font-size:.78rem;color:var(--dim)">${ongTxt}</td>
+        <td><span class="oeq-notes">${h.notes}</span></td>
+      </tr>`;
+    }
+
+    raceHtml += `
+    <div class="oeq-race-card" id="oeq-r${race.num}">
+      <div class="oeq-race-header" onclick="oeqToggle(${race.num})">
+        <span class="oeq-race-num">${race.num}</span>
+        <div class="oeq-race-info">
+          <div class="oeq-race-title">${race.name}</div>
+          <div class="oeq-race-meta">${race.dist} &middot; ${race.purse}</div>
+        </div>
+        <div class="oeq-race-right">
+          <span class="oeq-grade-badge oeq-grade-${race.type}">${race.type}</span>
+          ${oeqContentionHtml(race.contention)}
+        </div>
+        <span class="oeq-chevron">&#9660;</span>
+      </div>
+      <div class="oeq-race-body">
+        <div class="table-scroll">
+          <table class="oeq-table">
+            <thead><tr>
+              <th>Horse</th><th>ML</th><th>oFIG</th><th>oNg</th><th>Last Race Notes</th>
+            </tr></thead>
+            <tbody>${rows}</tbody>
+          </table>
+        </div>
+        <div class="oeq-verdict">&#128073; Top picks: ${race.verdict}</div>
+      </div>
+    </div>`;
+  }
+  document.getElementById('oeq-race-section').innerHTML = raceHtml;
+
+  // ── Exotic Tickets ─────────────────────────────────────────
+  let ticketHtml = '';
+  TICKETS.forEach((t, ti) => {
+    let legsHtml = '';
+    const copyLines = [];
+    for (const leg of t.legs) {
+      const raceData = OEQ_LOOKUP[leg.raceNum] || {};
+      let horseRows = '';
+      for (const hname of leg.horses) {
+        const hd = raceData[hname] || {};
+        const figCls = oeqFigClass(hd.ofig != null ? hd.ofig : null);
+        const figTxt = hd.ofig != null ? hd.ofig : '\u2014';
+        const ongTxt = hd.ong  != null ? hd.ong  : '\u2014';
+        horseRows += `<div class="oeq-leg-horse-row">
+          <span class="oeq-leg-hname">${hname}</span>
+          <span class="oeq-leg-fig"><span class="${figCls}">${figTxt}</span> <span style="color:var(--dim)">${ongTxt}</span></span>
+        </div>`;
+      }
+      legsHtml += `<div class="oeq-ticket-leg">
+        <div class="oeq-leg-label">${leg.label}</div>${horseRows}
+      </div>`;
+      copyLines.push(`${leg.label}: ${leg.horses.join(' / ')}`);
+    }
+    const copyText = copyLines.join('\n');
+    const taId  = `oeq-ta-${ti}`;
+    const btnId = `oeq-cp-${ti}`;
+    ticketHtml += `
+    <div class="oeq-ticket-card">
+      <div class="oeq-ticket-header">
+        <div class="oeq-ticket-title">${t.title}</div>
+        <span class="oeq-overlay-badge oeq-ov-${t.overlayKey}">${t.overlay}</span>
+      </div>
+      ${legsHtml}
+      <div class="oeq-ticket-math">${t.math} &nbsp;=&nbsp; <span class="oeq-ticket-cost">${t.cost}</span></div>
+      <textarea class="oeq-copy-area" id="${taId}" rows="${t.legs.length}" readonly>${copyText}</textarea>
+      <button class="oeq-copy-btn" id="${btnId}" onclick="oeqCopy('${taId}','${btnId}')">&#128203; COPY</button>
+    </div>`;
+  });
+  document.getElementById('oeq-tickets-section').innerHTML = ticketHtml;
+}
+
+function oeqToggle(num) {
+  document.getElementById('oeq-r' + num).classList.toggle('open');
+}
+
+function oeqSwitch(section) {
+  document.getElementById('oeq-race-section').style.display    = section === 'race'    ? '' : 'none';
+  document.getElementById('oeq-tickets-section').style.display = section === 'tickets' ? '' : 'none';
+  document.getElementById('oeq-btn-race').classList.toggle('active',    section === 'race');
+  document.getElementById('oeq-btn-tickets').classList.toggle('active', section === 'tickets');
+}
+
+function oeqCopy(taId, btnId) {
+  const ta  = document.getElementById(taId);
+  const btn = document.getElementById(btnId);
+  ta.select();
+  ta.setSelectionRange(0, 99999);
+  try { navigator.clipboard.writeText(ta.value).catch(() => document.execCommand('copy')); }
+  catch(e) { document.execCommand('copy'); }
+  btn.textContent = '\u2713 COPIED';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.innerHTML = '&#128203; COPY'; btn.classList.remove('copied'); }, 2000);
+}
+
+// =============================================================
 //  SERVICE WORKER REGISTRATION
 // =============================================================
 if ('serviceWorker' in navigator) {
@@ -3182,6 +3708,7 @@ loadDashboard();
 renderTrackGuide();
 updateWpLegs();
 buildTodayLegs();
+renderOptixEQ();
 </script>
 </body>
 </html>
