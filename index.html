@@ -4785,11 +4785,36 @@ function analyzeMorningLine() {
 
   // ── Sweet Spot Zone Display ──
   const histAvg = hist ? hist.avg_payout : null;
-  const enriched = combos.map(c => {
-    const winProb  = c.horses.reduce((p, h) => p * (1 / (h.odds + 1)), 1);
-    const vsRatio  = histAvg ? c.parlay / histAvg : null;
-    const valueScore = vsRatio !== null ? winProb * vsRatio : winProb;
-    return { ...c, winProb, vsRatio, valueScore };
+
+  // Step 1: raw log win score (sum of log probs) and vsRatio per combo
+  const pre = combos.map(c => ({
+    ...c,
+    logWinScore: c.horses.reduce((s, h) => s + Math.log(1 / (h.odds + 1)), 0),
+    vsRatio:     histAvg ? c.parlay / histAvg : null
+  }));
+
+  // Step 2: find min/max for normalization
+  const logScores = pre.map(c => c.logWinScore);
+  const logMin = Math.min(...logScores), logMax = Math.max(...logScores);
+  const logRange = (logMax - logMin) || 1;
+
+  const vsVals  = pre.map(c => c.vsRatio).filter(v => v !== null);
+  const vsMin   = vsVals.length ? Math.min(...vsVals) : 0;
+  const vsMax   = vsVals.length ? Math.max(...vsVals) : 1;
+  const vsRange = (vsMax - vsMin) || 1;
+
+  // Step 3: win-prob rank percentile (rank 1 = highest win prob = "Top 1%")
+  const sortedByLog = [...pre].sort((a, b) => b.logWinScore - a.logWinScore);
+  const rankPctMap  = new Map(sortedByLog.map((c, i) =>
+    [c, Math.ceil((i + 1) / sortedByLog.length * 100)]
+  ));
+
+  // Step 4: normalized Value Score = normLog × normVsRatio
+  const enriched = pre.map(c => {
+    const normLog    = (c.logWinScore - logMin) / logRange;
+    const normVs     = c.vsRatio !== null ? (c.vsRatio - vsMin) / vsRange : normLog;
+    const valueScore = normLog * normVs;
+    return { ...c, normLog, valueScore, winProbRankPct: rankPctMap.get(c) };
   });
 
   const [defMin, defMax] = TC_ZONE_BOUNDS[wager] || [1.75, 2.50];
@@ -4852,7 +4877,7 @@ function tcApplyZones(minXArg, maxXArg) {
       const vsCell  = histAvg
         ? `<td>${c.vsRatio !== null ? c.vsRatio.toFixed(2) + 'x' : '—'}</td>` : '';
       const wpCell  = isValue
-        ? `<td>${(c.winProb * 100).toFixed(3)}%</td>` : '';
+        ? `<td>Top ${c.winProbRankPct}%</td>` : '';
       const scoreTd = isValue
         ? `<td class="tc-score-gold">${c.valueScore.toFixed(4)}</td>`
         : `<td>${c.valueScore.toFixed(4)}</td>`;
@@ -4871,8 +4896,8 @@ function tcApplyZones(minXArg, maxXArg) {
         <th style="text-align:left">Combination</th>
         <th class="tc-parlay-hdr">${parlayLbl} Parlay</th>
         ${vsHdr}${wpHdr}
-        <th title="Win Prob \xd7 VS Hist Avg \u2014 higher is better">
-          Value Score <span class="tc-score-tip" title="Win Prob \xd7 VS Hist Avg \u2014 higher is better">&#9432;</span>
+        <th title="Value Score combines relative win probability rank and historical value ratio \u2014 1.0000 is the optimal combination on both dimensions">
+          Value Score <span class="tc-score-tip" title="Value Score combines relative win probability rank and historical value ratio \u2014 1.0000 is the optimal combination on both dimensions">&#9432;</span>
         </th>
       </tr></thead>
       <tbody>${rows}</tbody>
