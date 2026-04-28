@@ -547,6 +547,17 @@
       background: rgba(201,168,76,.06); border-left: 3px solid var(--gold);
     }
     .tc-no-hist-note { font-size:.78rem; color:var(--dim); margin-bottom:8px; }
+    .tc-realistic-target {
+      display: flex; align-items: center; gap: 10px; flex-wrap: wrap;
+      margin: 12px 0 4px;
+      padding: 9px 14px;
+      border: 1.5px solid rgba(201,168,76,.4);
+      border-radius: 8px;
+      background: rgba(201,168,76,.07);
+      font-size: .88rem;
+    }
+    .tc-realistic-target span:first-child { color: var(--dim); }
+    .tc-realistic-target strong { color: var(--gold); font-size: 1rem; }
     /* ── AE Alert ── */
     .ae-alert-banner {
       display: flex; gap: 10px; align-items: flex-start;
@@ -4627,6 +4638,11 @@ function analyzeMorningLine() {
   const avgPar   = parlays.reduce((s, v) => s + v, 0) / parlays.length;
   const bestPar  = parlays[0];
   const worstPar = parlays[parlays.length - 1];
+  const sortedParlays = [...parlays].sort((a, b) => a - b);
+  const _mid = Math.floor(sortedParlays.length / 2);
+  const medianPar = sortedParlays.length % 2 === 0
+    ? (sortedParlays[_mid - 1] + sortedParlays[_mid]) / 2
+    : sortedParlays[_mid];
   const inputEl2   = document.getElementById('tc-ticket-input');
   const storedBase2 = parseFloat(inputEl2?.dataset.base);
   const wagerBase  = (!isNaN(storedBase2) && storedBase2 > 0) ? storedBase2 : (TC_BASE[wager] || 0.50);
@@ -4682,8 +4698,8 @@ function analyzeMorningLine() {
       <div class="lbl">Best Combo Parlay</div>
     </div>
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${avgPar}">${fmtP(avgPar)}</span></div>
-      <div class="lbl">Avg Combo Parlay</div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${medianPar}">${fmtP(medianPar)}</span></div>
+      <div class="lbl">Median Combo Parlay</div>
     </div>
     <div class="stat-box">
       <div class="val" style="font-size:1.1rem"><span data-payout-raw="${worstPar}">${fmtP(worstPar)}</span></div>
@@ -4702,16 +4718,18 @@ function analyzeMorningLine() {
       : `<span class="badge badge-MODERATE">FAIR VALUE</span>`;
     const thinNote = hist.thin_sample
       ? '<p class="thin-note" style="margin-top:8px">&#9888; Small sample (&lt;5 hits) — treat with caution.</p>' : '';
+    const realisticWagerLbl = {10:'$0.20',4:'$0.50',2:'$1.00',1:'$2.00'}[displayDiv] || '$0.50';
     html += `<div class="card"><h2>Sequence History</h2>
       <p style="font-size:.76rem;color:var(--dim);margin-bottom:10px">${track} ${wager} &mdash; Races ${spanStr}</p>
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="val"><span data-payout-raw="${hist.avg_payout}">${fmtP(hist.avg_payout)}</span></div>
-          <div class="lbl">Historical Avg Payout</div>
+          <div class="val" style="color:var(--gold)"><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></div>
+          <div class="lbl">Historical Median Payout</div>
         </div>
         <div class="stat-box">
-          <div class="val"><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></div>
-          <div class="lbl">Historical Median Payout</div>
+          <div class="val" style="font-size:1.05rem"><span data-payout-raw="${hist.avg_payout}">${fmtP(hist.avg_payout)}</span></div>
+          <div class="lbl">Historical Avg Payout</div>
+          <div style="font-size:.66rem;color:var(--dim);font-style:italic;margin-top:3px">* Average may be distorted by carryover jackpot payouts</div>
         </div>
         <div class="stat-box">
           <div class="val">${hist.times_hit}</div>
@@ -4721,6 +4739,10 @@ function analyzeMorningLine() {
           <div class="val"><span data-payout-raw="${hist.max_payout}">${fmtP(hist.max_payout)}</span></div>
           <div class="lbl">Historical Max Payout</div>
         </div>
+      </div>
+      <div class="tc-realistic-target">
+        <span id="tc-realistic-lbl">&#127919; Realistic target on a ${realisticWagerLbl} ticket:</span>
+        <strong><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></strong>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
         ${ovlBadge}
@@ -4977,6 +4999,8 @@ function tcSetWagerBase(div) {
   tcApplyZones();
   // Update payout spans in Cards 1–3 (outside #tc-zones)
   const wagerLabel = {10:'$0.20', 4:'$0.50', 2:'$1.00', 1:'$2.00'}[div] || '$2.00';
+  const rlEl = document.getElementById('tc-realistic-lbl');
+  if (rlEl) rlEl.textContent = '\uD83C\uDFAF Realistic target on a ' + wagerLabel + ' ticket:';
   document.querySelectorAll('[data-payout-raw]').forEach(el => {
     if (el.closest('#tc-zones')) return;   // zones already rebuilt above
     const raw = parseFloat(el.dataset.payoutRaw);
