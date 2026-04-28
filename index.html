@@ -4886,8 +4886,8 @@ function tcApplyZones(minXArg, maxXArg) {
       const wpCell  = isValue
         ? `<td>Top ${c.winProbRankPct}%</td>` : '';
       const scoreTd = isValue
-        ? `<td class="tc-score-gold">${c.valueScore.toFixed(6)}</td>`
-        : `<td>${c.valueScore.toFixed(6)}</td>`;
+        ? `<td class="tc-score-gold">${(c.valueScore * 1000).toFixed(3)}</td>`
+        : `<td>${(c.valueScore * 1000).toFixed(3)}</td>`;
       return `<tr class="${rowCls}">
         <td style="text-align:left">${label}</td>
         <td><span data-payout-raw="${c.parlay}" data-payout-fmt="d">${fmtPC(c.parlay)}</span></td>
@@ -4903,8 +4903,8 @@ function tcApplyZones(minXArg, maxXArg) {
         <th style="text-align:left">Combination</th>
         <th class="tc-parlay-hdr">${parlayLbl} Parlay</th>
         ${vsHdr}${wpHdr}
-        <th title="Value Score combines relative win probability rank and historical value ratio \u2014 1.0000 is the optimal combination on both dimensions">
-          Value Score <span class="tc-score-tip" title="Value Score combines relative win probability rank and historical value ratio \u2014 1.0000 is the optimal combination on both dimensions">&#9432;</span>
+        <th title="Combines Relative Win Rank and VS Hist Avg into a single score out of 1000. A score of 1000 means this combination ranks highest on both win likelihood and historical value simultaneously. Use this to identify the best balance of probability and payout.">
+          Value Score <span class="tc-score-tip" title="Combines Relative Win Rank and VS Hist Avg into a single score out of 1000. A score of 1000 means this combination ranks highest on both win likelihood and historical value simultaneously. Use this to identify the best balance of probability and payout.">&#9432;</span>
         </th>
       </tr></thead>
       <tbody>${rows}</tbody>
@@ -4917,7 +4917,7 @@ function tcApplyZones(minXArg, maxXArg) {
     out += `<p class="tc-zone-summary">
       <strong>${valueZone.length}</strong> combination${valueZone.length !== 1 ? 's' : ''} in Value Zone
       out of <strong>${total}</strong> total
-      &mdash; top Value Score: <strong>${topScore.toFixed(6)}</strong>
+      &mdash; top Value Score: <strong>${(topScore * 1000).toFixed(3)}</strong>
     </p>`;
 
     // VALUE ZONE (open by default)
