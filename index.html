@@ -529,6 +529,30 @@
     .tc-zone-body .results-table tr.dim-row   { opacity: .6; }
     .tc-score-gold { color: var(--gold); font-weight: 700; }
     .tc-score-tip  { font-size: .64rem; color: var(--dim); font-style: italic; cursor: help; }
+    /* Column header ⓘ tooltips */
+    .th-tip { position: relative; cursor: help; white-space: nowrap; }
+    .th-tip-icon { font-size: .72rem; color: var(--gold); margin-left: 3px; vertical-align: middle; }
+    .th-tip-text {
+      display: none;
+      position: absolute;
+      bottom: calc(100% + 8px);
+      left: 50%;
+      transform: translateX(-50%);
+      width: 230px;
+      background: #07111f;
+      border: 1px solid var(--gold);
+      color: #e8e0d0;
+      font-size: .72rem;
+      font-weight: 400;
+      line-height: 1.45;
+      padding: 8px 10px;
+      border-radius: 6px;
+      z-index: 200;
+      white-space: normal;
+      pointer-events: none;
+      box-shadow: 0 4px 16px rgba(0,0,0,.6);
+    }
+    .th-tip:hover .th-tip-text { display: block; }
     .tc-min-max-row {
       display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
       margin-bottom: 10px; padding: 8px 10px;
@@ -3947,6 +3971,17 @@ function calcWillPay() {
 const TC_LEGS = { P3: 3, P4: 4, P5: 5, P6: 6 };
 const TC_BASE = { P3: 1.00, P4: 0.50, P5: 0.50, P6: 0.20 };  // default wager base amounts
 const TC_ZONE_BOUNDS = { P3:[1.50,2.25], P4:[1.75,2.50], P5:[2.00,2.75], P6:[2.50,4.00], DD:[1.50,2.25] };
+
+// Canonical parlay calculator.
+// legs = array of fractional-decimal odds (e.g. [5.0, 6.0, 4.5, 10.0, 4.5])
+// wagerBase = dollar amount of the ticket (0.20 / 0.50 / 1.00 / 2.00)
+// Returns the theoretical parlay payout at that wager base.
+// Formula: start with $2, multiply each (odds+1) payout factor, then scale to wagerBase.
+function calcComboParlay(legs, wagerBase) {
+  let parlay2 = 2.0;
+  for (const odds of legs) { parlay2 *= (odds + 1); }
+  return parlay2 * (wagerBase / 2.0);
+}
 let _portfolioData = null;  // populated by analyzeAllTickets(), read by download/copy
 
 function populateTcTrackSelect() {
@@ -4122,11 +4157,8 @@ function analyzeAllTickets() {
 
     if (parseErr) { results.push({ ticketStr, base, error: parseErr }); continue; }
 
-    // $2 theoretical parlay = $2 × ∏(odds_i + 1), where odds_i is fractional decimal odds
-    // (e.g. 5-1 → 5.0, 9/2 → 4.5, even → 1.0).  The +1 converts profit odds to a payout
-    // multiplier (6-1 horse pays $14 for $2 → factor 7 = 6+1).  Scale to ticket base for display.
-    const parlaysAt2 = tcCartesian(legs).map(hs => 2 * hs.reduce((p, h) => p * (h.odds + 1), 1));
-    const parlays  = parlaysAt2.map(p => p * (base / 2));
+    // Parlay at the ticket's wager base via calcComboParlay.
+    const parlays = tcCartesian(legs).map(hs => calcComboParlay(hs.map(h => h.odds), base));
     const avgPar   = parlays.reduce((s, v) => s + v, 0) / parlays.length;
     const bestPar  = Math.max(...parlays);
     const cost     = parlays.length * base;
@@ -4623,15 +4655,12 @@ function analyzeMorningLine() {
     legs.push(horses);
   }
 
-  // Generate all one-per-leg combinations and compute $2 theoretical parlay.
-  // Formula: $2 parlay = $2 × ∏(odds_i + 1)
-  //   odds_i is fractional decimal (5-1 → 5.0, 9/2 → 4.5, even → 1.0).
-  //   (odds + 1) converts to a payout multiplier: 6-1 pays $14 for $2 → factor = 7 = 6+1.
-  //   Example: #9 5-1, #6 6-1, #3 9/2, #3 10-1, #6 9/2
-  //     = 2 × 6 × 7 × 5.5 × 11 × 5.5 ≈ $27,951  →  $0.50 display ≈ $6,988
+  // Generate all one-per-leg combinations and compute $2 theoretical parlay via calcComboParlay.
+  // Example: #9 5-1, #6 6-1, #3 9/2, #3 10-1, #6 9/2
+  //   calcComboParlay([5,6,4.5,10,4.5], 2.0) = 2×6×7×5.5×11×5.5 ≈ $27,951  →  $0.50 display ≈ $6,988
   const rawCombos = tcCartesian(legs);
   const combos = rawCombos
-    .map(horses => ({ horses, parlay: 2 * horses.reduce((p, h) => p * (h.odds + 1), 1) }))
+    .map(horses => ({ horses, parlay: calcComboParlay(horses.map(h => h.odds), 2.0) }))
     .sort((a, b) => b.parlay - a.parlay);
 
   const parlays  = combos.map(c => c.parlay);
@@ -4918,16 +4947,14 @@ function tcApplyZones(minXArg, maxXArg) {
     }).join('');
     const capNote = list.length > CAP
       ? `<p class="thin-note" style="padding:6px 10px;margin:0">Showing ${CAP} of ${list.length}</p>` : '';
-    const vsHdr = histAvg ? '<th>vs Hist</th>' : '';
-    const wpHdr = isValue ? '<th>Win Prob</th>' : '';
+    const vsHdr = histAvg ? `<th><span class="th-tip">vs Hist Avg <span class="th-tip-icon">&#9432;</span><span class="th-tip-text">How this combination&#8217;s Parlay Benchmark compares to the historical average exotic payout for this sequence. 2.30&times; means the parlay benchmark is 2.3 times the historical average.</span></span></th>` : '';
+    const wpHdr = isValue ? `<th><span class="th-tip">Rel. Win Rank <span class="th-tip-icon">&#9432;</span><span class="th-tip-text">How likely this combination is to win compared to all other combinations in your ticket. Top 91% means this combo has higher win probability than 91% of the other combinations. Based on morning line odds only. Does not indicate absolute probability of winning.</span></span></th>` : '';
     return `${capNote}<div class="table-scroll"><table class="results-table">
       <thead><tr>
-        <th style="text-align:left">Combination</th>
-        <th class="tc-parlay-hdr">${parlayLbl} Parlay</th>
+        <th style="text-align:left"><span class="th-tip">Combination <span class="th-tip-icon">&#9432;</span><span class="th-tip-text">The specific horse numbers for each leg of the ticket, in race order.</span></span></th>
+        <th class="tc-parlay-hdr"><span class="th-tip">${parlayLbl} Parlay Benchmark <span class="th-tip-icon">&#9432;</span><span class="th-tip-text">Theoretical payout if you rolled a win bet of the selected wager amount through each leg using morning line odds. A mathematical benchmark only &#8212; not a real wager. Used to compare combinations against each other and against historical exotic averages.</span></span></th>
         ${vsHdr}${wpHdr}
-        <th title="Combines Relative Win Rank and VS Hist Avg into a single score out of 1000. A score of 1000 means this combination ranks highest on both win likelihood and historical value simultaneously. Use this to identify the best balance of probability and payout.">
-          Value Score <span class="tc-score-tip" title="Combines Relative Win Rank and VS Hist Avg into a single score out of 1000. A score of 1000 means this combination ranks highest on both win likelihood and historical value simultaneously. Use this to identify the best balance of probability and payout.">&#9432;</span>
-        </th>
+        <th><span class="th-tip">Value Score <span class="th-tip-icon">&#9432;</span><span class="th-tip-text">Combines Relative Win Rank and VS Hist Avg into a single score out of 1000. A score of 1000 means this combination ranks highest on both win likelihood and historical value simultaneously.</span></span></th>
       </tr></thead>
       <tbody>${rows}</tbody>
     </table></div>`;
