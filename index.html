@@ -475,6 +475,17 @@
     }
     .tc-signal-icon { font-size: 1.2rem; margin-bottom: 6px; }
     .tc-signal-text { font-size: .9rem; font-weight: 600; line-height: 1.5; }
+    /* ── Wager Base toggle ── */
+    .tc-wager-toggle { display:flex; gap:6px; flex-wrap:wrap; margin-bottom:6px; }
+    .tc-wager-btn {
+      padding:5px 14px; border-radius:20px;
+      border:1.5px solid var(--gold); background:transparent;
+      color:var(--gold); font-size:.8rem; font-weight:700;
+      cursor:pointer; transition:background .15s, color .15s;
+    }
+    .tc-wager-btn:hover { background:rgba(201,168,76,.15); }
+    .tc-wager-btn.active { background:var(--gold); color:#0f1b2d; }
+    .tc-wager-hint { font-size:.72rem; color:var(--dim); margin-bottom:14px; }
     /* ── AE Alert ── */
     .ae-alert-banner {
       display: flex; gap: 10px; align-items: flex-start;
@@ -4554,6 +4565,13 @@ function analyzeMorningLine() {
   const wagerBase  = (!isNaN(storedBase2) && storedBase2 > 0) ? storedBase2 : (TC_BASE[wager] || 0.50);
   const ticketCost = wagerBase * combos.length;
 
+  const displayDiv = window._tcWagerDiv || 4;
+  const fmtP  = v => '$' + (v / displayDiv).toLocaleString('en-US', { maximumFractionDigits: 0 });
+  const fmtPC = v => '$' + (v / displayDiv).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const wagerBtns = [['$0.20',10],['$0.50',4],['$1.00',2],['$2.00',1]].map(([label,div]) =>
+    `<button class="tc-wager-btn${displayDiv===div?' active':''}" data-div="${div}" onclick="tcSetWagerBase(${div})">${label}</button>`
+  ).join('');
+
   // Look up historical sequence data
   const raceNums = Array.from({ length: n }, (_, i) => start + i);
   const spanStr  = raceNums.join('-');
@@ -4563,6 +4581,9 @@ function analyzeMorningLine() {
   const fmtD  = v => '$' + v.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
   const fmtI  = v => '$' + v.toLocaleString('en-US', { maximumFractionDigits: 0 });
   let html = '';
+
+  html += `<div class="tc-wager-toggle">${wagerBtns}</div>
+  <p class="tc-wager-hint">Pick 6 = $0.20 &nbsp;&middot;&nbsp; Pick 3/4/5 = $0.50 &nbsp;&middot;&nbsp; Daily Double = $1.00</p>`;
 
   // ── Card 1: Theoretical Parlay Value ──
   html += `<div class="card"><h2>Theoretical Parlay Value</h2>
@@ -4590,15 +4611,15 @@ function analyzeMorningLine() {
 
   html += `<div class="stats-grid" style="margin-top:8px">
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem">${fmtI(bestPar)}</div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${bestPar}">${fmtP(bestPar)}</span></div>
       <div class="lbl">Best Combo Parlay</div>
     </div>
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem">${fmtI(avgPar)}</div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${avgPar}">${fmtP(avgPar)}</span></div>
       <div class="lbl">Avg Combo Parlay</div>
     </div>
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem">${fmtI(worstPar)}</div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${worstPar}">${fmtP(worstPar)}</span></div>
       <div class="lbl">Worst Combo Parlay</div>
     </div>
     <div class="stat-box">
@@ -4618,20 +4639,20 @@ function analyzeMorningLine() {
       <p style="font-size:.76rem;color:var(--dim);margin-bottom:10px">${track} ${wager} &mdash; Races ${spanStr}</p>
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="val">${fmtI(hist.avg_payout)}</div>
-          <div class="lbl">Avg Payout</div>
+          <div class="val"><span data-payout-raw="${hist.avg_payout}">${fmtP(hist.avg_payout)}</span></div>
+          <div class="lbl">Historical Avg Payout</div>
         </div>
         <div class="stat-box">
-          <div class="val">${fmtI(hist.median_payout)}</div>
-          <div class="lbl">Median Payout</div>
+          <div class="val"><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></div>
+          <div class="lbl">Historical Median Payout</div>
         </div>
         <div class="stat-box">
           <div class="val">${hist.times_hit}</div>
           <div class="lbl">Times Hit</div>
         </div>
         <div class="stat-box">
-          <div class="val">${fmtI(hist.max_payout)}</div>
-          <div class="lbl">Max Payout</div>
+          <div class="val"><span data-payout-raw="${hist.max_payout}">${fmtP(hist.max_payout)}</span></div>
+          <div class="lbl">Historical Max Payout</div>
         </div>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
@@ -4670,14 +4691,14 @@ function analyzeMorningLine() {
           <div class="key">Avg combo vs hist. avg</div>
           <div class="value" style="color:${avgRatioColor}">${avgRatio.toFixed(2)}x
             <span style="font-size:.8rem;color:var(--dim);font-weight:400">
-              &nbsp;${fmtI(avgPar)} vs ${fmtI(histAvg)}
+              &nbsp;<span data-payout-raw="${avgPar}">${fmtP(avgPar)}</span> vs <span data-payout-raw="${histAvg}">${fmtP(histAvg)}</span>
             </span>
           </div>
         </div>
         <div class="sum-item">
           <div class="key">Best combo vs hist. avg</div>
           <div class="value" style="color:${bstRatioColor}">${bstRatio.toFixed(2)}x
-            <span style="font-size:.8rem;color:var(--dim);font-weight:400">&nbsp;${fmtI(bestPar)}</span>
+            <span style="font-size:.8rem;color:var(--dim);font-weight:400">&nbsp;<span data-payout-raw="${bestPar}">${fmtP(bestPar)}</span></span>
           </div>
         </div>
         <div class="sum-item">
@@ -4718,11 +4739,12 @@ function analyzeMorningLine() {
       : '';
     tableRows += `<tr${rowCls}>
       <td style="text-align:left">${label}</td>
-      <td>${fmtD(c.parlay)}</td>
+      <td><span data-payout-raw="${c.parlay}" data-payout-fmt="d">${fmtPC(c.parlay)}</span></td>
       ${vsCell}
     </tr>`;
   }
 
+  const parlayHdrLabel = {10:'$0.20',4:'$0.50',2:'$1.00',1:'$2.00'}[displayDiv] || '$2.00';
   html += `<details><summary>Show all combinations (${combos.length})</summary>
     <div class="card" style="margin-top:4px">
       ${overflow}
@@ -4730,7 +4752,7 @@ function analyzeMorningLine() {
       <table class="results-table">
         <thead><tr>
           <th style="text-align:left">Combination</th>
-          <th>$2 Parlay</th>
+          <th id="tc-parlay-hdr">${parlayHdrLabel} Parlay</th>
           ${vsHeader}
         </tr></thead>
         <tbody>${tableRows}</tbody>
@@ -4742,6 +4764,23 @@ function analyzeMorningLine() {
   const el = document.getElementById('tc-results');
   el.innerHTML = html;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function tcSetWagerBase(div) {
+  window._tcWagerDiv = div;
+  document.querySelectorAll('.tc-wager-btn').forEach(b => {
+    b.classList.toggle('active', Number(b.dataset.div) === div);
+  });
+  const wagerLabel = {10:'$0.20', 4:'$0.50', 2:'$1.00', 1:'$2.00'}[div] || '$2.00';
+  document.querySelectorAll('#tc-parlay-hdr').forEach(h => { h.textContent = wagerLabel + ' Parlay'; });
+  document.querySelectorAll('[data-payout-raw]').forEach(el => {
+    const raw = parseFloat(el.dataset.payoutRaw);
+    if (el.dataset.payoutFmt === 'd') {
+      el.textContent = '$' + (raw / div).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    } else {
+      el.textContent = '$' + (raw / div).toLocaleString('en-US', { maximumFractionDigits: 0 });
+    }
+  });
 }
 
 // =============================================================
