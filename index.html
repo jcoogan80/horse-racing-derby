@@ -486,6 +486,67 @@
     .tc-wager-btn:hover { background:rgba(201,168,76,.15); }
     .tc-wager-btn.active { background:var(--gold); color:#0f1b2d; }
     .tc-wager-hint { font-size:.72rem; color:var(--dim); margin-bottom:14px; }
+    /* ── Sweet Spot Zone display ── */
+    .tc-zone-details { margin-bottom: 10px; }
+    .tc-zone-details summary { list-style: none; cursor: pointer; }
+    .tc-zone-details summary::-webkit-details-marker { display: none; }
+    .tc-zone-hdr {
+      display: flex; align-items: center; gap: 8px; flex-wrap: wrap;
+      padding: 9px 14px; border-radius: 8px;
+      font-size: .78rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em;
+      user-select: none;
+    }
+    details[open] > summary.tc-zone-hdr { border-radius: 8px 8px 0 0; }
+    .tc-zone-hdr.zone-value  {
+      background: rgba(201,168,76,.16); color: var(--gold-lt);
+      border: 1.5px solid rgba(201,168,76,.4);
+    }
+    .tc-zone-hdr.zone-lottery {
+      background: rgba(255,255,255,.03); color: var(--dim);
+      border: 1px solid rgba(255,255,255,.1);
+    }
+    .tc-zone-hdr.zone-below  {
+      background: rgba(231,76,60,.05); color: var(--dim);
+      border: 1px solid rgba(231,76,60,.18);
+    }
+    .tc-zone-count { margin-left: auto; font-size: .72rem; font-weight: 400; opacity: .75; }
+    .tc-zone-chevron { font-size: .65rem; opacity: .6; margin-left: 4px; }
+    details[open] .tc-zone-chevron::before { content: '▲'; }
+    .tc-zone-chevron::before { content: '▼'; }
+    .tc-zone-body {
+      border-left: 1.5px solid rgba(201,168,76,.3);
+      border-right: 1.5px solid rgba(201,168,76,.3);
+      border-bottom: 1.5px solid rgba(201,168,76,.3);
+      border-radius: 0 0 8px 8px; overflow: hidden; margin-bottom: 0;
+    }
+    .tc-zone-body.dim-border {
+      border-color: rgba(255,255,255,.1);
+    }
+    .tc-zone-body.below-border {
+      border-color: rgba(231,76,60,.15);
+    }
+    .tc-zone-body .results-table tr.value-row { background: rgba(201,168,76,.07); }
+    .tc-zone-body .results-table tr.dim-row   { opacity: .6; }
+    .tc-score-gold { color: var(--gold); font-weight: 700; }
+    .tc-score-tip  { font-size: .64rem; color: var(--dim); font-style: italic; cursor: help; }
+    .tc-min-max-row {
+      display: flex; gap: 14px; align-items: center; flex-wrap: wrap;
+      margin-bottom: 10px; padding: 8px 10px;
+      background: var(--card2); border-radius: 6px;
+    }
+    .tc-min-max-row label { font-size: .8rem; color: var(--dim); display: flex; align-items: center; gap: 6px; }
+    .tc-min-max-row input {
+      width: 62px; background: var(--card); border: 1px solid rgba(255,255,255,.18);
+      color: var(--text); border-radius: 6px; padding: 4px 8px;
+      font-size: .82rem; text-align: center;
+    }
+    .tc-min-max-row input:focus { outline: none; border-color: var(--gold); }
+    .tc-zone-summary {
+      font-size: .8rem; color: var(--dim); margin-bottom: 10px;
+      padding: 8px 12px; border-radius: 6px;
+      background: rgba(201,168,76,.06); border-left: 3px solid var(--gold);
+    }
+    .tc-no-hist-note { font-size:.78rem; color:var(--dim); margin-bottom:8px; }
     /* ── AE Alert ── */
     .ae-alert-banner {
       display: flex; gap: 10px; align-items: flex-start;
@@ -3874,6 +3935,7 @@ function calcWillPay() {
 // =============================================================
 const TC_LEGS = { P3: 3, P4: 4, P5: 5, P6: 6 };
 const TC_BASE = { P3: 1.00, P4: 0.50, P5: 0.50, P6: 0.20 };  // default wager base amounts
+const TC_ZONE_BOUNDS = { P3:[1.50,2.25], P4:[1.75,2.50], P5:[2.00,2.75], P6:[2.50,4.00], DD:[1.50,2.25] };
 let _portfolioData = null;  // populated by analyzeAllTickets(), read by download/copy
 
 function populateTcTrackSelect() {
@@ -4721,49 +4783,157 @@ function analyzeMorningLine() {
     </div>`;
   }
 
-  // ── Combo Table (collapsible) ──
-  const CAP        = 50;
-  const displayed  = combos.slice(0, CAP);
-  const overflow   = combos.length > CAP
-    ? `<p class="thin-note" style="margin-bottom:8px">Showing ${CAP} of ${combos.length} combinations.</p>` : '';
-  const histAvg    = hist ? hist.avg_payout : null;
-  const vsHeader   = histAvg ? '<th>vs Hist Avg</th>' : '';
+  // ── Sweet Spot Zone Display ──
+  const histAvg = hist ? hist.avg_payout : null;
+  const enriched = combos.map(c => {
+    const winProb  = c.horses.reduce((p, h) => p * (1 / (h.odds + 1)), 1);
+    const vsRatio  = histAvg ? c.parlay / histAvg : null;
+    const valueScore = vsRatio !== null ? winProb * vsRatio : winProb;
+    return { ...c, winProb, vsRatio, valueScore };
+  });
 
-  let tableRows = '';
-  for (const c of displayed) {
-    const label    = c.horses.map(h => '#' + h.pgm).join(' / ');
-    const isAbove  = histAvg !== null && c.parlay > histAvg;
-    const rowCls   = isAbove ? ' class="combo-row-highlight"' : '';
-    const vsCell   = histAvg !== null
-      ? `<td style="color:${isAbove ? 'var(--gold)' : 'var(--dim)'}">${(c.parlay / histAvg).toFixed(2)}x</td>`
-      : '';
-    tableRows += `<tr${rowCls}>
-      <td style="text-align:left">${label}</td>
-      <td><span data-payout-raw="${c.parlay}" data-payout-fmt="d">${fmtPC(c.parlay)}</span></td>
-      ${vsCell}
-    </tr>`;
-  }
+  const [defMin, defMax] = TC_ZONE_BOUNDS[wager] || [1.75, 2.50];
+  window._tcZoneData = { enriched, histAvg, wager };
 
-  const parlayHdrLabel = {10:'$0.20',4:'$0.50',2:'$1.00',1:'$2.00'}[displayDiv] || '$2.00';
-  html += `<details><summary>Show all combinations (${combos.length})</summary>
-    <div class="card" style="margin-top:4px">
-      ${overflow}
-      <div class="table-scroll">
-      <table class="results-table">
-        <thead><tr>
-          <th style="text-align:left">Combination</th>
-          <th id="tc-parlay-hdr">${parlayHdrLabel} Parlay</th>
-          ${vsHeader}
-        </tr></thead>
-        <tbody>${tableRows}</tbody>
-      </table>
-      </div>
-    </div>
-  </details>`;
+  const minMaxHtml = histAvg ? `
+    <div class="tc-min-max-row">
+      <label>Min&thinsp;<input type="number" id="tc-min-x" step="0.25" min="0" value="${defMin}"
+        onchange="tcApplyZones()"> ×</label>
+      <label>Max&thinsp;<input type="number" id="tc-max-x" step="0.25" min="0" value="${defMax}"
+        onchange="tcApplyZones()"> ×</label>
+      <span style="font-size:.72rem;color:var(--dim)">Value Zone multiplier vs historical avg</span>
+    </div>` : '';
+
+  html += `<div class="card">
+    <h2>Combination Rankings</h2>
+    ${minMaxHtml}
+    <div id="tc-zones"></div>
+  </div>`;
 
   const el = document.getElementById('tc-results');
   el.innerHTML = html;
   el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  tcApplyZones(defMin, defMax);
+}
+
+function tcApplyZones(minXArg, maxXArg) {
+  const zd = window._tcZoneData;
+  if (!zd) return;
+  const minX = minXArg !== undefined ? minXArg
+    : (parseFloat(document.getElementById('tc-min-x')?.value) || 1.75);
+  const maxX = maxXArg !== undefined ? maxXArg
+    : (parseFloat(document.getElementById('tc-max-x')?.value) || 2.50);
+  const div  = window._tcWagerDiv || 4;
+  const { enriched, histAvg } = zd;
+
+  const fmtPC = v => '$' + (v / div).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+  const parlayLbl = {10:'$0.20', 4:'$0.50', 2:'$1.00', 1:'$2.00'}[div] || '$2.00';
+
+  let valueZone = [], lottery = [], below = [], noHist = [];
+  if (histAvg) {
+    for (const c of enriched) {
+      if      (c.vsRatio >= minX && c.vsRatio <= maxX) valueZone.push(c);
+      else if (c.vsRatio >  maxX)                      lottery.push(c);
+      else                                              below.push(c);
+    }
+    [valueZone, lottery, below].forEach(z => z.sort((a, b) => b.valueScore - a.valueScore));
+  } else {
+    noHist = [...enriched].sort((a, b) => b.valueScore - a.valueScore);
+  }
+
+  const total    = enriched.length;
+  const topScore = total ? enriched.reduce((m, c) => c.valueScore > m ? c.valueScore : m, 0) : 0;
+
+  const buildTable = (list, isValue) => {
+    const CAP  = 200;
+    const rows = list.slice(0, CAP).map(c => {
+      const label   = c.horses.map(h => '#' + h.pgm).join(' / ');
+      const rowCls  = isValue ? 'value-row' : 'dim-row';
+      const vsCell  = histAvg
+        ? `<td>${c.vsRatio !== null ? c.vsRatio.toFixed(2) + 'x' : '—'}</td>` : '';
+      const wpCell  = isValue
+        ? `<td>${(c.winProb * 100).toFixed(3)}%</td>` : '';
+      const scoreTd = isValue
+        ? `<td class="tc-score-gold">${c.valueScore.toFixed(4)}</td>`
+        : `<td>${c.valueScore.toFixed(4)}</td>`;
+      return `<tr class="${rowCls}">
+        <td style="text-align:left">${label}</td>
+        <td><span data-payout-raw="${c.parlay}" data-payout-fmt="d">${fmtPC(c.parlay)}</span></td>
+        ${vsCell}${wpCell}${scoreTd}
+      </tr>`;
+    }).join('');
+    const capNote = list.length > CAP
+      ? `<p class="thin-note" style="padding:6px 10px;margin:0">Showing ${CAP} of ${list.length}</p>` : '';
+    const vsHdr = histAvg ? '<th>vs Hist</th>' : '';
+    const wpHdr = isValue ? '<th>Win Prob</th>' : '';
+    return `${capNote}<div class="table-scroll"><table class="results-table">
+      <thead><tr>
+        <th style="text-align:left">Combination</th>
+        <th class="tc-parlay-hdr">${parlayLbl} Parlay</th>
+        ${vsHdr}${wpHdr}
+        <th title="Win Prob \xd7 VS Hist Avg \u2014 higher is better">
+          Value Score <span class="tc-score-tip" title="Win Prob \xd7 VS Hist Avg \u2014 higher is better">&#9432;</span>
+        </th>
+      </tr></thead>
+      <tbody>${rows}</tbody>
+    </table></div>`;
+  };
+
+  let out = '';
+
+  if (histAvg) {
+    out += `<p class="tc-zone-summary">
+      <strong>${valueZone.length}</strong> combination${valueZone.length !== 1 ? 's' : ''} in Value Zone
+      out of <strong>${total}</strong> total
+      &mdash; top Value Score: <strong>${topScore.toFixed(4)}</strong>
+    </p>`;
+
+    // VALUE ZONE (open by default)
+    out += `<details class="tc-zone-details" open>
+      <summary class="tc-zone-hdr zone-value">
+        &#127919; VALUE ZONE &nbsp; ${minX.toFixed(2)}&times; &ndash; ${maxX.toFixed(2)}&times;
+        <span class="tc-zone-count">${valueZone.length} of ${total} combinations</span>
+        <span class="tc-zone-chevron"></span>
+      </summary>
+      <div class="tc-zone-body">`;
+    out += valueZone.length
+      ? buildTable(valueZone, true)
+      : `<p style="padding:12px 14px;font-size:.82rem;color:var(--dim)">No combinations in this range. Try widening the Min / Max bounds.</p>`;
+    out += `</div></details>`;
+
+    // LOTTERY (collapsed)
+    out += `<details class="tc-zone-details">
+      <summary class="tc-zone-hdr zone-lottery">
+        &#127393; LOTTERY &nbsp; &gt;${maxX.toFixed(2)}&times;
+        <span class="tc-zone-count">${lottery.length} of ${total} combinations</span>
+        <span class="tc-zone-chevron"></span>
+      </summary>
+      <div class="tc-zone-body dim-border">`;
+    out += lottery.length
+      ? buildTable(lottery, false)
+      : `<p style="padding:12px 14px;font-size:.82rem;color:var(--dim)">No combinations in this zone.</p>`;
+    out += `</div></details>`;
+
+    // BELOW AVERAGE (collapsed)
+    out += `<details class="tc-zone-details">
+      <summary class="tc-zone-hdr zone-below">
+        &#128203; BELOW AVERAGE &nbsp; &lt;${minX.toFixed(2)}&times;
+        <span class="tc-zone-count">${below.length} of ${total} combinations</span>
+        <span class="tc-zone-chevron"></span>
+      </summary>
+      <div class="tc-zone-body below-border">`;
+    out += below.length
+      ? buildTable(below, false)
+      : `<p style="padding:12px 14px;font-size:.82rem;color:var(--dim)">No combinations in this zone.</p>`;
+    out += `</div></details>`;
+
+  } else {
+    out += `<p class="tc-no-hist-note">No historical data — all ${total} combinations sorted by Win Probability (Value Score).</p>`;
+    out += buildTable(noHist, true);
+  }
+
+  const zoneEl = document.getElementById('tc-zones');
+  if (zoneEl) zoneEl.innerHTML = out;
 }
 
 function tcSetWagerBase(div) {
@@ -4771,9 +4941,12 @@ function tcSetWagerBase(div) {
   document.querySelectorAll('.tc-wager-btn').forEach(b => {
     b.classList.toggle('active', Number(b.dataset.div) === div);
   });
+  // Re-render zones with updated divisor (rebuilds all payout spans inside zones)
+  tcApplyZones();
+  // Update payout spans in Cards 1–3 (outside #tc-zones)
   const wagerLabel = {10:'$0.20', 4:'$0.50', 2:'$1.00', 1:'$2.00'}[div] || '$2.00';
-  document.querySelectorAll('#tc-parlay-hdr').forEach(h => { h.textContent = wagerLabel + ' Parlay'; });
   document.querySelectorAll('[data-payout-raw]').forEach(el => {
+    if (el.closest('#tc-zones')) return;   // zones already rebuilt above
     const raw = parseFloat(el.dataset.payoutRaw);
     if (el.dataset.payoutFmt === 'd') {
       el.textContent = '$' + (raw / div).toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
