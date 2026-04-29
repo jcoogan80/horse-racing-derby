@@ -910,23 +910,52 @@
     }
     .scratch-banner-title {
       font-size: .85rem; font-weight: 700; color: #ff9933;
-      margin-bottom: 8px; letter-spacing: .04em;
+      margin-bottom: 6px; letter-spacing: .04em;
     }
-    .scratch-banner-row {
-      font-size: .8rem; color: #ddd; padding: 3px 0;
-      border-bottom: 1px solid rgba(255,153,51,.12);
+    .scb-section-hdr {
+      font-size: .68rem; font-weight: 700; letter-spacing: .09em;
+      text-transform: uppercase; color: #996633;
+      margin: 8px 0 2px; padding-bottom: 3px;
+      border-bottom: 1px solid rgba(255,153,51,.18);
     }
-    .scratch-banner-row:last-child { border-bottom: none; }
-    .scratch-banner-row .scr-race { color: #ff9933; font-weight: 700; min-width: 28px; display: inline-block; }
+    .scb-race-row {
+      display: flex; align-items: center; gap: 7px;
+      padding: 5px 4px; cursor: pointer; border-radius: 4px;
+      user-select: none; border-bottom: 1px solid rgba(255,153,51,.09);
+      transition: background .15s;
+    }
+    .scb-race-row:hover { background: rgba(255,153,51,.07); }
+    .scb-race-arrow {
+      font-size: .6rem; color: #cc8033;
+      display: inline-block; transition: transform .2s ease;
+      width: 10px; text-align: center; flex-shrink: 0;
+    }
+    .scb-race-row.open .scb-race-arrow { transform: rotate(90deg); }
+    .scb-race-label { font-size: .8rem; font-weight: 600; color: #ffcc88; flex: 1; }
+    .scb-count { font-size: .72rem; color: #cc8844; }
+    .scb-race-body {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows .22s ease;
+    }
+    .scb-race-body.open { grid-template-rows: 1fr; }
+    .scb-race-body > div { overflow: hidden; }
+    .scb-entry {
+      font-size: .78rem; color: #ddd;
+      padding: 3px 0 3px 18px;
+      border-bottom: 1px solid rgba(255,153,51,.06);
+    }
+    .scb-entry:last-child { border-bottom: none; padding-bottom: 5px; }
+    .scb-pgm { color: #ffaa55; font-weight: 700; }
+    .scb-time { color: #887766; font-size: .72rem; margin-left: 4px; }
     .scr-badge {
       display: inline-block; font-size: .65rem; font-weight: 700;
       color: #fff; background: #cc3300; border-radius: 3px;
-      padding: 1px 4px; margin-left: 4px; vertical-align: middle;
+      padding: 1px 4px; margin-right: 4px; vertical-align: middle;
     }
     .ae-badge {
       display: inline-block; font-size: .65rem; font-weight: 700;
       color: #fff; background: #1a7a3a; border-radius: 3px;
-      padding: 1px 4px; margin-left: 4px; vertical-align: middle;
+      padding: 1px 4px; margin-right: 4px; vertical-align: middle;
     }
     .scratched-horse { text-decoration: line-through; opacity: .55; }
   </style>
@@ -5780,30 +5809,77 @@ async function loadScratches() {
   const today = new Date().toISOString().slice(0, 10);
   if (data.date !== today) return;
 
-  // ── Dashboard banner ──
+  // ── Dashboard accordion banner ──
   const banner = document.getElementById('scratch-banner');
   if (banner) {
-    const rows = data.scratches.map(s => {
+    // Bucket into SCR vs AE, grouped by race number
+    const scrByRace = {}, aeByRace = {};
+    for (const s of data.scratches) {
       if (s.change_type === 'AE_ADDED') {
-        return `<div class="scratch-banner-row">
-          <span class="scr-race">R${s.race}</span>
-          <span class="ae-badge">AE</span>
-          <strong>#${s.pgm}</strong> ${s.horse} &mdash; AE Added
-          ${s.time_posted ? '<span style="color:var(--dim);font-size:.75rem"> @ ' + s.time_posted + '</span>' : ''}
-        </div>`;
+        (aeByRace[s.race] = aeByRace[s.race] || []).push(s);
+      } else {
+        (scrByRace[s.race] = scrByRace[s.race] || []).push(s);
       }
-      const reason = s.reason ? ' &mdash; ' + s.reason : '';
-      return `<div class="scratch-banner-row">
-        <span class="scr-race">R${s.race}</span>
-        <span class="scr-badge">SCR</span>
-        <strong>#${s.pgm}</strong> ${s.horse}${reason}
-        ${s.time_posted ? '<span style="color:var(--dim);font-size:.75rem"> @ ' + s.time_posted + '</span>' : ''}
-      </div>`;
-    }).join('');
-    banner.innerHTML = `<div class="scratch-banner-card">
-      <div class="scratch-banner-title">&#9888; SCRATCHES &amp; CHANGES &mdash; ${data.track} ${data.date} (as of ${data.generated_at})</div>
-      ${rows}
-    </div>`;
+    }
+
+    const SKEY = 'scrBannerOpen';
+    const openSet = new Set(JSON.parse(localStorage.getItem(SKEY) || '[]'));
+
+    function scrEntryHtml(s) {
+      const reason = s.reason ? ` &mdash; ${s.reason}` : '';
+      const time   = s.time_posted
+        ? `<span class="scb-time">@ ${s.time_posted}</span>` : '';
+      return `<div class="scb-entry"><span class="scr-badge">SCR</span>`
+           + `<span class="scb-pgm">#${s.pgm}</span> ${s.horse}${reason}${time}</div>`;
+    }
+
+    function aeEntryHtml(s) {
+      const time = s.time_posted
+        ? `<span class="scb-time">@ ${s.time_posted}</span>` : '';
+      return `<div class="scb-entry"><span class="ae-badge">AE</span>`
+           + `<span class="scb-pgm">#${s.pgm}</span> ${s.horse} &mdash; AE Added${time}</div>`;
+    }
+
+    function accordionBlock(raceMap, entryFn, prefix, sectionLabel) {
+      const races = Object.keys(raceMap).map(Number).sort((a, b) => a - b);
+      if (!races.length) return '';
+      let html = `<div class="scb-section-hdr">${sectionLabel}</div>`;
+      for (const raceNum of races) {
+        const entries = raceMap[raceNum];
+        const key = `${prefix}${raceNum}`;
+        const isOpen = openSet.has(key);
+        const n = entries.length;
+        const countTxt = prefix === 'r'
+          ? `${n} change${n !== 1 ? 's' : ''}`
+          : `${n} AE`;
+        html += `<div class="scb-race-row${isOpen ? ' open' : ''}" data-scbkey="${key}">`
+              + `<span class="scb-race-arrow">&#9654;</span>`
+              + `<span class="scb-race-label">Race ${raceNum}</span>`
+              + `<span class="scb-count">&middot; ${countTxt}</span></div>`
+              + `<div class="scb-race-body${isOpen ? ' open' : ''}" id="scb-body-${key}">`
+              + `<div>${entries.map(entryFn).join('')}</div></div>`;
+      }
+      return html;
+    }
+
+    banner.innerHTML = `<div class="scratch-banner-card">`
+      + `<div class="scratch-banner-title">&#9888; SCRATCHES &amp; CHANGES`
+      + ` &mdash; ${data.track} ${data.date} (as of ${data.generated_at})</div>`
+      + accordionBlock(scrByRace, scrEntryHtml, 'r',  'Scratches')
+      + accordionBlock(aeByRace,  aeEntryHtml,  'ae', 'AE Alerts')
+      + `</div>`;
+
+    // Click handler — event delegation
+    banner.addEventListener('click', e => {
+      const row = e.target.closest('.scb-race-row');
+      if (!row) return;
+      const key  = row.dataset.scbkey;
+      const body = document.getElementById(`scb-body-${key}`);
+      const nowOpen = row.classList.toggle('open');
+      body.classList.toggle('open', nowOpen);
+      if (nowOpen) openSet.add(key); else openSet.delete(key);
+      localStorage.setItem(SKEY, JSON.stringify([...openSet]));
+    });
   }
 
   // ── OptixEQ badge overlays ──
