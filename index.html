@@ -3696,31 +3696,6 @@ async function loadDashboard() {
     }
   }
 
-  // ── AE Alerts Today section ──────────────────────────────────────────────
-  const todayEntries = data.today_entries || {};
-  const todayStr     = new Date().toISOString().slice(0, 10);
-  let aeHtml = '<div class="card"><h2>&#9888; AE Alerts Today</h2>';
-  let aeCount = 0;
-  for (const [trk, td] of Object.entries(todayEntries)) {
-    if (td.date !== todayStr || !td.ae_alerts || !td.ae_alerts.length) continue;
-    for (const ae of td.ae_alerts) {
-      const ml = ae.morning_line != null ? ` &bull; ${fmtML(ae.morning_line)}-1 ML` : '';
-      aeHtml += `<div class="ae-dash-row">
-        <span class="wager-pill" style="background:rgba(240,165,0,.12);color:var(--yellow);border-color:rgba(240,165,0,.4)">${trk}</span>
-        <div>
-          <div style="font-weight:700;font-size:.9rem;color:var(--yellow)">Race ${ae.race_num}: #${ae.program_num} ${ae.horse_name}${ml}</div>
-          <div style="font-size:.76rem;color:var(--dim);margin-top:3px;line-height:1.5">${ae.note}</div>
-        </div>
-      </div>`;
-      aeCount++;
-    }
-  }
-  if (!aeCount) {
-    aeHtml += '<p class="no-overlay">No AE entries detected for today.</p>';
-  }
-  aeHtml += '</div>';
-  html = aeHtml + html;
-
   el.innerHTML = html;
 }
 
@@ -5928,8 +5903,17 @@ async function loadScratches() {
 
     // ── Footer timestamp ──
     if (data.date && data.generated_at) {
-      const updEl = document.getElementById('dash-updated');
-      if (updEl) updEl.textContent = `Updated: ${data.date} \u00b7 ${data.generated_at}`;
+      const scrTs = `Updated: ${data.date} \u00b7 ${data.generated_at}`;
+      function _applyTs() {
+        const updEl = document.getElementById('dash-updated');
+        console.log('[loadScratches] dash-updated el:', updEl, '| value:', scrTs);
+        if (updEl) { updEl.textContent = scrTs; return true; }
+        return false;
+      }
+      if (!_applyTs()) {
+        // loadDashboard may not have rendered yet — retry once after 2 s
+        setTimeout(_applyTs, 2000);
+      }
     }
   }
 
