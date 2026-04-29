@@ -1,6 +1,151 @@
 {
-  "track": "",
-  "date": "",
-  "generated_at": "",
-  "scratches": []
+  "track": "CD",
+  "date": "2026-04-29",
+  "generated_at": "10:36 AM ET",
+  "scratches": [
+    {
+      "race": 1,
+      "pgm": "3",
+      "horse": "Fast Eddie",
+      "change_type": "Scratched",
+      "reason": "PrivVet-Illness",
+      "time_posted": "08:15 AM ET",
+      "time_posted_dt": "08:15"
+    },
+    {
+      "race": 2,
+      "pgm": "3",
+      "horse": "Altobelli",
+      "change_type": "Scratched",
+      "reason": "PrivVet-Illness",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 2,
+      "pgm": "7",
+      "horse": "Charbonnay",
+      "change_type": "Scratched",
+      "reason": "PrivVet-Injured",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 3,
+      "pgm": "7",
+      "horse": "Lucky Star",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "09:45 AM ET",
+      "time_posted_dt": "09:45"
+    },
+    {
+      "race": 4,
+      "pgm": "10",
+      "horse": "Fly Guy Mick",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 4,
+      "pgm": "14",
+      "horse": "Amberssohn",
+      "change_type": "Scratched",
+      "reason": "Also-Eligible",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 4,
+      "pgm": "15",
+      "horse": "The Fed's Plot",
+      "change_type": "Scratched",
+      "reason": "Also-Eligible",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 4,
+      "pgm": "3",
+      "horse": "Mush Carey",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 6,
+      "pgm": "1",
+      "horse": "Glory Run",
+      "change_type": "Scratched",
+      "reason": "Stakes Scratch",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 6,
+      "pgm": "8",
+      "horse": "Bourbon Town",
+      "change_type": "Scratched",
+      "reason": "Stakes Scratch",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 7,
+      "pgm": "13",
+      "horse": "Derby Dream",
+      "change_type": "AE_ADDED",
+      "reason": "Manual Entry",
+      "time_posted": "",
+      "time_posted_dt": null
+    },
+    {
+      "race": 7,
+      "pgm": "13",
+      "horse": "J Z's Last Schance",
+      "change_type": "Scratched",
+      "reason": "Also-Eligible",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 7,
+      "pgm": "2",
+      "horse": "Shoot It True",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 7,
+      "pgm": "8",
+      "horse": "Caberneigh",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 8,
+      "pgm": "6",
+      "horse": "Good Mojo",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": null
+    },
+    {
+      "race": 9,
+      "pgm": "4",
+      "horse": "Digital Ops",
+      "change_type": "Scratched",
+      "reason": "Stakes Scratch",
+      "time_posted": "9:31 AM ET",
+      "time_posted_dt": null
+    }
+  ]
 }
