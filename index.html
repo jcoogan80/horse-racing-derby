@@ -4665,9 +4665,7 @@ function analyzeMorningLine() {
 
   const parlays    = combos.map(c => c.parlay);            // $2.00-base values for data-payout-raw & ratios
   const avgPar     = parlays.reduce((s, v) => s + v, 0) / parlays.length;
-  const inputEl2   = document.getElementById('tc-ticket-input');
-  const storedBase2 = parseFloat(inputEl2?.dataset.base);
-  const wagerBase  = (!isNaN(storedBase2) && storedBase2 > 0) ? storedBase2 : (TC_BASE[wager] || 0.50);
+  const wagerBase  = TC_BASE[wager] || 0.50;
   const ticketCost = wagerBase * combos.length;
 
   // Summary card payouts at actual wager base via calcComboParlay
@@ -4748,6 +4746,13 @@ function analyzeMorningLine() {
 
   // ── Card 2: Sequence History ──
   if (hist) {
+    // Normalize hist payouts to $2.00 base so fmtP() and ratio math are consistent
+    // regardless of whether this track's data was scraped at $0.50 or $2.00 base.
+    const histWB     = hist.wager_base || 2.0;
+    const histMed_$2 = hist.median_payout * (2.0 / histWB);
+    const histAvg_$2 = hist.avg_payout    * (2.0 / histWB);
+    const histMax_$2 = hist.max_payout    * (2.0 / histWB);
+
     const ovlBadge = hist.is_overlay
       ? `<span class="badge badge-HIGH">OVERLAY ${hist.overlay_ratio ? hist.overlay_ratio.toFixed(1) + 'x' : ''}</span>`
       : `<span class="badge badge-MODERATE">FAIR VALUE</span>`;
@@ -4758,11 +4763,11 @@ function analyzeMorningLine() {
       <p style="font-size:.76rem;color:var(--dim);margin-bottom:10px">${track} ${wager} &mdash; Races ${spanStr}</p>
       <div class="stats-grid">
         <div class="stat-box">
-          <div class="val" style="color:var(--gold)"><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></div>
+          <div class="val" style="color:var(--gold)"><span data-payout-raw="${histMed_$2}">${fmtP(histMed_$2)}</span></div>
           <div class="lbl">Historical Median Payout</div>
         </div>
         <div class="stat-box">
-          <div class="val" style="font-size:1.05rem"><span data-payout-raw="${hist.avg_payout}">${fmtP(hist.avg_payout)}</span></div>
+          <div class="val" style="font-size:1.05rem"><span data-payout-raw="${histAvg_$2}">${fmtP(histAvg_$2)}</span></div>
           <div class="lbl">Historical Avg Payout</div>
           <div style="font-size:.66rem;color:var(--dim);font-style:italic;margin-top:3px">* Average may be distorted by carryover jackpot payouts</div>
         </div>
@@ -4771,13 +4776,13 @@ function analyzeMorningLine() {
           <div class="lbl">Times Hit</div>
         </div>
         <div class="stat-box">
-          <div class="val"><span data-payout-raw="${hist.max_payout}">${fmtP(hist.max_payout)}</span></div>
+          <div class="val"><span data-payout-raw="${histMax_$2}">${fmtP(histMax_$2)}</span></div>
           <div class="lbl">Historical Max Payout</div>
         </div>
       </div>
       <div class="tc-realistic-target">
         <span id="tc-realistic-lbl">&#127919; Realistic target on a ${realisticWagerLbl} ticket:</span>
-        <strong><span data-payout-raw="${hist.median_payout}">${fmtP(hist.median_payout)}</span></strong>
+        <strong><span data-payout-raw="${histMed_$2}">${fmtP(histMed_$2)}</span></strong>
       </div>
       <div style="display:flex;gap:8px;align-items:center;margin-top:10px;flex-wrap:wrap">
         ${ovlBadge}
@@ -4787,9 +4792,9 @@ function analyzeMorningLine() {
     </div>`;
 
     // ── Card 3: Gap Analysis ──
-    const histAvg  = hist.avg_payout;
-    const avgRatio = avgPar / histAvg;
-    const bstRatio = parlays[0] / histAvg;  // use $2-base for ratio vs $2-base histAvg
+    // Both parlays[] and histAvg_$2 are normalized to $2.00 base → ratio is correct.
+    const avgRatio = avgPar    / histAvg_$2;
+    const bstRatio = parlays[0] / histAvg_$2;
 
     let signal, sigColor, sigIcon;
     if (avgRatio > 1.5) {
@@ -4815,7 +4820,7 @@ function analyzeMorningLine() {
           <div class="key">Avg combo vs hist. avg</div>
           <div class="value" style="color:${avgRatioColor}">${avgRatio.toFixed(2)}x
             <span style="font-size:.8rem;color:var(--dim);font-weight:400">
-              &nbsp;<span data-payout-raw="${avgPar}">${fmtP(avgPar)}</span> vs <span data-payout-raw="${histAvg}">${fmtP(histAvg)}</span>
+              &nbsp;<span data-payout-raw="${avgPar}">${fmtP(avgPar)}</span> vs <span data-payout-raw="${histAvg_$2}">${fmtP(histAvg_$2)}</span>
             </span>
           </div>
         </div>
