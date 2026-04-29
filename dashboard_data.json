@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-04-28 13:21",
+  "last_updated": "2026-04-29 06:21",
   "db_summary": {
     "total_tracks": 7,
-    "total_race_days": 219,
-    "total_races": 3485,
-    "total_exotics": 18494,
+    "total_race_days": 220,
+    "total_races": 3494,
+    "total_exotics": 18543,
     "date_range": {
       "from": "2025-01-01",
-      "to": "2026-04-26"
+      "to": "2026-04-28"
     },
     "tracks": [
       {
@@ -19,9 +19,9 @@
       },
       {
         "track": "CD",
-        "days": 44,
-        "races": 426,
-        "exotics": 2248,
+        "days": 45,
+        "races": 435,
+        "exotics": 2297,
         "max_race": 14
       },
       {
@@ -98,25 +98,14 @@
       ]
     },
     "CD": {
-      "DD": [
-        {
-          "race_span": "8-9",
-          "times_hit": 36,
-          "avg_payout": 135.11,
-          "median_payout": 44.46,
-          "value_score": 3.039,
-          "overlay_ratio": 1.51,
-          "consistency": "MODERATE"
-        }
-      ],
       "P3": [
         {
           "race_span": "5-6-7",
-          "times_hit": 44,
-          "avg_payout": 1355.57,
+          "times_hit": 46,
+          "avg_payout": 1304.86,
           "median_payout": 251.28,
-          "value_score": 5.395,
-          "overlay_ratio": 1.89,
+          "value_score": 5.193,
+          "overlay_ratio": 1.86,
           "consistency": "MODERATE"
         }
       ],
@@ -127,7 +116,7 @@
           "avg_payout": 30532.31,
           "median_payout": 898.24,
           "value_score": 33.991,
-          "overlay_ratio": 3.75,
+          "overlay_ratio": 3.77,
           "consistency": "LOTTERY"
         }
       ],
@@ -138,7 +127,7 @@
           "avg_payout": 64525.92,
           "median_payout": 15478.68,
           "value_score": 4.169,
-          "overlay_ratio": 2.48,
+          "overlay_ratio": 2.52,
           "consistency": "MODERATE"
         }
       ],
@@ -149,7 +138,7 @@
           "avg_payout": 531536.39,
           "median_payout": 200609.4,
           "value_score": 2.65,
-          "overlay_ratio": 2.3,
+          "overlay_ratio": 2.32,
           "consistency": "HIGH"
         }
       ]
@@ -857,20 +846,20 @@
     "CD": {
       "DD": {
         "1-2": {
-          "times_hit": 44,
-          "avg_payout": 56.98,
-          "median_payout": 31.01,
+          "times_hit": 45,
+          "avg_payout": 55.89,
+          "median_payout": 29.96,
           "max_payout": 435.84,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.64,
+          "overlay_ratio": 0.63,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "2-3": {
-          "times_hit": 44,
-          "avg_payout": 80.55,
-          "median_payout": 40.38,
+          "times_hit": 45,
+          "avg_payout": 79.67,
+          "median_payout": 40.4,
           "max_payout": 763.52,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -879,69 +868,69 @@
           "thin_sample": false
         },
         "3-4": {
-          "times_hit": 44,
-          "avg_payout": 87.75,
-          "median_payout": 42.47,
+          "times_hit": 45,
+          "avg_payout": 86.35,
+          "median_payout": 41.3,
           "max_payout": 940.12,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.98,
+          "overlay_ratio": 0.97,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "4-5": {
-          "times_hit": 44,
-          "avg_payout": 80.63,
-          "median_payout": 43.45,
+          "times_hit": 45,
+          "avg_payout": 79.18,
+          "median_payout": 43.18,
           "max_payout": 497.9,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.9,
+          "overlay_ratio": 0.89,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "5-6": {
-          "times_hit": 44,
-          "avg_payout": 96.82,
-          "median_payout": 50.35,
+          "times_hit": 45,
+          "avg_payout": 95.05,
+          "median_payout": 50.08,
           "max_payout": 703.52,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.08,
+          "overlay_ratio": 1.07,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "6-7": {
-          "times_hit": 44,
-          "avg_payout": 111.55,
-          "median_payout": 55.63,
+          "times_hit": 45,
+          "avg_payout": 111.83,
+          "median_payout": 56.42,
           "max_payout": 841.82,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.24,
+          "overlay_ratio": 1.26,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "7-8": {
-          "times_hit": 44,
-          "avg_payout": 126.8,
-          "median_payout": 48.15,
+          "times_hit": 45,
+          "avg_payout": 127.57,
+          "median_payout": 49.08,
           "max_payout": 1054.92,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.41,
+          "overlay_ratio": 1.44,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "8-9": {
-          "times_hit": 36,
-          "avg_payout": 135.11,
-          "median_payout": 44.46,
+          "times_hit": 37,
+          "avg_payout": 131.91,
+          "median_payout": 44.14,
           "max_payout": 2769.78,
           "wager_base": 2.0,
-          "is_overlay": true,
-          "overlay_ratio": 1.51,
-          "consistency": "MODERATE",
+          "is_overlay": false,
+          "overlay_ratio": 1.49,
+          "consistency": "HIGH",
           "thin_sample": false
         },
         "9-10": {
@@ -951,7 +940,7 @@
           "max_payout": 768.98,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.87,
+          "overlay_ratio": 0.88,
           "consistency": "HIGH",
           "thin_sample": false
         },
@@ -984,7 +973,7 @@
           "max_payout": 45.84,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.47,
+          "overlay_ratio": 0.48,
           "consistency": "HIGH",
           "thin_sample": true
         },
@@ -1002,9 +991,9 @@
       },
       "P3": {
         "1-2-3": {
-          "times_hit": 44,
-          "avg_payout": 309.99,
-          "median_payout": 141.68,
+          "times_hit": 45,
+          "avg_payout": 304.21,
+          "median_payout": 132.32,
           "max_payout": 2584.04,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -1013,9 +1002,9 @@
           "thin_sample": false
         },
         "2-3-4": {
-          "times_hit": 44,
-          "avg_payout": 846.43,
-          "median_payout": 219.3,
+          "times_hit": 45,
+          "avg_payout": 829.3,
+          "median_payout": 200.16,
           "max_payout": 22564.32,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -1024,9 +1013,9 @@
           "thin_sample": false
         },
         "3-4-5": {
-          "times_hit": 44,
-          "avg_payout": 489.16,
-          "median_payout": 211.78,
+          "times_hit": 45,
+          "avg_payout": 480.25,
+          "median_payout": 206.48,
           "max_payout": 6010.32,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -1035,9 +1024,9 @@
           "thin_sample": false
         },
         "4-5-6": {
-          "times_hit": 44,
-          "avg_payout": 711.54,
-          "median_payout": 219.32,
+          "times_hit": 45,
+          "avg_payout": 696.78,
+          "median_payout": 203.36,
           "max_payout": 5874.36,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -1046,31 +1035,31 @@
           "thin_sample": false
         },
         "5-6-7": {
-          "times_hit": 44,
-          "avg_payout": 1355.57,
+          "times_hit": 46,
+          "avg_payout": 1304.86,
           "median_payout": 251.28,
           "max_payout": 26128.36,
           "wager_base": 2.0,
           "is_overlay": true,
-          "overlay_ratio": 1.89,
+          "overlay_ratio": 1.86,
           "consistency": "MODERATE",
           "thin_sample": false
         },
         "6-7-8": {
-          "times_hit": 45,
-          "avg_payout": 989.63,
+          "times_hit": 47,
+          "avg_payout": 957.97,
           "median_payout": 293.2,
           "max_payout": 9147.84,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.38,
+          "overlay_ratio": 1.36,
           "consistency": "MODERATE",
           "thin_sample": false
         },
         "7-8-9": {
-          "times_hit": 36,
-          "avg_payout": 952.57,
-          "median_payout": 282.94,
+          "times_hit": 37,
+          "avg_payout": 936.38,
+          "median_payout": 294.36,
           "max_payout": 12178.04,
           "wager_base": 2.0,
           "is_overlay": false,
@@ -1096,7 +1085,7 @@
           "max_payout": 9752.0,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.36,
+          "overlay_ratio": 1.39,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1107,7 +1096,7 @@
           "max_payout": 1131.8,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.42,
+          "overlay_ratio": 0.43,
           "consistency": "HIGH",
           "thin_sample": false
         },
@@ -1136,13 +1125,13 @@
       },
       "P4": {
         "2-3-4-5": {
-          "times_hit": 44,
-          "avg_payout": 3080.58,
-          "median_payout": 893.28,
+          "times_hit": 45,
+          "avg_payout": 3018.65,
+          "median_payout": 888.56,
           "max_payout": 55176.32,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.38,
+          "overlay_ratio": 0.37,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1153,7 +1142,7 @@
           "max_payout": 281259.2,
           "wager_base": 2.0,
           "is_overlay": true,
-          "overlay_ratio": 3.75,
+          "overlay_ratio": 3.77,
           "consistency": "LOTTERY",
           "thin_sample": false
         },
@@ -1169,13 +1158,13 @@
           "thin_sample": false
         },
         "6-7-8-9": {
-          "times_hit": 17,
-          "avg_payout": 4621.19,
-          "median_payout": 1482.28,
+          "times_hit": 18,
+          "avg_payout": 4411.06,
+          "median_payout": 1443.92,
           "max_payout": 41871.64,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.57,
+          "overlay_ratio": 0.54,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1237,24 +1226,24 @@
       },
       "P5": {
         "1-2-3-4-5": {
-          "times_hit": 44,
-          "avg_payout": 8234.76,
-          "median_payout": 3487.74,
+          "times_hit": 45,
+          "avg_payout": 8065.68,
+          "median_payout": 3466.68,
           "max_payout": 36511.48,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.32,
+          "overlay_ratio": 0.31,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "3-4-5-6-7": {
-          "times_hit": 7,
-          "avg_payout": 6526.07,
-          "median_payout": 4650.32,
+          "times_hit": 8,
+          "avg_payout": 6230.63,
+          "median_payout": 4406.44,
           "max_payout": 27172.4,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.25,
+          "overlay_ratio": 0.24,
           "consistency": "HIGH",
           "thin_sample": false
         },
@@ -1265,18 +1254,18 @@
           "max_payout": 148615.0,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.8,
+          "overlay_ratio": 0.81,
           "consistency": "MODERATE",
           "thin_sample": false
         },
         "5-6-7-8-9": {
-          "times_hit": 18,
-          "avg_payout": 35306.77,
-          "median_payout": 8588.32,
+          "times_hit": 19,
+          "avg_payout": 33596.39,
+          "median_payout": 6729.96,
           "max_payout": 196460.84,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 1.36,
+          "overlay_ratio": 1.31,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1287,7 +1276,7 @@
           "max_payout": 367683.72,
           "wager_base": 2.0,
           "is_overlay": true,
-          "overlay_ratio": 2.48,
+          "overlay_ratio": 2.52,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1298,7 +1287,7 @@
           "max_payout": 26377.52,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.37,
+          "overlay_ratio": 0.38,
           "consistency": "HIGH",
           "thin_sample": true
         },
@@ -1309,7 +1298,7 @@
           "max_payout": 110417.08,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.79,
+          "overlay_ratio": 0.8,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1320,7 +1309,7 @@
           "max_payout": 5541.32,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.21,
+          "overlay_ratio": 0.22,
           "consistency": "HIGH",
           "thin_sample": true
         },
@@ -1349,13 +1338,13 @@
           "thin_sample": false
         },
         "4-5-6-7-8-9": {
-          "times_hit": 15,
-          "avg_payout": 124501.19,
-          "median_payout": 17844.6,
+          "times_hit": 16,
+          "avg_payout": 117072.8,
+          "median_payout": 16892.85,
           "max_payout": 1074696.3,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.54,
+          "overlay_ratio": 0.51,
           "consistency": "MODERATE",
           "thin_sample": false
         },
@@ -1388,7 +1377,7 @@
           "max_payout": 2569827.8,
           "wager_base": 2.0,
           "is_overlay": true,
-          "overlay_ratio": 2.3,
+          "overlay_ratio": 2.32,
           "consistency": "HIGH",
           "thin_sample": false
         }
@@ -3759,27 +3748,27 @@
     },
     "CD": {
       "p3_to_p4": {
-        "mean": 8.382,
-        "median": 4.486,
+        "mean": 8.289,
+        "median": 4.43,
         "min": 0.221,
         "max": 178.226,
-        "sample": 116,
-        "confidence": "HIGH"
-      },
-      "p3_to_p5": {
-        "mean": 59.297,
-        "median": 22.786,
-        "min": 0.384,
-        "max": 1407.872,
         "sample": 118,
         "confidence": "HIGH"
       },
+      "p3_to_p5": {
+        "mean": 59.345,
+        "median": 22.544,
+        "min": 0.384,
+        "max": 1407.872,
+        "sample": 122,
+        "confidence": "HIGH"
+      },
       "p4_to_p5": {
-        "mean": 7.722,
-        "median": 5.119,
+        "mean": 7.63,
+        "median": 5.113,
         "min": 0.042,
         "max": 42.649,
-        "sample": 106,
+        "sample": 108,
         "confidence": "HIGH"
       }
     },
@@ -6167,53 +6156,53 @@
     },
     "CD": {
       "P4": {
-        "sample": 44,
-        "mean_ratio": 1.915,
-        "median_ratio": 1.761,
-        "exotic_beat_parlay_pct": 93.2,
-        "avg_edge": -92.92,
+        "sample": 45,
+        "mean_ratio": 1.912,
+        "median_ratio": 1.81,
+        "exotic_beat_parlay_pct": 93.3,
+        "avg_edge": -82.52,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 43,
-            "exotic_win_pct": 93.0,
-            "avg_ratio": 1.884
+            "sample": 44,
+            "exotic_win_pct": 93.2,
+            "avg_ratio": 1.882
           },
           {
             "min_leg": 8,
-            "sample": 42,
-            "exotic_win_pct": 92.9,
-            "avg_ratio": 1.869
+            "sample": 43,
+            "exotic_win_pct": 93.0,
+            "avg_ratio": 1.867
           },
           {
             "min_leg": 10,
-            "sample": 38,
-            "exotic_win_pct": 92.1,
-            "avg_ratio": 1.801
+            "sample": 39,
+            "exotic_win_pct": 92.3,
+            "avg_ratio": 1.802
           },
           {
             "min_leg": 12,
-            "sample": 32,
-            "exotic_win_pct": 90.6,
+            "sample": 33,
+            "exotic_win_pct": 90.9,
             "avg_ratio": 1.799
           },
           {
             "min_leg": 15,
-            "sample": 25,
-            "exotic_win_pct": 88.0,
-            "avg_ratio": 1.842
+            "sample": 26,
+            "exotic_win_pct": 88.5,
+            "avg_ratio": 1.84
           },
           {
             "min_leg": 20,
-            "sample": 18,
-            "exotic_win_pct": 88.9,
-            "avg_ratio": 1.885
+            "sample": 19,
+            "exotic_win_pct": 89.5,
+            "avg_ratio": 1.881
           },
           {
             "min_leg": 25,
-            "sample": 16,
-            "exotic_win_pct": 87.5,
-            "avg_ratio": 1.936
+            "sample": 17,
+            "exotic_win_pct": 88.2,
+            "avg_ratio": 1.929
           },
           {
             "min_leg": 30,
@@ -6478,6 +6467,17 @@
             "avg_field": 9.8
           },
           {
+            "date": "2026-04-28",
+            "span": "6-7-8-9",
+            "parlay": 463.54,
+            "exotic": 209.75,
+            "exotic_p2": 839.0,
+            "wager_base": 0.5,
+            "ratio": 1.81,
+            "max_leg": 29.62,
+            "avg_field": null
+          },
+          {
             "date": "2025-05-26",
             "span": "6-7-8-9",
             "parlay": 879.04,
@@ -6722,53 +6722,53 @@
         ]
       },
       "P5": {
-        "sample": 44,
-        "mean_ratio": 2.482,
-        "median_ratio": 2.223,
-        "exotic_beat_parlay_pct": 97.7,
-        "avg_edge": -670.21,
+        "sample": 45,
+        "mean_ratio": 2.47,
+        "median_ratio": 2.214,
+        "exotic_beat_parlay_pct": 97.8,
+        "avg_edge": -625.12,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 44,
-            "exotic_win_pct": 97.7,
-            "avg_ratio": 2.482
+            "sample": 45,
+            "exotic_win_pct": 97.8,
+            "avg_ratio": 2.47
           },
           {
             "min_leg": 8,
-            "sample": 43,
+            "sample": 44,
             "exotic_win_pct": 97.7,
-            "avg_ratio": 2.465
+            "avg_ratio": 2.453
           },
           {
             "min_leg": 10,
-            "sample": 43,
+            "sample": 44,
             "exotic_win_pct": 97.7,
-            "avg_ratio": 2.465
+            "avg_ratio": 2.453
           },
           {
             "min_leg": 12,
-            "sample": 38,
+            "sample": 39,
             "exotic_win_pct": 97.4,
-            "avg_ratio": 2.42
+            "avg_ratio": 2.407
           },
           {
             "min_leg": 15,
-            "sample": 30,
-            "exotic_win_pct": 96.7,
-            "avg_ratio": 2.564
+            "sample": 31,
+            "exotic_win_pct": 96.8,
+            "avg_ratio": 2.544
           },
           {
             "min_leg": 20,
-            "sample": 23,
-            "exotic_win_pct": 95.7,
-            "avg_ratio": 2.738
+            "sample": 24,
+            "exotic_win_pct": 95.8,
+            "avg_ratio": 2.705
           },
           {
             "min_leg": 25,
-            "sample": 20,
-            "exotic_win_pct": 95.0,
-            "avg_ratio": 2.831
+            "sample": 21,
+            "exotic_win_pct": 95.2,
+            "avg_ratio": 2.788
           },
           {
             "min_leg": 30,
@@ -7132,6 +7132,17 @@
             "avg_field": 9.2
           },
           {
+            "date": "2026-04-28",
+            "span": "5-6-7-8-9",
+            "parlay": 1450.87,
+            "exotic": 702.39,
+            "exotic_p2": 2809.56,
+            "wager_base": 0.5,
+            "ratio": 1.936,
+            "max_leg": 29.62,
+            "avg_field": null
+          },
+          {
             "date": "2025-04-30",
             "span": "6-7-8-9-10",
             "parlay": 14965.79,
@@ -7277,53 +7288,53 @@
         ]
       },
       "P6": {
-        "sample": 37,
-        "mean_ratio": 3.835,
-        "median_ratio": 2.753,
-        "exotic_beat_parlay_pct": 89.2,
-        "avg_edge": 115922.84,
+        "sample": 38,
+        "mean_ratio": 3.776,
+        "median_ratio": 2.677,
+        "exotic_beat_parlay_pct": 89.5,
+        "avg_edge": 112926.16,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 37,
-            "exotic_win_pct": 89.2,
-            "avg_ratio": 3.835
+            "sample": 38,
+            "exotic_win_pct": 89.5,
+            "avg_ratio": 3.776
           },
           {
             "min_leg": 8,
-            "sample": 37,
-            "exotic_win_pct": 89.2,
-            "avg_ratio": 3.835
+            "sample": 38,
+            "exotic_win_pct": 89.5,
+            "avg_ratio": 3.776
           },
           {
             "min_leg": 10,
-            "sample": 37,
-            "exotic_win_pct": 89.2,
-            "avg_ratio": 3.835
+            "sample": 38,
+            "exotic_win_pct": 89.5,
+            "avg_ratio": 3.776
           },
           {
             "min_leg": 12,
-            "sample": 31,
-            "exotic_win_pct": 87.1,
-            "avg_ratio": 3.99
+            "sample": 32,
+            "exotic_win_pct": 87.5,
+            "avg_ratio": 3.914
           },
           {
             "min_leg": 15,
-            "sample": 23,
-            "exotic_win_pct": 82.6,
-            "avg_ratio": 4.541
+            "sample": 24,
+            "exotic_win_pct": 83.3,
+            "avg_ratio": 4.417
           },
           {
             "min_leg": 20,
-            "sample": 19,
-            "exotic_win_pct": 89.5,
-            "avg_ratio": 5.267
+            "sample": 20,
+            "exotic_win_pct": 90.0,
+            "avg_ratio": 5.082
           },
           {
             "min_leg": 25,
-            "sample": 16,
-            "exotic_win_pct": 87.5,
-            "avg_ratio": 5.947
+            "sample": 17,
+            "exotic_win_pct": 88.2,
+            "avg_ratio": 5.69
           },
           {
             "min_leg": 30,
@@ -7635,6 +7646,17 @@
             "ratio": 1.678,
             "max_leg": 17.46,
             "avg_field": 9.0
+          },
+          {
+            "date": "2026-04-28",
+            "span": "4-5-6-7-8-9",
+            "parlay": 3598.15,
+            "exotic": 564.7,
+            "exotic_p2": 5647.0,
+            "wager_base": 0.2,
+            "ratio": 1.569,
+            "max_leg": 29.62,
+            "avg_field": null
           },
           {
             "date": "2025-05-17",
@@ -16652,790 +16674,5 @@
       }
     }
   },
-  "today_entries": {
-    "CD": {
-      "date": "2026-04-28",
-      "races": [
-        {
-          "race_num": 1,
-          "race_type": "Fillies & Mares | 3 Year Olds And Up",
-          "distance": "6 f,\nDirt,\n$50,000 Claiming",
-          "surface": "Dirt",
-          "field_size": 6,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Special Sauce",
-              "morning_line": 10.0,
-              "jockey": "Genaro GarciaVictor R. Carrasco",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Sing a Little Song",
-              "morning_line": 1.6,
-              "jockey": "Ian R. WilkesIrad Ortiz, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "C'Est Cheese",
-              "morning_line": 3.0,
-              "jockey": "D. Whitworth BeckmanTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Mascara",
-              "morning_line": 6.0,
-              "jockey": "Niccolo TroianiEdgar Morales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Letmenowhenurready",
-              "morning_line": 20.0,
-              "jockey": "Eric R. ReedJohn McKee",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Danzig's Dora",
-              "morning_line": 2.0,
-              "jockey": "Eddie KenneallyJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 2,
-          "race_type": "Open | 2 Year Olds",
-          "distance": "4 1/2F,\nDirt,\nMaiden Special Weight",
-          "surface": "Dirt",
-          "field_size": 6,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Booked",
-              "morning_line": 1.4,
-              "jockey": "Steven M. AsmussenJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Heart of a Hero",
-              "morning_line": 30.0,
-              "jockey": "Chasey Deville PomierEdgar Morales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Jasper Valley",
-              "morning_line": 6.0,
-              "jockey": "Timothy E. HammLuis Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Smoke Trail",
-              "morning_line": 8.0,
-              "jockey": "John EnnisAlex Achard",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "War Ready",
-              "morning_line": 4.0,
-              "jockey": "Steven M. AsmussenTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Fanshell Beach",
-              "morning_line": 1.8,
-              "jockey": "Wesley A. WardJohn R. Velazquez",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 3,
-          "race_type": "Fillies & Mares | 3 Year Olds And Up",
-          "distance": "1 m,\nTurf,\n$50,000 Starter Allowance",
-          "surface": "Turf",
-          "field_size": 10,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Heartbeat",
-              "morning_line": 8.0,
-              "jockey": "Brian A. LynchJoel Rosario",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Queen Wilhelmina",
-              "morning_line": 4.5,
-              "jockey": "Lindsay SchultzJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Sheila's Lion",
-              "morning_line": 4.0,
-              "jockey": "J. Keith DesormeauxAxel Concepcion",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "French Mistress",
-              "morning_line": 8.0,
-              "jockey": "Jeff A. HilesCorey J. Lanerie",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Daddario",
-              "morning_line": 6.0,
-              "jockey": "D. Whitworth BeckmanFlavien Prat",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Spying",
-              "morning_line": 3.0,
-              "jockey": "Brendan P. WalshTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Aviso",
-              "morning_line": 12.0,
-              "jockey": "Paul J. McGeeBrian Joseph Hernandez, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Faye's Gold",
-              "morning_line": 8.0,
-              "jockey": "Grant T. ForsterLuis Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Frosty Mojito",
-              "morning_line": 20.0,
-              "jockey": "Paul McEnteeDanny Sheehy",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "10",
-              "horse_name": "Unlimited Gold",
-              "morning_line": 30.0,
-              "jockey": "Jeremiah O'DwyerAdam Beschizza",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 4,
-          "race_type": "Fillies & Mares | 3 Year Olds And Up",
-          "distance": "6 f,\nDirt,\n$50,000 Claiming",
-          "surface": "Dirt",
-          "field_size": 7,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Freaks Go",
-              "morning_line": 6.0,
-              "jockey": "Rohan G. CrichtonBen Curtis",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Spun Candy",
-              "morning_line": 3.0,
-              "jockey": "Dallas StewartMario Gutierrez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Bright Lady Day",
-              "morning_line": 30.0,
-              "jockey": "Christopher J. JacksonChase Miller",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "No Time Left",
-              "morning_line": 4.0,
-              "jockey": "Gregory D. FoleyTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "G Rocks",
-              "morning_line": 15.0,
-              "jockey": "Eric N. FosterGabriel Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Wisconsin Gal",
-              "morning_line": 3.5,
-              "jockey": "Paul McEnteeDanny Sheehy",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Belle Ofthe Dance",
-              "morning_line": 2.0,
-              "jockey": "Horacio De PazIrad Ortiz, Jr.",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 5,
-          "race_type": "Open | 3 Year Olds And Up",
-          "distance": "6 1/2F,\nDirt,\n$20,000 Maiden Claiming",
-          "surface": "Dirt",
-          "field_size": 12,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Highway Patrol",
-              "morning_line": 15.0,
-              "jockey": "Genaro GarciaVictor R. Carrasco",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Good Sal",
-              "morning_line": 20.0,
-              "jockey": "Troy S. WismerWilliam Antongeorgi III",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Joe's Candy",
-              "morning_line": 3.5,
-              "jockey": "Albert M. Stall, Jr.Irad Ortiz, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Barstool",
-              "morning_line": 30.0,
-              "jockey": "German Vasquez, Sr.Alex Achard",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Lennie G",
-              "morning_line": 8.0,
-              "jockey": "Dale L. RomansCorey J. Lanerie",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Standard Deduction",
-              "morning_line": 8.0,
-              "jockey": "Chris M. BlockJareth Loveberry",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Outofpi",
-              "morning_line": 15.0,
-              "jockey": "Reina E. GonzalezAdam Beschizza",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Sierra Power",
-              "morning_line": 30.0,
-              "jockey": "Cirilo GorostietaAgustin Gomez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Harbe",
-              "morning_line": 5.0,
-              "jockey": "Rohan G. CrichtonBen Curtis",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "10",
-              "horse_name": "Lasting Legacy",
-              "morning_line": 6.0,
-              "jockey": "Dallas StewartAxel Concepcion",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "11",
-              "horse_name": "Circuit Breaker",
-              "morning_line": 10.0,
-              "jockey": "Paulo H. LoboEvin A. Roman",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "12",
-              "horse_name": "Vino Dominus",
-              "morning_line": 4.5,
-              "jockey": "Thomas Drury, Jr.Edgar Morales",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 6,
-          "race_type": "Open | 3 Year Olds And Up",
-          "distance": "1 1/16M,\nTurf,\n$30,000 Claiming",
-          "surface": "Turf",
-          "field_size": 12,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Good Point",
-              "morning_line": 30.0,
-              "jockey": "Kristine M. KaufeldSantiago Gonzalez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Hayes Goal",
-              "morning_line": 20.0,
-              "jockey": "John EnnisAlex Achard",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Jack Rabbit",
-              "morning_line": 4.5,
-              "jockey": "Brian WilliamsonDeclan Cannon",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Bagg O Time",
-              "morning_line": 20.0,
-              "jockey": "Thomas D. VanceTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Rulookinforrayray",
-              "morning_line": 8.0,
-              "jockey": "Thomas Drury, Jr.Edgar Morales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Garryowen",
-              "morning_line": 6.0,
-              "jockey": "Eddie KenneallyBen Curtis",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Gene and Jude",
-              "morning_line": 3.0,
-              "jockey": "Michael J. MakerFlavien Prat",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Li Grand Zombi",
-              "morning_line": 8.0,
-              "jockey": "Kenneth G. McPeekJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Obelisk",
-              "morning_line": 20.0,
-              "jockey": "Ed Moger, Jr.Summer Pauly",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "10",
-              "horse_name": "Footprint",
-              "morning_line": 4.0,
-              "jockey": "Albert M. Stall, Jr.Brian Joseph Hernandez, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "11",
-              "horse_name": "Aguila Negra",
-              "morning_line": 30.0,
-              "jockey": "Juan Carlos PerezJann N. Hernandez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "12",
-              "horse_name": "Khetam",
-              "morning_line": 12.0,
-              "jockey": "Andrew McKeeverDanny Sheehy",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 7,
-          "race_type": "Open | 3 Year Olds And Up",
-          "distance": "7 f,\nDirt,\n$20,000 Claiming",
-          "surface": "Dirt",
-          "field_size": 12,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Southern Bullet",
-              "morning_line": 30.0,
-              "jockey": "Greg BegleyOscar Villarreal",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Another Monarch",
-              "morning_line": 4.0,
-              "jockey": "Robert B. Hess, Jr.Irad Ortiz, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "McIlroy",
-              "morning_line": 4.5,
-              "jockey": "Genaro GarciaEdgar Morales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Vino Subito",
-              "morning_line": 6.0,
-              "jockey": "Brittany A. Vanden BergChristopher A. Emigh",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Hardtoblame",
-              "morning_line": 10.0,
-              "jockey": "Jeremiah O'DwyerLuan Machado",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Comes a Time",
-              "morning_line": 3.0,
-              "jockey": "Michael J. MakerFlavien Prat",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Il Cavallino",
-              "morning_line": 8.0,
-              "jockey": "Genevieve LondonoGabriel Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Fayette Spirit",
-              "morning_line": 12.0,
-              "jockey": "Robert MedinaJulien R. Leparoux",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Nassau Circle",
-              "morning_line": 15.0,
-              "jockey": "Albert M. Stall, Jr.Tyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "10",
-              "horse_name": "Up to No Good",
-              "morning_line": 20.0,
-              "jockey": "Keith KinmonGerardo Corrales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "11",
-              "horse_name": "Phila Street",
-              "morning_line": 20.0,
-              "jockey": "Eric N. FosterFernando De La Cruz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "12",
-              "horse_name": "Mo Hair Sam",
-              "morning_line": 30.0,
-              "jockey": "John A. HancockVictor R. Carrasco",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 8,
-          "race_type": "Open | 3 Year Olds And Up",
-          "distance": "7 1/2F,\nDirt,\n$100,000 Allowance Optional Claiming",
-          "surface": "Dirt",
-          "field_size": 9,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "This Is Uscar",
-              "morning_line": 8.0,
-              "jockey": "Jordan BlairEdgar Morales",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Hold My Bourbon",
-              "morning_line": 10.0,
-              "jockey": "Jose Francisco D'AngeloLuis Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Light the Way",
-              "morning_line": 10.0,
-              "jockey": "Michael J. MakerFlavien Prat",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Furio",
-              "morning_line": 6.0,
-              "jockey": "Joe SharpJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Owen Almighty",
-              "morning_line": 5.0,
-              "jockey": "Brian A. LynchJoel Rosario",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Echo Again",
-              "morning_line": 4.5,
-              "jockey": "Norm W. CasseJunior Alvarado",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "U Devil You",
-              "morning_line": 3.5,
-              "jockey": "John Alexander OrtizJohn R. Velazquez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Dr. Saikali",
-              "morning_line": 15.0,
-              "jockey": "Ed Moger, Jr.Tyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Flood Zone",
-              "morning_line": 4.0,
-              "jockey": "Brad H. CoxIrad Ortiz, Jr.",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        },
-        {
-          "race_num": 9,
-          "race_type": "Open | 3 Year Olds And Up",
-          "distance": "5 f,\nTurf,\n$80,000 Allowance Optional Claiming",
-          "surface": "Turf",
-          "field_size": 12,
-          "horses": [
-            {
-              "program_num": "1",
-              "horse_name": "Heart Headed",
-              "morning_line": 8.0,
-              "jockey": "Joe SharpJose L. Ortiz",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "2",
-              "horse_name": "Mischievous Rogue",
-              "morning_line": 30.0,
-              "jockey": "Brittany A. Vanden BergChristopher A. Emigh",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "3",
-              "horse_name": "Monsieur Candy",
-              "morning_line": 12.0,
-              "jockey": "Larry RivelliJareth Loveberry",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "4",
-              "horse_name": "Bacio",
-              "morning_line": 1.6,
-              "jockey": "Wesley A. WardJuan J. Hernandez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "5",
-              "horse_name": "Our Starry Night",
-              "morning_line": 6.0,
-              "jockey": "Philip A. BauerLuis Saez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "6",
-              "horse_name": "Beeline",
-              "morning_line": 15.0,
-              "jockey": "Riley MottJaime A. Torres",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "7",
-              "horse_name": "Simulate",
-              "morning_line": 15.0,
-              "jockey": "William I. MottJohn R. Velazquez",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "8",
-              "horse_name": "Jet Sweep Joe",
-              "morning_line": 30.0,
-              "jockey": "Paul McEnteeDanny Sheehy",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "9",
-              "horse_name": "Smash It",
-              "morning_line": 10.0,
-              "jockey": "Brendan P. WalshTyler Gaffalione",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "10",
-              "horse_name": "Camp Hale",
-              "morning_line": 5.0,
-              "jockey": "Ian R. WilkesBrian Joseph Hernandez, Jr.",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "11",
-              "horse_name": "B D Valeski",
-              "morning_line": 20.0,
-              "jockey": "Gregory D. FoleyAdam Beschizza",
-              "trainer": "",
-              "is_ae": false
-            },
-            {
-              "program_num": "12",
-              "horse_name": "Sweet Dani Boy",
-              "morning_line": 12.0,
-              "jockey": "Nicholas VaccarezzaJoel Rosario",
-              "trainer": "",
-              "is_ae": false
-            }
-          ],
-          "ae_horses": []
-        }
-      ],
-      "ae_alerts": []
-    }
-  }
+  "today_entries": {}
 }
