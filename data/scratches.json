@@ -1,17 +1,8 @@
 {
   "track": "CD",
   "date": "2026-04-29",
-  "generated_at": "10:37 AM ET",
+  "generated_at": "10:39 AM ET",
   "scratches": [
-    {
-      "race": 1,
-      "pgm": "3",
-      "horse": "Fast Eddie",
-      "change_type": "Scratched",
-      "reason": "PrivVet-Illness",
-      "time_posted": "08:15 AM ET",
-      "time_posted_dt": "08:15"
-    },
     {
       "race": 2,
       "pgm": "3",
@@ -19,7 +10,7 @@
       "change_type": "Scratched",
       "reason": "PrivVet-Illness",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 2,
@@ -28,16 +19,7 @@
       "change_type": "Scratched",
       "reason": "PrivVet-Injured",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
-    },
-    {
-      "race": 3,
-      "pgm": "7",
-      "horse": "Lucky Star",
-      "change_type": "Scratched",
-      "reason": "Trainer",
-      "time_posted": "09:45 AM ET",
-      "time_posted_dt": "09:45"
+      "time_posted_dt": "09:31"
     },
     {
       "race": 4,
@@ -46,7 +28,7 @@
       "change_type": "Scratched",
       "reason": "Trainer",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 4,
@@ -55,7 +37,7 @@
       "change_type": "Scratched",
       "reason": "Also-Eligible",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 4,
@@ -64,7 +46,7 @@
       "change_type": "Scratched",
       "reason": "Also-Eligible",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 4,
@@ -73,7 +55,7 @@
       "change_type": "Scratched",
       "reason": "Trainer",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 6,
@@ -82,7 +64,7 @@
       "change_type": "Scratched",
       "reason": "Stakes Scratch",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 6,
@@ -91,16 +73,7 @@
       "change_type": "Scratched",
       "reason": "Stakes Scratch",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
-    },
-    {
-      "race": 7,
-      "pgm": "13",
-      "horse": "Derby Dream",
-      "change_type": "AE_ADDED",
-      "reason": "Manual Entry",
-      "time_posted": "",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 7,
@@ -109,7 +82,7 @@
       "change_type": "Scratched",
       "reason": "Also-Eligible",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 7,
@@ -118,7 +91,7 @@
       "change_type": "Scratched",
       "reason": "Trainer",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 7,
@@ -127,7 +100,7 @@
       "change_type": "Scratched",
       "reason": "Trainer",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     },
     {
       "race": 8,
@@ -136,7 +109,7 @@
       "change_type": "First Start Since Reported as Gelding",
       "reason": "",
       "time_posted": "5:00 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "05:00"
     },
     {
       "race": 9,
@@ -145,7 +118,7 @@
       "change_type": "Scratched",
       "reason": "Stakes Scratch",
       "time_posted": "9:31 AM ET",
-      "time_posted_dt": null
+      "time_posted_dt": "09:31"
     }
   ]
 }
