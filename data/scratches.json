@@ -1,8 +1,17 @@
 {
   "track": "CD",
   "date": "2026-04-29",
-  "generated_at": "10:39 AM ET",
+  "generated_at": "01:23 PM ET",
   "scratches": [
+    {
+      "race": 1,
+      "pgm": "4",
+      "horse": "My Noble Knight",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
     {
       "race": 2,
       "pgm": "3",
@@ -20,6 +29,15 @@
       "reason": "PrivVet-Injured",
       "time_posted": "9:31 AM ET",
       "time_posted_dt": "09:31"
+    },
+    {
+      "race": 3,
+      "pgm": "5",
+      "horse": "Summer Dream",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "1:43 PM ET",
+      "time_posted_dt": "13:43"
     },
     {
       "race": 4,
@@ -50,12 +68,30 @@
     },
     {
       "race": 4,
+      "pgm": "2",
+      "horse": "Power of Will",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "2:04 PM ET",
+      "time_posted_dt": "14:04"
+    },
+    {
+      "race": 4,
       "pgm": "3",
       "horse": "Mush Carey",
       "change_type": "Scratched",
       "reason": "Trainer",
       "time_posted": "9:31 AM ET",
       "time_posted_dt": "09:31"
+    },
+    {
+      "race": 5,
+      "pgm": "4",
+      "horse": "Diagram",
+      "change_type": "Jockey - Axel Concepcion changed to Brian Joseph Hernandez, Jr.",
+      "reason": "",
+      "time_posted": "12:18 PM ET",
+      "time_posted_dt": "12:18"
     },
     {
       "race": 6,
@@ -65,6 +101,42 @@
       "reason": "Stakes Scratch",
       "time_posted": "9:31 AM ET",
       "time_posted_dt": "09:31"
+    },
+    {
+      "race": 6,
+      "pgm": "2",
+      "horse": "Skara Brae",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
+    {
+      "race": 6,
+      "pgm": "4",
+      "horse": "Waggley",
+      "change_type": "Overweight - 1 lbs",
+      "reason": "",
+      "time_posted": "12:18 PM ET",
+      "time_posted_dt": "12:18"
+    },
+    {
+      "race": 6,
+      "pgm": "6",
+      "horse": "Frontline Fury",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
+    {
+      "race": 6,
+      "pgm": "7",
+      "horse": "Peak Perspective",
+      "change_type": "Owner -  Changed to TCC Stables, LLC and Marina Colebrook",
+      "reason": "",
+      "time_posted": "12:18 PM ET",
+      "time_posted_dt": "12:18"
     },
     {
       "race": 6,
@@ -119,6 +191,42 @@
       "reason": "Stakes Scratch",
       "time_posted": "9:31 AM ET",
       "time_posted_dt": "09:31"
+    },
+    {
+      "race": 10,
+      "pgm": "13",
+      "horse": "Texas Holiday",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
+    {
+      "race": 10,
+      "pgm": "14",
+      "horse": "Bindi",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
+    {
+      "race": 10,
+      "pgm": "15",
+      "horse": "Menkaure",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
+    },
+    {
+      "race": 10,
+      "pgm": "16",
+      "horse": "Queen Mercedes",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "11:28 AM ET",
+      "time_posted_dt": "11:28"
     }
   ]
 }
