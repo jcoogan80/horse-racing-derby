@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-04-29 06:35",
+  "last_updated": "2026-04-29 13:47",
   "db_summary": {
     "total_tracks": 7,
-    "total_race_days": 220,
-    "total_races": 3494,
-    "total_exotics": 18543,
+    "total_race_days": 221,
+    "total_races": 3497,
+    "total_exotics": 18555,
     "date_range": {
       "from": "2025-01-01",
-      "to": "2026-04-28"
+      "to": "2026-04-29"
     },
     "tracks": [
       {
@@ -19,9 +19,9 @@
       },
       {
         "track": "CD",
-        "days": 45,
-        "races": 435,
-        "exotics": 2297,
+        "days": 46,
+        "races": 438,
+        "exotics": 2309,
         "max_race": 14
       },
       {
@@ -432,426 +432,119 @@
     },
     {
       "track": "CD",
-      "date": "2026-04-28",
-      "race_count": 9,
-      "exotic_count": 49,
+      "date": "2026-04-29",
+      "race_count": 3,
+      "exotic_count": 12,
       "races": [
         {
           "race_num": 1,
-          "winner": "Sing a Little Song",
-          "winner_pgm": "2",
-          "win_payout": 3.38,
-          "place_payout": 2.28,
-          "show_payout": 2.1
+          "winner": "Empire Builder",
+          "winner_pgm": "1",
+          "win_payout": 3.86,
+          "place_payout": 2.68,
+          "show_payout": 2.52
         },
         {
           "race_num": 2,
-          "winner": "Fanshell Beach",
-          "winner_pgm": "6",
-          "win_payout": 4.88,
-          "place_payout": 2.58,
-          "show_payout": 2.1
+          "winner": "Barksdale",
+          "winner_pgm": "1",
+          "win_payout": 4.66,
+          "place_payout": 2.68,
+          "show_payout": 2.32
         },
         {
           "race_num": 3,
-          "winner": "Faye's Gold",
-          "winner_pgm": "8",
-          "win_payout": 9.68,
-          "place_payout": 5.18,
-          "show_payout": 4.16
-        },
-        {
-          "race_num": 4,
-          "winner": "Spun Candy",
-          "winner_pgm": "2",
-          "win_payout": 4.96,
-          "place_payout": 3.0,
-          "show_payout": 2.7
-        },
-        {
-          "race_num": 5,
-          "winner": "Harbe",
-          "winner_pgm": "9",
-          "win_payout": 6.26,
-          "place_payout": 3.68,
-          "show_payout": 3.16
-        },
-        {
-          "race_num": 6,
-          "winner": "Gene and Jude",
+          "winner": "Ruiva",
           "winner_pgm": "7",
-          "win_payout": 5.2,
-          "place_payout": 3.44,
-          "show_payout": 2.98
-        },
-        {
-          "race_num": 7,
-          "winner": "Favoritism",
-          "winner_pgm": "13",
-          "win_payout": 29.62,
-          "place_payout": 11.64,
-          "show_payout": 7.46
-        },
-        {
-          "race_num": 8,
-          "winner": "U Devil You",
-          "winner_pgm": "7",
-          "win_payout": 9.26,
-          "place_payout": 4.48,
-          "show_payout": 3.54
-        },
-        {
-          "race_num": 9,
-          "winner": "Bacio",
-          "winner_pgm": "4",
-          "win_payout": 2.6,
-          "place_payout": 2.1,
-          "show_payout": 2.1
+          "win_payout": 6.9,
+          "place_payout": 4.32,
+          "show_payout": 2.86
         }
       ],
       "exotics": [
         {
           "wager_type": "DD",
           "race_span": "1-2",
-          "winning_combo": "2-6",
-          "payout_per_2": 7.6,
-          "payout": 3.8
+          "winning_combo": "1-1",
+          "payout_per_2": 10.84,
+          "payout": 5.42
         },
         {
           "wager_type": "DD",
           "race_span": "2-3",
-          "winning_combo": "6-8",
-          "payout_per_2": 40.6,
-          "payout": 20.3
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "3-4",
-          "winning_combo": "8-2",
-          "payout_per_2": 24.84,
-          "payout": 12.42
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "4-5",
-          "winning_combo": "2-9",
-          "payout_per_2": 15.46,
-          "payout": 7.73
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "5-6",
-          "winning_combo": "9-7",
-          "payout_per_2": 17.14,
-          "payout": 8.57
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "6-7",
-          "winning_combo": "7-13",
-          "payout_per_2": 124.04,
-          "payout": 62.02
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "7-8",
-          "winning_combo": "13-7",
-          "payout_per_2": 161.36,
-          "payout": 80.68
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "8-9",
-          "winning_combo": "7-4",
-          "payout_per_2": 16.66,
-          "payout": 8.33
+          "winning_combo": "1-7",
+          "payout_per_2": 15.84,
+          "payout": 7.92
         },
         {
           "wager_type": "EX",
           "race_span": "1",
-          "winning_combo": "2-3",
-          "payout_per_2": 9.84,
-          "payout": 9.84
+          "winning_combo": "1-5",
+          "payout_per_2": 69.42,
+          "payout": 69.42
         },
         {
           "wager_type": "EX",
           "race_span": "2",
-          "winning_combo": "6-1",
-          "payout_per_2": 8.58,
-          "payout": 8.58
+          "winning_combo": "1-5",
+          "payout_per_2": 10.76,
+          "payout": 10.76
         },
         {
           "wager_type": "EX",
           "race_span": "3",
-          "winning_combo": "8-1",
-          "payout_per_2": 43.02,
-          "payout": 43.02
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "4",
-          "winning_combo": "2-1",
-          "payout_per_2": 28.06,
-          "payout": 28.06
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "5",
-          "winning_combo": "9-11",
-          "payout_per_2": 84.04,
-          "payout": 84.04
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "6",
-          "winning_combo": "7-6",
-          "payout_per_2": 20.76,
-          "payout": 20.76
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "7",
-          "winning_combo": "13-3",
-          "payout_per_2": 135.16,
-          "payout": 135.16
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "8",
-          "winning_combo": "7-5",
-          "payout_per_2": 34.16,
-          "payout": 34.16
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "9",
-          "winning_combo": "4-2",
-          "payout_per_2": 8.8,
-          "payout": 8.8
+          "winning_combo": "7-1",
+          "payout_per_2": 68.14,
+          "payout": 68.14
         },
         {
           "wager_type": "P3",
           "race_span": "1-2-3",
-          "winning_combo": "2-6-8",
-          "payout_per_2": 50.04,
-          "payout": 12.51
+          "winning_combo": "1-1-5",
+          "payout_per_2": 10.36,
+          "payout": 2.59
         },
         {
           "wager_type": "P3",
-          "race_span": "2-3-4",
-          "winning_combo": "6-8-2",
-          "payout_per_2": 75.52,
-          "payout": 18.88
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "3-4-5",
-          "winning_combo": "8-2-9",
-          "payout_per_2": 87.96,
-          "payout": 21.99
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "4-5-6",
-          "winning_combo": "2-9-7",
-          "payout_per_2": 47.16,
-          "payout": 11.79
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "5-6-7",
-          "winning_combo": "9-7-11",
-          "payout_per_2": 19.24,
-          "payout": 4.81
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "5-6-7",
-          "winning_combo": "9-7-13",
-          "payout_per_2": 359.48,
-          "payout": 89.87
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "6-7-8",
-          "winning_combo": "7-11-7",
-          "payout_per_2": 24.44,
-          "payout": 6.11
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "6-7-8",
-          "winning_combo": "7-13-7",
-          "payout_per_2": 466.72,
-          "payout": 116.68
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "7-8-9",
-          "winning_combo": "13-7-4",
-          "payout_per_2": 353.28,
-          "payout": 529.92
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "2-3-4-5",
-          "winning_combo": "6-8-2-5/9",
-          "payout_per_2": 293.6,
-          "payout": 73.4
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "6-7-8-9",
-          "winning_combo": "7/8/14/15/16-13-7-1/3/4/5/9/12",
-          "payout_per_2": 839.0,
-          "payout": 209.75
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "1-2-3-4-5",
-          "winning_combo": "2-6-8-2-5/9",
-          "payout_per_2": 626.24,
-          "payout": 156.56
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "3-4-5-6-7",
-          "winning_combo": "8-2-5/9-7/8/14/15/16-13",
-          "payout_per_2": 4162.56,
-          "payout": 1040.64
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "5-6-7-8-9",
-          "winning_combo": "9-7-13-7-4",
-          "payout_per_2": 2809.56,
-          "payout": 702.39
-        },
-        {
-          "wager_type": "P6",
-          "race_span": "4-5-6-7-8-9",
-          "winning_combo": "2-9-7-13-7-4",
-          "payout_per_2": 5647.0,
-          "payout": 564.7
+          "race_span": "1-2-3",
+          "winning_combo": "1-1-7",
+          "payout_per_2": 50.88,
+          "payout": 12.72
         },
         {
           "wager_type": "SF",
           "race_span": "1",
-          "winning_combo": "2-3-1-6",
-          "payout_per_2": 103.4,
-          "payout": 5.17
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "2",
-          "winning_combo": "6-1-5-3",
-          "payout_per_2": 92.4,
-          "payout": 4.62
+          "winning_combo": "1-5-6-8",
+          "payout_per_2": 425.8,
+          "payout": 21.29
         },
         {
           "wager_type": "SF",
           "race_span": "3",
-          "winning_combo": "8-1-5-9",
-          "payout_per_2": 1595.6,
-          "payout": 79.78
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "4",
-          "winning_combo": "2-1-7-5",
-          "payout_per_2": 1974.0,
-          "payout": 98.7
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "5",
-          "winning_combo": "9-11-10-1",
-          "payout_per_2": 5199.2,
-          "payout": 259.96
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "6",
-          "winning_combo": "7-6-13-10",
-          "payout_per_2": 939.4,
-          "payout": 46.97
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "7",
-          "winning_combo": "13-3-2-6",
-          "payout_per_2": 1567.6,
-          "payout": 78.38
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "8",
-          "winning_combo": "7-5-4-1",
-          "payout_per_2": 869.4,
-          "payout": 43.47
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "9",
-          "winning_combo": "4-2-10-11",
-          "payout_per_2": 48.6,
-          "payout": 2.43
+          "winning_combo": "7-1-12-2",
+          "payout_per_2": 1482.4,
+          "payout": 74.12
         },
         {
           "wager_type": "TRI",
           "race_span": "1",
-          "winning_combo": "2-3-1",
-          "payout_per_2": 60.48,
-          "payout": 15.12
+          "winning_combo": "1-5-6",
+          "payout_per_2": 265.52,
+          "payout": 66.38
         },
         {
           "wager_type": "TRI",
           "race_span": "2",
-          "winning_combo": "6-1-5",
-          "payout_per_2": 25.44,
-          "payout": 6.36
+          "winning_combo": "1-5-2",
+          "payout_per_2": 54.56,
+          "payout": 13.64
         },
         {
           "wager_type": "TRI",
           "race_span": "3",
-          "winning_combo": "8-1-5",
-          "payout_per_2": 160.6,
-          "payout": 40.15
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "4",
-          "winning_combo": "2-1-7",
-          "payout_per_2": 122.16,
-          "payout": 30.54
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "5",
-          "winning_combo": "9-11-10",
-          "payout_per_2": 828.96,
-          "payout": 207.24
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "6",
-          "winning_combo": "7-6-13",
-          "payout_per_2": 225.12,
-          "payout": 56.28
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "7",
-          "winning_combo": "13-3-2",
-          "payout_per_2": 480.04,
-          "payout": 120.01
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "9",
-          "winning_combo": "4-2-10",
-          "payout_per_2": 16.32,
-          "payout": 4.08
+          "winning_combo": "7-1-12",
+          "payout_per_2": 232.16,
+          "payout": 58.04
         }
       ]
     },
@@ -3996,24 +3689,24 @@
     "CD": {
       "DD": {
         "1-2": {
-          "times_hit": 45,
-          "avg_payout": 55.89,
-          "median_payout": 29.96,
+          "times_hit": 46,
+          "avg_payout": 54.91,
+          "median_payout": 29.44,
           "max_payout": 435.84,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.63,
+          "overlay_ratio": 0.62,
           "consistency": "HIGH",
           "thin_sample": false
         },
         "2-3": {
-          "times_hit": 45,
-          "avg_payout": 79.67,
-          "median_payout": 40.4,
+          "times_hit": 46,
+          "avg_payout": 78.28,
+          "median_payout": 40.38,
           "max_payout": 763.52,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.9,
+          "overlay_ratio": 0.88,
           "consistency": "HIGH",
           "thin_sample": false
         },
@@ -4141,13 +3834,13 @@
       },
       "P3": {
         "1-2-3": {
-          "times_hit": 45,
-          "avg_payout": 304.21,
-          "median_payout": 132.32,
+          "times_hit": 47,
+          "avg_payout": 292.57,
+          "median_payout": 130.32,
           "max_payout": 2584.04,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.43,
+          "overlay_ratio": 0.42,
           "consistency": "HIGH",
           "thin_sample": false
         },
@@ -4257,7 +3950,7 @@
           "max_payout": 172.56,
           "wager_base": 2.0,
           "is_overlay": false,
-          "overlay_ratio": 0.23,
+          "overlay_ratio": 0.24,
           "consistency": "HIGH",
           "thin_sample": true
         },
@@ -19824,5 +19517,912 @@
       }
     }
   },
-  "today_entries": {}
+  "today_entries": {
+    "CD": {
+      "date": "2026-04-29",
+      "races": [
+        {
+          "race_num": 1,
+          "race_type": "Open | 4 Year Olds And Up",
+          "distance": "1 m,\nDirt,\n$16,000 Claiming",
+          "surface": "Dirt",
+          "field_size": 8,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Empire Builder",
+              "morning_line": 2.5,
+              "jockey": "Armando HernandezTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Nip N Tuck",
+              "morning_line": 15.0,
+              "jockey": "Barry L. KingLuan Machado",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Charbon",
+              "morning_line": 10.0,
+              "jockey": "Chasey Deville PomierEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "My Noble Knight",
+              "morning_line": 3.0,
+              "jockey": "Kinnon LaRoseJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Tres Soles",
+              "morning_line": 8.0,
+              "jockey": "William Stinson, Jr.Gabriel Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Raising Kane",
+              "morning_line": 15.0,
+              "jockey": "J. Keith DesormeauxCorey J. Lanerie",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Quokka",
+              "morning_line": 6.0,
+              "jockey": "Cirilo GorostietaAgustin Gomez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "National Eclipse",
+              "morning_line": 3.5,
+              "jockey": "Robertino DiodoroIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 2,
+          "race_type": "Open | 4 Year Olds And Up",
+          "distance": "6 1/2F,\nDirt,\n$25,000 Claiming",
+          "surface": "Dirt",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Barksdale",
+              "morning_line": 3.0,
+              "jockey": "David JacobsonTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Chiringo",
+              "morning_line": 10.0,
+              "jockey": "Genaro GarciaEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Altobelli",
+              "morning_line": 20.0,
+              "jockey": "Nery AlvarezCesar Diaz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Real Macho",
+              "morning_line": 3.5,
+              "jockey": "Rohan G. CrichtonMicah J. Husbands",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Highly Flammable",
+              "morning_line": 1.8,
+              "jockey": "Joe SharpIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Mister Mmmmm",
+              "morning_line": 3.0,
+              "jockey": "Joe SharpJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Charbonnay",
+              "morning_line": 20.0,
+              "jockey": "Nery AlvarezCesar Orantes",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 3,
+          "race_type": "Fillies | 2 Year Olds",
+          "distance": "4 1/2F,\nDirt,\nMaiden Special Weight",
+          "surface": "Dirt",
+          "field_size": 12,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Barometric",
+              "morning_line": 15.0,
+              "jockey": "Timothy E. HammLuis Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Bit Tipsy",
+              "morning_line": 20.0,
+              "jockey": "Eduardo CaramoriJaime A. Torres",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Tuxca",
+              "morning_line": 30.0,
+              "jockey": "Erick Alexander TorresAgustin Gomez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Bayou Baby",
+              "morning_line": 30.0,
+              "jockey": "Chasey Deville PomierAdam Beschizza",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Summer Dream",
+              "morning_line": 20.0,
+              "jockey": "John EnnisDanny Sheehy",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "By Grace",
+              "morning_line": 8.0,
+              "jockey": "Joe SharpJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Ruiva",
+              "morning_line": 4.0,
+              "jockey": "Wesley A. WardJuan J. Hernandez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Just Epic",
+              "morning_line": 4.5,
+              "jockey": "Steven M. AsmussenBrian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Epicure",
+              "morning_line": 12.0,
+              "jockey": "Steven M. AsmussenFlorent Geroux",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Champagne Dream",
+              "morning_line": 6.0,
+              "jockey": "Todd A. PletcherIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Traction Park",
+              "morning_line": 8.0,
+              "jockey": "Mark E. CasseTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Bush",
+              "morning_line": 3.5,
+              "jockey": "Brian A. LynchJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 4,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1 1/16M,\nTurf,\n$50,000 Maiden Claiming",
+          "surface": "Turf",
+          "field_size": 12,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Traverse City",
+              "morning_line": 10.0,
+              "jockey": "Michael J. MakerFlavien Prat",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Power of Will",
+              "morning_line": 15.0,
+              "jockey": "Nicholas EslerDeclan Cannon",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Mush Carey",
+              "morning_line": 30.0,
+              "jockey": "Conor MurphyDanny Sheehy",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Turbo Launch",
+              "morning_line": 4.0,
+              "jockey": "Joe SharpJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Underappreciated",
+              "morning_line": 8.0,
+              "jockey": "John EnnisEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Abbi Fede",
+              "morning_line": 3.0,
+              "jockey": "Joe SharpIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Feral",
+              "morning_line": 6.0,
+              "jockey": "Kenneth G. McPeekChristopher Elliott",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Newman",
+              "morning_line": 4.5,
+              "jockey": "Eddie KenneallyBen Curtis",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Nyttime Story",
+              "morning_line": 30.0,
+              "jockey": "Brian D. MichaelAndres Calleja",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Fly Guy Mick",
+              "morning_line": 12.0,
+              "jockey": "Fergus BogleTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Holyrood",
+              "morning_line": 30.0,
+              "jockey": "Edward VaughanBrian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Bearister",
+              "morning_line": 15.0,
+              "jockey": "J. Keith DesormeauxJames Graham",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 5,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "6F,\nDirt,\n$50,000 Maiden Claiming",
+          "surface": "Dirt",
+          "field_size": 10,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Grant's Gretchen",
+              "morning_line": 10.0,
+              "jockey": "Fergus BogleJaime A. Torres",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Luck of the Day",
+              "morning_line": 20.0,
+              "jockey": "Yoni R. OrantesOscar Villarreal",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Go Go Playmate",
+              "morning_line": 5.0,
+              "jockey": "Joe SharpIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Diagram",
+              "morning_line": 4.5,
+              "jockey": "W. Bret CalhounAxel Concepcion",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Santiana",
+              "morning_line": 10.0,
+              "jockey": "Genaro GarciaEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Lil Braveheart",
+              "morning_line": 20.0,
+              "jockey": "Roddina A. BarrettVictor R. Carrasco",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Red Rainbow",
+              "morning_line": 12.0,
+              "jockey": "Troy S. WismerWilliam Antongeorgi III",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Bourbon and Spice",
+              "morning_line": 8.0,
+              "jockey": "Ed Moger, Jr.Summer Pauly",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Scarce",
+              "morning_line": 3.0,
+              "jockey": "D. Whitworth BeckmanTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Ribadeo",
+              "morning_line": 3.5,
+              "jockey": "Albert M. Stall, Jr.Jose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 6,
+          "race_type": "Open | 2 Year Olds",
+          "distance": "5 f,\nDirt,\nKentucky Juvenile S. presented by Resolute Racing",
+          "surface": "Dirt",
+          "field_size": 8,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Glory Run",
+              "morning_line": 15.0,
+              "jockey": "John EnnisDanny Sheehy",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Skara Brae",
+              "morning_line": 1.4,
+              "jockey": "Wesley A. WardJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "American Pope",
+              "morning_line": 30.0,
+              "jockey": "Paul McEnteeChristopher Elliott",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Waggley",
+              "morning_line": 2.0,
+              "jockey": "Wesley A. WardJoel Rosario",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Super Saiyajin",
+              "morning_line": 8.0,
+              "jockey": "Sergio DonjuanGerardo Corrales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Frontline Fury",
+              "morning_line": 20.0,
+              "jockey": "Ben ColebrookLuan Machado",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Peak Perspective",
+              "morning_line": 4.5,
+              "jockey": "Ben ColebrookTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Bourbon Town",
+              "morning_line": 10.0,
+              "jockey": "Rey HernandezLuis Saez",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 7,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "5 f,\nTurf,\n$80,000 Allowance Optional Claiming",
+          "surface": "Turf",
+          "field_size": 12,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Fancy Caber Neigh",
+              "morning_line": 15.0,
+              "jockey": "William E. MoreyBen Curtis",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Shoot It True",
+              "morning_line": 1.4,
+              "jockey": "Wesley A. WardJoel Rosario",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "I'm Mo Joke",
+              "morning_line": 20.0,
+              "jockey": "Joe SharpBrian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Cart Girl Sam",
+              "morning_line": 15.0,
+              "jockey": "Rohan G. CrichtonTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Justinqueso",
+              "morning_line": 8.0,
+              "jockey": "Ian R. WilkesJulien R. Leparoux",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "High Fashion Kate",
+              "morning_line": 10.0,
+              "jockey": "Jordan BlairEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Satin Blue",
+              "morning_line": 8.0,
+              "jockey": "Joe SharpJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Caberneigh",
+              "morning_line": 50.0,
+              "jockey": "Scott W. BarkerJohn McKee",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Roja",
+              "morning_line": 4.0,
+              "jockey": "H. Graham MotionIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Rosato",
+              "morning_line": 6.0,
+              "jockey": "Ian R. WilkesLuis Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Tempting Eve",
+              "morning_line": 12.0,
+              "jockey": "Chris A. HartmanJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Gladriel",
+              "morning_line": 30.0,
+              "jockey": "Cody W. AxmakerLuan Machado",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 8,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "7 f,\nDirt,\n$50,000 Starter Allowance",
+          "surface": "Dirt",
+          "field_size": 10,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Norwich",
+              "morning_line": 4.5,
+              "jockey": "Michael J. MakerFlavien Prat",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Free Advice",
+              "morning_line": 15.0,
+              "jockey": "Tommy HumphriesBrian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Sharons Beach",
+              "morning_line": 2.5,
+              "jockey": "Jonathan ThomasIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Mo Work",
+              "morning_line": 4.0,
+              "jockey": "Mark Simms, Jr.Luis Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Gordon's Legacy",
+              "morning_line": 6.0,
+              "jockey": "Chris A. HartmanEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Good Mojo",
+              "morning_line": 12.0,
+              "jockey": "Grant T. ForsterJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "South Bend Tom",
+              "morning_line": 6.0,
+              "jockey": "Albert M. Stall, Jr.Tyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Speedstorm",
+              "morning_line": 12.0,
+              "jockey": "Ron MoquettJoel Rosario",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Sweet Freedom",
+              "morning_line": 8.0,
+              "jockey": "Robert MedinaAlex Achard",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Just Like Max",
+              "morning_line": 30.0,
+              "jockey": "Genaro GarciaChristopher Elliott",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 9,
+          "race_type": "Open | 4 Year Olds And Up",
+          "distance": "1 1/2 m,\nDirt,\nIsaac Murphy Marathon S. presented by Resolute Racing",
+          "surface": "Dirt",
+          "field_size": 9,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "No Bien Ni Mal (BRZ)",
+              "morning_line": 3.0,
+              "jockey": "Paulo H. LoboJoel Rosario",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Parchment Party",
+              "morning_line": 2.0,
+              "jockey": "William I. MottJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Timeout",
+              "morning_line": 12.0,
+              "jockey": "William I. MottJunior Alvarado",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Digital Ops",
+              "morning_line": 8.0,
+              "jockey": "Saffie A. Joseph, Jr.Tyler Gaffalione",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Interceptor",
+              "morning_line": 6.0,
+              "jockey": "Michael J. MakerFlavien Prat",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Makes Sense",
+              "morning_line": 15.0,
+              "jockey": "Chad SummersLuis Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Johny's Rendezvous",
+              "morning_line": 20.0,
+              "jockey": "Philip A. BauerJaime A. Torres",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Wynstock",
+              "morning_line": 4.5,
+              "jockey": "Brad H. CoxIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Stowaway",
+              "morning_line": 12.0,
+              "jockey": "D. Whitworth BeckmanJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 10,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "1 1/16M,\nTurf,\n$30,000 Claiming",
+          "surface": "Turf",
+          "field_size": 12,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Sussudio",
+              "morning_line": 30.0,
+              "jockey": "Jeff A. HilesAdam Beschizza",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Austin High",
+              "morning_line": 6.0,
+              "jockey": "Thomas Drury, Jr.Brian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Mustang Lady",
+              "morning_line": 20.0,
+              "jockey": "J. Kent SweezeyDanny Sheehy",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Oak Alley",
+              "morning_line": 8.0,
+              "jockey": "Ed Moger, Jr.Summer Pauly",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Got Gone",
+              "morning_line": 30.0,
+              "jockey": "John EnnisAlex Achard",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Never Really Know (IRE)",
+              "morning_line": 3.5,
+              "jockey": "Norm W. CasseLuis Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Fashion Affirmed",
+              "morning_line": 30.0,
+              "jockey": "Guber GorostietaJann N. Hernandez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Egyptian Candy",
+              "morning_line": 20.0,
+              "jockey": "Daniel LeitchGabriel Saez",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Twolatebabydoll (FR)",
+              "morning_line": 2.5,
+              "jockey": "Albert M. Stall, Jr.Jose L. Ortiz",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Kittens Stormy Gal",
+              "morning_line": 15.0,
+              "jockey": "Walter M. Bindner, Jr.James Graham",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Honor Azteca",
+              "morning_line": 12.0,
+              "jockey": "J. Keith DesormeauxJunior Alvarado",
+              "trainer": "",
+              "is_ae": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Heart Spin",
+              "morning_line": 4.5,
+              "jockey": "Anna NavarreteEdgar Morales",
+              "trainer": "",
+              "is_ae": false
+            }
+          ],
+          "ae_horses": []
+        }
+      ],
+      "ae_alerts": []
+    }
+  }
 }
