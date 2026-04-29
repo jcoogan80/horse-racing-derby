@@ -912,12 +912,28 @@
       font-size: .85rem; font-weight: 700; color: #ff9933;
       margin-bottom: 6px; letter-spacing: .04em;
     }
-    .scb-section-hdr {
-      font-size: .68rem; font-weight: 700; letter-spacing: .09em;
-      text-transform: uppercase; color: #996633;
-      margin: 8px 0 2px; padding-bottom: 3px;
-      border-bottom: 1px solid rgba(255,153,51,.18);
+    /* Level 1 collapsible headers */
+    .scb-l1-header {
+      display: flex; align-items: center; gap: 8px;
+      padding: 7px 4px; cursor: pointer; border-radius: 4px;
+      user-select: none; transition: background .15s;
+      border-bottom: 1px solid rgba(255,153,51,.15);
     }
+    .scb-l1-header + .scb-l1-header { margin-top: 2px; }
+    .scb-l1-header:hover { background: rgba(255,153,51,.07); }
+    .scb-l1-icon  { font-size: .82rem; color: #ff9933; flex-shrink: 0; }
+    .scb-l1-title { font-size: .8rem; font-weight: 700; color: #ff9933; flex: 1; letter-spacing: .03em; }
+    .scb-l1-arrow {
+      font-size: .6rem; color: #cc8033; flex-shrink: 0;
+      transition: transform .22s ease;
+    }
+    .scb-l1-header.open .scb-l1-arrow { transform: rotate(90deg); }
+    .scb-l1-body {
+      display: grid; grid-template-rows: 0fr;
+      transition: grid-template-rows .25s ease;
+    }
+    .scb-l1-body.open { grid-template-rows: 1fr; }
+    .scb-l1-body > div { overflow: hidden; padding: 0 2px; }
     .scb-race-row {
       display: flex; align-items: center; gap: 7px;
       padding: 5px 4px; cursor: pointer; border-radius: 4px;
@@ -3629,7 +3645,7 @@ async function loadDashboard() {
   const db = data.db_summary;
   let html = '';
   if (fromCache) html += '<div class="offline-bar">Offline &mdash; showing cached data</div>';
-  html += `<p class="last-updated">Updated: ${data.last_updated}</p>
+  html += `<p class="last-updated" id="dash-updated">Updated: ${data.last_updated}</p>
     <div class="stats-grid">
       <div class="stat-box"><div class="val">${db.total_races.toLocaleString()}</div><div class="lbl">Races</div></div>
       <div class="stat-box"><div class="val">${db.total_race_days}</div><div class="lbl">Race Days</div></div>
@@ -5822,8 +5838,10 @@ async function loadScratches() {
       }
     }
 
-    const SKEY = 'scrBannerOpen';
-    const openSet = new Set(JSON.parse(localStorage.getItem(SKEY) || '[]'));
+    const SKEY  = 'scrBannerOpen';   // Level 2 — array of open race keys
+    const L1KEY = 'scrL1Open';       // Level 1 — {scr: bool, ae: bool}
+    const openSet = new Set(JSON.parse(localStorage.getItem(SKEY)  || '[]'));
+    const l1State = JSON.parse(localStorage.getItem(L1KEY) || '{"scr":false,"ae":false}');
 
     function scrEntryHtml(s) {
       const reason = s.reason ? ` &mdash; ${s.reason}` : '';
@@ -5840,10 +5858,10 @@ async function loadScratches() {
            + `<span class="scb-pgm">#${s.pgm}</span> ${s.horse} &mdash; AE Added${time}</div>`;
     }
 
-    function accordionBlock(raceMap, entryFn, prefix, sectionLabel) {
+    // Level 2 rows only — no section label (L1 header is the label now)
+    function l2Block(raceMap, entryFn, prefix) {
       const races = Object.keys(raceMap).map(Number).sort((a, b) => a - b);
-      if (!races.length) return '';
-      let html = `<div class="scb-section-hdr">${sectionLabel}</div>`;
+      let html = '';
       for (const raceNum of races) {
         const entries = raceMap[raceNum];
         const key = `${prefix}${raceNum}`;
@@ -5862,15 +5880,42 @@ async function loadScratches() {
       return html;
     }
 
+    const scrTotal = data.scratches.filter(s => s.change_type !== 'AE_ADDED').length;
+    const aeTotal  = data.scratches.filter(s => s.change_type === 'AE_ADDED').length;
+    const scrOpen  = !!l1State.scr;
+    const aeOpen   = !!l1State.ae;
+
     banner.innerHTML = `<div class="scratch-banner-card">`
-      + `<div class="scratch-banner-title">&#9888; SCRATCHES &amp; CHANGES`
-      + ` &mdash; ${data.track} ${data.date} (as of ${data.generated_at})</div>`
-      + accordionBlock(scrByRace, scrEntryHtml, 'r',  'Scratches')
-      + accordionBlock(aeByRace,  aeEntryHtml,  'ae', 'AE Alerts')
+      // ── SCR Level 1 header ──
+      + `<div class="scb-l1-header${scrOpen ? ' open' : ''}" data-l1="scr">`
+      + `<span class="scb-l1-icon">&#9888;</span>`
+      + `<span class="scb-l1-title">SCRATCHES &amp; CHANGES &mdash; ${data.track}`
+      + ` ${data.date} &middot; ${scrTotal} change${scrTotal !== 1 ? 's' : ''}`
+      + ` (as of ${data.generated_at})</span>`
+      + `<span class="scb-l1-arrow">&#9654;</span></div>`
+      + `<div class="scb-l1-body${scrOpen ? ' open' : ''}" id="scb-l1b-scr">`
+      + `<div>${l2Block(scrByRace, scrEntryHtml, 'r')}</div></div>`
+      // ── AE Level 1 header ──
+      + `<div class="scb-l1-header${aeOpen ? ' open' : ''}" data-l1="ae">`
+      + `<span class="scb-l1-icon">&#10010;</span>`
+      + `<span class="scb-l1-title">AE Alerts Today &middot; ${aeTotal} AE</span>`
+      + `<span class="scb-l1-arrow">&#9654;</span></div>`
+      + `<div class="scb-l1-body${aeOpen ? ' open' : ''}" id="scb-l1b-ae">`
+      + `<div>${l2Block(aeByRace, aeEntryHtml, 'ae')}</div></div>`
       + `</div>`;
 
-    // Click handler — event delegation
+    // Single delegated click handler — Level 1 takes priority over Level 2
     banner.addEventListener('click', e => {
+      const l1row = e.target.closest('.scb-l1-header');
+      if (l1row) {
+        const k     = l1row.dataset.l1;
+        const body  = document.getElementById(`scb-l1b-${k}`);
+        const nowOpen = l1row.classList.toggle('open');
+        body.classList.toggle('open', nowOpen);
+        l1State[k] = nowOpen;
+        localStorage.setItem(L1KEY, JSON.stringify(l1State));
+        return;
+      }
       const row = e.target.closest('.scb-race-row');
       if (!row) return;
       const key  = row.dataset.scbkey;
@@ -5880,6 +5925,12 @@ async function loadScratches() {
       if (nowOpen) openSet.add(key); else openSet.delete(key);
       localStorage.setItem(SKEY, JSON.stringify([...openSet]));
     });
+
+    // ── Footer timestamp ──
+    if (data.date && data.generated_at) {
+      const updEl = document.getElementById('dash-updated');
+      if (updEl) updEl.textContent = `Updated: ${data.date} \u00b7 ${data.generated_at}`;
+    }
   }
 
   // ── OptixEQ badge overlays ──
