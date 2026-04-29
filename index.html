@@ -3399,7 +3399,7 @@ function renderRecentResults(recentResults) {
     if (t.races && t.races.length) {
       racesBody = t.races.map(r => `<tr>
         <td>${r.race_num}</td>
-        <td class="left" style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${r.winner || '—'}</td>
+        <td class="left" style="max-width:200px;overflow:hidden;text-overflow:ellipsis">${r.winner_pgm ? `<span style="color:var(--gold);font-weight:700">#${r.winner_pgm}</span> ` : ''}${r.winner || '—'}</td>
         <td>${fmtPay(r.win_payout)}</td>
         <td>${fmtPay(r.place_payout)}</td>
         <td>${fmtPay(r.show_payout)}</td>
