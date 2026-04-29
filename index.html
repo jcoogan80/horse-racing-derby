@@ -901,6 +901,34 @@
     }
     .oeq-copy-btn:active { opacity: .8; }
     .oeq-copy-btn.copied { border-color: var(--green); color: var(--green); }
+
+    /* ── Scratch Alerts ── */
+    #scratch-banner { margin: 0 0 10px; }
+    .scratch-banner-card {
+      background: #2a1a00; border: 1px solid #cc6600;
+      border-radius: 8px; padding: 12px 16px;
+    }
+    .scratch-banner-title {
+      font-size: .85rem; font-weight: 700; color: #ff9933;
+      margin-bottom: 8px; letter-spacing: .04em;
+    }
+    .scratch-banner-row {
+      font-size: .8rem; color: #ddd; padding: 3px 0;
+      border-bottom: 1px solid rgba(255,153,51,.12);
+    }
+    .scratch-banner-row:last-child { border-bottom: none; }
+    .scratch-banner-row .scr-race { color: #ff9933; font-weight: 700; min-width: 28px; display: inline-block; }
+    .scr-badge {
+      display: inline-block; font-size: .65rem; font-weight: 700;
+      color: #fff; background: #cc3300; border-radius: 3px;
+      padding: 1px 4px; margin-left: 4px; vertical-align: middle;
+    }
+    .ae-badge {
+      display: inline-block; font-size: .65rem; font-weight: 700;
+      color: #fff; background: #1a7a3a; border-radius: 3px;
+      padding: 1px 4px; margin-left: 4px; vertical-align: middle;
+    }
+    .scratched-horse { text-decoration: line-through; opacity: .55; }
   </style>
 </head>
 <body>
@@ -923,6 +951,7 @@
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
 <div id="tab-dashboard" class="tab-pane active">
+  <div id="scratch-banner"></div>
   <div id="dash-content">
     <div class="status-msg"><div class="icon">&#128225;</div><div>Loading...</div></div>
   </div>
@@ -5737,6 +5766,126 @@ if ('serviceWorker' in navigator) {
 })();
 
 // =============================================================
+//  SCRATCH ALERTS
+// =============================================================
+async function loadScratches() {
+  let data = null;
+  try {
+    const res = await fetch('data/scratches.json?t=' + Date.now());
+    if (res.ok) data = await res.json();
+  } catch (_) {}
+  if (!data || !data.scratches || !data.scratches.length) return;
+
+  // Only show if today's date matches
+  const today = new Date().toISOString().slice(0, 10);
+  if (data.date !== today) return;
+
+  // ── Dashboard banner ──
+  const banner = document.getElementById('scratch-banner');
+  if (banner) {
+    const rows = data.scratches.map(s => {
+      if (s.change_type === 'AE_ADDED') {
+        return `<div class="scratch-banner-row">
+          <span class="scr-race">R${s.race}</span>
+          <span class="ae-badge">AE</span>
+          <strong>#${s.pgm}</strong> ${s.horse} &mdash; AE Added
+          ${s.time_posted ? '<span style="color:var(--dim);font-size:.75rem"> @ ' + s.time_posted + '</span>' : ''}
+        </div>`;
+      }
+      const reason = s.reason ? ' &mdash; ' + s.reason : '';
+      return `<div class="scratch-banner-row">
+        <span class="scr-race">R${s.race}</span>
+        <span class="scr-badge">SCR</span>
+        <strong>#${s.pgm}</strong> ${s.horse}${reason}
+        ${s.time_posted ? '<span style="color:var(--dim);font-size:.75rem"> @ ' + s.time_posted + '</span>' : ''}
+      </div>`;
+    }).join('');
+    banner.innerHTML = `<div class="scratch-banner-card">
+      <div class="scratch-banner-title">&#9888; SCRATCHES &amp; CHANGES &mdash; ${data.track} ${data.date} (as of ${data.generated_at})</div>
+      ${rows}
+    </div>`;
+  }
+
+  // ── OptixEQ badge overlays ──
+  // Build lookup: { raceNum -> { pgm -> scratch_obj, ... }, ... }
+  // Also track AE_ADDED by pgm for badge injection
+  const byRace = {};
+  for (const s of data.scratches) {
+    if (!byRace[s.race]) byRace[s.race] = {};
+    byRace[s.race][String(s.pgm)] = s;
+  }
+
+  // Static race cards: div.race-card (Oaks) and div.optix-race-card (Derby)
+  // Race num from span.race-num text, e.g. "R4" -> 4
+  // Horse rows: table.horse-table tbody tr, pgm = td[0].textContent
+  for (const cardEl of document.querySelectorAll('.race-card, .optix-race-card')) {
+    const raceNumEl = cardEl.querySelector('.race-num');
+    if (!raceNumEl) continue;
+    const raceNum = parseInt(raceNumEl.textContent.replace(/\D/g, ''), 10);
+    if (!byRace[raceNum]) continue;
+
+    const tbody = cardEl.querySelector('table.horse-table tbody');
+    if (!tbody) continue;
+
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    const aeRows = [];
+    for (const tr of rows) {
+      const tds = tr.querySelectorAll('td');
+      if (!tds.length) continue;
+      const pgm = tds[0].textContent.trim();
+      const s = byRace[raceNum][pgm];
+      if (!s) continue;
+      const horseTd = tds[1];
+      if (!horseTd) continue;
+      if (s.change_type === 'AE_ADDED') {
+        // Add AE badge and a new row
+        horseTd.innerHTML += '<span class="ae-badge">AE</span>';
+        aeRows.push({ after: tr, pgm: s.pgm, name: s.horse, tds: tds.length });
+      } else {
+        // SCR badge + strikethrough
+        tds[0].innerHTML += '<span class="scr-badge">SCR</span>';
+        horseTd.classList.add('scratched-horse');
+      }
+    }
+    // Insert AE new-entry rows
+    for (const ae of aeRows) {
+      const newTr = document.createElement('tr');
+      newTr.style.background = 'rgba(26,122,58,.12)';
+      newTr.innerHTML = `<td>${ae.pgm} <span class="ae-badge">AE</span></td><td>${ae.name}</td>`;
+      for (let i = 2; i < ae.tds; i++) newTr.innerHTML += '<td>—</td>';
+      ae.after.insertAdjacentElement('afterend', newTr);
+    }
+  }
+
+  // Dynamic oeq-race-card: match by .oeq-horse-name text content
+  for (const cardEl of document.querySelectorAll('.oeq-race-card')) {
+    const idMatch = cardEl.id && cardEl.id.match(/oeq-r(\d+)/);
+    if (!idMatch) continue;
+    const raceNum = parseInt(idMatch[1], 10);
+    if (!byRace[raceNum]) continue;
+
+    // Build name->scratch lookup
+    const byName = {};
+    for (const [pgm, s] of Object.entries(byRace[raceNum])) {
+      byName[s.horse.toLowerCase()] = s;
+    }
+
+    for (const tr of cardEl.querySelectorAll('tbody tr')) {
+      const nameEl = tr.querySelector('.oeq-horse-name');
+      if (!nameEl) continue;
+      const s = byName[nameEl.textContent.trim().toLowerCase()];
+      if (!s) continue;
+      if (s.change_type === 'AE_ADDED') {
+        nameEl.insertAdjacentHTML('afterend', '<span class="ae-badge">AE</span>');
+      } else {
+        nameEl.classList.add('scratched-horse');
+        nameEl.insertAdjacentHTML('afterend', '<span class="scr-badge">SCR</span>');
+      }
+    }
+  }
+}
+
+// =============================================================
 //  INIT
 // =============================================================
 loadDashboard();
@@ -5744,6 +5893,7 @@ renderTrackGuide();
 updateWpLegs();
 buildTodayLegs();
 renderOptixEQ();
+loadScratches();
 </script>
 </body>
 </html>
