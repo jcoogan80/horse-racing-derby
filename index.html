@@ -4663,19 +4663,25 @@ function analyzeMorningLine() {
     .map(horses => ({ horses, parlay: calcComboParlay(horses.map(h => h.odds), 2.0) }))
     .sort((a, b) => b.parlay - a.parlay);
 
-  const parlays  = combos.map(c => c.parlay);
-  const avgPar   = parlays.reduce((s, v) => s + v, 0) / parlays.length;
-  const bestPar  = parlays[0];
-  const worstPar = parlays[parlays.length - 1];
-  const sortedParlays = [...parlays].sort((a, b) => a - b);
-  const _mid = Math.floor(sortedParlays.length / 2);
-  const medianPar = sortedParlays.length % 2 === 0
-    ? (sortedParlays[_mid - 1] + sortedParlays[_mid]) / 2
-    : sortedParlays[_mid];
+  const parlays    = combos.map(c => c.parlay);            // $2.00-base values for data-payout-raw & ratios
+  const avgPar     = parlays.reduce((s, v) => s + v, 0) / parlays.length;
   const inputEl2   = document.getElementById('tc-ticket-input');
   const storedBase2 = parseFloat(inputEl2?.dataset.base);
   const wagerBase  = (!isNaN(storedBase2) && storedBase2 > 0) ? storedBase2 : (TC_BASE[wager] || 0.50);
   const ticketCost = wagerBase * combos.length;
+
+  // Summary card payouts at actual wager base via calcComboParlay
+  const bestPar    = calcComboParlay(combos[0].horses.map(h => h.odds), wagerBase);
+  const worstPar   = calcComboParlay(combos[combos.length - 1].horses.map(h => h.odds), wagerBase);
+  const sortedByPar = [...combos].sort((a, b) => a.parlay - b.parlay);
+  const _mid        = Math.floor(sortedByPar.length / 2);
+  const medianPar   = sortedByPar.length % 2 === 0
+    ? (calcComboParlay(sortedByPar[_mid - 1].horses.map(h => h.odds), wagerBase) +
+       calcComboParlay(sortedByPar[_mid].horses.map(h => h.odds), wagerBase)) / 2
+    : calcComboParlay(sortedByPar[_mid].horses.map(h => h.odds), wagerBase);
+  const medianParRaw = sortedByPar.length % 2 === 0
+    ? (sortedByPar[_mid - 1].parlay + sortedByPar[_mid].parlay) / 2
+    : sortedByPar[_mid].parlay;
 
   const displayDiv = window._tcWagerDiv || 4;
   const fmtP  = v => '$' + (v / displayDiv).toLocaleString('en-US', { maximumFractionDigits: 0 });
@@ -4723,15 +4729,15 @@ function analyzeMorningLine() {
 
   html += `<div class="stats-grid" style="margin-top:8px">
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${bestPar}">${fmtP(bestPar)}</span></div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${parlays[0]}">${fmtI(bestPar)}</span></div>
       <div class="lbl">Best Combo Parlay</div>
     </div>
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${medianPar}">${fmtP(medianPar)}</span></div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${medianParRaw}">${fmtI(medianPar)}</span></div>
       <div class="lbl">Median Combo Parlay</div>
     </div>
     <div class="stat-box">
-      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${worstPar}">${fmtP(worstPar)}</span></div>
+      <div class="val" style="font-size:1.1rem"><span data-payout-raw="${parlays[parlays.length - 1]}">${fmtI(worstPar)}</span></div>
       <div class="lbl">Worst Combo Parlay</div>
     </div>
     <div class="stat-box">
@@ -4783,7 +4789,7 @@ function analyzeMorningLine() {
     // ── Card 3: Gap Analysis ──
     const histAvg  = hist.avg_payout;
     const avgRatio = avgPar / histAvg;
-    const bstRatio = bestPar / histAvg;
+    const bstRatio = parlays[0] / histAvg;  // use $2-base for ratio vs $2-base histAvg
 
     let signal, sigColor, sigIcon;
     if (avgRatio > 1.5) {
@@ -4816,7 +4822,7 @@ function analyzeMorningLine() {
         <div class="sum-item">
           <div class="key">Best combo vs hist. avg</div>
           <div class="value" style="color:${bstRatioColor}">${bstRatio.toFixed(2)}x
-            <span style="font-size:.8rem;color:var(--dim);font-weight:400">&nbsp;<span data-payout-raw="${bestPar}">${fmtP(bestPar)}</span></span>
+            <span style="font-size:.8rem;color:var(--dim);font-weight:400">&nbsp;<span data-payout-raw="${parlays[0]}">${fmtI(bestPar)}</span></span>
           </div>
         </div>
         <div class="sum-item">
