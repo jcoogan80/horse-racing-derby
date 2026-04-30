@@ -1781,6 +1781,14 @@
 <!-- ─────────────── TICKET GENERATOR TAB ─────────────── -->
 <div id="tab-ticketgen" class="tab-pane">
   <div class="tg-top">
+    <span class="tg-label">Track</span>
+    <select class="tg-select" id="tg-track" onchange="tgOnBetChange()">
+      <option value="CD" selected>CD</option>
+      <option value="KEE">KEE</option>
+      <option value="GP">GP</option>
+      <option value="SA">SA</option>
+      <option value="AQU">AQU</option>
+    </select>
     <span class="tg-label">Bet type</span>
     <select class="tg-select" id="tg-bet" onchange="tgOnBetChange()">
       <option value="3">Pick 3</option>
@@ -5569,47 +5577,47 @@ const RACES = [
     ]},
   { num:7, name:"Unbridled Sandra G2", type:"G2", dist:"5.5f Turf", purse:"$500k", contention:"soft", verdict:"Shisospicy · Haulin Ice · Creed's Gold",
     horses:[
-      {name:"Shisospicy",      prog:9, ml:181, ofig:106, ong:"B",  notes:"NASAL_S LONE SAVED · BC Turf Sprint G1",  tags:["KEY","BOMB"]},
-      {name:"Haulin Ice",      prog:2, ml:35,  ofig:98,  ong:"B",  notes:"NASAL_S BOS · A- grade prior race",       tags:["KEY"]},
-      {name:"Creed's Gold",   prog:3, ml:19,  ofig:94,  ong:"B-", notes:"TROUBLE_S COVER STRETCH?",               tags:[]},
-      {name:"Queen Maxima",   prog:4, ml:27,  ofig:92,  ong:"B-", notes:"NASAL_S COVER MOVE",                     tags:[]},
-      {name:"Time to Dazzle", prog:5, ml:19,  ofig:91,  ong:"B-", notes:"SLOG WIDE",                              tags:[]},
-      {name:"Buttercream Babe",prog:6,ml:27,  ofig:89,  ong:"B",  notes:"NASAL_S TACTIC+ COVER",                  tags:[]},
-      {name:"Shoot It True",  prog:7, ml:27,  ofig:87,  ong:"B-", notes:"GATE TACTIC- MOVE",                      tags:[]},
-      {name:"Mae Town",       prog:8, ml:299, ofig:86,  ong:"B+", notes:"X_WIDE CLOSE GALLOP- · best grade",      tags:["BOMB"]},
-      {name:"Moon Spun",      prog:1, ml:48,  ofig:85,  ong:"C+", notes:"SCARED SAVED NO_KEEP",                   tags:[]}
+      {name:"Shisospicy",     ml:181, ofig:106, ong:"B",  notes:"NASAL_S LONE SAVED · BC Turf Sprint G1",  tags:["KEY","BOMB"]},
+      {name:"Haulin Ice",     ml:35,  ofig:98,  ong:"B",  notes:"NASAL_S BOS · A- grade prior race",       tags:["KEY"]},
+      {name:"Creed's Gold",   ml:19,  ofig:94,  ong:"B-", notes:"TROUBLE_S COVER STRETCH?",               tags:[]},
+      {name:"Queen Maxima",   ml:27,  ofig:92,  ong:"B-", notes:"NASAL_S COVER MOVE",                     tags:[]},
+      {name:"Time to Dazzle", ml:19,  ofig:91,  ong:"B-", notes:"SLOG WIDE",                              tags:[]},
+      {name:"Buttercream Babe",ml:27, ofig:89,  ong:"B",  notes:"NASAL_S TACTIC+ COVER",                  tags:[]},
+      {name:"Shoot It True",  ml:27,  ofig:87,  ong:"B-", notes:"GATE TACTIC- MOVE",                      tags:[]},
+      {name:"Mae Town",       ml:299, ofig:86,  ong:"B+", notes:"X_WIDE CLOSE GALLOP- · best grade",      tags:["BOMB"]},
+      {name:"Moon Spun",      ml:48,  ofig:85,  ong:"C+", notes:"SCARED SAVED NO_KEEP",                   tags:[]}
     ]},
   { num:8, name:"8 Belles G2", type:"G2", dist:"7f Dirt", purse:"$700k", contention:"high", verdict:"Goodall · Sippin Pretty · On Time Girl",
     horses:[
-      {name:"Goodall",          prog:1, ml:48, ofig:95, ong:"B",  notes:"PERFECT · OP win",                  tags:["KEY","VALUE"]},
-      {name:"Sippin Pretty",    prog:2, ml:27, ofig:91, ong:"B",  notes:"WARM_UP PRESSED · KEY+",            tags:["KEY"]},
-      {name:"River Wind",       prog:3, ml:48, ofig:88, ong:"B-", notes:"TROUBLE_S RUSH",                    tags:[]},
-      {name:"On Time Girl",     prog:4, ml:62, ofig:84, ong:"B-", notes:"WIDE · 3 straight wins",            tags:["VALUE"]},
-      {name:"Paradise",         prog:5, ml:27, ofig:84, ong:"C+", notes:"POCKET NO_KEEP",                    tags:[]},
-      {name:"Luv Your Neighbor",prog:6, ml:41, ofig:82, ong:"C+", notes:"COVER",                             tags:[]},
-      {name:"Solemn Vow",       prog:7, ml:27, ofig:81, ong:"B-", notes:"NASAL_S WARM_UP",                   tags:[]},
-      {name:"Front Runnin",     prog:8, ml:28, ofig:74, ong:"C",  notes:"PRERACE+ NO_KEEP",                  tags:["FADE"]},
-      {name:"French Friction",  prog:9, ml:28, ofig:72, ong:"C+", notes:"NASAL_S PRESSED · prior best 94 B+", tags:[]}
+      {name:"Goodall",          ml:48, ofig:95, ong:"B",  notes:"PERFECT · OP win",                  tags:["KEY","VALUE"]},
+      {name:"Sippin Pretty",    ml:27, ofig:91, ong:"B",  notes:"WARM_UP PRESSED · KEY+",            tags:["KEY"]},
+      {name:"River Wind",       ml:48, ofig:88, ong:"B-", notes:"TROUBLE_S RUSH",                    tags:[]},
+      {name:"On Time Girl",     ml:62, ofig:84, ong:"B-", notes:"WIDE · 3 straight wins",            tags:["VALUE"]},
+      {name:"Paradise",         ml:27, ofig:84, ong:"C+", notes:"POCKET NO_KEEP",                    tags:[]},
+      {name:"Luv Your Neighbor",ml:41, ofig:82, ong:"C+", notes:"COVER",                             tags:[]},
+      {name:"Solemn Vow",       ml:27, ofig:81, ong:"B-", notes:"NASAL_S WARM_UP",                   tags:[]},
+      {name:"Front Runnin",     ml:28, ofig:74, ong:"C",  notes:"PRERACE+ NO_KEEP",                  tags:["FADE"]},
+      {name:"French Friction",  ml:28, ofig:72, ong:"C+", notes:"NASAL_S PRESSED · prior best 94 B+", tags:[]}
     ]},
   { num:9, name:"Alysheba G2", type:"G2", dist:"8.5f Dirt", purse:"$750k", contention:"soft", verdict:"Navajo Warrior · Grande · Skippylongstocking · Disruptor",
     horses:[
-      {name:"Navajo Warrior",     prog:1, ml:41,  ofig:107, ong:"B",  notes:"WARM SLOG MOVE",                            tags:["KEY"]},
-      {name:"Baeza",              prog:2, ml:181, ofig:105, ong:"C+", notes:"SLOG TROUBLE_S · BCClassic runner",         tags:["BOMB","LAYOFF"]},
-      {name:"Disruptor",          prog:3, ml:55,  ofig:103, ong:"B+", notes:"BIAS win · best grade",                     tags:["KEY"]},
-      {name:"Grande",             prog:4, ml:34,  ofig:97,  ong:"B",  notes:"EASY_LEAD · most consistent",               tags:[]},
-      {name:"Skippylongstocking", prog:5, ml:41,  ofig:97,  ong:"B",  notes:"WARM_UP WARM · 3 wins",                     tags:[]},
-      {name:"Corporate Power",    prog:6, ml:41,  ofig:95,  ong:"B",  notes:"Blank last race",                           tags:[]},
-      {name:"Nu What's New",      prog:7, ml:34,  ofig:92,  ong:"B",  notes:"NASAL_S WARM WARM_UP · 3 wins",             tags:[]},
-      {name:"East Avenue",        prog:8, ml:34,  ofig:91,  ong:"B-", notes:"WIDE",                                      tags:[]},
-      {name:"Tappan Street",      prog:9, ml:97,  ofig:75,  ong:"C",  notes:"KICKBACK-",                                 tags:["FADE"]}
+      {name:"Navajo Warrior",     ml:41,  ofig:107, ong:"B",  notes:"WARM SLOG MOVE",                            tags:["KEY"]},
+      {name:"Baeza",              ml:181, ofig:105, ong:"C+", notes:"SLOG TROUBLE_S · BCClassic runner",         tags:["BOMB","LAYOFF"]},
+      {name:"Disruptor",          ml:55,  ofig:103, ong:"B+", notes:"BIAS win · best grade",                     tags:["KEY"]},
+      {name:"Grande",             ml:34,  ofig:97,  ong:"B",  notes:"EASY_LEAD · most consistent",               tags:[]},
+      {name:"Skippylongstocking", ml:41,  ofig:97,  ong:"B",  notes:"WARM_UP WARM · 3 wins",                     tags:[]},
+      {name:"Corporate Power",    ml:41,  ofig:95,  ong:"B",  notes:"Blank last race",                           tags:[]},
+      {name:"Nu What's New",      ml:34,  ofig:92,  ong:"B",  notes:"NASAL_S WARM WARM_UP · 3 wins",             tags:[]},
+      {name:"East Avenue",        ml:34,  ofig:91,  ong:"B-", notes:"WIDE",                                      tags:[]},
+      {name:"Tappan Street",      ml:97,  ofig:75,  ong:"C",  notes:"KICKBACK-",                                 tags:["FADE"]}
     ]},
   { num:10, name:"Modesty G3", type:"G3", dist:"9f Turf", purse:"$500k", contention:"soft", verdict:"Gezora · Kathynmarissa · Stylish Sue",
     horses:[
-      {name:"Gezora (FR)",          prog:1, ml:181, ofig:107, ong:"B+", notes:"NO_COVER CLOSE · BC F&M Turf G1",    tags:["KEY","BOMB"]},
-      {name:"Kathynmarissa",        prog:2, ml:246, ofig:100, ong:"B+", notes:"PERFECT NO_LEAD · Am Oaks G1",       tags:["KEY","BOMB"]},
-      {name:"Ramsey Pond",          prog:3, ml:34,  ofig:100, ong:"C+", notes:"Blank last race",                    tags:[]},
-      {name:"Stylish Sue",          prog:5, ml:41,  ofig:95,  ong:"B",  notes:"EASY_LEAD PRESSED",                  tags:[]},
-      {name:"Dona Clota (CHI)",     prog:4, ml:34,  ofig:97,  ong:"C",  notes:"RANK SHORTER?",                      tags:[]},
+      {name:"Gezora (FR)",          ml:181, ofig:107, ong:"B+", notes:"NO_COVER CLOSE · BC F&M Turf G1",    tags:["KEY","BOMB"]},
+      {name:"Kathynmarissa",        ml:246, ofig:100, ong:"B+", notes:"PERFECT NO_LEAD · Am Oaks G1",       tags:["KEY","BOMB"]},
+      {name:"Ramsey Pond",          ml:34,  ofig:100, ong:"C+", notes:"Blank last race",                    tags:[]},
+      {name:"Stylish Sue",          ml:41,  ofig:95,  ong:"B",  notes:"EASY_LEAD PRESSED",                  tags:[]},
+      {name:"Dona Clota (CHI)",     ml:34,  ofig:97,  ong:"C",  notes:"RANK SHORTER?",                      tags:[]},
       {name:"Pin Up Betty",         ml:20,  ofig:89,  ong:"C+", notes:"WARM SAVED DROP?",                   tags:["FADE"]},
       {name:"Queens Command (IRE)", ml:34,  ofig:88,  ong:"B-", notes:"Blank last race",                    tags:[]},
       {name:"Whiskey Decision",     ml:55,  ofig:87,  ong:"B",  notes:"BLANKET",                            tags:[]},
@@ -6176,9 +6184,12 @@ loadScratches();
 
   function tgBuildRaceBar() {
     var n = parseInt(document.getElementById('tg-bet').value);
-    document.getElementById('tg-race-bar').innerHTML = RACES.map(function(r) {
-      var isLeg = r.num >= tgStartRace && r.num < tgStartRace + n;
-      return '<button class="tg-rbtn' + (isLeg ? ' active' : '') + '" onclick="tgSetStart(' + r.num + ')">R' + r.num + '</button>';
+    var track = document.getElementById('tg-track').value;
+    var trackData = (window._dashData && window._dashData.today_entries && window._dashData.today_entries[track]) || null;
+    var races = trackData ? (trackData.races || []) : [];
+    document.getElementById('tg-race-bar').innerHTML = races.map(function(r) {
+      var isLeg = r.race_num >= tgStartRace && r.race_num < tgStartRace + n;
+      return '<button class="tg-rbtn' + (isLeg ? ' active' : '') + '" onclick="tgSetStart(' + r.race_num + ')">R' + r.race_num + '</button>';
     }).join('');
   }
 
@@ -6197,37 +6208,40 @@ loadScratches();
 
   function tgBuildLegs() {
     var n = parseInt(document.getElementById('tg-bet').value);
-    var slice = RACES.filter(function(r) { return r.num >= tgStartRace; }).slice(0, n);
+    var track = document.getElementById('tg-track').value;
+    var trackData = (window._dashData && window._dashData.today_entries && window._dashData.today_entries[track]) || null;
+    if (!trackData) {
+      alert('No live entries for ' + track + '. Run your scraper and push first.');
+      return;
+    }
+    var allRaces = trackData.races || [];
+    var slice = allRaces.filter(function(r) { return r.race_num >= tgStartRace; }).slice(0, n);
     if (slice.length < n) {
       alert('Not enough races from R' + tgStartRace + ' for a Pick ' + n + '. Choose an earlier starting race.');
       return;
     }
     tgLegs = slice.map(function(race) {
-      var horses = race.horses
-        .filter(function(h) { return h.ml !== 'FTS'; })
+      var horses = (race.horses || [])
+        .filter(function(h) { return !h.is_ae && h.morning_line != null; })
         .map(function(h) {
-          var imp = tgMlToImp(h.ml);
-          var progNum = h.prog || '';
-          if (typeof _dashData !== 'undefined' && _dashData.today_entries) {
-            var tracks = Object.values(_dashData.today_entries);
-            for (var ti = 0; ti < tracks.length; ti++) {
-              var tRaces = tracks[ti].races || [];
-              for (var ri = 0; ri < tRaces.length; ri++) {
-                var match = (tRaces[ri].horses || []).find(function(e) {
-                  return e.horse_name.toLowerCase() === h.name.toLowerCase();
-                });
-                if (match) { progNum = match.program_num; break; }
-              }
-              if (progNum) break;
-            }
-          }
-          return { name: h.name, ml: h.ml, ofig: h.ofig, ong: h.ong, tags: h.tags,
-                   imp: imp, prob: imp ? Math.round(imp) : 0, sel: false, prog: progNum };
+          var ml = h.morning_line;
+          var imp = 1 / (ml + 1) * 100;
+          var mlDisplay = (Number.isInteger(ml) ? ml : ml.toFixed(1)) + '-1';
+          return { name: h.horse_name, prog: h.program_num, ml: ml, mlDisplay: mlDisplay,
+                   imp: imp, prob: Math.round(imp), ofig: null, ong: null, tags: [], sel: false };
         });
       var tot = horses.reduce(function(s, h) { return s + h.prob; }, 0);
       if (tot > 0) horses.forEach(function(h) { h.prob = Math.round(h.prob / tot * 100); });
-      horses.forEach(function(h) { if (h.tags.indexOf('KEY') >= 0 || h.tags.indexOf('VALUE') >= 0) h.sel = true; });
-      return { raceNum: race.num, title: 'R' + race.num + ' · ' + race.name + ' · ' + race.dist, horses: horses };
+      // Enrich with OptixEQ oFIG/tags where names match
+      var oeqRace = (typeof RACES !== 'undefined') ? RACES.find(function(r) { return r.num === race.race_num; }) : null;
+      if (oeqRace) {
+        horses.forEach(function(h) {
+          var o = oeqRace.horses.find(function(x) { return x.name.toLowerCase() === h.name.toLowerCase(); });
+          if (o) { h.ofig = o.ofig; h.ong = o.ong; h.tags = o.tags || []; }
+          if (h.tags.indexOf('KEY') >= 0 || h.tags.indexOf('VALUE') >= 0) h.sel = true;
+        });
+      }
+      return { raceNum: race.race_num, title: 'R' + race.race_num + ' - ' + (race.race_type || '') + ' - ' + (race.distance || ''), horses: horses };
     });
     tgRenderLegs();
   }
@@ -6244,7 +6258,7 @@ loadScratches();
         var edgeSel = h.sel ? ' tg-sel' : '';
         return '<tr class="' + (h.sel ? 'tg-sel' : '') + '">' +
           '<td><button class="tg-sel-btn' + (h.sel ? ' on' : '') + '" onclick="tgToggleSel(' + li + ',' + hi + ')">' + (h.sel ? '&#10003;' : '+') + '</button></td>' +
-          '<td><span class="tg-hname">' + (h.prog ? '<span style="color:var(--gold);font-weight:700;margin-right:5px">#' + h.prog + '</span>' : '') + h.name + '</span>' + tagHtml + '</td>' +
+          '<td><span class="tg-hname">' + h.name + '</span>' + tagHtml + '</td>' +
           '<td class="r ' + figCls + '">' + (h.ofig !== null ? h.ofig : '&mdash;') + '</td>' +
           '<td class="tg-ml-cell">' + tgFmtML(h.ml) + '<span class="tg-impl">' + (h.imp ? h.imp.toFixed(1) + '%' : '') + '</span></td>' +
           '<td class="r"><input class="tg-prob-input" type="number" min="0" max="100" step="1" value="' + h.prob + '" onchange="tgSetProb(' + li + ',' + hi + ',this.value)" onfocus="this.select()"></td>' +
@@ -6395,7 +6409,10 @@ loadScratches();
 
   function tgInit() {
     tgBuildRaceBar();
-    window.tgSetStart(7);
+    var initTrack = document.getElementById('tg-track').value;
+    var initData = (window._dashData && window._dashData.today_entries && window._dashData.today_entries[initTrack]);
+    var firstRace = (initData && initData.races && initData.races.length) ? initData.races[0].race_num : 1;
+    window.tgSetStart(firstRace);
   }
 
   if (document.readyState === 'loading') {
