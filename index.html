@@ -6207,8 +6207,22 @@ loadScratches();
         .filter(function(h) { return h.ml !== 'FTS'; })
         .map(function(h) {
           var imp = tgMlToImp(h.ml);
+          var progNum = '';
+          if (typeof _dashData !== 'undefined' && _dashData.today_entries) {
+            var tracks = Object.values(_dashData.today_entries);
+            for (var ti = 0; ti < tracks.length; ti++) {
+              var tRaces = tracks[ti].races || [];
+              for (var ri = 0; ri < tRaces.length; ri++) {
+                var match = (tRaces[ri].horses || []).find(function(e) {
+                  return e.horse_name.toLowerCase() === h.name.toLowerCase();
+                });
+                if (match) { progNum = match.program_num; break; }
+              }
+              if (progNum) break;
+            }
+          }
           return { name: h.name, ml: h.ml, ofig: h.ofig, ong: h.ong, tags: h.tags,
-                   imp: imp, prob: imp ? Math.round(imp) : 0, sel: false };
+                   imp: imp, prob: imp ? Math.round(imp) : 0, sel: false, prog: progNum };
         });
       var tot = horses.reduce(function(s, h) { return s + h.prob; }, 0);
       if (tot > 0) horses.forEach(function(h) { h.prob = Math.round(h.prob / tot * 100); });
@@ -6230,7 +6244,7 @@ loadScratches();
         var edgeSel = h.sel ? ' tg-sel' : '';
         return '<tr class="' + (h.sel ? 'tg-sel' : '') + '">' +
           '<td><button class="tg-sel-btn' + (h.sel ? ' on' : '') + '" onclick="tgToggleSel(' + li + ',' + hi + ')">' + (h.sel ? '&#10003;' : '+') + '</button></td>' +
-          '<td><span class="tg-hname">' + h.name + '</span>' + tagHtml + '</td>' +
+          '<td><span class="tg-hname">' + (h.prog ? '<span style="color:var(--gold);font-weight:700;margin-right:5px">#' + h.prog + '</span>' : '') + h.name + '</span>' + tagHtml + '</td>' +
           '<td class="r ' + figCls + '">' + (h.ofig !== null ? h.ofig : '&mdash;') + '</td>' +
           '<td class="tg-ml-cell">' + tgFmtML(h.ml) + '<span class="tg-impl">' + (h.imp ? h.imp.toFixed(1) + '%' : '') + '</span></td>' +
           '<td class="r"><input class="tg-prob-input" type="number" min="0" max="100" step="1" value="' + h.prob + '" onchange="tgSetProb(' + li + ',' + hi + ',this.value)" onfocus="this.select()"></td>' +
