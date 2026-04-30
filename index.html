@@ -6262,7 +6262,7 @@ loadScratches();
         var edgeSel = h.sel ? ' tg-sel' : '';
         return '<tr class="' + (h.sel ? 'tg-sel' : '') + '">' +
           '<td><button class="tg-sel-btn' + (h.sel ? ' on' : '') + '" onclick="tgToggleSel(' + li + ',' + hi + ')">' + (h.sel ? '&#10003;' : '+') + '</button></td>' +
-          '<td><span class="tg-hname">' + h.name + '</span>' + tagHtml + '</td>' +
+          '<td><span class="tg-hname"><span style="color:var(--gold);font-weight:700;margin-right:4px">#' + h.prog + '</span>' + h.name + '</span>' + tagHtml + '</td>' +
           '<td class="r ' + figCls + '">' + (h.ofig !== null ? h.ofig : '&mdash;') + '</td>' +
           '<td class="tg-ml-cell">' + tgFmtML(h.ml) + '<span class="tg-impl">' + (h.imp ? h.imp.toFixed(1) + '%' : '') + '</span></td>' +
           '<td class="r"><input class="tg-prob-input" type="number" min="0" max="100" step="1" value="' + h.prob + '" onchange="tgSetProb(' + li + ',' + hi + ',this.value)" onfocus="this.select()"></td>' +
