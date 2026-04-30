@@ -6412,18 +6412,17 @@ loadScratches();
   };
 
   function tgInit() {
-    tgBuildRaceBar();
-    var initTrack = document.getElementById('tg-track').value;
-    var initData = (window._dashData && window._dashData.today_entries && window._dashData.today_entries[initTrack]);
-    var firstRace = (initData && initData.races && initData.races.length) ? initData.races[0].race_num : 1;
-    window.tgSetStart(firstRace);
+    var track = document.getElementById('tg-track') ? document.getElementById('tg-track').value : 'CD';
+    var td = (typeof _dashData !== 'undefined' && _dashData.today_entries && _dashData.today_entries[track]) || null;
+    if (td && td.races && td.races.length) {
+      tgStartRace = td.races[0].race_num;
+      tgBuildRaceBar();
+      tgBuildLegs();
+    } else {
+      setTimeout(tgInit, 500);
+    }
   }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', tgInit);
-  } else {
-    tgInit();
-  }
+  tgInit();
 })();
 </script>
 
