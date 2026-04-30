@@ -974,6 +974,86 @@
       padding: 1px 4px; margin-right: 4px; vertical-align: middle;
     }
     .scratched-horse { text-decoration: line-through; opacity: .55; }
+
+    /* ── Ticket Generator ── */
+    .tg-top { display:flex; gap:10px; align-items:center; flex-wrap:wrap; background:var(--card); border:1px solid var(--border); border-radius:var(--radius); padding:10px 14px; margin-bottom:12px; }
+    .tg-label { font-size:.75rem; color:var(--dim); white-space:nowrap; }
+    .tg-select { font-size:.8rem; padding:5px 8px; background:var(--input-bg); border:1px solid var(--border); border-radius:6px; color:var(--text); }
+    .tg-select:focus { outline:none; border-color:var(--gold); }
+    .tg-slider-wrap { display:flex; align-items:center; gap:6px; flex:1; min-width:160px; }
+    .tg-slider-wrap input[type=range] { flex:1; accent-color:var(--gold); }
+    .tg-race-bar { display:flex; gap:4px; flex-wrap:wrap; margin-bottom:12px; }
+    .tg-rbtn { font-size:.72rem; padding:4px 9px; border:1px solid var(--border); border-radius:6px; background:var(--card); cursor:pointer; color:var(--dim); transition:all .15s; }
+    .tg-rbtn:hover { border-color:var(--gold); color:var(--gold-lt); }
+    .tg-rbtn.active { background:var(--gold); color:#111; border-color:var(--gold); font-weight:700; }
+    .tg-leg { background:var(--card); border:1px solid var(--border); border-radius:var(--radius); margin-bottom:10px; overflow:hidden; }
+    .tg-leg-head { display:flex; justify-content:space-between; align-items:center; padding:8px 12px; background:var(--card2); flex-wrap:wrap; gap:4px; }
+    .tg-leg-title { font-size:.82rem; font-weight:700; color:var(--gold); }
+    .tg-leg-meta { font-size:.72rem; color:var(--dim); }
+    .tg-leg-sum { font-size:.72rem; color:var(--dim); }
+    .tg-leg-sum.warn { color:var(--yellow); }
+    .tg-scroll { overflow-x:auto; }
+    .tg-table { width:100%; border-collapse:collapse; font-size:.78rem; min-width:480px; }
+    .tg-table th { font-size:.68rem; text-transform:uppercase; letter-spacing:.04em; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); text-align:left; background:var(--card); }
+    .tg-table th.r { text-align:right; }
+    .tg-table td { padding:6px 8px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .tg-table tr:last-child td { border-bottom:none; }
+    .tg-table tr.tg-sel td { background:rgba(46,204,113,.06); }
+    .tg-sel-btn { width:26px; height:26px; border-radius:6px; border:1px solid var(--border); background:var(--input-bg); cursor:pointer; font-size:.8rem; color:var(--dim); display:inline-flex; align-items:center; justify-content:center; transition:all .12s; }
+    .tg-sel-btn.on { background:#1a7a3a; border-color:var(--green); color:#fff; }
+    .tg-hname { font-size:.82rem; font-weight:600; color:var(--text); }
+    .tg-tag { display:inline-block; font-size:.65rem; padding:1px 5px; border-radius:8px; margin-left:4px; vertical-align:middle; }
+    .tg-tag-KEY { background:rgba(201,168,76,.2); color:var(--gold); border:1px solid rgba(201,168,76,.4); }
+    .tg-tag-VALUE { background:rgba(46,204,113,.18); color:var(--green); border:1px solid rgba(46,204,113,.4); }
+    .tg-tag-FADE { background:rgba(231,76,60,.18); color:var(--red); border:1px solid rgba(231,76,60,.4); }
+    .tg-tag-LAYOFF { background:rgba(230,126,34,.18); color:#e67e22; border:1px solid rgba(230,126,34,.4); }
+    .tg-tag-FTS { background:rgba(100,100,120,.15); color:var(--dim); border:1px solid var(--border); }
+    .tg-prob-input { width:54px; font-size:.8rem; padding:3px 6px; background:var(--input-bg); border:1px solid var(--border); border-radius:5px; color:var(--text); text-align:right; }
+    .tg-prob-input:focus { outline:none; border-color:var(--gold); }
+    .tg-ml-cell { font-size:.75rem; color:var(--dim); text-align:right; }
+    .tg-impl { font-size:.67rem; color:#666; display:block; }
+    .tg-edge { display:inline-block; font-size:.72rem; font-weight:600; padding:2px 7px; border-radius:10px; }
+    .tg-edge-pos { background:rgba(46,204,113,.18); color:var(--green); }
+    .tg-edge-neg { background:rgba(231,76,60,.15); color:var(--red); }
+    .tg-edge-neu { background:rgba(100,100,120,.15); color:var(--dim); }
+    .tg-fig-hi { color:var(--green); font-weight:700; }
+    .tg-fig-mid { color:#7eb8f7; font-weight:700; }
+    .tg-fig-lo { color:var(--dim); }
+    .tg-gen-row { display:flex; gap:10px; align-items:center; margin:12px 0; flex-wrap:wrap; }
+    .tg-gen-btn { background:var(--gold); color:#111; border:none; border-radius:var(--radius); font-size:.85rem; font-weight:800; padding:10px 22px; cursor:pointer; letter-spacing:.04em; }
+    .tg-gen-btn:hover { background:var(--gold-lt); }
+    .tg-combo-lbl { font-size:.75rem; color:var(--dim); }
+    .tg-sum-bar { display:flex; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:12px; }
+    .tg-sum-cell { flex:1; background:var(--card2); padding:10px 6px; text-align:center; }
+    .tg-sum-val { font-size:1rem; font-weight:800; color:var(--gold); }
+    .tg-sum-lbl { font-size:.65rem; color:var(--dim); text-transform:uppercase; letter-spacing:.04em; margin-top:2px; }
+    .tg-tabs { display:flex; gap:4px; margin-bottom:10px; }
+    .tg-tab { font-size:.75rem; padding:5px 14px; border:1px solid var(--border); border-radius:6px; background:var(--card); cursor:pointer; color:var(--dim); }
+    .tg-tab.on { background:var(--gold); color:#111; border-color:var(--gold); font-weight:700; }
+    .tg-res-wrap { overflow-x:auto; }
+    .tg-res-table { width:100%; border-collapse:collapse; font-size:.75rem; min-width:500px; }
+    .tg-res-table th { font-size:.65rem; text-transform:uppercase; letter-spacing:.04em; color:var(--dim); padding:6px 8px; border-bottom:1px solid var(--border); background:var(--card2); }
+    .tg-res-table th.r { text-align:right; }
+    .tg-res-table td { padding:6px 8px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .tg-res-table tr:last-child td { border-bottom:none; }
+    .tg-rank { font-size:.72rem; color:var(--dim); text-align:center; font-weight:700; }
+    .tg-chip { display:inline-block; font-size:.7rem; padding:2px 6px; border-radius:4px; margin:1px; }
+    .tg-chip-pos { background:rgba(46,204,113,.2); color:var(--green); }
+    .tg-chip-neg { background:rgba(231,76,60,.15); color:var(--red); }
+    .tg-chip-neu { background:var(--card2); color:var(--text); }
+    .tg-ev-bar-wrap { height:3px; background:var(--border); border-radius:2px; margin-top:2px; }
+    .tg-ev-bar { height:3px; background:var(--green); border-radius:2px; }
+    .tg-bld-grid { display:flex; gap:1px; background:var(--border); border-radius:var(--radius); overflow:hidden; margin-bottom:10px; }
+    .tg-bld-leg { flex:1; background:var(--card); padding:8px 10px; min-width:0; }
+    .tg-bld-title { font-size:.65rem; text-transform:uppercase; letter-spacing:.04em; color:var(--dim); font-weight:700; margin-bottom:6px; }
+    .tg-bld-row { display:flex; align-items:center; gap:5px; padding:2px 0; }
+    .tg-dot { width:7px; height:7px; border-radius:50%; flex-shrink:0; }
+    .tg-dot-in { background:var(--green); }
+    .tg-dot-out { background:var(--border); }
+    .tg-bld-name { font-size:.72rem; overflow:hidden; text-overflow:ellipsis; white-space:nowrap; flex:1; }
+    .tg-bld-edge { font-size:.65rem; padding:1px 4px; border-radius:6px; flex-shrink:0; }
+    .tg-legend { display:flex; gap:10px; flex-wrap:wrap; font-size:.72rem; color:var(--dim); margin-top:8px; }
+    .tg-legend span { display:flex; align-items:center; gap:4px; }
   </style>
 </head>
 <body>
@@ -992,6 +1072,7 @@
   <button class="tab-btn"         onclick="showTab('today')">Today</button>
   <button class="tab-btn"         onclick="showTab('howto')">How To Use</button>
   <button class="tab-btn"         onclick="showTab('optixeq')">OptixEQ</button>
+  <button class="tab-btn"         onclick="showTab('ticketgen')">Ticket Gen</button>
 </nav>
 
 <!-- ─────────────── DASHBOARD TAB ─────────────── -->
@@ -1694,6 +1775,58 @@
     Good luck on May 1 and May 3.
   </div>
 
+</div>
+
+
+<!-- ─────────────── TICKET GENERATOR TAB ─────────────── -->
+<div id="tab-ticketgen" class="tab-pane">
+  <div class="tg-top">
+    <span class="tg-label">Bet type</span>
+    <select class="tg-select" id="tg-bet" onchange="tgOnBetChange()">
+      <option value="3">Pick 3</option>
+      <option value="4">Pick 4</option>
+      <option value="5" selected>Pick 5</option>
+    </select>
+    <span class="tg-label">Stake</span>
+    <select class="tg-select" id="tg-stake">
+      <option value="0.5">$0.50</option>
+      <option value="1" selected>$1.00</option>
+      <option value="2">$2.00</option>
+    </select>
+    <span class="tg-label">Show top</span>
+    <select class="tg-select" id="tg-topn">
+      <option value="10">10</option>
+      <option value="20" selected>20</option>
+      <option value="50">50</option>
+    </select>
+    <div class="tg-slider-wrap">
+      <span class="tg-label">EV</span>
+      <span class="tg-label" id="tg-ev-lbl" style="min-width:28px">60%</span>
+      <input type="range" min="0" max="100" step="5" value="60" id="tg-ev-w"
+        oninput="document.getElementById('tg-ev-lbl').textContent=this.value+'%';document.getElementById('tg-edge-lbl').textContent=(100-this.value)+'%'">
+      <span class="tg-label" id="tg-edge-lbl" style="min-width:28px">40%</span>
+      <span class="tg-label">edge</span>
+    </div>
+  </div>
+
+  <p class="tg-label" style="margin-bottom:6px">Starting race — click to set Leg 1:</p>
+  <div class="tg-race-bar" id="tg-race-bar"></div>
+  <div id="tg-legs-wrap"></div>
+
+  <div class="tg-gen-row">
+    <button class="tg-gen-btn" onclick="tgGenerate()">Generate Tickets &#9654;</button>
+    <span class="tg-combo-lbl" id="tg-combo-lbl"></span>
+  </div>
+
+  <div id="tg-results" style="display:none">
+    <div class="tg-sum-bar" id="tg-sum-bar"></div>
+    <div class="tg-tabs">
+      <button class="tg-tab on" onclick="tgShowTab('ranked',this)">Ranked List</button>
+      <button class="tg-tab" onclick="tgShowTab('builder',this)">Visual Builder</button>
+    </div>
+    <div class="tg-res-wrap" id="tg-tab-ranked"></div>
+    <div id="tg-tab-builder" style="display:none"></div>
+  </div>
 </div>
 
 <!-- ─────────────── OPTIXEQ TAB ─────────────── -->
@@ -3050,7 +3183,7 @@ function showTab(name) {
   document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   const btns  = document.querySelectorAll('.tab-btn');
-  const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq'];
+  const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq', 'ticketgen'];
   btns[names.indexOf(name)].classList.add('active');
 }
 
@@ -4704,7 +4837,7 @@ function tcDownloadSummary() {
   </div>
 
   <script>window.onload = function(){ window.print(); };<\/script>
-</body>
+
 </html>`;
 
   const win = window.open('', '_blank', 'width=850,height=1100');
@@ -6006,5 +6139,257 @@ buildTodayLegs();
 renderOptixEQ();
 loadScratches();
 </script>
-</body>
+
+<script>
+// =============================================================
+//  TICKET GENERATOR
+// =============================================================
+(function() {
+  var tgStartRace = 7;
+  var tgLegs = [];
+  var tgResults = [];
+
+  function tgMlToImp(ml) {
+    if (!ml || ml === 'FTS') return null;
+    var v = parseFloat(ml) / 10;
+    return 1 / (v + 1) * 100;
+  }
+
+  function tgFmtML(ml) {
+    if (!ml || ml === 'FTS') return 'FTS';
+    return (parseFloat(ml) / 10).toFixed(1) + '-1';
+  }
+
+  function tgFigCls(f) {
+    if (f === null) return 'tg-fig-lo';
+    if (f >= 95) return 'tg-fig-hi';
+    if (f >= 85) return 'tg-fig-mid';
+    return 'tg-fig-lo';
+  }
+
+  function tgEdgeHtml(edge) {
+    if (edge === null) return '<span class="tg-edge tg-edge-neu">&mdash;</span>';
+    var sign = edge > 0 ? '+' : '';
+    var cls = edge > 0.5 ? 'tg-edge-pos' : edge < -0.5 ? 'tg-edge-neg' : 'tg-edge-neu';
+    return '<span class="tg-edge ' + cls + '">' + sign + edge.toFixed(1) + '%</span>';
+  }
+
+  function tgBuildRaceBar() {
+    var n = parseInt(document.getElementById('tg-bet').value);
+    document.getElementById('tg-race-bar').innerHTML = RACES.map(function(r) {
+      var isLeg = r.num >= tgStartRace && r.num < tgStartRace + n;
+      return '<button class="tg-rbtn' + (isLeg ? ' active' : '') + '" onclick="tgSetStart(' + r.num + ')">R' + r.num + '</button>';
+    }).join('');
+  }
+
+  window.tgSetStart = function(r) {
+    tgStartRace = r;
+    tgBuildLegs();
+    tgBuildRaceBar();
+    document.getElementById('tg-results').style.display = 'none';
+  };
+
+  window.tgOnBetChange = function() {
+    tgBuildLegs();
+    tgBuildRaceBar();
+    document.getElementById('tg-results').style.display = 'none';
+  };
+
+  function tgBuildLegs() {
+    var n = parseInt(document.getElementById('tg-bet').value);
+    var slice = RACES.filter(function(r) { return r.num >= tgStartRace; }).slice(0, n);
+    if (slice.length < n) {
+      alert('Not enough races from R' + tgStartRace + ' for a Pick ' + n + '. Choose an earlier starting race.');
+      return;
+    }
+    tgLegs = slice.map(function(race) {
+      var horses = race.horses
+        .filter(function(h) { return h.ml !== 'FTS'; })
+        .map(function(h) {
+          var imp = tgMlToImp(h.ml);
+          return { name: h.name, ml: h.ml, ofig: h.ofig, ong: h.ong, tags: h.tags,
+                   imp: imp, prob: imp ? Math.round(imp) : 0, sel: false };
+        });
+      var tot = horses.reduce(function(s, h) { return s + h.prob; }, 0);
+      if (tot > 0) horses.forEach(function(h) { h.prob = Math.round(h.prob / tot * 100); });
+      horses.forEach(function(h) { if (h.tags.indexOf('KEY') >= 0 || h.tags.indexOf('VALUE') >= 0) h.sel = true; });
+      return { raceNum: race.num, title: 'R' + race.num + ' · ' + race.name + ' · ' + race.dist, horses: horses };
+    });
+    tgRenderLegs();
+  }
+
+  function tgRenderLegs() {
+    document.getElementById('tg-legs-wrap').innerHTML = tgLegs.map(function(leg, li) {
+      var sel = leg.horses.filter(function(h) { return h.sel; });
+      var sum = sel.reduce(function(a, h) { return a + h.prob; }, 0);
+      var warn = sel.length > 0 && Math.abs(sum - 100) > 8;
+      var rows = leg.horses.map(function(h, hi) {
+        var edge = h.imp !== null ? h.prob - h.imp : null;
+        var figCls = tgFigCls(h.ofig);
+        var tagHtml = h.tags.map(function(t) { return '<span class="tg-tag tg-tag-' + t + '">' + t + '</span>'; }).join('');
+        var edgeSel = h.sel ? ' tg-sel' : '';
+        return '<tr class="' + (h.sel ? 'tg-sel' : '') + '">' +
+          '<td><button class="tg-sel-btn' + (h.sel ? ' on' : '') + '" onclick="tgToggleSel(' + li + ',' + hi + ')">' + (h.sel ? '&#10003;' : '+') + '</button></td>' +
+          '<td><span class="tg-hname">' + h.name + '</span>' + tagHtml + '</td>' +
+          '<td class="r ' + figCls + '">' + (h.ofig !== null ? h.ofig : '&mdash;') + '</td>' +
+          '<td class="tg-ml-cell">' + tgFmtML(h.ml) + '<span class="tg-impl">' + (h.imp ? h.imp.toFixed(1) + '%' : '') + '</span></td>' +
+          '<td class="r"><input class="tg-prob-input" type="number" min="0" max="100" step="1" value="' + h.prob + '" onchange="tgSetProb(' + li + ',' + hi + ',this.value)" onfocus="this.select()"></td>' +
+          '<td class="r">' + tgEdgeHtml(edge) + '</td>' +
+          '</tr>';
+      }).join('');
+      return '<div class="tg-leg">' +
+        '<div class="tg-leg-head">' +
+          '<span class="tg-leg-title">Leg ' + (li+1) + ' &nbsp;&middot;&nbsp; ' + leg.title + '</span>' +
+          '<span class="tg-leg-sum' + (warn ? ' warn' : '') + '">' + sel.length + ' contender' + (sel.length !== 1 ? 's' : '') + ' selected' + (warn ? ' &middot; &Sigma;=' + sum + '% &otimes;' : '') + '</span>' +
+        '</div>' +
+        '<div class="tg-scroll"><table class="tg-table">' +
+          '<tr><th style="width:30px"></th><th>Horse</th><th class="r">oFIG</th><th class="r">ML &middot; impl%</th><th class="r">Your win%</th><th class="r">Edge</th></tr>' +
+          rows +
+        '</table></div>' +
+      '</div>';
+    }).join('');
+    tgUpdateComboCount();
+  }
+
+  window.tgToggleSel = function(li, hi) {
+    tgLegs[li].horses[hi].sel = !tgLegs[li].horses[hi].sel;
+    tgRenderLegs();
+  };
+
+  window.tgSetProb = function(li, hi, v) {
+    tgLegs[li].horses[hi].prob = parseFloat(v) || 0;
+    tgRenderLegs();
+  };
+
+  function tgUpdateComboCount() {
+    var sel = tgLegs.map(function(l) { return l.horses.filter(function(h) { return h.sel; }); });
+    if (!tgLegs.length || sel.some(function(l) { return !l.length; })) {
+      document.getElementById('tg-combo-lbl').textContent = ''; return;
+    }
+    var n = sel.reduce(function(a, l) { return a * l.length; }, 1);
+    document.getElementById('tg-combo-lbl').textContent = n + ' combination' + (n === 1 ? '' : 's') + ' to evaluate';
+  }
+
+  function cartesian(arrs) {
+    return arrs.reduce(function(a, b) {
+      return a.reduce(function(res, x) {
+        return res.concat(b.map(function(y) { return x.concat([y]); }));
+      }, []);
+    }, [[]]);
+  }
+
+  window.tgGenerate = function() {
+    var stake = parseFloat(document.getElementById('tg-stake').value);
+    var topN = parseInt(document.getElementById('tg-topn').value);
+    var evW = parseInt(document.getElementById('tg-ev-w').value) / 100;
+    var edgeW = 1 - evW;
+    var sel = tgLegs.map(function(l) { return l.horses.filter(function(h) { return h.sel; }); });
+    if (!tgLegs.length) return alert('Pick a starting race first.');
+    if (sel.some(function(l) { return !l.length; })) return alert('Select at least one contender per leg.');
+
+    var enriched = sel.map(function(l) {
+      return l.map(function(h) {
+        var o = {}; Object.keys(h).forEach(function(k) { o[k] = h[k]; });
+        o.edge = h.imp !== null ? h.prob - h.imp : 0;
+        return o;
+      });
+    });
+    var combos = cartesian(enriched);
+    var evs = combos.map(function(c) { return c.reduce(function(p, h) { return p * (h.prob / 100); }, 1); });
+    var maxEV = Math.max.apply(null, evs) || 1;
+    var edgeSums = combos.map(function(c) { return c.reduce(function(s, h) { return s + h.edge; }, 0); });
+
+    var nLegs = tgLegs.length;
+    tgResults = combos.map(function(c, i) {
+      var ev = evs[i], es = edgeSums[i];
+      var score = evW * (ev / maxEV) + edgeW * Math.max(0, Math.min(1, (es / nLegs + 20) / 40));
+      return { combo: c, ev: ev, es: es, score: score, cost: stake };
+    }).sort(function(a, b) { return b.score - a.score; }).slice(0, topN);
+
+    var posEdge = tgResults.filter(function(r) { return r.es > 0; }).length;
+    var avgEdge = (tgResults.reduce(function(s, r) { return s + r.es; }, 0) / tgResults.length / nLegs).toFixed(1);
+
+    document.getElementById('tg-sum-bar').innerHTML =
+      '<div class="tg-sum-cell"><div class="tg-sum-val">' + tgResults.length + '</div><div class="tg-sum-lbl">Tickets</div></div>' +
+      '<div class="tg-sum-cell"><div class="tg-sum-val">$' + (tgResults.length * stake).toFixed(2) + '</div><div class="tg-sum-lbl">Total Cost</div></div>' +
+      '<div class="tg-sum-cell"><div class="tg-sum-val">' + (tgResults[0].ev*100).toFixed(2) + '%</div><div class="tg-sum-lbl">Best EV</div></div>' +
+      '<div class="tg-sum-cell"><div class="tg-sum-val">' + (parseFloat(avgEdge) > 0 ? '+' : '') + avgEdge + '%</div><div class="tg-sum-lbl">Avg Edge/Leg</div></div>' +
+      '<div class="tg-sum-cell"><div class="tg-sum-val">' + posEdge + '</div><div class="tg-sum-lbl">+Edge Tickets</div></div>';
+
+    tgRenderRanked();
+    tgRenderBuilder(enriched);
+    document.getElementById('tg-results').style.display = 'block';
+  };
+
+  function tgRenderRanked() {
+    var stake = parseFloat(document.getElementById('tg-stake').value);
+    var maxEV = tgResults[0].ev;
+    var nLegs = tgLegs.length;
+    var rows = tgResults.map(function(r, i) {
+      var ep = r.es / nLegs;
+      var epCls = ep > 0 ? 'tg-edge-pos' : ep < 0 ? 'tg-edge-neg' : 'tg-edge-neu';
+      var chips = r.combo.map(function(h) {
+        var cc = h.edge > 0.5 ? 'tg-chip-pos' : h.edge < -0.5 ? 'tg-chip-neg' : 'tg-chip-neu';
+        return '<span class="tg-chip ' + cc + '">' + h.name + '</span>';
+      }).join(' &rarr; ');
+      return '<tr>' +
+        '<td class="tg-rank">' + (i+1) + '</td>' +
+        '<td>' + chips + '</td>' +
+        '<td style="text-align:right;min-width:80px"><div style="font-size:.75rem">' + (r.ev*100).toFixed(2) + '%</div>' +
+          '<div class="tg-ev-bar-wrap"><div class="tg-ev-bar" style="width:' + Math.round(r.ev/maxEV*100) + '%"></div></div></td>' +
+        '<td><span class="tg-edge ' + epCls + '" style="float:right">' + (ep>0?'+':'') + ep.toFixed(1) + '%</span></td>' +
+        '<td style="text-align:right;font-size:.75rem;color:var(--dim)">$' + stake.toFixed(2) + '</td>' +
+        '<td style="text-align:right;font-weight:700;color:var(--gold)">' + (r.score*100).toFixed(0) + '</td>' +
+        '</tr>';
+    }).join('');
+    document.getElementById('tg-tab-ranked').innerHTML =
+      '<table class="tg-res-table"><tr><th>#</th><th>Combination</th><th class="r">Combo EV</th><th class="r">Avg Edge/Leg</th><th class="r">Cost</th><th class="r">Score</th></tr>' +
+      rows + '</table>';
+  }
+
+  function tgRenderBuilder(enriched) {
+    var nLegs = tgLegs.length;
+    var cols = enriched.map(function(leg, li) {
+      var rows = leg.map(function(h) {
+        var inTop = tgResults.some(function(r) { return r.combo[li].name === h.name; });
+        var ec = h.edge > 0.5 ? 'tg-edge-pos' : h.edge < -0.5 ? 'tg-edge-neg' : 'tg-edge-neu';
+        var edgeStr = h.imp !== null ? (h.edge > 0 ? '+' : '') + h.edge.toFixed(1) + '%' : '&mdash;';
+        return '<div class="tg-bld-row">' +
+          '<div class="tg-dot ' + (inTop ? 'tg-dot-in' : 'tg-dot-out') + '"></div>' +
+          '<span class="tg-bld-name" style="font-weight:' + (inTop?700:400) + ';color:' + (inTop?'var(--text)':'var(--dim)') + '">' + h.name + '</span>' +
+          '<span class="tg-bld-edge ' + ec + '">' + edgeStr + '</span>' +
+          '</div>';
+      }).join('');
+      return '<div class="tg-bld-leg"><div class="tg-bld-title">Leg ' + (li+1) + ' &middot; R' + tgLegs[li].raceNum + '</div>' + rows + '</div>';
+    }).join('');
+    document.getElementById('tg-tab-builder').innerHTML =
+      '<div class="tg-bld-grid">' + cols + '</div>' +
+      '<div class="tg-legend">' +
+        '<span><span class="tg-dot tg-dot-in" style="display:inline-block"></span> In top tickets</span>' +
+        '<span><span class="tg-dot tg-dot-out" style="display:inline-block"></span> Not in tickets</span>' +
+        '<span style="color:var(--green)">+edge = your% beats ML</span>' +
+        '<span style="color:var(--red)">-edge = ML beats your%</span>' +
+      '</div>';
+  }
+
+  window.tgShowTab = function(name, el) {
+    document.querySelectorAll('.tg-tab').forEach(function(t) { t.classList.remove('on'); });
+    el.classList.add('on');
+    document.getElementById('tg-tab-ranked').style.display = name === 'ranked' ? '' : 'none';
+    document.getElementById('tg-tab-builder').style.display = name === 'builder' ? '' : 'none';
+  };
+
+  function tgInit() {
+    tgBuildRaceBar();
+    window.tgSetStart(7);
+  }
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', tgInit);
+  } else {
+    tgInit();
+  }
+})();
+</script>
+
 </html>
