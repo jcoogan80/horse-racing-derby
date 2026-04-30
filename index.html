@@ -6232,11 +6232,15 @@ loadScratches();
         });
       var tot = horses.reduce(function(s, h) { return s + h.prob; }, 0);
       if (tot > 0) horses.forEach(function(h) { h.prob = Math.round(h.prob / tot * 100); });
-      // Enrich with OptixEQ oFIG/tags where names match
-      var oeqRace = (typeof RACES !== 'undefined') ? RACES.find(function(r) { return r.num === race.race_num; }) : null;
-      if (oeqRace) {
+      // Enrich with OptixEQ oFIG/tags by horse name match across ALL races
+      // (race numbers may differ between today_entries and RACES/OptixEQ card)
+      if (typeof RACES !== 'undefined') {
         horses.forEach(function(h) {
-          var o = oeqRace.horses.find(function(x) { return x.name.toLowerCase() === h.name.toLowerCase(); });
+          var o = null;
+          for (var ri = 0; ri < RACES.length; ri++) {
+            o = RACES[ri].horses.find(function(x) { return x.name.toLowerCase() === h.name.toLowerCase(); });
+            if (o) break;
+          }
           if (o) { h.ofig = o.ofig; h.ong = o.ong; h.tags = o.tags || []; }
           if (h.tags.indexOf('KEY') >= 0 || h.tags.indexOf('VALUE') >= 0) h.sel = true;
         });
