@@ -32110,7 +32110,7 @@
               "jockey": "Christopher DavisLuis Saez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "2",
@@ -32182,7 +32182,7 @@
               "jockey": "Bob BaffertJuan J. Hernandez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "10",
@@ -32300,7 +32300,7 @@
               "jockey": "Kenneth G. McPeekBrian Joseph Hernandez, Jr.",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "11",
@@ -32482,7 +32482,7 @@
               "jockey": "Saffie A. Joseph, Jr.Francisco Arrieta",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "3",
@@ -32918,7 +32918,7 @@
               "jockey": "John EnnisAlex Achard",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "11",
@@ -32991,7 +32991,7 @@
               "jockey": "Kenneth G. McPeekLuis Saez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "6",
@@ -33263,7 +33263,7 @@
               "jockey": "Simon CallaghanJavier Castellano",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "9",
@@ -33336,7 +33336,7 @@
               "jockey": "Kenneth G. McPeekChristopher Elliott",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "6",
@@ -33408,7 +33408,7 @@
               "jockey": "Mark E. CasseCristian A. Torres",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "14",
@@ -33471,7 +33471,7 @@
               "jockey": "Brad H. CoxTyler Gaffalione",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "21",
