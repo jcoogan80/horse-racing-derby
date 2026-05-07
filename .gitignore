@@ -1,2 +1,6 @@
 # Local Netlify folder
 .netlify
+
+# Secrets - never commit these
+credentials.json
+Directions on how to run the program.txt
