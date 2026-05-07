@@ -4727,6 +4727,7 @@
       <label style="font-size:11px;color:#f5c842;font-weight:700;letter-spacing:.5px;text-transform:uppercase;">📂 Load Race Card</label>
       <div style="display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
         <select class="wpd-select" id="wpd-day-select" onchange="wpdUpdateRaceSelect()" style="min-width:140px;">
+          <option value="live">📡 Live / Today</option>
           <option value="oaks">🌹 Oaks Day (5/1)</option>
           <option value="derby">🏆 Derby Day (5/2)</option>
         </select>
@@ -6330,26 +6331,79 @@ const WPD_RACE_DATA = {
 
   // ── Populate race dropdown when day changes ──
   window.wpdUpdateRaceSelect = function() {
-    const day    = document.getElementById('wpd-day-select').value;
-    const sel    = document.getElementById('wpd-race-select');
-    const races  = WPD_RACE_DATA[day];
+    const day = document.getElementById('wpd-day-select').value;
+    const sel = document.getElementById('wpd-race-select');
     sel.innerHTML = '';
-    Object.keys(races).sort((a,b) => parseInt(a)-parseInt(b)).forEach(rnum => {
-      const opt = document.createElement('option');
-      opt.value = rnum;
-      opt.textContent = `R${rnum} — ${races[rnum].name} (${races[rnum].horses.length} horses)`;
-      sel.appendChild(opt);
-    });
+
+    if (day === 'live') {
+      // Pull from live today_entries in dashboard JSON
+      const allRaces = [];
+      const te = window._dashData?.today_entries || {};
+      for (const [track, trackData] of Object.entries(te)) {
+        (trackData.races || []).forEach(r => {
+          const horses = (r.horses || []).filter(h => !h.is_ae && h.scratched !== true);
+          if (horses.length > 0) allRaces.push({ track, raceNum: r.race_num, raceName: r.race_name || '', horses });
+        });
+      }
+      allRaces.sort((a,b) => a.raceNum - b.raceNum);
+      if (allRaces.length === 0) {
+        const opt = document.createElement('option');
+        opt.value = '';
+        opt.textContent = 'No live entries — run scraper first';
+        sel.appendChild(opt);
+      } else {
+        allRaces.forEach(r => {
+          const opt = document.createElement('option');
+          opt.value = `live:${r.track}:${r.raceNum}`;
+          opt.textContent = `${r.track} R${r.raceNum}${r.raceName ? ' — ' + r.raceName : ''} (${r.horses.length} horses)`;
+          sel.appendChild(opt);
+        });
+      }
+    } else {
+      // Fall back to embedded race card data (Derby/Oaks)
+      const races = WPD_RACE_DATA[day];
+      Object.keys(races).sort((a,b) => parseInt(a)-parseInt(b)).forEach(rnum => {
+        const opt = document.createElement('option');
+        opt.value = rnum;
+        opt.textContent = `R${rnum} — ${races[rnum].name} (${races[rnum].horses.length} horses)`;
+        sel.appendChild(opt);
+      });
+    }
   };
 
   // ── Load selected race into horse input table ──
   window.wpdLoadRace = function() {
-    const day    = document.getElementById('wpd-day-select').value;
-    const rnum   = document.getElementById('wpd-race-select').value;
-    const race   = WPD_RACE_DATA[day][rnum];
-    if (!race) return;
+    const day  = document.getElementById('wpd-day-select').value;
+    const val  = document.getElementById('wpd-race-select').value;
+    if (!val) return;
 
-    // Auto-set the final leg race # field
+    let horses = [], rnum = '', raceName = '';
+
+    if (day === 'live') {
+      // Parse live:TRACK:RACENUM
+      const [, track, raceNumStr] = val.split(':');
+      rnum = raceNumStr;
+      const te = window._dashData?.today_entries || {};
+      const raceData = (te[track]?.races || []).find(r => String(r.race_num) === rnum);
+      if (!raceData) { alert('Race data not found in live entries.'); return; }
+      raceName = raceData.race_name || '';
+      horses = (raceData.horses || [])
+        .filter(h => !h.is_ae && h.scratched !== true)
+        .sort((a,b) => parseInt(a.program_num) - parseInt(b.program_num))
+        .map(h => {
+          // morning_line is stored as decimal (e.g. 5.0 = 5-1, 4.5 = 9-2)
+          const ml = h.morning_line != null ? wpdFormatML(h.morning_line) : '';
+          return { pgm: String(h.program_num), name: h.horse_name || '', ml, ofig: '' };
+        });
+    } else {
+      rnum = val;
+      const race = WPD_RACE_DATA[day]?.[rnum];
+      if (!race) return;
+      raceName = race.name;
+      horses = [...race.horses].sort((a,b) => parseInt(a.pgm) - parseInt(b.pgm));
+    }
+
+    // Auto-set final leg race # field
     document.getElementById('wpd-race-num').value = rnum;
 
     // Clear and rebuild table
@@ -6357,7 +6411,7 @@ const WPD_RACE_DATA = {
     tbody.innerHTML = '';
     wpdRowCount = 0;
 
-    race.horses.forEach(h => {
+    horses.forEach(h => {
       const tr = document.createElement('tr');
       tr.innerHTML = `
         <td><input class="wpd-table input wpd-pgm-input" type="text" value="${h.pgm}" style="width:40px;text-align:center;" /></td>
@@ -6371,17 +6425,24 @@ const WPD_RACE_DATA = {
       wpdRowCount++;
     });
 
-    // Clear previous results
     document.getElementById('wpd-results').style.display = 'none';
 
-    // Flash confirmation
     const btn = document.querySelector('[onclick="wpdLoadRace()"]');
     const orig = btn.textContent;
-    btn.textContent = `✓ Loaded R${rnum} (${race.horses.length} horses)`;
-    btn.style.background = '#44cc88';
-    btn.style.color = '#0d1b2a';
-    setTimeout(() => { btn.textContent = orig; btn.style.background=''; btn.style.color=''; }, 2000);
+    btn.textContent = `✓ Loaded R${rnum} — ${raceName} (${horses.length} horses)`;
+    btn.style.background = '#44cc88'; btn.style.color = '#0d1b2a';
+    setTimeout(() => { btn.textContent = orig; btn.style.background=''; btn.style.color=''; }, 2500);
   };
+
+  // ── Format decimal ML to display string (e.g. 5.0 → "5-1", 4.5 → "9-2") ──
+  function wpdFormatML(d) {
+    if (d == null) return '';
+    if (d <= 0.1) return '1-10';
+    // Common fractions
+    const frac = Math.round(d * 2);
+    if (frac % 2 === 0) return `${frac/2}-1`;
+    return `${frac}-2`;
+  }
 
   // ── Init: build default 8-horse table ──
   window.wpdInit = function() {
@@ -6527,10 +6588,10 @@ const WPD_RACE_DATA = {
     const resTbody = document.getElementById('wpd-results-tbody');
     resTbody.innerHTML = '';
 
-    // Sort by implied prob descending (shortest odds first)
+    // Sort by program number ascending
     const sorted = scaledHorses.map((h, i) => ({
       ...h, impliedProb: impliedProbs[i], impliedOdds: impliedOddsArr[i]
-    })).sort((a,b) => b.impliedProb - a.impliedProb);
+    })).sort((a,b) => parseInt(a.pgm) - parseInt(b.pgm));
 
     let sharpList = [], fadeList = [], confirmList = [], overlayList = [];
 
@@ -6550,7 +6611,7 @@ const WPD_RACE_DATA = {
       if (h.mlOdds !== null) {
         const diff = h.impliedOdds - h.mlOdds;
         const pct  = Math.round((diff / h.mlOdds) * 100);
-        const cls  = diff < 0 ? 'pos' : 'neg'; // shorter than ML = positive signal (green)
+        const cls  = diff < 0 ? 'neg' : 'pos'; // shorter than ML = red (priced down), longer = green (overlay value)
         const sign = diff < 0 ? '▼' : '▲';
         deltaHTML  = `<span class="wpd-delta ${cls}">${sign}${Math.abs(pct)}%</span>`;
       }
