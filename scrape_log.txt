@@ -1,0 +1,244 @@
+ 
+============================================================ 
+CD DAILY SCRAPE    started 20:58:00.36 
+============================================================ 
+NOTE: scrape_entries.py runs separately at 9am each morning  
+      via the "HorseRacing CD Morning Entries" scheduled task. 
+      By 8pm those entries are already in the DB for export.  
+[1/5] scrape_entries.py CD  
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-04-24
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-04-24 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+==============================================
+ENTRIES SUMMARY  CD  2026-04-24
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+[2/5] HorseRacingHRN.py --track CD  
+
+HorseRacingHRN.py � Multi-track results scraper (Horse Racing Nation)
+
+Usage:
+    python HorseRacingHRN.py [--track CODE] <date|start end|shortcut> [--dry-run]
+
+Examples:
+    python HorseRacingHRN.py 2025-05-01                          CD single day
+    python HorseRacingHRN.py spring2025                          CD spring meet
+    python HorseRacingHRN.py fall2025                            CD fall meet
+    python HorseRacingHRN.py --track FG 2025-02-01               FG single day
+    python HorseRacingHRN.py --track FG 2025-01-01 2025-03-31    FG date range
+    python HorseRacingHRN.py --track OP spring2025               OP spring meet
+    python HorseRacingHRN.py --track PIM spring2025              PIM spring meet
+    python HorseRacingHRN.py --track BEL spring2025              BEL spring meet
+    python HorseRacingHRN.py --list-tracks                       show all tracks
+
+Flags:
+    --track CODE    track code to scrape (default: CD)
+    --dry-run       parse only, do not write to database
+    --list-tracks   print all supported track codes and exit
+
+Requires: pip install requests beautifulsoup4
+
+STEP 2 FAILED (exit 1) — aborting pipeline 
+---- end 21:17:28.54 ---- 
+ 
+── MORNING ENTRIES     7:48:38.32 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/gulfstream-park/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/fair-grounds/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/oaklawn-park/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/santa-anita-park/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/aqueduct/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/keeneland/2026-04-27
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+
+==============================================
+ENTRIES SUMMARY  ALL TRACKS  2026-04-27
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+── morning entries done  7:48:51.86 ── 
+ 
+── MORNING ENTRIES     8:32:28.39 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+ 
+── MORNING ENTRIES     9:00:01.40 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+^C 
+── MORNING ENTRIES    10:40:34.31 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/gulfstream-park/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/gulfstream-park/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/fair-grounds/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/fair-grounds/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/oaklawn-park/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/oaklawn-park/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/santa-anita-park/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/santa-anita-park/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/aqueduct/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/aqueduct/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/keeneland/2026-04-29
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/keeneland/2026-04-29 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+==============================================
+ENTRIES SUMMARY  ALL TRACKS  2026-04-29
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+── morning entries done 10:40:43.79 ── 
+ 
+============================================================ 
+CD DAILY SCRAPE  2026-04-30  started  8:31:55.45 
+============================================================ 
+NOTE: scrape_entries.py runs separately at 9am each morning  
+      via the "HorseRacing CD Morning Entries" scheduled task. 
+      By 8pm those entries are already in the DB for export.  
+[1/5] scrape_entries.py CD 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-04-30
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-04-30 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+==============================================
+ENTRIES SUMMARY  CD  2026-04-30
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+[2/5] HorseRacingHRN.py --track CD 2026-04-30 
+Scraping 1 date(s) for CD (churchill-downs)
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-04-30
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-04-30 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+Done. Total parsed: 0 race winners, 0 exotic payouts.
+[3/5] derby_value.py validate 
+validate_payout_bases: 2 known anomaly/anomalies (non-failing):
+  Track  Type  ActualBase   Count  Date Range               Note
+  --------------------------------------------------------------------------
+  SA     DD          1.00      25  2026-04-17 � 2026-04-19  known anomaly 2026-04-17�19, origin unresolved
+  SA     EX          1.00      28  2026-04-17 � 2026-04-19  known anomaly 2026-04-17�19, origin unresolved
+validate_payout_bases: 8 violation group(s) found:
+  Track  Type  ActualBase   Count  Date Range               Note
+  --------------------------------------------------------------------------
+  CD     DD          1.00      10  2026-04-28 � 2026-04-29  expected 2.0
+  CD     P3          0.50      10  2026-04-28 � 2026-04-29  expected 2.0
+  CD     P3          3.00       1  2026-04-28 � 2026-04-28  expected 2.0
+  CD     P4          0.50       2  2026-04-28 � 2026-04-28  expected 2.0
+  CD     P5          0.50       3  2026-04-28 � 2026-04-28  expected 2.0
+  CD     P6          0.20       1  2026-04-28 � 2026-04-28  expected 2.0
+  CD     SF          0.10      11  2026-04-28 � 2026-04-29  expected 2.0
+  CD     TRI         0.50      11  2026-04-28 � 2026-04-29  expected 2.0
+STEP 3 WARNING: validate found hard violations — continuing 
+[4/5] export_dashboard_data.py 
+Exporting overlay data for all tracks...
+  AQU: 3 overlay(s), 44 total sequence span(s)
+  CD: 4 overlay(s), 48 total sequence span(s)
+  FG: 2 overlay(s), 43 total sequence span(s)
+  GP: 4 overlay(s), 50 total sequence span(s)
+  KEE: 5 overlay(s), 34 total sequence span(s)
+  OP: 2 overlay(s), 38 total sequence span(s)
+  SA: 5 overlay(s), 42 total sequence span(s)
+  AQU P4: 62 parlay/exotic pair(s) matched
+  AQU P5: 62 parlay/exotic pair(s) matched
+  AQU P6: 61 parlay/exotic pair(s) matched
+  CD P4: 45 parlay/exotic pair(s) matched
+  CD P5: 45 parlay/exotic pair(s) matched
+  CD P6: 38 parlay/exotic pair(s) matched
+  FG P4: 53 parlay/exotic pair(s) matched
+  FG P5: 53 parlay/exotic pair(s) matched
+  FG P6: 52 parlay/exotic pair(s) matched
+  GP P4: 77 parlay/exotic pair(s) matched
+  GP P5: 77 parlay/exotic pair(s) matched
+  GP P6: 77 parlay/exotic pair(s) matched
+  KEE P4: 29 parlay/exotic pair(s) matched
+  KEE P5: 28 parlay/exotic pair(s) matched
+  KEE P6: 28 parlay/exotic pair(s) matched
+  OP P4: 48 parlay/exotic pair(s) matched
+  OP P5: 47 parlay/exotic pair(s) matched
+  SA P4: 50 parlay/exotic pair(s) matched
+  SA P5: 50 parlay/exotic pair(s) matched
+  SA P6: 49 parlay/exotic pair(s) matched
+  Today's entries: none scraped yet (run scrape_entries.py first)
+
+Wrote C:\Users\jason\Desktop\HorseRacing Project\web\dashboard_data.json
+  Tracks: 7  |  Races: 3497  |  Exotics: 18555  |  Days: 221  |  Sequences: 299
+  Date range: 2025-01-01 to 2026-04-29
+
+Next steps:
+  cd web
+  git add dashboard_data.json
+  git commit -m "update dashboard data"
+  git push
+[5/5] git add / commit / push 
+[main 2a4f0b3] daily CD scrape 2026-04-30
+ 1 file changed, 2 insertions(+), 909 deletions(-)
+fatal: unable to access 'https://github.com/jcoogan80/horse-racing-derby.git/': Could not resolve host: github.com
+STEP 5 WARNING: git push exited 128 
+---- done  8:31:59.49 ---- 
+ 
+── MORNING ENTRIES     9:21:56.56 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/gulfstream-park/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/gulfstream-park/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/fair-grounds/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/fair-grounds/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/oaklawn-park/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/oaklawn-park/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/santa-anita-park/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/santa-anita-park/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/aqueduct/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/aqueduct/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/keeneland/2026-05-01
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/keeneland/2026-05-01 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+==============================================
+ENTRIES SUMMARY  ALL TRACKS  2026-05-01
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+── morning entries done  9:22:06.11 ── 
+ 
+── MORNING ENTRIES    16:20:34.49 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/churchill-downs/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/gulfstream-park/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/gulfstream-park/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/fair-grounds/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/fair-grounds/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/oaklawn-park/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/oaklawn-park/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/santa-anita-park/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/santa-anita-park/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/aqueduct/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/aqueduct/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+Fetching https://entries.horseracingnation.com/entries-results/keeneland/2026-05-06
+  Request error: HTTPSConnectionPool(host='entries.horseracingnation.com', port=443): Max retries exceeded with url: /entries-results/keeneland/2026-05-06 (Caused by NameResolutionError("HTTPSConnection(host='entries.horseracingnation.com', port=443): Failed to resolve 'entries.horseracingnation.com' ([Errno 11001] getaddrinfo failed)"))
+
+==============================================
+ENTRIES SUMMARY  ALL TRACKS  2026-05-06
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+── morning entries done 16:20:44.34 ── 

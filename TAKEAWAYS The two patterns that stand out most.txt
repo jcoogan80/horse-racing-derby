@@ -1,0 +1,23 @@
+The two patterns that stand out most for future cards:
+First, oNg vs oFIG gap. When oNg is significantly higher than oFIG — Golden Tempo was +16 points — the horse is projecting a career-best and the market hasn't priced it in yet. That gap should be an automatic VALUE signal in the app, separate from the edge model.
+Second, the international shipper blind spot is real. T O Elvis (Japan) won the Churchill Downs Stakes G1 at $13.74 and wasn't in the card at all. Japanese shippers have been increasingly competitive in US Grade 1s and there's currently no way to capture them from OptixEQ data alone.
+
+Key takeaways for next race day
+Patterns from Fri/Sat CD performance
+
+1
+EV model is the real edge — Golden Tempo winning at 23-1 as our VALUE pick (oNg 104 = top projected fig) is the biggest validation possible. The model found the Derby winner. Raw OptixEQ keys missed it entirely. This is the case for centering the whole card around edge, not figures alone.
+2
+oNg matters more than oFIG for longshots — Golden Tempo's oFIG was only 88 but oNg 104 = projected massive improvement. When there's a big gap between oFIG and oNg, that horse is pointing toward a career-best and the market doesn't know it yet. Flag "oNg much higher than oFIG" as a standalone VALUE signal.
+3
+50% OptixEQ key rate is genuinely strong — 7 of 14 races won by an OptixEQ key horse. In a field averaging ~10 runners, random chance = 10%. We were 5x above random. The card is working.
+4
+The "E" tag is underweighted — R Disaster won the Derby City Distaff G1 at $16.26. It was in our card tagged "E125" (explosive speed rating) but not keyed. The E-tag appears to flag something real — consider upgrading E-tagged horses to LEAN or VALUE regardless of raw oFIG rank.
+5
+International shippers are a blind spot — T O Elvis (Japan) won the Churchill Downs Stakes G1 at $13.74 and wasn't in our card at all. With Japanese and European horses increasingly competitive in US Grade 1s, the system needs a way to include them. Flag any race with a known international runner and add a manual note.
+6
+Near misses were in the card — R3 Vibe, R4 R Disaster, R7 Classic Q, R14 Prize Pick were all in our card but not keyed. 4 near misses × avg $15 payout = significant exotic value left on the table. The question for next card: raise the "in card" count per race from 1-2 keys to 3-4 for exotics coverage.
+7
+Top figure ≠ top bet, again and again — Knightsbridge (oFIG 112), Ways and Means (oFIG 111), Further Ado (oFIG 106) all LOST. The highest figure in the field is the most dangerous bet when the market has already fully priced it in. EV model correctly FADEd all three. This pattern should be formalized: "highest oFIG + shortest ML = likely FADE."
+8
+Podcast conditional plays 2/2 — Always a Runner (Oaks KEY) and Corporate Power (conditional at 10/1+) both won. The "only at overlay" trigger is one of the cleanest signals in the system. Keep this discipline — don't lower the price threshold.

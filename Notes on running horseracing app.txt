@@ -1,0 +1,5 @@
+A few things to keep in mind going forward:
+
+The CAPTCHA may not show every time — once Equibase recognizes your browser session it sometimes lets you through without it. So don't be surprised if future runs go straight through without needing the 30 second wait.
+To add more dates just use the GUI — open HorseRacingGUI.py and pick dates from the calendar. Everything flows through automatically.
+To add other tracks just change AQU to whatever track code you want in the GUI dropdown — it will automatically create a new tab in Google Sheets for that track.

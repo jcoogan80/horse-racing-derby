@@ -1,0 +1,421 @@
+================================================================
+  DERBY DAY GUIDE
+  Horse Racing Analysis Toolkit -- Field Reference
+================================================================
+
+This file tells you exactly what to run, when to run it, and
+what the numbers mean.  No setup required -- everything reads
+from horse_racing.db in this folder.
+
+
+================================================================
+  PART 1: SCRAPING RESULTS AFTER EACH RACE
+  Tool: HorseRacingGUI.py
+================================================================
+
+WHEN TO RUN IT
+  After each race posts (results are usually on Equibase
+  within 5-10 minutes of the official result).  You can
+  also run it in bulk at the end of the day.
+
+HOW TO LAUNCH
+  Double-click HorseRacingGUI.py, or from the terminal:
+
+      python HorseRacingGUI.py
+
+STEP BY STEP
+  1. Select track: CD (Churchill Downs)
+  2. Select mode: "Date Range" if scraping the whole card
+     at once, or "Individual Dates" to add one date.
+  3. Click the race date on the calendar (e.g. May 3, 2025).
+  4. For a range: click start date, then end date.
+     All dates in between are filled automatically.
+  5. Click the green "Run Scraper" button.
+  6. Watch the output log.  Each race looks like:
+
+       CD | 2025-05-03 | Race 1 | 9 starters
+         Win:  $8.40  Place: $4.20  Show: $3.00
+         DD  races 1-2  payout: $42.60
+       +-  1 race saved.
+
+  7. Done message: "X race(s) saved to database."
+     If you see "already scraped" for a date, the data
+     is already in the DB -- no duplicates are created.
+
+WHAT GETS SAVED
+  - Win / place / show payouts for each race
+  - DD, P3, P4, P5, P6 exotic payouts
+  - Field size (number of starters)
+  - Track condition (fast, sloppy, good, etc.)
+  - Surface (dirt, turf, synthetic)
+
+COMMON ISSUES
+  "Page blocked / bot protection"
+     Equibase sometimes shows a CAPTCHA on first load.
+     The browser window will open visibly -- solve the
+     CAPTCHA manually if prompted, then re-run.
+
+  "No data found for this date"
+     Results may not be posted yet.  Wait 10 minutes
+     and try again.
+
+  "Already scraped"
+     That's fine.  The scraper skips dates already in
+     the database.  No action needed.
+
+COMMAND LINE (no GUI)
+  If you prefer the terminal, edit the bottom of
+  HorseRacing.py and run:
+
+      python HorseRacing.py
+
+
+================================================================
+  PART 2: CHECKING FOR OVERLAYS BEFORE EACH EXOTIC
+  Tool: derby_value.py  -->  profile_track("CD")
+================================================================
+
+WHEN TO RUN IT
+  Run this after each scrape to see if CD is showing
+  any race sequences where average payouts are
+  significantly higher than the track's own baseline.
+  The most useful time: before the Pick 4 / Pick 5 / Pick 6
+  sequence is about to start.
+
+THE COMMANDS
+
+  Full profile for CD (all wager types, best sequences):
+      python derby_value.py profile CD
+
+  Compare CD against KEE and GP baseline:
+      python derby_value.py profile CD KEE GP
+
+  Detailed sequence-by-sequence breakdown for CD:
+      python derby_value.py CD
+
+  Detailed breakdown for all tracks in the database:
+      python derby_value.py
+
+WHAT THE OUTPUT MEANS
+
+  --- Example output ---
+  P3  |  8 spans total  |  6 qualified (>=5 hits)  |  overall avg: $312.40
+  Races       Hits    Avg $   Median $   Ratio   V.Score  Consistency
+  7-8-9         14   1840.00    210.00   5.89x     8.76   MODERATE
+
+  "Races 7-8-9" -- the Pick 3 covering races 7, 8, and 9
+  "Hits: 14"    -- this exact sequence paid out 14 times
+                   in the database (the sample)
+  "Avg $1840"   -- average payout was $1,840 per $1 ticket
+  "Median $210" -- half the payouts were above $210,
+                   half below
+  "Ratio 5.89x" -- this sequence pays 5.89x the overall
+                   P3 average -- that's the OVERLAY signal
+  "V.Score 8.76"-- avg / median.  Close to 1.0 = consistent
+                   payouts.  High number = a few huge hits
+                   are pulling the average up
+  "MODERATE"    -- consistency rating (see below)
+
+CONSISTENCY RATINGS
+  HIGH     (V.Score < 3.0)  -- payouts are relatively
+                               predictable.  Good for
+                               regular play.
+  MODERATE (3.0 - 10.0)    -- some big hits skew the avg.
+                               The overlay is real but
+                               expect variance.
+  LOTTERY  (V.Score > 10)  -- one or two monster payouts
+                               are inflating the average.
+                               Treat as a bonus, not
+                               a reliable pattern.
+
+WHAT TO LOOK FOR (the overlay threshold)
+  Any sequence where Ratio >= 1.5x is an overlay --
+  it pays at least 50% more than the track average
+  for that wager type.  Only sequences with >= 5 hits
+  are shown (thin samples are flagged separately).
+
+  Sequences with Ratio > 2.0x and Consistency = HIGH
+  or MODERATE are the strongest signals.
+
+COMPARING CD AGAINST THE BASELINE
+  The baseline_report.txt in this folder shows the
+  KEE and GP profiles as of April 2026.  Key benchmarks:
+
+  KEE DD  races 6-7    avg $78   HIGH consistency  (1.52x)
+  KEE DD  races 8-9    avg $82   HIGH consistency  (1.59x)
+  KEE P3  races 7-8-9  avg $2084 LOTTERY           (4.19x)
+  GP  P3  races 9-10-11 avg $2480 MODERATE         (4.78x)
+  GP  P5  races 1-2-3-4-5 avg $12209 LOTTERY       (1.59x)
+
+  If CD shows similar or stronger numbers in the same
+  race spans, the pattern is likely real.  If CD shows
+  overlays in spans that KEE/GP don't, treat with more
+  skepticism until you have >= 10 hits.
+
+THIN SAMPLE WARNING
+  Lines marked [thin sample: X-Y (N hits)] are shown
+  for transparency but should NOT drive betting decisions
+  until you have more data.  < 5 hits is noise.
+
+
+================================================================
+  PART 3: HEDGING A LIVE TICKET IN THE LAST LEG
+  Tool: hedge_calculator.py
+================================================================
+
+WHEN TO RUN IT
+  You're alive in the Pick 4, Pick 5, or Pick 6 going
+  into the final leg and you need to decide whether --
+  and how much -- to bet on horses you don't have.
+
+HOW TO LAUNCH
+
+  Interactive mode (prompts for all inputs):
+      python hedge_calculator.py
+
+  Sample run (shows how it all works):
+      python hedge_calculator.py sample
+
+INTERACTIVE MODE WALKTHROUGH
+
+  The tool will ask:
+
+  1. Track code (e.g. CD)
+     -- pulls historical Pick 6 payouts from the
+        database so you know what's realistic
+
+  2. Wager type (P3, P4, P5, P6)
+     -- determines total legs
+
+  3. Ticket cost
+     -- what you paid for your ticket originally
+     -- e.g. $120
+
+  4. Estimated payout
+     -- what the tote board / pool shows if your
+        ticket hits right now
+     -- e.g. $180000
+
+  5. How many legs you've survived
+     -- e.g. 5 (out of 6)
+
+  6. How many horses in the final leg
+     -- e.g. 10
+
+  7. Your horses in the final leg
+     -- comma-separated program numbers
+     -- e.g.  2, 5, 8
+
+  8. All horses in the field
+     -- comma-separated, or just press Enter to use
+        1 through N automatically
+
+  9. Current odds for each horse
+     -- as shown on the tote board
+     -- formats accepted: 5/2  or  5-2  or  2.5  or  even
+
+  10. Hedge budget (optional)
+      -- how much cash you have available to hedge with
+      -- e.g. $500
+
+READING THE OUTPUT
+
+  --- HEDGE ANALYSIS table ---
+  This shows the full picture for each uncovered horse.
+  Sorted by Win% (most dangerous threats first).
+
+  B/E Hedge  -- minimum bet to recover your ticket cost
+                if this horse wins.  At 5/2 on a $120
+                ticket: $120 / 3.5 = $34.29
+  P/N Hedge  -- bet this much and you end up with the
+                same profit whether your ticket hits OR
+                this horse wins.  Very expensive on
+                short-priced horses.
+  Rec Hedge  -- the suggested amount.  Splits the
+                difference between B/E and P/N, rounded
+                to the nearest $2.
+  Net/Ticket -- your profit if YOUR original horses win
+                (after subtracting the hedge costs you
+                already placed)
+  Net/Hedge  -- your profit if the HEDGE horse wins
+                (win bet return minus all costs)
+
+  --- SCENARIO TABLE ---
+  One row per horse in the field.  Sorted most dangerous
+  (highest win probability) to least dangerous.
+
+  Full Hedge   -- recommended bet if you hedge every
+                  uncovered horse
+  Net/Full     -- your net in that scenario
+  Part Hedge   -- bet if you only hedge horses at 8/1
+                  or shorter (realistic threats)
+  Net/Part     -- your net hedging only the threats
+  Net/None     -- your net if you do nothing
+
+  For covered horses (YOUR horses):
+    Net/Full will be lower than Net/None because
+    you're spending hedge money that won't be needed.
+    This is the cost of protection.
+
+  For uncovered horses in the "(skip)" row:
+    These are longshots skipped in partial hedge mode.
+    Net/Part shows what happens if you skipped hedging
+    them and one of them wins -- you lose the partial
+    hedge money you spent plus the ticket.
+
+  --- BUDGET HEDGE table ---
+  Allocates your available cash proportionally to win
+  probability.  The most dangerous uncovered horses
+  get the most money.
+
+  Allocated   -- dollars placed on this horse
+  Net if Wins -- your net if this horse wins
+                 (collected from win bet minus all costs)
+  B/E Needed  -- how much you'd need on this horse ALONE
+                 to break even after all hedge spending
+  Profitable? -- YES if Net if Wins >= 0
+                 "short $X" if you're still underwater
+                 even if this horse wins
+
+  IMPORTANT: On a large-payout ticket ($50K+), a small
+  hedge budget ($500) usually can't make you profitable
+  if an uncovered horse wins -- the payouts aren't big
+  enough to cover total spending.  What it CAN do is
+  recover enough to soften the loss.  The tool shows
+  you exactly how much you recover in each scenario.
+
+PRACTICAL DECISION GUIDE
+
+  Scenario: Do-nothing net = $179,880.  You have $500.
+
+  Question 1: Can I live with losing $120 if an uncovered
+  horse wins?
+    If YES -- do nothing.  Your upside is $179,880.
+    If NO  -- hedge.
+
+  Question 2: Which horses actually worry me?
+    Look at the Win% column.  Any horse above ~15% at
+    these odds is a real threat (roughly 6/1 or shorter).
+    The scenario table shows them first.
+
+  Question 3: If I hedge the threats (8/1 or shorter),
+  what do I give up?
+    Look at Net/Part for YOUR covered horses.
+    That's the cost of partial protection.
+
+  Question 4: Is my budget enough to matter?
+    Look at the Budget Hedge table.  If "Profitable?"
+    shows "short $X" for every horse, your budget only
+    softens a loss -- it can't guarantee a profit.
+    In that case, hedge the ONE horse that worries you
+    most and put all the budget there instead of
+    spreading it thin.
+
+
+================================================================
+  PART 4: QUICK COMMAND REFERENCE
+================================================================
+
+All commands run from this folder:
+  cd "C:\Users\jason\Desktop\HorseRacing Project"
+
+-- SCRAPER GUI --
+  python HorseRacingGUI.py
+    Opens calendar interface.  Select CD, pick dates, run.
+
+-- VALUE DETECTION --
+  python derby_value.py profile CD
+    Consolidated overlay profile for Churchill Downs.
+
+  python derby_value.py profile CD KEE GP
+    Side-by-side profiles for CD, Keeneland, Gulfstream.
+
+  python derby_value.py CD
+    Full sequence-by-sequence breakdown for CD.
+
+  python derby_value.py
+    Full breakdown for every track in the database.
+
+-- HEDGE CALCULATOR --
+  python hedge_calculator.py
+    Interactive mode.  Prompts for all inputs.
+
+  python hedge_calculator.py sample
+    Runs the built-in $120 ticket / $180K payout example
+    and saves output to hedge_calculator_sample.txt.
+
+-- DATABASE SNAPSHOT --
+  Run this in a Python terminal to check current DB state:
+
+      import sqlite3
+      conn = sqlite3.connect("horse_racing.db")
+      c = conn.cursor()
+      c.execute("""
+          SELECT track, COUNT(DISTINCT race_date) days,
+                 COUNT(*) races
+          FROM race_results
+          GROUP BY track ORDER BY track
+      """)
+      for row in c.fetchall(): print(row)
+      conn.close()
+
+
+================================================================
+  PART 5: DERBY DAY SEQUENCE (MINUTE BY MINUTE)
+================================================================
+
+BEFORE THE CARD STARTS
+  [ ] Run: python derby_value.py profile CD
+      Look for any P4/P5/P6 sequence overlays already
+      established from the meet so far.
+      Compare against baseline_report.txt (KEE/GP).
+
+AFTER EACH RACE
+  [ ] Wait 5-10 min for Equibase to post results.
+  [ ] Open HorseRacingGUI.py, scrape that date.
+  [ ] Check the output log -- confirm race saved.
+
+BEFORE THE BIG SEQUENCES START
+  (Typically the P5 starts around race 7, P6 around 5-6)
+  [ ] Run: python derby_value.py profile CD
+  [ ] Note any sequences that match races coming up.
+  [ ] Sequences with Ratio >= 1.5x and >= 5 hits are live.
+
+IF YOU HAVE A LIVE TICKET GOING INTO THE LAST LEG
+  [ ] Check the tote board for estimated payout.
+  [ ] Note your horses and all horses + current odds.
+  [ ] Run: python hedge_calculator.py
+  [ ] Work through the interactive prompts.
+  [ ] Look at the Scenario Table -- sorted by threat level.
+  [ ] Decide: full hedge, partial hedge (8/1 or less),
+      budget hedge, or do nothing.
+  [ ] If budget hedging: put the most money on the horse
+      with the highest Win% that you don't have.
+
+AFTER THE CARD
+  [ ] Run the scraper one more time for the full day.
+  [ ] Run: python derby_value.py profile CD
+      This gives you CD's updated profile with Derby
+      day data included.
+  [ ] Compare against baseline_report.txt.
+      Note any new overlays or shifts in existing ones.
+
+================================================================
+  REFERENCE: FILES IN THIS FOLDER
+================================================================
+
+  horse_racing.db          -- all race results and exotic
+                              payouts (do not delete)
+  HorseRacing.py           -- scraper engine
+  HorseRacingGUI.py        -- calendar GUI for scraper
+  HorseRacingAnalysis.py   -- Google Sheets export
+  derby_value.py           -- overlay value detection
+  hedge_calculator.py      -- last-leg hedge calculator
+  baseline_report.txt      -- KEE/GP overlay baseline
+                              (April 2026 snapshot)
+  hedge_calculator_sample.txt -- sample hedge output
+  credentials.json         -- Google Sheets auth key
+                              (keep private)
+  DERBY_DAY_GUIDE.txt      -- this file
+
+================================================================

@@ -1,0 +1,113 @@
+
+========================================================================
+  HEDGE CALCULATOR  --  SAMPLE RUN
+  Generated: 2026-04-22 12:41
+========================================================================
+
+  Scenario:
+    Wager type       : Pick 6
+    Ticket cost      : $120.00
+    Estimated payout : $180,000.00
+    Legs survived    : 5 of 6
+    My horses (leg 6): 2, 5, 8
+    Field size       : 10 horses
+
+  Final leg odds:
+    # 1  5/2     
+    # 2  3/1      <-- YOUR HORSE
+    # 3  8/1     
+    # 4  6/1     
+    # 5  9/2      <-- YOUR HORSE
+    # 6  15/1    
+    # 7  4/1     
+    # 8  12/1     <-- YOUR HORSE
+    # 9  20/1    
+    #10  7/2     
+
+  (No P6 history for CD in local database yet)
+
+
+====================================================================
+  HEDGE ANALYSIS  --  Pick 6  |  After leg 5
+====================================================================
+  Ticket cost          : $    120.00
+  Estimated payout     : $180,000.00
+  Horses covered (leg) : 3
+  Horses uncovered     : 7
+  Total hedge cost     : $ 96,546.00
+
+  Do-nothing net profit:  $179,880.00
+
+   Pgm  Odds      Win%   B/E Hedge  P/N Hedge  Rec Hedge   Net/Ticket   Net/Hedge
+  ------------------------------------------------------------------
+     1  5/2      28.6%   $   34.29 $51,428.57  $  25,732   $154,148.00   $64,210.00
+    10  7/2      22.2%   $   26.67 $40,000.00  $  20,014   $159,866.00   $69,929.00
+     7  4/1      20.0%   $   24.00 $36,000.00  $  18,012   $161,868.00   $71,928.00
+     4  6/1      14.3%   $   17.14 $25,714.29  $  12,866   $167,014.00   $77,076.00
+     3  8/1      11.1%   $   13.33 $20,000.00  $  10,006   $169,874.00   $79,928.00
+     6  15/1      6.2%   $    7.50 $11,250.00  $   5,628   $174,252.00   $84,300.00
+     9  20/1      4.8%   $    5.71  $8,571.43  $   4,288   $175,592.00   $85,640.00
+
+  Column guide:
+  B/E Hedge  = bet this much to break even if uncovered horse wins
+  P/N Hedge  = bet this much to match ticket payout if uncovered horse wins
+  Rec Hedge  = suggested amount (halfway between B/E and P/N, rounded to $2)
+  Net/Ticket = your net if YOUR ticket hits (after ticket + all hedge costs)
+  Net/Hedge  = your net if the HEDGE HORSE wins (win bet return minus costs)
+
+
+==========================================================================================
+  SCENARIO TABLE  --  What happens if each horse wins the final leg
+  Sorted by win probability  |  Partial hedge = 8/1 or shorter only
+==========================================================================================
+   Pgm  Odds     Win%   Cov  Full Hedge      Net/Full  Part Hedge      Net/Part     Net/None
+  ----------------------------------------------------------------------------------------
+     1  5/2     28.6%    no   $  25,732    -$6,604.00   $  25,732     $3,312.00     -$120.00
+     2  3/1     25.0%   YES        ----    $83,334.00        ----    $93,250.00   $179,880.00
+    10  7/2     22.2%    no   $  20,014    -$6,603.00   $  20,014     $3,313.00     -$120.00
+     7  4/1     20.0%    no   $  18,012    -$6,606.00   $  18,012     $3,310.00     -$120.00
+     5  9/2     18.2%   YES        ----    $83,334.00        ----    $93,250.00   $179,880.00
+     4  6/1     14.3%    no   $  12,866    -$6,604.00   $  12,866     $3,312.00     -$120.00
+     3  8/1     11.1%    no   $  10,006    -$6,612.00   $  10,006     $3,304.00     -$120.00
+     8  12/1     7.7%   YES        ----    $83,334.00        ----    $93,250.00   $179,880.00
+     6  15/1     6.2%    no   $   5,628    -$6,618.00      (skip)   -$86,750.00     -$120.00
+     9  20/1     4.8%    no   $   4,288    -$6,618.00      (skip)   -$86,750.00     -$120.00
+  ----------------------------------------------------------------------------------------
+  Full hedge total  : $ 96,546.00  (covers ALL 7 uncovered horses)
+  Partial hedge total: $86,630.00  (covers 5 realistic threats at <=8/1)
+
+  Ticket cost: $120.00   Est. payout if ticket hits: $180,000.00
+
+
+========================================================================
+  BUDGET HEDGE  --  $500.00 allocated across uncovered threats
+  Strategy: proportional to implied win probability
+========================================================================
+  Requested budget  : $    500.00
+  Actual total      : $    502.00  (rounded to $2 increments)
+  Ticket cost       : $    120.00
+
+  If your ticket hits  :  net  $179,378.00
+
+   Pgm  Odds      Win%   Allocated    Net if Wins    B/E Needed   Profitable?
+  ----------------------------------------------------------------------
+     1  5/2      28.6%  $      134       -$153.00  $    177.71     short $44
+    10  7/2      22.2%  $      104       -$154.00  $    138.22     short $34
+     7  4/1      20.0%  $       94       -$152.00  $    124.40     short $30
+     4  6/1      14.3%  $       66       -$160.00  $     88.86     short $23
+     3  8/1      11.1%  $       52       -$154.00  $     69.11     short $17
+     6  15/1      6.2%  $       30       -$142.00  $     38.88      short $9
+     9  20/1      4.8%  $       22       -$160.00  $     29.62      short $8
+
+  This $500 budget cannot make any uncovered horse profitable.
+  Break-even needed = (ticket + full budget) / odds.  Shortfalls:
+    - #1 (5/2): allocated $134, need $177.71 to break even (short $43.71)
+    - #10 (7/2): allocated $104, need $138.22 to break even (short $34.22)
+    - #7 (4/1): allocated $94, need $124.40 to break even (short $30.40)
+    - #4 (6/1): allocated $66, need $88.86 to break even (short $22.86)
+    - #3 (8/1): allocated $52, need $69.11 to break even (short $17.11)
+    - #6 (15/1): allocated $30, need $38.88 to break even (short $8.88)
+    - #9 (20/1): allocated $22, need $29.62 to break even (short $7.62)
+
+  To break even if #1 (5/2) wins, you'd need a total hedge budget of ~$178 placed entirely on that horse.
+

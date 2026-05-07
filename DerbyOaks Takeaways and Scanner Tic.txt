@@ -1,0 +1,13 @@
+Derby/Oaks Takeaways and Scanner Ticket Creator Logic
+
+That's the full reference card. Here's the short version of each section:
+
+**What we backtested** — two Churchill Downs race days in May 2026, 27 races total. Saturday produced a clean P3 R12-13-14 hit worth an estimated $700-1,100 on a $2 ticket, driven by three consecutive oNg gap winners. Friday produced three sequences that hit (P4 at $1,221, P5 at $9,404, P6 at $43,529 on $2 base), but the gap signal only caught the endpoints of each sequence — the middle legs required wider coverage, and the FADE conflict at R11 would have broken any tight ticket.
+
+**What the scanner does** — seven steps: filter by historical position overlay → enrich each horse with EV model + gap + tags → assign each leg to single/pair/spread → detect bookend patterns and widen middles → enforce cost limit → rank by composite score → suggest P3→P4 upgrades where cost stays flat.
+
+**The four signals and what triggers them:**
+- Gap badge — oNg exceeds oFIG, meaning OptixEQ projects improvement the market hasn't priced. ≥8 singles the horse, ≥4 includes it.
+- FADE — overbet chalk that the EV model says is mispriced short. Never singled. Kept if gap ≥6 for secondary coverage.
+- BOMB — manual/podcast tag at 15-1+. Added regardless of gap. Oaks Day proved this matters when two BOMB winners had gaps of only +2 and +3.
+- BOOKEND — scanner detected that only the endpoints of a sequence have strong signals. Middle legs opened to 3 horses and labeled so you know why the ticket is wider than usual.

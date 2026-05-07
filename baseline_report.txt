@@ -1,0 +1,103 @@
+================================================================
+  DERBY VALUE BASELINE REPORT
+  Generated: 2026-04-22 12:26
+================================================================
+
+  DATABASE SNAPSHOT
+  Tracks:          4  (AQU, GP, KEE, SA)
+  Race days:       42
+  Total races:     398
+  Total exotics:   2177
+  Date range:      2026-02-12 to 2026-04-19
+
+  Per-track breakdown:
+  Track     Days   Races   Exotics
+  -------- ----- ------- ---------
+  AQU          8      66       355
+  GP          19     189      1040
+  KEE         12     115       633
+  SA           3      28       149
+
+  Baseline tracks: KEE and GP (min 5 hits per sequence)
+  Compare CD profile against these after each weekend scrape.
+================================================================
+
+====================================================================
+  TRACK PROFILE  |  KEE  |  generated 2026-04-22 12:26
+====================================================================
+  Min hits threshold: 5  (sequences below this flagged as thin sample)
+
+  ------------------------------------------------------------------
+  DD  |  10 span(s) total  |  9 qualified (>=5 hits)  |  overall avg: $51.70
+  ------------------------------------------------------------------
+  Races       Hits     Avg $   Median $   Ratio   V.Score Consistency   
+  ------------------------------------------------------------------
+  8-9           11     82.31      21.97   1.59x      3.75 MODERATE      
+  6-7           12     78.47      27.77   1.52x      2.83 HIGH          
+  [thin sample: 10-11 (3 hits)]
+
+  ------------------------------------------------------------------
+  P3  |  9 span(s) total  |  9 qualified (>=5 hits)  |  overall avg: $497.21
+  ------------------------------------------------------------------
+  Races       Hits     Avg $   Median $   Ratio   V.Score Consistency   
+  ------------------------------------------------------------------
+  7-8-9         17   2084.18     154.18   4.19x     13.52 LOTTERY       
+
+  ------------------------------------------------------------------
+  P4  |  6 span(s) total  |  1 qualified (>=5 hits)  |  overall avg: $257.35
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 6-7-8-9 (4 hits), 8-9-10-11 (3 hits), 4-5-6-7 (2 hits), 7-8-9-10 (3 hits), 5-6-7-8 (2 hits)]
+
+  ------------------------------------------------------------------
+  P5  |  5 span(s) total  |  1 qualified (>=5 hits)  |  overall avg: $513.39
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 7-8-9-10-11 (3 hits), 6-7-8-9-10 (3 hits), 5-6-7-8-9 (4 hits), 4-5-6-7-8 (2 hits)]
+
+  ------------------------------------------------------------------
+  P6  |  4 span(s) total  |  0 qualified (>=5 hits)  |  overall avg: $0.00
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 6-7-8-9-10-11 (3 hits), 5-6-7-8-9-10 (3 hits), 4-5-6-7-8-9 (4 hits), 3-4-5-6-7-8 (2 hits)]
+
+
+====================================================================
+  TRACK PROFILE  |  GP  |  generated 2026-04-22 12:26
+====================================================================
+  Min hits threshold: 5  (sequences below this flagged as thin sample)
+
+  ------------------------------------------------------------------
+  DD  |  11 span(s) total  |  9 qualified (>=5 hits)  |  overall avg: $38.15
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 10-11 (4 hits), 11-12 (2 hits)]
+
+  ------------------------------------------------------------------
+  P3  |  10 span(s) total  |  9 qualified (>=5 hits)  |  overall avg: $519.45
+  ------------------------------------------------------------------
+  Races       Hits     Avg $   Median $   Ratio   V.Score Consistency   
+  ------------------------------------------------------------------
+  9-10-11        6   2480.45     349.95   4.78x      7.09 MODERATE      
+  [thin sample: 10-11-12 (4 hits)]
+
+  ------------------------------------------------------------------
+  P4  |  7 span(s) total  |  3 qualified (>=5 hits)  |  overall avg: $951.43
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 9-10-11-12 (2 hits), 6-7-8-9 (4 hits), 8-9-10-11 (2 hits), 5-6-7-8 (2 hits)]
+
+  ------------------------------------------------------------------
+  P5  |  7 span(s) total  |  2 qualified (>=5 hits)  |  overall avg: $7702.67
+  ------------------------------------------------------------------
+  Races       Hits     Avg $   Median $   Ratio   V.Score Consistency   
+  ------------------------------------------------------------------
+  1-2-3-4-5     19  12209.07    1136.00   1.59x     10.75 LOTTERY       
+  [thin sample: 8-9-10-11-12 (3 hits), 7-8-9-10-11 (3 hits), 3-4-5-6-7 (4 hits), 5-6-7-8-9 (3 hits), 4-5-6-7-8 (2 hits)]
+
+  ------------------------------------------------------------------
+  P6  |  5 span(s) total  |  1 qualified (>=5 hits)  |  overall avg: $10823.16
+  ------------------------------------------------------------------
+  No overlay sequences above threshold.
+  [thin sample: 6-7-8-9-10-11 (2 hits), 7-8-9-10-11-12 (2 hits), 4-5-6-7-8-9 (3 hits), 3-4-5-6-7-8 (2 hits)]
+
