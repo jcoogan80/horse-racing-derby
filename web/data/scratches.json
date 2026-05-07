@@ -1,0 +1,115 @@
+{
+  "track": "CD",
+  "date": "2026-05-02",
+  "generated_at": "06:07 AM ET",
+  "scratches": [
+    {
+      "race": 1,
+      "pgm": "1",
+      "horse": "Bhatia",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 1,
+      "pgm": "9",
+      "horse": "Winston Ave",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 2,
+      "pgm": "10",
+      "horse": "J J Grey",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 4,
+      "pgm": "2",
+      "horse": "Haulin Ice",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 8,
+      "pgm": "10",
+      "horse": "Great White",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 9,
+      "pgm": "5",
+      "horse": "Blackout Time",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 11,
+      "pgm": "8",
+      "horse": "Astronomer",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 12,
+      "pgm": "13",
+      "horse": "Silent Tactic",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 12,
+      "pgm": "20",
+      "horse": "Fulleffort",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 12,
+      "pgm": "24",
+      "horse": "Corona de Oro",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 12,
+      "pgm": "5",
+      "horse": "Right to Party",
+      "change_type": "Scratched",
+      "reason": "Reason Unavailable",
+      "time_posted": "6:02 AM ET",
+      "time_posted_dt": "06:02"
+    },
+    {
+      "race": 13,
+      "pgm": "2",
+      "horse": "Heartily",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": "05:00"
+    }
+  ]
+}

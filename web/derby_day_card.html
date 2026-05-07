@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Derby Day Card — Churchill Downs 5/2/2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1b2a; color: #e8e0d0; min-height: 100vh; padding: 20px; }
+.header { text-align: center; padding: 24px 0 16px; border-bottom: 1px solid #2a3f5a; margin-bottom: 24px; }
+.header h1 { font-size: 28px; color: #f5c842; font-weight: 700; letter-spacing: 2px; }
+.header .sub { font-size: 13px; color: #8a9bb0; margin-top: 6px; }
+.expert-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(140px, 1fr)); gap: 8px; margin-bottom: 24px; }
+.expert-card { background: #152232; border: 1px solid #2a3f5a; border-radius: 8px; padding: 10px 12px; font-size: 11px; }
+.expert-name { font-weight: 700; color: #f5c842; margin-bottom: 6px; font-size: 12px; }
+.expert-pick { color: #e8e0d0; margin: 2px 0; }
+.expert-pick span { color: #66aaff; font-weight: 600; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; padding: 12px 16px; background: #152232; border-radius: 8px; font-size: 12px; }
+.leg-item { display: flex; align-items: center; gap: 6px; }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+.pace-box { background: #1a2a0e; border: 1px solid #3a5a1a; border-radius: 8px; padding: 14px 16px; margin-bottom: 20px; font-size: 12px; color: #88cc44; }
+.pace-box strong { color: #aaee66; }
+.pace-box .pace-detail { color: #6a9a44; margin-top: 4px; }
+.section-title { font-size: 13px; font-weight: 700; color: #f5c842; letter-spacing: 1px; text-transform: uppercase; margin: 20px 0 10px; padding-bottom: 4px; border-bottom: 1px solid #2a3f5a; }
+.horse-row { display: grid; grid-template-columns: 36px 1fr 48px 70px; gap: 8px; padding: 10px 14px; align-items: start; border-bottom: 1px solid #1a2d42; }
+.horse-row:last-child { border-bottom: none; }
+.horse-row.top-pick { background: #0e2438; }
+.horse-row.value-play { background: #0e2418; }
+.horse-row.bomb-play { background: #2a1e0a; }
+.horse-row.fade-horse { opacity: 0.55; background: #0d1b2a; }
+.horse-list { border: 1px solid #1e3048; border-radius: 0 0 8px 8px; overflow: hidden; }
+.race-header { display: flex; align-items: baseline; gap: 10px; padding: 8px 14px; background: #152232; border-radius: 8px 8px 0 0; border-left: 4px solid #f5c842; flex-wrap: wrap; margin-top: 16px; }
+.race-num { font-size: 13px; font-weight: 700; color: #f5c842; }
+.race-name { font-size: 15px; font-weight: 600; color: #e8e0d0; }
+.race-meta { font-size: 12px; color: #8a9bb0; margin-left: auto; }
+.race-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.badge-g1 { background: #3d1a00; color: #ff9944; }
+.pgm { width: 28px; height: 28px; border-radius: 50%; background: #1e3048; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #f5c842; flex-shrink: 0; }
+.horse-info { min-width: 0; }
+.horse-name { font-size: 14px; font-weight: 600; color: #e8e0d0; }
+.horse-tags { display: flex; gap: 4px; margin-top: 3px; flex-wrap: wrap; }
+.tag { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+.tag-key { background: #1a3d5a; color: #66aaee; }
+.tag-val { background: #1a3d1a; color: #66cc66; }
+.tag-bomb { background: #3d2a00; color: #ffaa33; }
+.tag-fade { background: #3d1a1a; color: #ff6666; }
+.tag-pace { background: #2a2a3d; color: #aa88ff; }
+.tag-post { background: #1a3d3d; color: #44cccc; }
+.fig-col { text-align: center; }
+.beyer { font-size: 14px; font-weight: 700; color: #e8e0d0; }
+.beyer-lbl { font-size: 10px; color: #8a9bb0; margin-top: 1px; }
+.prob-col { text-align: right; }
+.pct { font-size: 18px; font-weight: 700; }
+.pct.high { color: #44cc88; }
+.pct.med { color: #66aaff; }
+.pct.spec { color: #ffaa33; }
+.pct.low { color: #8a9bb0; }
+.ml-odds { font-size: 11px; color: #8a9bb0; margin-top: 1px; }
+.bar-wrap { height: 3px; background: #1e3048; border-radius: 2px; margin-top: 4px; }
+.bar-fill { height: 3px; border-radius: 2px; }
+.bar-high { background: #44cc88; }
+.bar-med { background: #66aaff; }
+.bar-spec { background: #ffaa33; }
+.bar-low { background: #666; }
+.horse-note { grid-column: 2 / -1; font-size: 11px; color: #6a8aa0; margin-top: 2px; }
+.upgrade { color: #44cc88; font-weight: 600; }
+.downgrade { color: #ff6666; font-weight: 600; }
+.summary-box { background: #152232; border: 1px solid #2a3f5a; padding: 12px 16px; font-size: 12px; color: #8a9bb0; border-top: 1px solid #1e3048; }
+.summary-box strong { color: #f5c842; }
+.super-box { background: #1a2a3d; border: 1px solid #2a4a6a; border-radius: 8px; padding: 14px 16px; margin-top: 16px; font-size: 12px; }
+.super-box h3 { color: #f5c842; font-size: 14px; margin-bottom: 10px; }
+.super-tier { margin-bottom: 8px; }
+.super-tier-label { color: #66aaff; font-weight: 700; font-size: 11px; text-transform: uppercase; letter-spacing: 1px; margin-bottom: 3px; }
+.super-ticket { background: #0d1b2a; border-radius: 4px; padding: 8px 10px; font-family: monospace; font-size: 12px; color: #88cc44; margin-top: 4px; }
+.footer { text-align: center; padding: 24px 0; font-size: 11px; color: #4a6a8a; border-top: 1px solid #1e3048; margin-top: 24px; }
+.print-btn { position: fixed; bottom: 20px; right: 20px; background: #f5c842; color: #0d1b2a; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; }
+@media print { .print-btn { display: none; } body { background: white; color: #111; } }
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div style="font-size:22px;margin-bottom:6px;">🌹</div>
+  <h1>DERBY DAY CARD</h1>
+  <div class="sub">Churchill Downs · Saturday, May 2, 2026 · Sources: VSiN/DRF Betting Guide + DRF Past Performances</div>
+</div>
+
+<!-- EXPERT CONSENSUS -->
+<div class="section-title">VSiN Expert Consensus</div>
+<div class="expert-grid">
+  <div class="expert-card">
+    <div class="expert-name">Somich (VSiN)</div>
+    <div class="expert-pick">Win: <span>#12 Chief Wallabee</span></div>
+    <div class="expert-pick">Tri: <span>#9 The Puma</span></div>
+    <div class="expert-pick">Tri: <span>#20 Fulleffort</span></div>
+    <div class="expert-pick">Super: <span>#6 Commandment</span></div>
+  </div>
+  <div class="expert-card">
+    <div class="expert-name">Tuley (VSiN)</div>
+    <div class="expert-pick">Value: <span>#17 Six Speed</span></div>
+    <div class="expert-pick">Long: <span>#10 Wonder Dean</span></div>
+    <div class="expert-pick">Watch: <span>#8 So Happy</span></div>
+    <div class="expert-pick">Watch: <span>#14 Potente</span></div>
+  </div>
+  <div class="expert-card">
+    <div class="expert-name">Sehon (VSiN)</div>
+    <div class="expert-pick">Win: <span>#15 Emerging Mkt</span></div>
+    <div class="expert-pick">2nd: <span>#6 Commandment</span></div>
+    <div class="expert-pick">3rd: <span>#18 Further Ado</span></div>
+  </div>
+  <div class="expert-card">
+    <div class="expert-name">Burke (VSiN)</div>
+    <div class="expert-pick">Super: <span>#6 Commandment</span></div>
+    <div class="expert-pick">Super: <span>#18 Further Ado</span></div>
+    <div class="expert-pick">Super: <span>#15 Emerging Mkt</span></div>
+    <div class="expert-pick">Super: <span>#1 Renegade</span></div>
+  </div>
+  <div class="expert-card">
+    <div class="expert-name">Aragona (DRF)</div>
+    <div class="expert-pick">Win: <span>#6 Commandment</span></div>
+    <div class="expert-pick">2nd: <span>#9 The Puma</span></div>
+    <div class="expert-pick">3rd: <span>#1 Renegade</span></div>
+    <div class="expert-pick">4th: <span>#8 So Happy</span></div>
+  </div>
+  <div class="expert-card">
+    <div class="expert-name">Beer (DRF)</div>
+    <div class="expert-pick">1st: <span>#14 Potente</span></div>
+    <div class="expert-pick">2nd: <span>#13 Silent Tactic</span></div>
+    <div class="expert-pick">3rd: <span>#6 Commandment</span></div>
+    <div class="expert-pick">4th: <span>#18 Further Ado</span></div>
+  </div>
+</div>
+
+<!-- PACE NOTE -->
+<div class="pace-box">
+  <strong>Somich Pace Report:</strong> Projected 22.4 / 45.4 — FAST early pace. Speed clash posts 14-18 (#14, #16, #17 all gunning). Best draws: #6 Commandment, #9 The Puma, #12 Chief Wallabee, #20 Fulleffort.
+  <div class="pace-detail">Post losers: #1 Renegade (rail, likely last), #14-18 speed cluster (will clash). Post winners: #12 (clean outside close), #20 (outer allows pace choice).</div>
+</div>
+
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#44cc88"></div> High confidence (&gt;20%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#66aaff"></div> Medium (12-20%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffaa33"></div> Speculative (&lt;12%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ff6666"></div> FADE / avoid</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#aa88ff"></div> PACE horse</div>
+</div>
+
+<!-- KENTUCKY DERBY R14 -->
+<div class="race-header">
+  <span class="race-num">R14</span>
+  <span class="race-name">🌹 Kentucky Derby (G1)</span>
+  <span class="race-badge badge-g1">G1</span>
+  <span class="race-meta">1.25 Miles Dirt · $5M · ~6:57 ET</span>
+</div>
+<div class="horse-list">
+
+  <!-- TIER 1: WIN CONTENDERS -->
+  <div class="horse-row top-pick" style="background:#0a1e10;">
+    <div class="pgm">6</div>
+    <div class="horse-info">
+      <div class="horse-name">Commandment</div>
+      <div class="horse-tags"><span class="tag tag-key">Consensus Top</span><span class="tag tag-post">Post 6 ✓</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">101</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct high">22%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:22%"></div></div></div>
+    <div class="horse-note">4-race win streak. Florida Derby G1 in versatile style. 5 of 6 experts include. Cox/Saez. Ideal post 6. <span class="upgrade">Best overall package in the field.</span></div>
+  </div>
+
+  <div class="horse-row top-pick">
+    <div class="pgm">12</div>
+    <div class="horse-info">
+      <div class="horse-name">Chief Wallabee</div>
+      <div class="horse-tags"><span class="tag tag-key">Somich Win</span><span class="tag tag-post">Post 12 ✓</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">100</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct high">20%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:20%"></div></div></div>
+    <div class="horse-note">Somich's top pick. Bill Mott won last year's Derby. Blinkers on. Best post in race per Somich — clean outside close. Fountain of Youth 2nd to Commandment (trip issue). <span class="upgrade">Upside still untapped in 3 starts.</span></div>
+  </div>
+
+  <div class="horse-row top-pick">
+    <div class="pgm">18</div>
+    <div class="horse-info">
+      <div class="horse-name">Further Ado</div>
+      <div class="horse-tags"><span class="tag tag-key">Beyer Top 106</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">106</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct high">18%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:18%"></div></div></div>
+    <div class="horse-note">Highest Beyer in field (106). Blue Grass G1 by 11 lengths. 2 wins at Churchill surface. Outside post #18 suits his style — avoids early speed cluster. Cox/Velazquez. <span class="upgrade">Best fig in field. Bounce risk from monster effort noted by Sehon.</span></div>
+  </div>
+
+  <div class="horse-row top-pick">
+    <div class="pgm">9</div>
+    <div class="horse-info">
+      <div class="horse-name">The Puma</div>
+      <div class="horse-tags"><span class="tag tag-key">Somich Tri</span><span class="tag tag-post">Post 9 ✓</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">100</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct med">16%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:16%"></div></div></div>
+    <div class="horse-note">Somich Tri. Aragona 2nd. Castellano up. Beat Further Ado in Tampa Bay Derby. Narrowly caught by Commandment in Florida Derby. Ideal post 9. <span class="upgrade">Connections won Derby with Mage — same late kick setup.</span></div>
+  </div>
+
+  <!-- TIER 2: STRONG SECONDARY -->
+  <div class="horse-row top-pick">
+    <div class="pgm">1</div>
+    <div class="horse-info">
+      <div class="horse-name">Renegade</div>
+      <div class="horse-tags"><span class="tag tag-fade">Post 1 ✗</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">98</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct med">14%</div><div class="ml-odds">ML 4-1 fav</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:14%"></div></div></div>
+    <div class="horse-note">Morning line favorite. Arkansas Derby by 4. Best horse? Maybe. But rail post #1 = no winner since 1986. Somich chucks it. Sehon fades. <span class="downgrade">Model discounts 4+ points for post penalty. Deep closer needs everything perfect.</span></div>
+  </div>
+
+  <div class="horse-row value-play">
+    <div class="pgm">20</div>
+    <div class="horse-info">
+      <div class="horse-name">Fulleffort</div>
+      <div class="horse-tags"><span class="tag tag-val">Somich WIN</span><span class="tag tag-post">Post 20 ✓</span><span class="tag tag-key">Dirt Debut</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">94</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct med">13%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:13%"></div></div></div>
+    <div class="horse-note">Somich Win pick. Cox/Gaffalione. One-run closer. Post 20 = pick your own ground, no traffic. Won JR Steaks G3 on synthetic. <span class="upgrade">Tuley notes last 4 Derbys won by this style. Dirt debut is the risk.</span></div>
+  </div>
+
+  <!-- TIER 3: VALUE / LONGSHOTS -->
+  <div class="horse-row bomb-play">
+    <div class="pgm">15</div>
+    <div class="horse-info">
+      <div class="horse-name">Emerging Market</div>
+      <div class="horse-tags"><span class="tag tag-bomb">Sehon WIN</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">97</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct spec">9%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:9%"></div></div></div>
+    <div class="horse-note">Sehon's top pick. Burke includes. Won Louisiana Derby in just 2nd career start. Beyer 97. Chad Brown / Flavien Prat. <span class="downgrade">Somich strongly against — "too much too soon." Only 2 starts total is very thin.</span></div>
+  </div>
+
+  <div class="horse-row">
+    <div class="pgm">8</div>
+    <div class="horse-info">
+      <div class="horse-name">So Happy</div>
+      <div class="horse-tags"><span class="tag tag-pace">Front speed</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">100</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct spec">8%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:8%"></div></div></div>
+    <div class="horse-note">Santa Anita Derby G1 winner. Beyer 100. Tuley watches at 15-1. Aragona 4th. <span class="downgrade">Somich fades all California speed — will be tested hard in fast pace. Watch ML tote.</span></div>
+  </div>
+
+  <div class="horse-row bomb-play">
+    <div class="pgm">14</div>
+    <div class="horse-info">
+      <div class="horse-name">Potente</div>
+      <div class="horse-tags"><span class="tag tag-bomb">Beer #1</span><span class="tag tag-pace">Baffert</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">95</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct spec">7%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:7%"></div></div></div>
+    <div class="horse-note">Beer's top pick. $2.4M Baffert. Won San Felipe, ran 2nd SA Derby to So Happy. Tuley watches at 20-1. Can rate or press. <span class="upgrade">If SA Derby was a line item and he gets right trip, big value at 20-1.</span></div>
+  </div>
+
+  <div class="horse-row">
+    <div class="pgm">13</div>
+    <div class="horse-info">
+      <div class="horse-name">Silent Tactic</div>
+      <div class="horse-tags"></div>
+    </div>
+    <div class="fig-col"><div class="beyer">91</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct spec">5%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:5%"></div></div></div>
+    <div class="horse-note">Beer 2nd pick. Arkansas Derby 2nd to Renegade. Southwest G3 winner. Deep closer style. Beer: "can roll from the back if ready to rebound." Use in supers.</div>
+  </div>
+
+  <div class="horse-row bomb-play">
+    <div class="pgm">17</div>
+    <div class="horse-info">
+      <div class="horse-name">Six Speed</div>
+      <div class="horse-tags"><span class="tag tag-pace">Lone Speed</span><span class="tag tag-bomb">Tuley Value</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">—</div><div class="beyer-lbl">UAE</div></div>
+    <div class="prob-col"><div class="pct spec">5%</div><div class="ml-odds">ML 50-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:5%"></div></div></div>
+    <div class="horse-note">Tuley's top value. Expected lone front-runner in 20-horse field. UAE 2-turn experience (4 wins). BJ Hernandez won 2024 Derby. <span class="upgrade">If wire-to-wire setup materializes and nobody chases, could steal.</span> Include 4th in supers.</div>
+  </div>
+
+  <div class="horse-row">
+    <div class="pgm">10</div>
+    <div class="horse-info">
+      <div class="horse-name">Wonder Dean</div>
+      <div class="horse-tags"><span class="tag tag-bomb">Tuley Long</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">—</div><div class="beyer-lbl">Jpn</div></div>
+    <div class="prob-col"><div class="pct spec">4%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:4%"></div></div></div>
+    <div class="horse-note">Tuley Win ticket. Ran down Six Speed in UAE Derby. Mid-pack to closing style. Timeform 107. Include in wide supers if going deep.</div>
+  </div>
+
+  <div class="horse-row">
+    <div class="pgm">11</div>
+    <div class="horse-info">
+      <div class="horse-name">Incredibolt</div>
+      <div class="horse-tags"></div>
+    </div>
+    <div class="fig-col"><div class="beyer">88</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct spec">4%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:4%"></div></div></div>
+    <div class="horse-note">Only horse with 2 Churchill wins. Virginia Derby winner. Somich super horse. Tuley includes in exotics. Use 3rd/4th in supers.</div>
+  </div>
+
+  <!-- FADE TIER -->
+  <div class="horse-row fade-horse">
+    <div class="pgm">7</div>
+    <div class="horse-info">
+      <div class="horse-name">Danon Bourbon</div>
+      <div class="horse-tags"><span class="tag tag-fade">Somich out</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">—</div><div class="beyer-lbl">Jpn</div></div>
+    <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+    <div class="horse-note"><span class="downgrade">Fade:</span> Somich: "Not as good as Forever Young." Japanese horse unproven vs this field. Wild card per Aragona.</div>
+  </div>
+
+  <div class="horse-row fade-horse">
+    <div class="pgm">2</div>
+    <div class="horse-info">
+      <div class="horse-name">Albus</div>
+      <div class="horse-tags"></div>
+    </div>
+    <div class="fig-col"><div class="beyer">84</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct low">2%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:2%"></div></div></div>
+    <div class="horse-note">Tuley exotics. Won Wood Memorial but benefited from hot pace collapse. Grening: "would have to get faster in a hurry." Deep closer at 30-1. Use 4th only in big supers.</div>
+  </div>
+
+  <div class="horse-row fade-horse">
+    <div class="pgm">16</div>
+    <div class="horse-info">
+      <div class="horse-name">Pavlovian</div>
+      <div class="horse-tags"><span class="tag tag-pace">Front</span></div>
+    </div>
+    <div class="fig-col"><div class="beyer">90</div><div class="beyer-lbl">Beyer</div></div>
+    <div class="prob-col"><div class="pct low">2%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:2%"></div></div></div>
+    <div class="horse-note">Somich: "Speed that could hold for 4th — maybe, just maybe." Louisiana Derby 2nd. Include in big budget super 4th leg only.</div>
+  </div>
+
+</div>
+
+<!-- SOMICH SUPERFECTA TICKETS -->
+<div class="super-box">
+  <h3>Mike Somich Superfecta Tickets (VSiN)</h3>
+  <div class="super-tier">
+    <div class="super-tier-label">Small Budget — $36</div>
+    <div class="super-ticket">$1 SF: 9,12 / 6,9,12,20 / 6,9,12,13,20 / 6,9,12,13,20</div>
+  </div>
+  <div class="super-tier">
+    <div class="super-tier-label">Medium Budget — $96</div>
+    <div class="super-ticket">$1 SF: 9,12 / 6,9,12,20 / 6,9,11,12,13,20 / 6,9,11,12,13,19,20</div>
+  </div>
+  <div class="super-tier">
+    <div class="super-tier-label">Big Budget — $180</div>
+    <div class="super-ticket">$1 SF: 9,12,20 / 6,9,12,20 / 6,9,11,12,13,20 / 6,9,11,12,13,16,19,20</div>
+  </div>
+  <div style="margin-top:10px;font-size:11px;color:#6a8aa0;">Win contenders: #12 Chief Wallabee · #9 The Puma · #20 Fulleffort &nbsp;|&nbsp; Trifecta: #6 Commandment &nbsp;|&nbsp; Late closers: #11 #13 #19 &nbsp;|&nbsp; Speed 4th: #16</div>
+</div>
+
+<div class="summary-box" style="border-radius:0 0 8px 8px;margin-top:-1px;">
+  <strong>Suggested ticket structure:</strong> Key #6 Commandment + #12 Chief Wallabee on top. Ex box 6,12,18,9. Tri 6,12/6,12,18,9/6,12,18,9,20. Super use Somich tickets above.<br><br>
+  <strong>Best divergence plays:</strong> #20 Fulleffort (20-1, Somich WIN, post suits) · #14 Potente (20-1, Beer top) · #17 Six Speed (50-1, lone speed angle)<br>
+  <strong>Fade:</strong> #1 Renegade (rail penalty), #7 Danon Bourbon, #8 So Happy and CA speed cluster
+</div>
+
+<div class="footer">
+  Derby Day Card · Churchill Downs · May 2, 2026<br>
+  VSiN/DRF Betting Guide · Mike Somich · Dave Tuley · Ed Sehon · Adam Burke · David Aragona · Mike Beer<br>
+  Probabilities are model estimates for informational purposes only.
+</div>
+
+<button class="print-btn" onclick="window.print()">Print Card</button>
+
+</body>
+</html>

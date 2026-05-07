@@ -1,0 +1,592 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Oaks Day Card — Churchill Downs 5/1/2026</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1b2a; color: #e8e0d0; min-height: 100vh; padding: 20px; }
+.header { text-align: center; padding: 24px 0 16px; border-bottom: 1px solid #2a3f5a; margin-bottom: 24px; }
+.header h1 { font-size: 28px; color: #f5c842; font-weight: 700; letter-spacing: 2px; }
+.header .sub { font-size: 13px; color: #8a9bb0; margin-top: 6px; }
+.header .rose { font-size: 22px; margin-bottom: 6px; }
+.legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; padding: 12px 16px; background: #152232; border-radius: 8px; font-size: 12px; }
+.leg-item { display: flex; align-items: center; gap: 6px; }
+.leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+.race-section { margin-bottom: 20px; }
+.race-header { display: flex; align-items: baseline; gap: 10px; padding: 8px 14px; background: #152232; border-radius: 8px 8px 0 0; border-left: 4px solid #f5c842; flex-wrap: wrap; }
+.race-num { font-size: 13px; font-weight: 700; color: #f5c842; }
+.race-name { font-size: 15px; font-weight: 600; color: #e8e0d0; }
+.race-meta { font-size: 12px; color: #8a9bb0; margin-left: auto; }
+.race-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+.badge-g1 { background: #3d1a00; color: #ff9944; }
+.badge-g2 { background: #1a2a3d; color: #66aaff; }
+.badge-g3 { background: #1a3d2a; color: #44cc88; }
+.badge-stake { background: #2a1a3d; color: #bb88ff; }
+.horse-list { border: 1px solid #1e3048; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
+.horse-row { display: grid; grid-template-columns: 36px 1fr auto 70px; gap: 8px; padding: 10px 14px; align-items: start; border-bottom: 1px solid #1a2d42; }
+.horse-row:last-child { border-bottom: none; }
+.horse-row.top-pick { background: #0e2438; }
+.horse-row.value-play { background: #0e2418; }
+.horse-row.bomb-play { background: #2a1e0a; }
+.horse-row.fade-horse { opacity: 0.6; }
+.pgm { width: 28px; height: 28px; border-radius: 50%; background: #1e3048; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #f5c842; flex-shrink: 0; }
+.horse-info { min-width: 0; }
+.horse-name { font-size: 14px; font-weight: 600; color: #e8e0d0; }
+.horse-tags { display: flex; gap: 4px; margin-top: 3px; flex-wrap: wrap; }
+.tag { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+.tag-key { background: #1a3d5a; color: #66aaee; }
+.tag-val { background: #1a3d1a; color: #66cc66; }
+.tag-bomb { background: #3d2a00; color: #ffaa33; }
+.tag-fade { background: #3d1a1a; color: #ff6666; }
+.tag-pod { background: #2a1a4a; color: #cc88ff; }
+.tag-layoff { background: #3d3d1a; color: #cccc44; }
+.fig-col { text-align: center; }
+.ofig { font-size: 15px; font-weight: 700; color: #e8e0d0; }
+.ong { font-size: 11px; color: #8a9bb0; margin-top: 1px; }
+.prob-col { text-align: right; }
+.pct { font-size: 18px; font-weight: 700; }
+.pct.high { color: #44cc88; }
+.pct.med { color: #66aaff; }
+.pct.spec { color: #ffaa33; }
+.pct.low { color: #8a9bb0; }
+.ml-odds { font-size: 11px; color: #8a9bb0; margin-top: 1px; }
+.bar-wrap { height: 3px; background: #1e3048; border-radius: 2px; margin-top: 4px; }
+.bar-fill { height: 3px; border-radius: 2px; }
+.bar-high { background: #44cc88; }
+.bar-med { background: #66aaff; }
+.bar-spec { background: #ffaa33; }
+.bar-low { background: #666; }
+.horse-note { grid-column: 2 / -1; font-size: 11px; color: #6a8aa0; margin-top: 2px; }
+.upgrade { color: #44cc88; font-weight: 600; }
+.downgrade { color: #ff6666; font-weight: 600; }
+.summary-box { background: #152232; border: 1px solid #2a3f5a; border-radius: 0 0 8px 8px; padding: 12px 16px; font-size: 12px; color: #8a9bb0; border-top: 1px solid #1e3048; margin-top: -1px; }
+.summary-box strong { color: #f5c842; }
+.footer { text-align: center; padding: 24px 0; font-size: 11px; color: #4a6a8a; border-top: 1px solid #1e3048; margin-top: 24px; }
+.print-btn { position: fixed; bottom: 20px; right: 20px; background: #f5c842; color: #0d1b2a; border: none; padding: 10px 18px; border-radius: 6px; font-weight: 700; font-size: 13px; cursor: pointer; }
+@media print { .print-btn { display: none; } body { background: white; color: #111; } }
+</style>
+</head>
+<body>
+<div class="header">
+  <div class="rose">🌹</div>
+  <h1>OAKS DAY CARD</h1>
+  <div class="sub">Churchill Downs · Friday, May 1, 2026 · Sources: OptixEQ + Racing Dudes</div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#44cc88"></div> High confidence (&gt;25%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#66aaff"></div> Medium (15-25%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffaa33"></div> Speculative (&lt;15%)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#66cc66"></div> VALUE = OptixEQ overlay</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffaa33"></div> BOMB = big price / top fig</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ff6666"></div> FADE = model downgrade</div>
+</div>
+
+<!-- R1 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R1</span><span class="race-name">Maiden Sp Wt</span><span class="race-badge badge-stake">MSW</span><span class="race-meta">8.5f Dirt · $120k · 12:30 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Phantom Blue</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Win 4-5</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct high">44%</div><div class="ml-odds">ML 2.8-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:44%"></div></div></div>
+      <div class="horse-note">Top oFIG 91 · WARM_UP TROUBLE_S RUSH — had excuses. Both sources agree. Heavy chalk but form backs it.</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Episist</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Place 4-1</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">28%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:28%"></div></div></div>
+      <div class="horse-note">oFIG 88 B · WEATHER SAVED MOVE HOT — clear excuses last time. <span class="upgrade">Upgrade: B grade with excuses could outrun 4-1 ML.</span></div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Mass</div><div class="horse-tags"><span class="tag tag-pod">Dudes Next Best 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">80</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 4.1-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">oFIG 80 · use underneath in exotics. Dudes next best.</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Soaring High</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show</span><span class="tag tag-layoff">LAYOFF</span></div></div>
+      <div class="fig-col"><div class="ofig">69</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct low">8%</div><div class="ml-odds">ML 21.8-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">Downgrade:</span> oFIG 69 LAYOFF conflicts with Dudes Show pick. Pass.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #1 / #7. Ex 1/7,5. Tri 1/7,5/7,5,6.</div>
+</div>
+
+<!-- R2 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R2</span><span class="race-name">OClm 80000n2x</span><span class="race-badge badge-stake">ALW</span><span class="race-meta">8f Dirt · $134k · 1:00 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row value-play">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Five A Side</div><div class="horse-tags"><span class="tag tag-val">VALUE</span><span class="tag tag-pod">Dudes Show 3-1</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct med">24%</div><div class="ml-odds">ML 4.1-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:24%"></div></div></div>
+      <div class="horse-note">Top oFIG 90 VALUE tag · WIDE NO_LEAD excuses. <span class="upgrade">Upgrade: model says Win, Dudes only have Show.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Sudden Switch</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Place 7-2</span></div></div>
+      <div class="fig-col"><div class="ofig">89</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 2.3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">oFIG 89 KEY · RUSH SAVED, had traffic. Both sources agree.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Decadent</div><div class="horse-tags"><span class="tag tag-pod">Dudes Next Best 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">86</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 5.6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">oFIG 86 · TROUBLE- WIDE excuses. Use underneath.</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Chopsticks</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 9-2</span><span class="tag tag-layoff">LAYOFF</span></div></div>
+      <div class="fig-col"><div class="ofig">71</div><div class="ong">C</div></div>
+      <div class="prob-col"><div class="pct low">8%</div><div class="ml-odds">ML 20.9-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">Downgrade hard:</span> oFIG 71 LAYOFF + KICKBACK-. Dudes Win pick but model says no.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Box 9,7. Tri 9,7/9,7,2/9,7,2. <span class="downgrade">Fade Chopsticks</span> despite Dudes Win pick.</div>
+</div>
+
+<!-- R3 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R3</span><span class="race-name">OClm 125000n1x</span><span class="race-badge badge-stake">ALW</span><span class="race-meta">8.5f Dirt · $127k · 1:30 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Leinani</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 5-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">OptixEQ top 3 · Dudes Win. C. Brown / Gaffalione barn. Both sources aligned.</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">10</div>
+      <div class="horse-info"><div class="horse-name">Star Actress</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 4-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">W.I. Mott barn. OptixEQ aligned. Solid secondary.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Joyful Justice</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">B Cox / Castellano. Dudes Show. Use underneath.</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Krissys Star</div><div class="horse-tags"><span class="tag tag-pod">Dudes Next Best 15-1</span><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">67</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct low">6%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:6%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">Downgrade:</span> oFIG 67 FADE · TACTIC- SHUFFLE PLODDY. F. Prat up but model says no.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Box 9,10. Tri 9,10/9,10,5/all.</div>
+</div>
+
+<!-- R4 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R4</span><span class="race-name">Maiden Sp Wt</span><span class="race-badge badge-stake">MSW</span><span class="race-meta">7f Dirt · $120k · 2:00 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Hedge Book</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Place 7-2</span></div></div>
+      <div class="fig-col"><div class="ofig">82</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">24%</div><div class="ml-odds">ML 3.5-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:24%"></div></div></div>
+      <div class="horse-note">Top oFIG 82 B · TROUBLE_S MOVE — had excuses. <span class="upgrade">Upgrade to Win per OptixEQ. Dudes have as Place only.</span></div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Passerine</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">FTS</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">FTS — no OptixEQ data. Dudes Win at 8-1. B Cox barn. Pure form play.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Couplet</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">FTS</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct low">10%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:10%"></div></div></div>
+      <div class="horse-note">FTS. Use underneath only.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #1 Hedge Book. Ex 1/6,4. Tri 1/6,4/6,4,3.</div>
+</div>
+
+<!-- R5 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R5</span><span class="race-name">Maiden Sp Wt</span><span class="race-badge badge-stake">MSW</span><span class="race-meta">8f Turf · $120k · 2:35 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Flick</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 3.7-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">OptixEQ top pick oFIG 90 B · SLOG TACTIC- TRAFFIC — clear excuses. <span class="upgrade">Not in Dudes picks — model-only play. Strong value.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">11</div>
+      <div class="horse-info"><div class="horse-name">Royal Guard</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 5-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">Dudes top pick · B Cox barn · Irad up.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">10</div>
+      <div class="horse-info"><div class="horse-name">Prepped</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 3-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">15%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:15%"></div></div></div>
+      <div class="horse-note">C. DeVaux / JL Ortiz. Use underneath.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Box 6,11,10. Tri 6,11/6,11,10/6,11,10,8. <span class="upgrade">Upgrade:</span> Flick — OptixEQ Key not reflected in Dudes card at all.</div>
+</div>
+
+<!-- R6 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R6</span><span class="race-name">OClm 125000n1x</span><span class="race-badge badge-stake">ALW</span><span class="race-meta">6.5f Dirt · $127k · 3:12 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Where Luck Lives</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Show 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">OptixEQ top pick. <span class="upgrade">Upgrade to Win — Dudes only have as Show.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Paige Turner</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 4-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">OptixEQ 2nd pick. Dudes Place. Both agree. Solid secondary.</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">12</div>
+      <div class="horse-info"><div class="horse-name">French Blue</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 9-2</span><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">64</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct low">8%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">Downgrade hard:</span> oFIG 64 FADE · Baffert hype not backed by fig. Pass as Win.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #1 / #5. Box 1,5. Tri 1,5/1,5,6/1,5,6,3. <span class="downgrade">Fade French Blue</span> despite Dudes Win pick.</div>
+</div>
+
+<!-- R7 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R7</span><span class="race-name">Unbridled Sidney S. (G2)</span><span class="race-badge badge-g2">G2</span><span class="race-meta">5.5f Turf · $500k · 3:48 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Shisospicy</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-bomb">BOMB</span><span class="tag tag-pod">Dudes Win 9-5</span></div></div>
+      <div class="fig-col"><div class="ofig">106</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct high">42%</div><div class="ml-odds">ML 9-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:42%"></div></div></div>
+      <div class="horse-note">Top oFIG 106 — best in field by 8pts. BC Turf Sprint G1 runner. Both sources agree. <span class="upgrade">Dominant figure. Short price but justified.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Haulin Ice</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Next Best 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">98</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 3.5-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">oFIG 98 B · A- prior grade. Podcast "Maytown" likely maps here. OptixEQ 2nd pick. <span class="upgrade">Value at 3.5-1 ML.</span></div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Creed's Gold</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">94</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct med">18%</div><div class="ml-odds">ML 1.9-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:18%"></div></div></div>
+      <div class="horse-note">oFIG 94 B- · TROUBLE_S COVER — had excuses. OptixEQ 3rd. Underlier at 1.9-1 ML.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Queen Maxima</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 7-2</span></div></div>
+      <div class="fig-col"><div class="ofig">92</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">12%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:12%"></div></div></div>
+      <div class="horse-note">oFIG 92 B- · Dudes Place. Use underneath in tri/super.</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Mae Town</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">86</div><div class="ong">B+</div></div>
+      <div class="prob-col"><div class="pct low">4%</div><div class="ml-odds">ML 29.9-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:4%"></div></div></div>
+      <div class="horse-note">Best oNg grade (B+) in field at 30-1. X_WIDE last. BOMB play — include in wide supers only.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #6 Shisospicy. Ex 6/7,3. Tri 6/7,3,5/7,3,5,8. <span class="upgrade">Upgrade:</span> Haulin Ice (model + podcast align at value). Mae Town = super bomb.</div>
+</div>
+
+<!-- R8 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R8</span><span class="race-name">Eight Belles S. (G2)</span><span class="race-badge badge-g2">G2</span><span class="race-meta">7f Dirt · $700k · 4:30 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Goodall</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-val">VALUE</span><span class="tag tag-pod">Dudes Win 3-1</span></div></div>
+      <div class="fig-col"><div class="ofig">95</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct high">34%</div><div class="ml-odds">ML 4.8-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:34%"></div></div></div>
+      <div class="horse-note">Top oFIG 95 B · KEY + VALUE tags · PERFECT · OP win. <span class="upgrade">OptixEQ calling this an overlay at 4.8-1 ML — both sources agree on top pick.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Sippin Pretty</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Show 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">24%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:24%"></div></div></div>
+      <div class="horse-note">oFIG 91 B · KEY+ tag. <span class="upgrade">OptixEQ loves this — Dudes only have Show. Upgrade to Place/Win potential.</span></div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">On Time Girl</div><div class="horse-tags"><span class="tag tag-val">VALUE</span><span class="tag tag-pod">Dudes Place 5-2</span></div></div>
+      <div class="fig-col"><div class="ofig">84</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 6.2-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note">oFIG 84 B- · VALUE tag · 3 straight wins · WIDE last. Momentum player at value price.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Paradise</div><div class="horse-tags"><span class="tag tag-pod">Dudes Next Best 15-1</span></div></div>
+      <div class="fig-col"><div class="ofig">84</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct low">8%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note">oFIG 84 C+ · POCKET NO_KEEP. Dudes like at 15-1. Use in supers only.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #8 Goodall / #6. Box 8,6. Tri 8,6/8,6,9/8,6,9,4. <span class="upgrade">Upgrade:</span> Goodall = VALUE overlay. Sippin Pretty undervalued by Dudes.</div>
+</div>
+
+<!-- R9 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R9</span><span class="race-name">Alysheba S. (G2)</span><span class="race-badge badge-g2">G2</span><span class="race-meta">8.5f Dirt · $750k · 5:12 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Navajo Warrior</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">107</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct high">32%</div><div class="ml-odds">ML 4.1-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:32%"></div></div></div>
+      <div class="horse-note">Top oFIG 107 B · WARM SLOG MOVE. <span class="upgrade">NOT in Dudes top picks — strong model divergence play. Best fig in field at fair price.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Disruptor</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">103</div><div class="ong">B+</div></div>
+      <div class="prob-col"><div class="pct high">26%</div><div class="ml-odds">ML 5.5-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:26%"></div></div></div>
+      <div class="horse-note">oFIG 103 B+ — best oNg grade in race. Bias win. <span class="upgrade">OptixEQ 2nd pick at 5.5-1 — great value if grade translates.</span></div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Grande</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">16%</div><div class="ml-odds">ML 3.4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:16%"></div></div></div>
+      <div class="horse-note">oFIG 97 B · EASY_LEAD · most consistent. Dudes top pick. OptixEQ 3rd. Honest play.</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Baeza</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span><span class="tag tag-layoff">LAYOFF</span><span class="tag tag-pod">Podcast · Dudes Place</span></div></div>
+      <div class="fig-col"><div class="ofig">105</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 18-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">Raw oFIG 105 elite but C+ grade + LAYOFF = risk. BC Classic runner. Podcast conditional — only play if 10-1+. ML 18-1 makes it viable.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Corporate Power</div><div class="horse-tags"><span class="tag tag-pod">Podcast (if 10-1+)</span></div></div>
+      <div class="fig-col"><div class="ofig">95</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct spec">10%</div><div class="ml-odds">ML 4.1-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:10%"></div></div></div>
+      <div class="horse-note">oFIG 95 B · blank last race. Podcast said 10-1+ only. At 4.1-1 ML — <span class="downgrade">skip unless odds lengthen significantly at post.</span></div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #1 / #4. Box 1,4. Tri 1,4/1,4,3/1,4,3,2. <span class="upgrade">Upgrade:</span> Navajo Warrior (model diverges from public). Baeza at 18-1 is the value bomb. <span class="downgrade">Downgrade:</span> Corporate Power at 4.1-1 — podcast said 10-1+ threshold.</div>
+</div>
+
+<!-- R10 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R10</span><span class="race-name">Modesty S. (G3)</span><span class="race-badge badge-g3">G3</span><span class="race-meta">9f Turf · $500k · 6:01 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Gezora (FR)</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-bomb">BOMB</span><span class="tag tag-pod">Dudes Win 4-5</span></div></div>
+      <div class="fig-col"><div class="ofig">107</div><div class="ong">B+</div></div>
+      <div class="prob-col"><div class="pct high">46%</div><div class="ml-odds">ML 4-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:46%"></div></div></div>
+      <div class="horse-note">Top oFIG 107 B+ · BC F&amp;M Turf G1 runner. KEY + BOMB. Both sources agree. Dominant figure — use as single on top.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Pin Up Betty</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 10-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">Dudes Place 10-1. Use underneath for upset coverage.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Whiskey Decision</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show 4-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">12%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:12%"></div></div></div>
+      <div class="horse-note">Dudes Show. Secondary underneath.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Key #6 single on top. Ex 6/8,3. Tri 6/8,3,2/8,3,2.</div>
+</div>
+
+<!-- R11 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R11</span><span class="race-name">La Troienne S. (G1)</span><span class="race-badge badge-g1">G1</span><span class="race-meta">8.5f Dirt · $1M · 6:56 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Fully Subscribed</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 7-2</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">24%</div><div class="ml-odds">ML 7-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:24%"></div></div></div>
+      <div class="horse-note">Dudes top pick · C. Brown / F. Prat combo. Strong barn play.</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Shred the Gnar</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 3-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">Dudes Place · B Lynch / L. Saez. Solid secondary.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Chasten</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">B Cox barn. Dudes Show. Use underneath.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Miss Justify</div><div class="horse-tags"><span class="tag tag-pod">Dudes Next Best 15-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct low">8%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note">15-1 bomb play in supers.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Box 9,5. Tri 9,5/9,5,7/9,5,7,4.</div>
+</div>
+
+<!-- R12 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R12</span><span class="race-name">Edgewood S. (G2)</span><span class="race-badge badge-g2">G2</span><span class="race-meta">8.5f Turf · $600k · 7:40 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Just Aloof</div><div class="horse-tags"><span class="tag tag-pod">Dudes Win 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">Dudes Win at 8-1 · C. Brown / F. Prat. Good value if they're right.</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Imaginationthelady</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 4-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">18%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:18%"></div></div></div>
+      <div class="horse-note">Walsh / Gaffalione. Dudes Place. Solid secondary.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Lion Lake</div><div class="horse-tags"><span class="tag tag-pod">Dudes Show 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note">Walsh barn (two Walsh entries). Use underneath.</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Ticket:</strong> Box 5,3. Tri 5,3/5,3,8/5,3,8,1.</div>
+</div>
+
+<!-- R13 OAKS -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R13</span><span class="race-name">🌹 Kentucky Oaks (G1)</span><span class="race-badge badge-g1">G1</span><span class="race-meta">9f Dirt · $1.5M · 8:40 ET</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Always a Runner</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Podcast Key · Dudes Show 10-1</span></div></div>
+      <div class="fig-col"><div class="ofig">95</div><div class="ong">B+</div></div>
+      <div class="prob-col"><div class="pct high">28%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:28%"></div></div></div>
+      <div class="horse-note">oFIG 95 B+ — best oNg in race. Gazelle win. CLOSE NO_LEAD = saved ground. OptixEQ #1 pick. Podcast keys her. <span class="upgrade">Major upgrade vs Dudes who have her as Show only.</span></div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">10</div>
+      <div class="horse-info"><div class="horse-name">Prom Queen</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-pod">Dudes Next Best 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">95</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct high">23%</div><div class="ml-odds">ML 3.4-1</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:23%"></div></div></div>
+      <div class="horse-note">oFIG 95 B · BUNCHED PERFECT · GP Oaks win. Tied top oFIG. <span class="upgrade">OptixEQ #2 pick — upgrade to Win contender. Dudes have as Next Best only.</span></div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Counting Stars</div><div class="horse-tags"><span class="tag tag-val">VALUE</span><span class="tag tag-pod">Dudes Win 8-1</span></div></div>
+      <div class="fig-col"><div class="ofig">94</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct med">18%</div><div class="ml-odds">ML 3.5-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:18%"></div></div></div>
+      <div class="horse-note">oFIG 94 B · NASAL_S WARM_UP PERFECT · 3 wins. OptixEQ VALUE tag. Dudes Win pick — strong inclusion on ticket.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">11</div>
+      <div class="horse-info"><div class="horse-name">Percy's Bar</div><div class="horse-tags"><span class="tag tag-pod">Dudes Place 6-1</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct spec">12%</div><div class="ml-odds">ML 2.8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:12%"></div></div></div>
+      <div class="horse-note">oFIG 90 B · PERFECT SAVED MOVE · 3 straight wins. Dudes #2 pick. Consistent.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Meaning</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">92</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct spec">9%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:9%"></div></div></div>
+      <div class="horse-note">oFIG 92 B · PERFECT POCKET MOVE · SA Oaks win. OptixEQ 4th. Sneaky live closer. Include in supers.</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Pashmina</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct spec">10%</div><div class="ml-odds">ML 2.7-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:10%"></div></div></div>
+      <div class="horse-note">oFIG 93 B · LONE — lone speed. Gazelle runner. Could control and steal. Use in exotics.</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">15</div>
+      <div class="horse-info"><div class="horse-name">Explora</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct low">6%</div><div class="ml-odds">ML 6.1-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:6%"></div></div></div>
+      <div class="horse-note">oFIG 90 B · PERFECT · Baffert / Honeybee win. OptixEQ VALUE tag. Single deep in supers.</div>
+    </div>
+  </div>
+  <div class="summary-box">
+    <strong>Main Ticket:</strong> Key #9 / #10 on top. Ex box 9,10,4. Tri 9,10/9,10,4/9,10,4,11,7. Super 9,10/9,10,4/9,10,4,11,7/all.<br><br>
+    <strong>Upgrades:</strong> Always a Runner (model #1 vs Dudes Show) · Prom Queen (model #2 vs Dudes Next Best) · Counting Stars (VALUE overlay).<br>
+    <strong>Avoid:</strong> Nycon (FADE tag · C+ grade · TRAFFIC) · any horses not listed above.
+  </div>
+</div>
+
+<div class="footer">
+  Oaks Day Full Card · Churchill Downs · May 1, 2026<br>
+  OptixEQ model data + Racing Dudes picks + Podcast analysis · Derby Value Analytics<br>
+  Probabilities are model estimates for informational purposes only.
+</div>
+
+<button class="print-btn" onclick="window.print()">Print Card</button>
+</body>
+</html>
