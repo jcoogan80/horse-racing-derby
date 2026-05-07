@@ -6269,9 +6269,17 @@ function showTab(name) {
 }
 
 function rdSwitch(mode) {
+  // Safety: if willpay pane is still nested inside derby (HTML parse artifact), move it out
+  const wpPane    = document.getElementById('willpay-card-content');
+  const derbyPane = document.getElementById('derby-card-content');
+  const rdTab     = document.getElementById('tab-raceday');
+  if (wpPane && derbyPane && rdTab && derbyPane.contains(wpPane)) {
+    rdTab.appendChild(wpPane);
+  }
+
   document.getElementById('oaks-card-content').style.display    = mode === 'oaks'    ? 'block' : 'none';
   document.getElementById('derby-card-content').style.display   = mode === 'derby'   ? 'block' : 'none';
-  document.getElementById('willpay-card-content').style.display = mode === 'willpay' ? 'block' : 'none';
+  if (wpPane) wpPane.style.display = mode === 'willpay' ? 'block' : 'none';
   document.getElementById('rd-btn-oaks').classList.toggle('active',    mode === 'oaks');
   document.getElementById('rd-btn-derby').classList.toggle('active',   mode === 'derby');
   document.getElementById('rd-btn-willpay').classList.toggle('active', mode === 'willpay');
