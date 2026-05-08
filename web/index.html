@@ -1208,6 +1208,39 @@
     .tg-bld-edge { font-size:.65rem; padding:1px 4px; border-radius:6px; flex-shrink:0; }
     .tg-legend { display:flex; gap:10px; flex-wrap:wrap; font-size:.72rem; color:var(--dim); margin-top:8px; }
     .tg-legend span { display:flex; align-items:center; gap:4px; }
+
+    /* ── WPD Signal badges (TG + SCT) ── */
+    .tg-wpd-confirm { background:rgba(66,170,255,.18); color:#66aaff; border:1px solid rgba(66,170,255,.45); }
+    .tg-wpd-sharp   { background:rgba(68,204,136,.18); color:#44cc88; border:1px solid rgba(68,204,136,.45); }
+    .tg-wpd-overlay { background:rgba(255,170,51,.18); color:#ffaa33; border:1px solid rgba(255,170,51,.45); }
+    .tg-wpd-fade    { background:rgba(255,102,102,.15); color:#ff8888; border:1px solid rgba(255,102,102,.35); }
+    /* Inline chip badges in ranked table */
+    .tg-wpd-chip { display:inline-block; font-size:.6rem; padding:0 3px; border-radius:3px; margin-left:3px; vertical-align:middle; line-height:1.6; }
+    /* WPD active notification bar */
+    .tg-wpd-bar {
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      background:rgba(66,170,255,.08); border:1px solid rgba(66,170,255,.25);
+      border-radius:7px; padding:7px 12px; margin-bottom:10px; font-size:.75rem;
+    }
+    .tg-wpd-bar-icon { font-size:.9rem; }
+    .tg-wpd-bar-title { color:#66aaff; font-weight:700; }
+    .tg-wpd-bar-chips { display:flex; gap:5px; flex-wrap:wrap; }
+    .tg-wpd-bar-note  { font-size:.68rem; color:var(--dim); margin-left:auto; }
+    /* WPD score boost badge in ranked table */
+    .tg-wpd-score-up   { font-size:.6rem; color:var(--green); margin-left:4px; font-weight:700; }
+    .tg-wpd-score-down { font-size:.6rem; color:var(--yellow); margin-left:4px; font-weight:700; }
+    /* SCT WPD badges */
+    .sct-wpd-confirm { background:rgba(66,170,255,.18);  color:#66aaff; border:1px solid rgba(66,170,255,.4); }
+    .sct-wpd-sharp   { background:rgba(68,204,136,.18);  color:#44cc88; border:1px solid rgba(68,204,136,.4); }
+    .sct-wpd-overlay { background:rgba(255,170,51,.18);  color:#ffaa33; border:1px solid rgba(255,170,51,.4); }
+    .sct-wpd-fade    { background:rgba(255,102,102,.15); color:#ff8888; border:1px solid rgba(255,102,102,.3); }
+    /* FADE advisory panel */
+    .tg-fade-advisory {
+      background:rgba(255,102,102,.07); border:1px solid rgba(255,102,102,.25);
+      border-radius:7px; padding:8px 12px; margin-top:10px; font-size:.74rem;
+      color:#ff9999; line-height:1.6;
+    }
+    .tg-fade-advisory strong { color:#ffbbbb; }
   </style>
 </head>
 <body>
@@ -6644,6 +6677,21 @@ const WPD_RACE_DATA = {
       resTbody.appendChild(tr);
     });
 
+    // ── Store signals globally for Smart Ticket Generator ──
+    window._wpdSignals = window._wpdSignals || {};
+    const raceKey = parseInt(raceNum) || raceNum;
+    window._wpdSignals[raceKey] = sorted.map(h => ({
+      pgm:          h.pgm,
+      name:         h.name,
+      signal:       classifySignal(h.impliedOdds, h.mlOdds, h.ofig, avgOFIG),
+      impliedProb:  h.impliedProb,
+      impliedOdds:  h.impliedOdds
+    }));
+    window._wpdLastRace  = raceKey;
+    window._wpdBetType   = betType;
+    // Notify Ticket Generator to refresh its display with the new signals
+    if (typeof tgRefreshWpdSignals === 'function') tgRefreshWpdSignals();
+
     // Meta line
     const totalInvProb = (sumInv * base).toFixed(3);
     document.getElementById('wpd-results-meta').textContent =
@@ -6679,9 +6727,49 @@ const WPD_RACE_DATA = {
     wpdRowCount = 0;
     for (let i = 0; i < 8; i++) wpdBuildRow(document.getElementById('wpd-horse-tbody'), i+1);
     wpdRowCount = 8;
+    // Clear stored signals and refresh TG
+    window._wpdSignals = {};
+    window._wpdLastRace = null;
+    if (typeof tgRefreshWpdSignals === 'function') tgRefreshWpdSignals();
   };
 
 })(); // end WILL PAY DECODER IIFE
+
+// =============================================================
+//  WPD SIGNAL LOOKUP  (global — used by TG + Smart Scanner)
+// =============================================================
+window.wpdGetSignal = function(horseName) {
+  if (!window._wpdSignals || !horseName) return null;
+  var name = horseName.toLowerCase().trim();
+  for (var rn in window._wpdSignals) {
+    var arr = window._wpdSignals[rn];
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].name.toLowerCase().trim() === name) return arr[i].signal;
+    }
+  }
+  return null;
+};
+
+// Build a compact summary of active WPD signals for display
+window.wpdActiveSummary = function() {
+  if (!window._wpdSignals || !window._wpdLastRace) return null;
+  var arr = window._wpdSignals[window._wpdLastRace] || [];
+  var byCode = { confirm:[], sharp:[], overlay:[], fade:[] };
+  arr.forEach(function(h) {
+    var c = h.signal && h.signal.code;
+    if (byCode[c]) byCode[c].push(h.name);
+  });
+  var hasAny = Object.values(byCode).some(function(v) { return v.length > 0; });
+  if (!hasAny) return null;
+  return {
+    raceNum:  window._wpdLastRace,
+    betType:  window._wpdBetType,
+    confirm:  byCode.confirm,
+    sharp:    byCode.sharp,
+    overlay:  byCode.overlay,
+    fade:     byCode.fade
+  };
+};
 
 // =============================================================
 //  MATH HELPERS
@@ -10153,6 +10241,14 @@ function buildSmartTickets(trackOverride) {
         }
         enriched.sort((a, b) => b.modelPct - a.modelPct);
 
+        // ── WPD signal enrichment ──────────────────────────────────────
+        const isFinalLeg = (i === races.length - 1);
+        const wpdRaceMatch = window._wpdLastRace && (raceNum === window._wpdLastRace);
+        enriched.forEach(h => {
+          const sig = window.wpdGetSignal ? window.wpdGetSignal(h.name) : null;
+          h.wpdSignal = sig ? sig.code : null;
+        });
+
         if (enriched.length === 0) enriched.push(...horses.slice(0, 2).map(h => ({
           ...h, modelPct: 0, edge: 0, evFlag: '', gap: null
         })));
@@ -10175,7 +10271,53 @@ function buildSmartTickets(trackOverride) {
           (!topIsFade && top.gap >= 4);
 
         let selected, selectionReason;
-        if (isStrongSingle) {
+
+        // ── WPD role overrides — final leg only ───────────────────────
+        // Only override when Will Pay data is available for this exact race
+        // (Elvis R10 backtest: full field essential — partial data = invisible signal)
+        if (isFinalLeg && wpdRaceMatch) {
+          const wpdConfirm  = enriched.find(h => h.wpdSignal === 'confirm');
+          const wpdSharp    = enriched.filter(h => h.wpdSignal === 'sharp');
+          const wpdOverlay  = enriched.filter(h => h.wpdSignal === 'overlay');
+          const wpdFade     = enriched.filter(h => h.wpdSignal === 'fade');
+          const wpdNeutral  = enriched.filter(h => !h.wpdSignal || h.wpdSignal === 'neutral');
+
+          if (wpdConfirm) {
+            // ✅ CONFIRM: single anchor — model + sharp money aligned
+            selected = [wpdConfirm];
+            selectionReason = '✅ WPD CONFIRM single';
+            hasStrongSignal = true;
+          } else if (wpdSharp.length) {
+            // 🔵 SHARP: heavy use — sharp horses first, add model horses
+            const rest = wpdNeutral.concat(wpdOverlay).slice(0, 2);
+            selected = [...wpdSharp, ...rest.filter(h => !wpdSharp.includes(h))].slice(0, Math.max(wpdSharp.length + 1, 2));
+            selectionReason = '🔵 WPD SHARP heavy (' + wpdSharp.length + ')';
+            hasStrongSignal = true;
+          } else if (wpdOverlay.length) {
+            // 💰 OVERLAY: include overlay as underneath value alongside model top
+            const modelTop = wpdNeutral.slice(0, 1);
+            selected = [...new Map([...modelTop, ...wpdOverlay].map(h => [h.name, h])).values()].slice(0, 2);
+            selectionReason = '💰 WPD OVERLAY + model';
+          } else if (isStrongSingle) {
+            selected = [enriched[0]];
+            selectionReason = top.gap >= 8 ? 'gap≥8 single' : 'model%≥35 single';
+            hasStrongSignal = true;
+          } else if (isPairCandidate && enriched.length >= 2) {
+            selected = enriched.slice(0, 2);
+            selectionReason = (!topIsFade && top.gap >= 4) ? 'gap signal pair' : 'model pair';
+          } else {
+            selected = enriched.filter(h => h.wpdSignal !== 'fade').slice(0, Math.min(3, enriched.length));
+            selectionReason = 'spread (3)';
+          }
+          // 🔴 FADE: always include with thin coverage — never omit (backtest: Crazy Mason 3rd at ▲486%)
+          // Add fade horses as last-position entries so they appear in exactly 1 ticket combo
+          wpdFade.forEach(fh => {
+            if (!selected.find(s => s.name === fh.name) && selected.length < 4) {
+              selected = [...selected, { ...fh, wpdThin: true }];
+              selectionReason = (selectionReason || 'model') + '+🔴 FADE/thin';
+            }
+          });
+        } else if (isStrongSingle) {
           selected = [enriched[0]];
           selectionReason = top.gap >= 8 ? 'gap≥8 single' : 'model%≥35 single';
           hasStrongSignal = true;
@@ -10344,6 +10486,13 @@ function renderTicketCard(t, isTop) {
   const topLabel = isTop ? '<span style="font-size:.65rem;font-weight:800;color:var(--gold);border:1px solid var(--gold);border-radius:3px;padding:1px 5px;margin-right:4px;">TOP PICK</span>' : '';
   const roiColor = t.roi > 50 ? 'sct-ev-good' : t.roi > 0 ? 'sct-ev-ok' : 'sct-ev-warn';
 
+  // WPD active label for ticket header
+  const wpdSummary = window.wpdActiveSummary ? window.wpdActiveSummary() : null;
+  const wpdRaceMatch = wpdSummary && t.legs.some(l => l.race === wpdSummary.raceNum);
+  const wpdHeaderBadge = wpdRaceMatch
+    ? `<span style="font-size:.63rem;font-weight:700;color:#66aaff;border:1px solid rgba(66,170,255,.4);border-radius:3px;padding:1px 5px;margin-left:4px;">📡 WPD R${wpdSummary.raceNum}</span>`
+    : '';
+
   const legsHtml = t.legs.map(leg => {
     const horsesHtml = leg.selected.map(h => {
       const whyBadges = [];
@@ -10355,8 +10504,14 @@ function renderTicketCard(t, isTop) {
       if (h.gap >= 8)                 whyBadges.push(`<span class="sct-why-badge sct-why-gap">gap+${Math.round(h.gap)}</span>`);
       else if (h.gap >= 4)            whyBadges.push(`<span class="sct-why-badge sct-why-gap">gap+${Math.round(h.gap)}</span>`);
       if (h.modelPct >= 25)           whyBadges.push(`<span class="sct-why-badge sct-why-mdl">${h.modelPct.toFixed(0)}%</span>`);
+      // ── WPD signal badge ──
+      if (h.wpdSignal && h.wpdSignal !== 'neutral') {
+        const sigLabels = { confirm:'✅ CONFIRM', sharp:'🔵 SHARP', overlay:'💰 OVERLAY', fade:'🔴 FADE/thin' };
+        whyBadges.push(`<span class="sct-why-badge sct-wpd-${h.wpdSignal}">${sigLabels[h.wpdSignal] || h.wpdSignal}</span>`);
+      }
+      const thinNote = h.wpdThin ? ' <span style="font-size:.6rem;color:#ff9999;opacity:.8">(thin)</span>' : '';
       return `<div class="sct-horse-row">
-        <span class="sct-horse-name">${h.name}</span>
+        <span class="sct-horse-name">${h.name}${thinNote}</span>
         <span class="sct-horse-why">${whyBadges.join('')}</span>
       </div>`;
     }).join('');
@@ -10392,7 +10547,7 @@ function renderTicketCard(t, isTop) {
   <div class="sct-ticket-head">
     ${topLabel}
     <span class="sct-wager-badge">${t.wager}</span>
-    <span class="sct-span">R${t.span}</span>${bookendLabel}
+    <span class="sct-span">R${t.span}</span>${bookendLabel}${wpdHeaderBadge}
     <div class="sct-scores">
       <span class="sct-score-item">Overlay: <strong style="color:${t.seqInfo.ratio>=1.5?'#2ecc71':t.seqInfo.ratio>=1.0?'#f0a500':'#888'}">${t.seqInfo.ratio.toFixed(2)}×</strong></span>
       <span class="sct-score-item">Combos: <strong>${t.totalCombos}</strong></span>
@@ -10541,6 +10696,13 @@ loadScratches();
           if (h.tags.indexOf('KEY') >= 0 || h.tags.indexOf('VALUE') >= 0) h.sel = true;
         });
       }
+      // Enrich with WPD signals if available
+      horses.forEach(function(h) {
+        var sig = window.wpdGetSignal ? window.wpdGetSignal(h.name) : null;
+        h.wpdSignal = sig ? sig.code : null;
+        // Auto-select CONFIRM and SHARP horses
+        if (h.wpdSignal === 'confirm' || h.wpdSignal === 'sharp') h.sel = true;
+      });
       var scrNote = scratchedCount > 0 ? ' <span style="color:var(--dim);font-weight:400;font-size:.75em">(' + scratchedCount + ' scratched)</span>' : '';
       return { raceNum: race.race_num, title: 'R' + race.race_num + ' - ' + (race.race_type || '') + ' - ' + (race.distance || '') + scrNote, horses: horses };
     });
@@ -10583,7 +10745,26 @@ loadScratches();
   };
 
   function tgRenderLegs() {
-    document.getElementById('tg-legs-wrap').innerHTML = tgLegs.map(function(leg, li) {
+    // ── WPD Active banner ──
+    var wpdSummary = window.wpdActiveSummary ? window.wpdActiveSummary() : null;
+    var wpdBar = '';
+    if (wpdSummary) {
+      var chips = [];
+      if (wpdSummary.confirm.length) chips.push('<span class="tg-tag tg-wpd-confirm">✅ CONFIRM: ' + wpdSummary.confirm.join(', ') + '</span>');
+      if (wpdSummary.sharp.length)   chips.push('<span class="tg-tag tg-wpd-sharp">🔵 SHARP: '   + wpdSummary.sharp.join(', ')   + '</span>');
+      if (wpdSummary.overlay.length) chips.push('<span class="tg-tag tg-wpd-overlay">💰 OVERLAY: ' + wpdSummary.overlay.join(', ') + '</span>');
+      if (wpdSummary.fade.length)    chips.push('<span class="tg-tag tg-wpd-fade">🔴 FADE: '      + wpdSummary.fade.join(', ')    + '</span>');
+      if (chips.length) {
+        wpdBar = '<div class="tg-wpd-bar">' +
+          '<span class="tg-wpd-bar-icon">📡</span>' +
+          '<span class="tg-wpd-bar-title">WPD Signals Active</span>' +
+          '<span class="tg-wpd-bar-title" style="font-weight:400;color:var(--dim)">R' + wpdSummary.raceNum + ' ' + (wpdSummary.betType||'') + '</span>' +
+          '<span class="tg-wpd-bar-chips">' + chips.join('') + '</span>' +
+          '<span class="tg-wpd-bar-note">Scoring adjusted · CONFIRM/SHARP auto-selected · FADE included thin</span>' +
+        '</div>';
+      }
+    }
+    document.getElementById('tg-legs-wrap').innerHTML = wpdBar + tgLegs.map(function(leg, li) {
       var sel = leg.horses.filter(function(h) { return h.sel; });
       var fieldSum = parseFloat(leg.horses.reduce(function(a, h) { return a + h.prob; }, 0).toFixed(1));
       var manualSum = parseFloat(leg.horses.reduce(function(a, h) { return a + (h.manual ? h.prob : 0); }, 0).toFixed(1));
@@ -10594,6 +10775,11 @@ loadScratches();
         var edge = h.imp !== null ? h.prob - h.imp : null;
         var figCls = tgFigCls(h.ofig);
         var tagHtml = h.tags.map(function(t) { return '<span class="tg-tag tg-tag-' + t + '">' + t + '</span>'; }).join('');
+        // WPD signal badge
+        if (h.wpdSignal && h.wpdSignal !== 'neutral') {
+          var wpdLabels = { confirm:'✅ CONFIRM', sharp:'🔵 SHARP', overlay:'💰 OVERLAY', fade:'🔴 FADE' };
+          tagHtml += '<span class="tg-tag tg-wpd-' + h.wpdSignal + '">' + (wpdLabels[h.wpdSignal] || h.wpdSignal) + '</span>';
+        }
         var probVal = parseFloat(h.prob.toFixed(1));
         var closeVal = (h.closeOdds !== null && h.closeOdds !== undefined) ? h.closeOdds : '';
         var moveHtml = (function() {
@@ -10711,9 +10897,13 @@ loadScratches();
       return l.map(function(h) {
         var o = {}; Object.keys(h).forEach(function(k) { o[k] = h[k]; });
         o.edge = h.imp !== null ? h.prob - h.imp : 0;
+        // Attach WPD signal
+        var sig = window.wpdGetSignal ? window.wpdGetSignal(h.name) : null;
+        o.wpdSignal = sig ? sig.code : null;
         return o;
       });
     });
+    var wpdActive = enriched.some(function(l) { return l.some(function(h) { return h.wpdSignal && h.wpdSignal !== 'neutral'; }); });
     var combos = cartesian(enriched);
     var evs = combos.map(function(c) { return c.reduce(function(p, h) { return p * (h.prob / 100); }, 1); });
     var maxEV = Math.max.apply(null, evs) || 1;
@@ -10737,7 +10927,23 @@ loadScratches();
         });
       }
       var score = baseScore * lmMult;
-      return { combo: c, ev: ev, es: es, score: score, cost: stake, lmMult: lmMult };
+      // ── WPD signal scoring adjustment ──────────────────────────────
+      // CONFIRM: +20% (model + sharp money locked)
+      // SHARP:   +12% (smart money on this horse)
+      // OVERLAY: +6%  (value opportunity)
+      // FADE:    -20% (thin coverage only — ticket still boards)
+      var wpdMult = 1.0;
+      if (wpdActive) {
+        c.forEach(function(h) {
+          if (!h.wpdSignal || h.wpdSignal === 'neutral') return;
+          if      (h.wpdSignal === 'confirm') wpdMult *= 1.20;
+          else if (h.wpdSignal === 'sharp')   wpdMult *= 1.12;
+          else if (h.wpdSignal === 'overlay') wpdMult *= 1.06;
+          else if (h.wpdSignal === 'fade')    wpdMult *= 0.80;
+        });
+      }
+      score = score * wpdMult;
+      return { combo: c, ev: ev, es: es, score: score, cost: stake, lmMult: lmMult, wpdMult: wpdMult };
     }).sort(function(a, b) { return b.score - a.score; }).slice(0, topN);
 
     var posEdge = tgResults.filter(function(r) { return r.es > 0; }).length;
@@ -10764,7 +10970,12 @@ loadScratches();
       var epCls = ep > 0 ? 'tg-edge-pos' : ep < 0 ? 'tg-edge-neg' : 'tg-edge-neu';
       var chips = r.combo.map(function(h) {
         var cc = h.edge > 0.5 ? 'tg-chip-pos' : h.edge < -0.5 ? 'tg-chip-neg' : 'tg-chip-neu';
-        return '<span class="tg-chip ' + cc + '">#' + h.prog + ' ' + h.name + '</span>';
+        var wpdChip = '';
+        if (h.wpdSignal && h.wpdSignal !== 'neutral') {
+          var wpdIcons = { confirm:'✅', sharp:'🔵', overlay:'💰', fade:'🔴' };
+          wpdChip = '<span class="tg-wpd-chip tg-wpd-' + h.wpdSignal + '" title="WPD: ' + h.wpdSignal.toUpperCase() + '">' + (wpdIcons[h.wpdSignal] || '') + '</span>';
+        }
+        return '<span class="tg-chip ' + cc + '">#' + h.prog + ' ' + h.name + wpdChip + '</span>';
       }).join(' &rarr; ');
       return '<tr>' +
         '<td class="tg-rank">' + (i+1) + '</td>' +
@@ -10775,12 +10986,18 @@ loadScratches();
         '<td style="text-align:right;font-size:.75rem;color:var(--dim)">$' + stake.toFixed(2) + '</td>' +
         '<td style="text-align:right;font-weight:700;color:var(--gold)">' + (r.score*100).toFixed(0) + (function() {
           var useLMcheck = document.getElementById('tg-lm-toggle') && document.getElementById('tg-lm-toggle').checked;
+          var badges = '';
           if (useLMcheck && r.lmMult !== undefined && Math.abs(r.lmMult - 1.0) > 0.001) {
             var badgeColor = r.lmMult > 1.0 ? 'var(--green)' : 'var(--yellow)';
             var badgeArrow = r.lmMult > 1.0 ? '&uarr;' : '&darr;';
-            return '<span style="font-size:.62rem;color:' + badgeColor + ';margin-left:4px;font-weight:700;">LM' + badgeArrow + '</span>';
+            badges += '<span style="font-size:.62rem;color:' + badgeColor + ';margin-left:4px;font-weight:700;">LM' + badgeArrow + '</span>';
           }
-          return '';
+          if (r.wpdMult !== undefined && Math.abs(r.wpdMult - 1.0) > 0.01) {
+            var wpdCls  = r.wpdMult > 1.0 ? 'tg-wpd-score-up' : 'tg-wpd-score-down';
+            var wpdArrow = r.wpdMult > 1.0 ? '▲' : '▼';
+            badges += '<span class="' + wpdCls + '">WPD' + wpdArrow + '</span>';
+          }
+          return badges;
         })() + '</td>' +
         '</tr>';
     }).join('');
@@ -10819,7 +11036,19 @@ loadScratches();
     document.getElementById('tg-tab-ranked').innerHTML =
       condensedHtml +
       '<table class="tg-res-table"><tr><th>#</th><th>Combination</th><th class="r">Combo EV</th><th class="r">Avg Edge/Leg</th><th class="r">Cost</th><th class="r">Score</th></tr>' +
-      rows + '</table>';
+      rows + '</table>' +
+      (function() {
+        // FADE advisory: find any selected FADE-signaled horses not in top tickets
+        var wpdSummary = window.wpdActiveSummary ? window.wpdActiveSummary() : null;
+        if (!wpdSummary || !wpdSummary.fade.length) return '';
+        var missingFade = wpdSummary.fade.filter(function(name) {
+          return !tgResults.some(function(r) { return r.combo.some(function(h) { return h.name.toLowerCase() === name.toLowerCase(); }); });
+        });
+        if (!missingFade.length) {
+          return '<div class="tg-fade-advisory">🔴 <strong>WPD FADE coverage confirmed</strong> — ' + wpdSummary.fade.join(', ') + ' appear in top tickets (thin coverage).</div>';
+        }
+        return '<div class="tg-fade-advisory">🔴 <strong>WPD FADE — add thin coverage:</strong> ' + missingFade.join(', ') + ' not in top tickets. Select these horses and add them to at least 1 ticket manually. (Crazy Mason rule: FADE never omit.)</div>';
+      })();
   }
 
   function tgRenderBuilder(enriched) {
@@ -10866,6 +11095,24 @@ loadScratches();
     }
   }
   tgInit();
+
+  // Called by wpdCalculate/wpdClearResults to re-render TG with fresh signals
+  window.tgRefreshWpdSignals = function() {
+    if (!tgLegs.length) return;
+    // Re-attach WPD signals to horse objects (may have changed)
+    tgLegs.forEach(function(leg) {
+      leg.horses.forEach(function(h) {
+        var sig = window.wpdGetSignal ? window.wpdGetSignal(h.name) : null;
+        h.wpdSignal = sig ? sig.code : null;
+        // Auto-select CONFIRM/SHARP; deselect only if was auto-selected before (not manual)
+        if ((h.wpdSignal === 'confirm' || h.wpdSignal === 'sharp') && !h.manual) h.sel = true;
+      });
+    });
+    tgRenderLegs();
+    if (document.getElementById('tg-results') && document.getElementById('tg-results').style.display !== 'none') {
+      tgGenerate();
+    }
+  };
 })();
 </script>
 
