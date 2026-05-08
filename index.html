@@ -4839,6 +4839,34 @@
 .wpd-tl-role.standard { background:#152232; color:#8a9bb0; border:1px solid #2a3f5a; }
 .wpd-tl-apply-btn { margin-top:12px; padding:7px 18px; background:#44cc88; color:#0d1b2a; border:none; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; }
 .wpd-tl-apply-btn:hover { background:#5de89a; }
+/* ── Single Race Exotics ── */
+.wpd-exotics-wrap { margin-top:20px; background:#0d1b2a; border:1px solid #2a3f5a; border-radius:8px; overflow:hidden; }
+.wpd-exotics-header { display:flex; align-items:center; justify-content:space-between; padding:12px 16px; cursor:pointer; user-select:none; }
+.wpd-exotics-header:hover { background:#152232; }
+.wpd-exotics-title { font-size:15px; font-weight:700; color:#f5c842; }
+.wpd-exotics-arrow { font-size:12px; color:#8a9bb0; transition:transform .2s; display:inline-block; }
+.wpd-exotics-arrow.open { transform:rotate(90deg); }
+.wpd-exotics-body { padding:14px 16px; border-top:1px solid #2a3f5a; }
+.wpd-exotic-tabs { display:flex; gap:0; margin-bottom:14px; border-bottom:1px solid #2a3f5a; }
+.wpd-exotic-tab { padding:7px 20px; background:transparent; border:none; border-bottom:2px solid transparent; color:#8a9bb0; font-size:13px; font-weight:600; cursor:pointer; margin-bottom:-1px; }
+.wpd-exotic-tab.active { color:#f5c842; border-bottom-color:#f5c842; }
+.wpd-exotic-tab:hover { color:#e8e0d0; }
+.wpd-exotic-table { width:100%; border-collapse:collapse; font-size:13px; min-width:480px; }
+.wpd-exotic-table th { background:#152232; color:#8a9bb0; font-size:11px; font-weight:600; text-transform:uppercase; letter-spacing:.5px; padding:8px 10px; text-align:center; border-bottom:1px solid #2a3f5a; white-space:nowrap; }
+.wpd-exotic-table th.left { text-align:left; }
+.wpd-exotic-table td { padding:7px 10px; border-bottom:1px solid #1a2d42; text-align:center; vertical-align:middle; font-size:12px; }
+.wpd-exotic-table td.left { text-align:left; }
+.wpd-exotic-table tr:last-child td { border-bottom:none; }
+.wpd-exotic-row-value { background:rgba(68,204,136,.05); }
+.wpd-exotic-row-fade  { background:rgba(255,102,102,.05); }
+.wpd-exotic-combo { font-weight:700; color:#e8e0d0; }
+.wpd-exotic-signal.value   { display:inline-block; padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; background:#0e2e1a; color:#44cc88; border:1px solid #1a4a2a; white-space:nowrap; }
+.wpd-exotic-signal.fade    { display:inline-block; padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; background:#2e0e0e; color:#ff6666; border:1px solid #4a1a1a; white-space:nowrap; }
+.wpd-exotic-signal.neutral { display:inline-block; padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; background:#152232; color:#8a9bb0; border:1px solid #2a3f5a; }
+.wpd-exotic-edge.pos     { color:#44cc88; font-weight:700; }
+.wpd-exotic-edge.neg     { color:#ff6666; font-weight:700; }
+.wpd-exotic-edge.neutral { color:#8a9bb0; }
+.wpd-exotic-empty { text-align:center; padding:24px; color:#4a6a8a; font-size:13px; }
 </style>
 
 <div class="wpd">
@@ -4973,6 +5001,56 @@
       <button class="wpd-tl-apply-btn" onclick="wpdApplyToTicketGen()">Apply to Ticket Gen →</button>
     </div>
   </div>
+
+  <!-- ── Single Race Exotics ── -->
+  <div class="wpd-exotics-wrap" id="wpd-exotics-wrap">
+    <div class="wpd-exotics-header" onclick="wpdToggleExotics()">
+      <span class="wpd-exotics-title">🎯 Single Race Exotics</span>
+      <span class="wpd-exotics-arrow" id="wpd-exotics-arrow">▶</span>
+    </div>
+    <div id="wpd-exotics-body" style="display:none;" class="wpd-exotics-body">
+      <div class="wpd-exotic-tabs">
+        <button class="wpd-exotic-tab active" id="wpd-exotic-tab-exacta" onclick="wpdShowExoticTab('exacta')">Exactas</button>
+        <button class="wpd-exotic-tab" id="wpd-exotic-tab-trifecta" onclick="wpdShowExoticTab('trifecta')">Trifectas</button>
+      </div>
+      <div id="wpd-exotic-exacta-panel">
+        <div class="wpd-exotic-empty" id="wpd-exotic-exacta-empty">Enter will pays above and click Calculate Exotics to see pricing.</div>
+        <div class="wpd-table-wrap" id="wpd-exotic-exacta-table-wrap" style="display:none;">
+          <table class="wpd-exotic-table">
+            <thead><tr>
+              <th style="width:36px;">Rank</th>
+              <th class="left">Combination</th>
+              <th>WPD Price</th>
+              <th>ML Price</th>
+              <th>Edge vs ML</th>
+              <th>Signal</th>
+            </tr></thead>
+            <tbody id="wpd-exotic-exacta-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div id="wpd-exotic-trifecta-panel" style="display:none;">
+        <div class="wpd-exotic-empty" id="wpd-exotic-trifecta-empty">Enter will pays above and click Calculate Exotics to see pricing.</div>
+        <div class="wpd-table-wrap" id="wpd-exotic-trifecta-table-wrap" style="display:none;">
+          <table class="wpd-exotic-table">
+            <thead><tr>
+              <th style="width:36px;">Rank</th>
+              <th class="left">Combination</th>
+              <th>WPD Price</th>
+              <th>ML Price</th>
+              <th>Edge vs ML</th>
+              <th>Signal</th>
+            </tr></thead>
+            <tbody id="wpd-exotic-trifecta-tbody"></tbody>
+          </table>
+        </div>
+      </div>
+      <div style="margin-top:14px;">
+        <button class="wpd-btn wpd-btn-calc" onclick="wpdCalculateExotics()">⚡ Calculate Exotics</button>
+      </div>
+    </div>
+  </div><!-- end .wpd-exotics-wrap -->
+
 </div><!-- end .wpd -->
   </div><!-- end willpay-card-content -->
   </div><!-- end tab-raceday -->
@@ -6921,6 +6999,171 @@ const WPD_RACE_DATA = {
 
     document.getElementById('wpd-results').style.display = 'block';
     document.getElementById('wpd-results').scrollIntoView({ behavior:'smooth', block:'start' });
+  };
+
+  // ── Single Race Exotics ──────────────────────────────────────────────────
+
+  window.wpdToggleExotics = function() {
+    const body  = document.getElementById('wpd-exotics-body');
+    const arrow = document.getElementById('wpd-exotics-arrow');
+    const isOpen = body.style.display !== 'none';
+    body.style.display = isOpen ? 'none' : '';
+    arrow.classList.toggle('open', !isOpen);
+  };
+
+  window.wpdShowExoticTab = function(tab) {
+    ['exacta','trifecta'].forEach(t => {
+      document.getElementById(`wpd-exotic-${t}-panel`).style.display = (t === tab) ? '' : 'none';
+      document.getElementById(`wpd-exotic-tab-${t}`).classList.toggle('active', t === tab);
+    });
+  };
+
+  window.wpdCalculateExotics = function() {
+    const tbody  = document.getElementById('wpd-horse-tbody');
+    const rows   = Array.from(tbody.querySelectorAll('tr'));
+    const base   = parseFloat(document.getElementById('wpd-base-cost').value) || 1;
+
+    const horses = [];
+    rows.forEach((tr, i) => {
+      const inputs  = tr.querySelectorAll('input');
+      const pgm     = inputs[0].value.trim() || String(i + 1);
+      const name    = inputs[1].value.trim() || `Horse ${pgm}`;
+      const mlRaw   = inputs[2].value.trim();
+      const wpRaw   = inputs[4].value.trim();
+      const willPay = parseFloat(wpRaw);
+      if (!wpRaw || isNaN(willPay) || willPay <= 0) return;
+      const mlOdds = parseMLOdds(mlRaw);
+      horses.push({ pgm, name, mlOdds, willPay1: willPay * (1 / base) });
+    });
+
+    if (horses.length < 2) {
+      alert('Enter will pays for at least 2 horses to calculate exotic prices.');
+      return;
+    }
+
+    // Implied win probs from will pays: 1/WP normalized
+    const invWPs  = horses.map(h => 1 / h.willPay1);
+    const sumInv  = invWPs.reduce((a, b) => a + b, 0);
+    const wpdProbs = invWPs.map(v => v / sumInv);
+
+    // ML win probs: 1/(mlOdds+1) normalized; fall back to wpdProbs for missing ML
+    const hasMl = horses.some(h => h.mlOdds !== null);
+    let mlProbs = null;
+    if (hasMl) {
+      const mlInvs = horses.map((h, i) => h.mlOdds !== null ? 1 / (h.mlOdds + 1) : wpdProbs[i]);
+      const mlSum  = mlInvs.reduce((a, b) => a + b, 0);
+      mlProbs = mlInvs.map(v => v / mlSum);
+    }
+
+    // ── Compute exacta theoretical prices ──────────────────────────────────
+    const exactas = [];
+    for (let a = 0; a < horses.length; a++) {
+      for (let b = 0; b < horses.length; b++) {
+        if (b === a) continue;
+        const pA      = wpdProbs[a];
+        const pAB     = pA * (wpdProbs[b] / (1 - pA));
+        const wpdPrice = (2 / pAB) * (1 - 0.19);
+
+        let mlPrice = null, edge = null;
+        if (mlProbs) {
+          const mpA   = mlProbs[a];
+          const mpAB  = mpA * (mlProbs[b] / (1 - mpA));
+          mlPrice = (2 / mpAB) * (1 - 0.19);
+          edge = ((mlPrice / wpdPrice) - 1) * 100;
+        }
+
+        exactas.push({
+          combo: `${horses[a].pgm}-${horses[b].pgm}`,
+          wpdPrice, mlPrice, edge
+        });
+      }
+    }
+    exactas.sort((a, b) => (b.edge ?? -Infinity) - (a.edge ?? -Infinity));
+
+    // ── Compute trifecta theoretical prices ────────────────────────────────
+    const trifectas = [];
+    for (let a = 0; a < horses.length; a++) {
+      for (let b = 0; b < horses.length; b++) {
+        if (b === a) continue;
+        for (let c = 0; c < horses.length; c++) {
+          if (c === a || c === b) continue;
+          const pA   = wpdProbs[a];
+          const pB   = wpdProbs[b];
+          const dBC  = 1 - pA - pB;
+          if (dBC <= 0) continue;
+          const pABC = pA * (pB / (1 - pA)) * (wpdProbs[c] / dBC);
+          if (!isFinite(pABC) || pABC <= 0) continue;
+          const wpdPrice = (2 / pABC) * (1 - 0.25);
+
+          let mlPrice = null, edge = null;
+          if (mlProbs) {
+            const mpA  = mlProbs[a];
+            const mpB  = mlProbs[b];
+            const mdBC = 1 - mpA - mpB;
+            if (mdBC > 0) {
+              const mpABC = mpA * (mpB / (1 - mpA)) * (mlProbs[c] / mdBC);
+              if (isFinite(mpABC) && mpABC > 0) {
+                mlPrice = (2 / mpABC) * (1 - 0.25);
+                edge = ((mlPrice / wpdPrice) - 1) * 100;
+              }
+            }
+          }
+
+          trifectas.push({
+            combo: `${horses[a].pgm}-${horses[b].pgm}-${horses[c].pgm}`,
+            wpdPrice, mlPrice, edge
+          });
+        }
+      }
+    }
+    trifectas.sort((a, b) => (b.edge ?? -Infinity) - (a.edge ?? -Infinity));
+
+    // ── Render ──────────────────────────────────────────────────────────────
+    function renderExoticRows(tbodyId, wrapId, emptyId, combos) {
+      const tb    = document.getElementById(tbodyId);
+      const wrap  = document.getElementById(wrapId);
+      const empty = document.getElementById(emptyId);
+      tb.innerHTML = '';
+      if (!combos.length) {
+        wrap.style.display  = 'none';
+        empty.style.display = '';
+        empty.textContent   = 'Not enough data to compute prices.';
+        return;
+      }
+      wrap.style.display  = '';
+      empty.style.display = 'none';
+      combos.slice(0, 20).forEach((row, i) => {
+        const edgeTxt = row.edge !== null
+          ? (row.edge >= 0 ? `+${row.edge.toFixed(1)}%` : `${row.edge.toFixed(1)}%`) : '—';
+        const edgeCls = row.edge === null ? 'neutral' : row.edge > 15 ? 'pos' : row.edge < -15 ? 'neg' : 'neutral';
+        const sigCls  = row.edge === null ? 'neutral' : row.edge > 15 ? 'value' : row.edge < -15 ? 'fade' : 'neutral';
+        const sigTxt  = row.edge === null ? '—' : row.edge > 15 ? '🔥 VALUE' : row.edge < -15 ? '❌ FADE' : '—';
+        const rowCls  = row.edge !== null && row.edge > 15 ? 'wpd-exotic-row-value'
+                      : row.edge !== null && row.edge < -15 ? 'wpd-exotic-row-fade' : '';
+        const mlDisp  = row.mlPrice !== null ? `$${row.mlPrice.toFixed(2)}` : '—';
+        const tr      = document.createElement('tr');
+        tr.className  = rowCls;
+        tr.innerHTML  = `
+          <td style="color:#8a9bb0;font-size:11px;">${i + 1}</td>
+          <td class="left wpd-exotic-combo">${row.combo}</td>
+          <td style="font-weight:700;color:#e8e0d0;">$${row.wpdPrice.toFixed(2)}</td>
+          <td style="color:#8a9bb0;">${mlDisp}</td>
+          <td class="wpd-exotic-edge ${edgeCls}">${edgeTxt}</td>
+          <td><span class="wpd-exotic-signal ${sigCls}">${sigTxt}</span></td>
+        `;
+        tb.appendChild(tr);
+      });
+    }
+
+    renderExoticRows('wpd-exotic-exacta-tbody',   'wpd-exotic-exacta-table-wrap',   'wpd-exotic-exacta-empty',   exactas);
+    renderExoticRows('wpd-exotic-trifecta-tbody',  'wpd-exotic-trifecta-table-wrap', 'wpd-exotic-trifecta-empty', trifectas);
+
+    // Expand section if collapsed
+    const body = document.getElementById('wpd-exotics-body');
+    if (body.style.display === 'none') {
+      body.style.display = '';
+      document.getElementById('wpd-exotics-arrow').classList.add('open');
+    }
   };
 
   window.wpdApplyToTicketGen = function() {
