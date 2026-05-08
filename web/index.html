@@ -9896,7 +9896,7 @@ function oeqComputeEV(horses) {
   const active = [], noFig = [];
 
   for (const h of horses) {
-    const ml_raw = h.ml === 'FTS' ? null : h.ml / 10;
+    const ml_raw = (h.ml === 'FTS' || h.ml === null || h.ml === undefined) ? null : h.ml / 10;
     if (ml_raw === null) { noFig.push({h, ml_f: 99}); continue; }
     const fig = oeqBestFig(h.ofig, h.ong);
     if (fig !== null) active.push({h, ml_f: ml_raw, fig});
@@ -10002,7 +10002,7 @@ function renderOptixEQ() {
       const rowCls = ev?.flag === 'VALUE' ? ' class="oeq-value-row"'
                    : ev?.flag === 'LEAN'  ? ' class="oeq-value-row"'
                    : ev?.flag === 'FADE'  ? ' class="oeq-fade-row"' : '';
-      const mlDisplay = h.ml === 'FTS' ? 'FTS' : oeqFmtML(h.ml);
+      const mlDisplay = (h.ml === 'FTS' || h.ml === null || h.ml === undefined) ? 'FTS' : oeqFmtML(h.ml);
       const evBadge = oeqEvBadgeHtml(ev);
       const mdlPct = ev && ev.flag !== 'NOFIG'
         ? `<div class="oeq-ev-mdl">${ev.modelPct}%</div>` : '';
@@ -10090,7 +10090,7 @@ function renderOptixEQ() {
             <tbody>${rows}</tbody>
           </table>
         </div>
-        <div class="oeq-verdict">&#128073; OptixEQ keys: ${race.verdict}</div>
+        ${race.verdict ? `<div class="oeq-verdict">&#128073; OptixEQ keys: ${race.verdict}</div>` : ''}
       </div>
     </div>`;
   }
