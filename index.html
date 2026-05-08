@@ -4956,7 +4956,6 @@
             <th>Will Pay</th>
             <th>Implied<br>Odds</th>
             <th>Implied<br>Prob%</th>
-            <th>Adj<br>Conf%</th>
             <th>Morning<br>Line</th>
             <th>Δ vs ML</th>
             <th>oFIG</th>
@@ -6765,13 +6764,11 @@ const WPD_RACE_DATA = {
     // For ticket layer
     const ticketLayerData = [];
 
-    // Pre-compute normalized adj conf: (impliedProb[i] * w) / sum(impliedProb[j] * w) * 100
-    // Since w is uniform across all horses, it cancels in the ratio — but we compute explicitly
-    // so the formula is correct if per-horse weights are ever introduced.
-    const adjRaw    = sorted.map(h => h.impliedProb * (poolSum > 0 ? poolWeight : 1.0));
-    const adjRawSum = adjRaw.reduce((a, b) => a + b, 0);
-    const adjNorm   = adjRaw.map(v => adjRawSum > 0 ? (v / adjRawSum) * 100 : 0);
-    const adjColor  = poolTier === 'ELITE' ? '#44cc88' : poolTier === 'SHARP' ? '#ff8844' : poolTier === 'MIXED' ? '#f5c842' : '#8a9bb0';
+    // Pool-context signal suffix for SHARP/CONFIRM
+    const poolSuffix = poolSum > 0
+      ? (poolTier === 'PUBLIC' ? ' ⚠️' : poolTier === 'SHARP' ? ' ✅' : poolTier === 'ELITE' ? ' 🔥' : '')
+      : '';
+    const poolSuffixTitle = poolSum > 0 && poolTier === 'PUBLIC' ? 'low pool volume' : '';
 
     sorted.forEach((h, idx) => {
       const sig = classifySignal(h.impliedOdds, h.mlOdds, h.ofig, avgOFIG);
@@ -6780,17 +6777,24 @@ const WPD_RACE_DATA = {
       if (sig.code === 'confirm') confirmList.push(h.name);
       if (sig.code === 'overlay') overlayList.push(h.name);
 
-      const implDisp   = oddsToDisplay(h.impliedOdds);
-      const mlDisp     = h.mlOdds !== null ? oddsToDisplay(h.mlOdds) : '—';
-      const probPct    = (h.impliedProb * 100).toFixed(1) + '%';
-      const adjConfPct = adjNorm[idx].toFixed(1) + '%';
+      const implDisp = oddsToDisplay(h.impliedOdds);
+      const mlDisp   = h.mlOdds !== null ? oddsToDisplay(h.mlOdds) : '—';
+      const probPct  = (h.impliedProb * 100).toFixed(1) + '%';
+
+      // Pool-context signal label
+      let sigLabel = sig.label;
+      if (sig.code === 'sharp' || sig.code === 'confirm') {
+        sigLabel = sig.label + poolSuffix;
+      }
+      const sigTitleAttr = (sig.code === 'sharp' || sig.code === 'confirm') && poolSuffixTitle
+        ? ` title="${poolSuffixTitle}"` : '';
 
       // Delta: implied vs ML
       let deltaHTML = '—';
       if (h.mlOdds !== null) {
         const diff = h.impliedOdds - h.mlOdds;
         const pct  = Math.round((diff / h.mlOdds) * 100);
-        const cls  = diff < 0 ? 'neg' : 'pos'; // shorter than ML = red (priced down), longer = green (overlay value)
+        const cls  = diff < 0 ? 'neg' : 'pos';
         const sign = diff < 0 ? '▼' : '▲';
         deltaHTML  = `<span class="wpd-delta ${cls}">${sign}${Math.abs(pct)}%</span>`;
       }
@@ -6804,12 +6808,15 @@ const WPD_RACE_DATA = {
       const rowClass = (sig.code === 'sharp' || sig.code === 'confirm') ? 'wpd-row-top'
                      : (sig.code === 'fade'  || sig.code === 'overlay') ? 'wpd-row-fade' : '';
 
-      // Ticket layer role
+      // Ticket layer role — pool-context for anchor
       let tlRole, tlRoleCls;
-      if (sig.code === 'confirm' || sig.code === 'sharp') { tlRole = 'Anchor 🔒'; tlRoleCls = 'anchor'; }
-      else if (sig.code === 'overlay')                    { tlRole = 'Value 💎'; tlRoleCls = 'value'; }
-      else if (sig.code === 'fade')                       { tlRole = 'Thin ⚠️'; tlRoleCls = 'thin'; }
-      else                                                { tlRole = 'Standard'; tlRoleCls = 'standard'; }
+      if (sig.code === 'confirm' || sig.code === 'sharp') {
+        const anchorCtx = poolSum > 0 && (poolTier === 'SHARP' || poolTier === 'ELITE')
+          ? ' (pool-confirmed)' : poolSum > 0 && poolTier === 'PUBLIC' ? ' (unconfirmed pool)' : '';
+        tlRole = 'Anchor 🔒' + anchorCtx; tlRoleCls = 'anchor';
+      } else if (sig.code === 'overlay') { tlRole = 'Value 💎';  tlRoleCls = 'value'; }
+        else if (sig.code === 'fade')    { tlRole = 'Thin ⚠️';   tlRoleCls = 'thin'; }
+        else                             { tlRole = 'Standard';   tlRoleCls = 'standard'; }
       ticketLayerData.push({ pgm: h.pgm, name: h.name, role: tlRole, roleCls: tlRoleCls, sigCode: sig.code });
 
       const tr = document.createElement('tr');
@@ -6823,11 +6830,10 @@ const WPD_RACE_DATA = {
           <div class="wpd-bar-wrap"><div class="wpd-bar ${oddsClass}" style="width:${barWidth}%;"></div></div>
         </td>
         <td><span class="wpd-prob">${probPct}</span></td>
-        <td><span style="color:${adjColor};font-weight:700;">${poolSum > 0 ? adjConfPct : '—'}</span></td>
         <td>${mlDisp}</td>
         <td>${deltaHTML}</td>
         <td style="color:#8a9bb0;">${ofigDisp}</td>
-        <td><span class="wpd-signal ${sig.code}">${sig.label}</span></td>
+        <td><span class="wpd-signal ${sig.code}"${sigTitleAttr}>${sigLabel}</span></td>
       `;
       resTbody.appendChild(tr);
     });
@@ -6857,6 +6863,18 @@ const WPD_RACE_DATA = {
     // Insight box
     const insightEl = document.getElementById('wpd-insight-box');
     let insightHTML = `<div class="ins-title">💡 Smart Money Reads — R${raceNum} (${betType} Final Leg)</div>`;
+
+    // Pool context line
+    if (poolSum > 0) {
+      const ddFmt = '$' + poolSum.toFixed(2) + ' DD';
+      const poolCtxMap = {
+        PUBLIC: `<div style="margin-bottom:8px;padding:6px 10px;background:#1a1a1a;border-left:3px solid #888;border-radius:4px;color:#aaa;font-size:11px;">⚠️ Low pool volume (${ddFmt}) — signals are directional only, not pool-confirmed.</div>`,
+        MIXED:  `<div style="margin-bottom:8px;padding:6px 10px;background:#1e1a00;border-left:3px solid #f5c842;border-radius:4px;color:#c8a800;font-size:11px;">📊 Mixed pool (${ddFmt}) — moderate signal confidence.</div>`,
+        SHARP:  `<div style="margin-bottom:8px;padding:6px 10px;background:#1a1000;border-left:3px solid #ff8844;border-radius:4px;color:#cc6622;font-size:11px;">✅ Sharp pool (${ddFmt}) — signals carry meaningful weight.</div>`,
+        ELITE:  `<div style="margin-bottom:8px;padding:6px 10px;background:#0a1f10;border-left:3px solid #44cc88;border-radius:4px;color:#44cc88;font-size:11px;">🔥 Elite pool (${ddFmt}) — heavy sharp action, high conviction signals.</div>`,
+      };
+      insightHTML += poolCtxMap[poolTier] || '';
+    }
 
     if (confirmList.length)
       insightHTML += `<div class="wpd-insight-row"><span class="ins-label">✅ CONFIRM</span><span>${confirmList.join(', ')} — model &amp; sharp exotic money aligned. Strong single candidate.</span></div>`;
