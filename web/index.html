@@ -7023,6 +7023,26 @@ const WPD_RACE_DATA = {
     const rows   = Array.from(tbody.querySelectorAll('tr'));
     const base   = parseFloat(document.getElementById('wpd-base-cost').value) || 1;
 
+    // Build direct morning_line lookup from today_entries for live races.
+    // Uses the raw decimal "to-1" value (e.g. 4.5 = 9-2, 1.6 = ~8-5) directly,
+    // bypassing the wpdFormatML → parseMLOdds round-trip which loses precision.
+    const mlLookup = {};
+    const dayVal  = document.getElementById('wpd-day-select')?.value;
+    const raceVal = document.getElementById('wpd-race-select')?.value || '';
+    if (dayVal === 'live') {
+      const parts = raceVal.split(':');
+      if (parts.length === 3) {
+        const [, liveTrack, liveRnum] = parts;
+        const te = window._dashData?.today_entries || {};
+        const raceData = (te[liveTrack]?.races || []).find(r => String(r.race_num) === liveRnum);
+        if (raceData) {
+          (raceData.horses || [])
+            .filter(h => !h.is_ae && h.scratched !== true && h.morning_line != null)
+            .forEach(h => { mlLookup[String(h.program_num)] = h.morning_line; });
+        }
+      }
+    }
+
     const horses = [];
     rows.forEach((tr, i) => {
       const inputs  = tr.querySelectorAll('input');
@@ -7032,7 +7052,8 @@ const WPD_RACE_DATA = {
       const wpRaw   = inputs[4].value.trim();
       const willPay = parseFloat(wpRaw);
       if (!wpRaw || isNaN(willPay) || willPay <= 0) return;
-      const mlOdds = parseMLOdds(mlRaw);
+      // Prefer direct morning_line from source data; fall back to parsing ML input
+      const mlOdds = mlLookup[pgm] != null ? mlLookup[pgm] : parseMLOdds(mlRaw);
       horses.push({ pgm, name, mlOdds, willPay1: willPay * (1 / base) });
     });
 
@@ -7054,6 +7075,19 @@ const WPD_RACE_DATA = {
       const mlSum  = mlInvs.reduce((a, b) => a + b, 0);
       mlProbs = mlInvs.map(v => v / mlSum);
     }
+
+    // Debug: log computed values to browser console
+    console.group('WPD Single Race Exotics — Debug');
+    console.table(horses.map((h, i) => ({
+      pgm:       h.pgm,
+      name:      h.name,
+      mlOdds:    h.mlOdds != null ? h.mlOdds.toFixed(2) : 'null',
+      mlProb_raw: h.mlOdds != null ? (1/(h.mlOdds+1)).toFixed(4) : 'null',
+      mlProb_norm: mlProbs ? mlProbs[i].toFixed(4) : 'null',
+      willPay1:  h.willPay1.toFixed(3),
+      wpdProb:   wpdProbs[i].toFixed(4),
+    })));
+    console.groupEnd();
 
     // ── Exactas ($2 base, 19% takeout) ─────────────────────────────────────
     const exactas = [];
