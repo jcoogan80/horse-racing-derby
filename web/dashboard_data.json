@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-05-04 16:38",
+  "last_updated": "2026-05-07 20:31",
   "db_summary": {
     "total_tracks": 7,
-    "total_race_days": 223,
-    "total_races": 3524,
-    "total_exotics": 18717,
+    "total_race_days": 224,
+    "total_races": 3532,
+    "total_exotics": 18759,
     "date_range": {
       "from": "2025-01-01",
-      "to": "2026-05-02"
+      "to": "2026-05-07"
     },
     "tracks": [
       {
@@ -19,9 +19,9 @@
       },
       {
         "track": "CD",
-        "days": 48,
-        "races": 465,
-        "exotics": 2471,
+        "days": 49,
+        "races": 473,
+        "exotics": 2513,
         "max_race": 14
       },
       {
@@ -432,739 +432,369 @@
     },
     {
       "track": "CD",
-      "date": "2026-05-02",
-      "race_count": 14,
-      "exotic_count": 88,
+      "date": "2026-05-07",
+      "race_count": 8,
+      "exotic_count": 42,
       "races": [
         {
           "race_num": 1,
-          "winner": "Powershift",
-          "winner_pgm": "11",
-          "win_payout": 4.14,
-          "place_payout": 2.7,
-          "show_payout": 2.4
+          "winner": "Pampered Prince (114*)",
+          "winner_pgm": "6",
+          "win_payout": 9.2,
+          "place_payout": 5.1,
+          "show_payout": 3.26
         },
         {
           "race_num": 2,
-          "winner": "Out of the Woods",
-          "winner_pgm": "1",
-          "win_payout": 26.14,
-          "place_payout": 11.7,
-          "show_payout": 7.32
+          "winner": "De' Medici (106*)",
+          "winner_pgm": "6",
+          "win_payout": 6.48,
+          "place_payout": 3.4,
+          "show_payout": 2.72
         },
         {
           "race_num": 3,
-          "winner": "Vibe",
-          "winner_pgm": "10",
-          "win_payout": 16.48,
-          "place_payout": 8.76,
-          "show_payout": 5.46
+          "winner": "Gypsy Art (91*)",
+          "winner_pgm": "4",
+          "win_payout": 5.08,
+          "place_payout": 3.54,
+          "show_payout": 2.86
         },
         {
           "race_num": 4,
-          "winner": "R Disaster",
-          "winner_pgm": "6",
-          "win_payout": 16.26,
-          "place_payout": 5.0,
-          "show_payout": 3.96
+          "winner": "Awesome Ruta (113*)",
+          "winner_pgm": "1",
+          "win_payout": 3.3,
+          "place_payout": 2.28,
+          "show_payout": 2.1
         },
         {
           "race_num": 5,
-          "winner": "Yellow Card",
-          "winner_pgm": "7",
-          "win_payout": 7.8,
-          "place_payout": 4.24,
-          "show_payout": 3.02
+          "winner": "Llamp (99*)",
+          "winner_pgm": "1",
+          "win_payout": 3.22,
+          "place_payout": 2.28,
+          "show_payout": 2.32
         },
         {
           "race_num": 6,
-          "winner": "Tour Player",
-          "winner_pgm": "6",
-          "win_payout": 8.7,
-          "place_payout": 4.62,
-          "show_payout": 3.0
+          "winner": "Clever Mischief (126*)",
+          "winner_pgm": "9",
+          "win_payout": 9.66,
+          "place_payout": 4.8,
+          "show_payout": 3.38
         },
         {
           "race_num": 7,
-          "winner": "Classic Q",
-          "winner_pgm": "5",
-          "win_payout": 15.62,
-          "place_payout": 6.14,
-          "show_payout": 4.52
+          "winner": "Don't Even (111*)",
+          "winner_pgm": "4",
+          "win_payout": 10.12,
+          "place_payout": 6.54,
+          "show_payout": 4.56
         },
         {
           "race_num": 8,
-          "winner": "Crude Velocity",
-          "winner_pgm": "6",
-          "win_payout": 5.14,
-          "place_payout": 2.88,
-          "show_payout": 2.64
-        },
-        {
-          "race_num": 9,
-          "winner": "Stark Contrast",
-          "winner_pgm": "4",
-          "win_payout": 4.4,
-          "place_payout": 2.88,
-          "show_payout": 2.46
-        },
-        {
-          "race_num": 10,
-          "winner": "T O Elvis",
-          "winner_pgm": "8",
-          "win_payout": 13.74,
-          "place_payout": 7.3,
-          "show_payout": 5.58
-        },
-        {
-          "race_num": 11,
-          "winner": "Rhetorical",
-          "winner_pgm": "6",
-          "win_payout": 5.92,
-          "place_payout": 3.76,
-          "show_payout": 3.04
-        },
-        {
-          "race_num": 12,
-          "winner": "Golden Tempo",
-          "winner_pgm": "19",
-          "win_payout": 48.24,
-          "place_payout": 19.14,
-          "show_payout": 11.9
-        },
-        {
-          "race_num": 13,
-          "winner": "Gilded Bandit",
-          "winner_pgm": "8",
-          "win_payout": 5.68,
-          "place_payout": 3.62,
-          "show_payout": 2.88
-        },
-        {
-          "race_num": 14,
-          "winner": "Prize Pick",
-          "winner_pgm": "6",
-          "win_payout": 15.88,
-          "place_payout": 6.7,
-          "show_payout": 3.98
+          "winner": "Turner's Charm",
+          "winner_pgm": "10",
+          "win_payout": 18.38,
+          "place_payout": 6.6,
+          "show_payout": 4.36
         }
       ],
       "exotics": [
         {
           "wager_type": "DD",
           "race_span": "1-2",
-          "winning_combo": "11-1",
-          "payout_per_2": 69.42,
-          "payout": 34.71
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "10-11",
-          "winning_combo": "8-6",
-          "payout_per_2": 52.16,
-          "payout": 26.08
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "11-12",
-          "winning_combo": "6-19",
-          "payout_per_2": 189.66,
-          "payout": 94.83
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "11-12",
-          "winning_combo": "OAKS/DERBY 9-19",
-          "payout_per_2": 296.42,
-          "payout": 148.21
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "12-13",
-          "winning_combo": "19-8",
-          "payout_per_2": 143.22,
-          "payout": 71.61
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "13-14",
-          "winning_combo": "8-6",
-          "payout_per_2": 54.5,
-          "payout": 27.25
+          "winning_combo": "6-6",
+          "payout_per_2": 24.8,
+          "payout": 24.8
         },
         {
           "wager_type": "DD",
           "race_span": "2-3",
-          "winning_combo": "1-10",
-          "payout_per_2": 243.58,
-          "payout": 121.79
+          "winning_combo": "6-4",
+          "payout_per_2": 28.6,
+          "payout": 28.6
         },
         {
           "wager_type": "DD",
           "race_span": "3-4",
-          "winning_combo": "10-6",
-          "payout_per_2": 152.98,
-          "payout": 76.49
+          "winning_combo": "4-1",
+          "payout_per_2": 10.92,
+          "payout": 10.92
         },
         {
           "wager_type": "DD",
           "race_span": "4-5",
-          "winning_combo": "6-7",
-          "payout_per_2": 56.6,
-          "payout": 28.3
+          "winning_combo": "1-1",
+          "payout_per_2": 8.3,
+          "payout": 8.3
         },
         {
           "wager_type": "DD",
           "race_span": "5-6",
-          "winning_combo": "7-6",
-          "payout_per_2": 34.84,
-          "payout": 17.42
+          "winning_combo": "1-9",
+          "payout_per_2": 17.04,
+          "payout": 17.04
         },
         {
           "wager_type": "DD",
           "race_span": "6-7",
-          "winning_combo": "6-5",
-          "payout_per_2": 81.66,
-          "payout": 40.83
+          "winning_combo": "9-4",
+          "payout_per_2": 52.28,
+          "payout": 52.28
         },
         {
           "wager_type": "DD",
           "race_span": "7-8",
-          "winning_combo": "5-6",
-          "payout_per_2": 50.16,
-          "payout": 25.08
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "8-9",
-          "winning_combo": "6-4",
-          "payout_per_2": 10.22,
-          "payout": 5.11
-        },
-        {
-          "wager_type": "DD",
-          "race_span": "9-10",
-          "winning_combo": "4-8",
-          "payout_per_2": 82.36,
-          "payout": 41.18
+          "winning_combo": "4-10",
+          "payout_per_2": 94.7,
+          "payout": 94.7
         },
         {
           "wager_type": "EX",
           "race_span": "1",
-          "winning_combo": "11-3",
-          "payout_per_2": 10.72,
-          "payout": 10.72
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "10",
-          "winning_combo": "8-5",
-          "payout_per_2": 108.44,
-          "payout": 108.44
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "11",
-          "winning_combo": "6-10",
-          "payout_per_2": 55.8,
-          "payout": 55.8
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "12",
-          "winning_combo": "19-1",
-          "payout_per_2": 278.86,
-          "payout": 278.86
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "13",
-          "winning_combo": "8-1",
-          "payout_per_2": 53.36,
-          "payout": 53.36
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "14",
-          "winning_combo": "6-8",
-          "payout_per_2": 85.12,
-          "payout": 85.12
+          "winning_combo": "6-3",
+          "payout_per_2": 95.26,
+          "payout": 95.26
         },
         {
           "wager_type": "EX",
           "race_span": "2",
-          "winning_combo": "1-2",
-          "payout_per_2": 299.98,
-          "payout": 299.98
+          "winning_combo": "6-1",
+          "payout_per_2": 14.78,
+          "payout": 14.78
         },
         {
           "wager_type": "EX",
           "race_span": "3",
-          "winning_combo": "10-14",
-          "payout_per_2": 277.34,
-          "payout": 277.34
+          "winning_combo": "4-1",
+          "payout_per_2": 44.7,
+          "payout": 44.7
         },
         {
           "wager_type": "EX",
           "race_span": "4",
-          "winning_combo": "6-4",
-          "payout_per_2": 42.46,
-          "payout": 42.46
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "5",
-          "winning_combo": "7-10",
-          "payout_per_2": 52.5,
-          "payout": 52.5
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "6",
-          "winning_combo": "6-11",
-          "payout_per_2": 55.52,
-          "payout": 55.52
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "7",
-          "winning_combo": "5-3",
-          "payout_per_2": 51.18,
-          "payout": 51.18
-        },
-        {
-          "wager_type": "EX",
-          "race_span": "8",
-          "winning_combo": "6-1",
+          "winning_combo": "1-6",
           "payout_per_2": 10.8,
           "payout": 10.8
         },
         {
           "wager_type": "EX",
-          "race_span": "9",
-          "winning_combo": "4-12",
-          "payout_per_2": 15.58,
-          "payout": 15.58
+          "race_span": "5",
+          "winning_combo": "1-10",
+          "payout_per_2": 20.98,
+          "payout": 20.98
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "6",
+          "winning_combo": "9-3",
+          "payout_per_2": 69.5,
+          "payout": 69.5
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "7",
+          "winning_combo": "4-6",
+          "payout_per_2": 120.26,
+          "payout": 120.26
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "8",
+          "winning_combo": "10-7",
+          "payout_per_2": 47.6,
+          "payout": 47.6
         },
         {
           "wager_type": "P3",
           "race_span": "1-2-3",
-          "winning_combo": "11-1-10",
-          "payout_per_2": 513.68,
-          "payout": 128.42
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "3YO P3 6-4-19",
-          "payout_per_2": 350.78,
-          "payout": 526.17
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "3YO P3 6-4-21",
-          "payout_per_2": 10.36,
-          "payout": 15.54
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "8-6-19",
-          "payout_per_2": 1109.16,
-          "payout": 277.29
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "8-6-21",
-          "payout_per_2": 44.16,
-          "payout": 11.04
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "OAKS/FRSTR/DERBY 9-6-19",
-          "payout_per_2": 1655.48,
-          "payout": 413.87
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "OAKS/FRSTR/DERBY 9-6-21",
-          "payout_per_2": 39.32,
-          "payout": 9.83
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "10-11-12",
-          "winning_combo": "OAKS/FRSTR/DERBY 9-6-9",
-          "payout_per_2": 39.32,
-          "payout": 9.83
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "11-12-13",
-          "winning_combo": "6-19-8",
-          "payout_per_2": 468.72,
-          "payout": 117.18
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "11-12-13",
-          "winning_combo": "6-21-8",
-          "payout_per_2": 17.68,
-          "payout": 4.42
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "12-13-14",
-          "winning_combo": "19-8-6",
-          "payout_per_2": 1553.8,
-          "payout": 2330.7
+          "winning_combo": "6-6-4",
+          "payout_per_2": 74.84,
+          "payout": 74.84
         },
         {
           "wager_type": "P3",
           "race_span": "2-3-4",
-          "winning_combo": "1-10-6",
-          "payout_per_2": 1800.84,
-          "payout": 450.21
+          "winning_combo": "6-4-1",
+          "payout_per_2": 35.84,
+          "payout": 35.84
         },
         {
           "wager_type": "P3",
           "race_span": "3-4-5",
-          "winning_combo": "10-6-7",
-          "payout_per_2": 775.28,
-          "payout": 193.82
+          "winning_combo": "4-1-1",
+          "payout_per_2": 20.76,
+          "payout": 20.76
         },
         {
           "wager_type": "P3",
           "race_span": "4-5-6",
-          "winning_combo": "6-7-6",
-          "payout_per_2": 371.4,
-          "payout": 92.85
+          "winning_combo": "1-1-9",
+          "payout_per_2": 40.8,
+          "payout": 40.8
         },
         {
           "wager_type": "P3",
           "race_span": "5-6-7",
-          "winning_combo": "7-6-5",
-          "payout_per_2": 304.72,
-          "payout": 76.18
+          "winning_combo": "1-9-4",
+          "payout_per_2": 128.96,
+          "payout": 128.96
         },
         {
           "wager_type": "P3",
           "race_span": "6-7-8",
-          "winning_combo": "6-5-6",
-          "payout_per_2": 206.48,
-          "payout": 51.62
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "7-8-9",
-          "winning_combo": "5-6-4",
-          "payout_per_2": 113.32,
-          "payout": 28.33
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "8-9-10",
-          "winning_combo": "6-4-8",
-          "payout_per_2": 107.6,
-          "payout": 26.9
-        },
-        {
-          "wager_type": "P3",
-          "race_span": "9-10-11",
-          "winning_combo": "4-8-6",
-          "payout_per_2": 121.64,
-          "payout": 30.41
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "11-12-13-14",
-          "winning_combo": "6/8-19-6/8-6",
-          "payout_per_2": 3621.6,
-          "payout": 905.4
+          "winning_combo": "9-4-10",
+          "payout_per_2": 583.66,
+          "payout": 583.66
         },
         {
           "wager_type": "P4",
           "race_span": "2-3-4-5",
-          "winning_combo": "1-10-6-7",
-          "payout_per_2": 9189.8,
-          "payout": 2297.45
+          "winning_combo": "6-6-4/6/12/13/14-1/4/8-1/2/5",
+          "payout_per_2": 67.88,
+          "payout": 67.88
         },
         {
           "wager_type": "P4",
-          "race_span": "4-5-6-7",
-          "winning_combo": "6-7-6-5",
-          "payout_per_2": 3577.16,
-          "payout": 894.29
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "6-7-8-9",
-          "winning_combo": "6-5-6/10-4/5",
-          "payout_per_2": 568.32,
-          "payout": 142.08
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "8-9-10-11",
-          "winning_combo": "TURF P4 7-5-4/5-6/8",
-          "payout_per_2": 759.68,
-          "payout": 189.92
-        },
-        {
-          "wager_type": "P4",
-          "race_span": "9-10-11-12",
-          "winning_combo": "4/5-8-6/8-19",
-          "payout_per_2": 3138.36,
-          "payout": 784.59
+          "race_span": "5-6-7-8",
+          "winning_combo": "1/2/5-9-4-10",
+          "payout_per_2": 897.44,
+          "payout": 897.44
         },
         {
           "wager_type": "P5",
           "race_span": "1-2-3-4-5",
-          "winning_combo": "1/9/10/11-1-10-6-7",
-          "payout_per_2": 35142.08,
-          "payout": 8785.52
+          "winning_combo": "6-6-4/6/12/13/14-1/4/8-1/2/5",
+          "payout_per_2": 215.12,
+          "payout": 215.12
         },
         {
           "wager_type": "P5",
-          "race_span": "10-11-12-13-14",
-          "winning_combo": "8-6/8-19-6/8-6",
-          "payout_per_2": 29479.8,
-          "payout": 7369.95
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "3-4-5-6-7",
-          "winning_combo": "10-6-7-6-5",
-          "payout_per_2": 55466.56,
-          "payout": 13866.64
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "5-6-7-8-9",
-          "winning_combo": "7-6-5-6/10-4/5",
-          "payout_per_2": 2403.64,
-          "payout": 600.91
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "8-9-10-11-12",
-          "winning_combo": "6/10-4/5-8-6/8-19",
-          "payout_per_2": 9162.32,
-          "payout": 2290.58
-        },
-        {
-          "wager_type": "P5",
-          "race_span": "8-9-10-11-12",
-          "winning_combo": "ALL DIRT 6-6-6/10-8-1-9",
-          "payout_per_2": 113053.68,
-          "payout": 28263.42
+          "race_span": "4-5-6-7-8",
+          "winning_combo": "1/4/8-1/2/5-9-4-10",
+          "payout_per_2": 1810.52,
+          "payout": 1810.52
         },
         {
           "wager_type": "P6",
-          "race_span": "7-8-9-10-11-12",
-          "winning_combo": "5-6/10-4/5-8-6/8-19",
-          "payout_per_2": 96912.4,
-          "payout": 9691.24
-        },
-        {
-          "wager_type": "P6",
-          "race_span": "7-8-9-10-11-12",
-          "winning_combo": "OAKS/DERBY P6 5-9-4/5-8-6/8-19",
-          "payout_per_2": 176858.26,
-          "payout": 88429.13
+          "race_span": "3-4-5-6-7-8",
+          "winning_combo": "4-1-1-9-4-10",
+          "payout_per_2": 5889.1,
+          "payout": 5889.1
         },
         {
           "wager_type": "SF",
           "race_span": "1",
-          "winning_combo": "11-3-4-6",
-          "payout_per_2": 376.88,
-          "payout": 188.44
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "10",
-          "winning_combo": "8-5-9-7",
-          "payout_per_2": 11533.42,
-          "payout": 5766.71
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "11",
-          "winning_combo": "6-10-1-4",
-          "payout_per_2": 2511.92,
-          "payout": 1255.96
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "12",
-          "winning_combo": "19-1-22-12",
-          "payout_per_2": 188979.9,
-          "payout": 94489.95
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "13",
-          "winning_combo": "8-1-11-10",
-          "payout_per_2": 479.22,
-          "payout": 239.61
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "14",
-          "winning_combo": "6-8-9-14",
-          "payout_per_2": 2825.88,
-          "payout": 1412.94
+          "winning_combo": "6-3-8-1",
+          "payout_per_2": 801.4,
+          "payout": 801.4
         },
         {
           "wager_type": "SF",
           "race_span": "2",
-          "winning_combo": "1-2-9-8",
-          "payout_per_2": 7357.8,
-          "payout": 3678.9
+          "winning_combo": "6-1-7-5",
+          "payout_per_2": 537.4,
+          "payout": 537.4
         },
         {
           "wager_type": "SF",
           "race_span": "3",
-          "winning_combo": "10-14-6-12",
-          "payout_per_2": 4302.54,
-          "payout": 2151.27
+          "winning_combo": "4-1-11-7",
+          "payout_per_2": 3991.8,
+          "payout": 3991.8
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "4",
+          "winning_combo": "1-6-9-5",
+          "payout_per_2": 259.4,
+          "payout": 259.4
         },
         {
           "wager_type": "SF",
           "race_span": "5",
-          "winning_combo": "7-10-9-3",
-          "payout_per_2": 317.3,
-          "payout": 158.65
+          "winning_combo": "1-10-9-4",
+          "payout_per_2": 747.6,
+          "payout": 747.6
         },
         {
           "wager_type": "SF",
           "race_span": "6",
-          "winning_combo": "6-11-2-7",
-          "payout_per_2": 1295.58,
-          "payout": 647.79
+          "winning_combo": "9-3-11-5",
+          "payout_per_2": 1694.2,
+          "payout": 1694.2
         },
         {
           "wager_type": "SF",
           "race_span": "7",
-          "winning_combo": "5-3-8-7",
-          "payout_per_2": 904.04,
-          "payout": 452.02
+          "winning_combo": "4-6-12-5",
+          "payout_per_2": 5192.2,
+          "payout": 5192.2
         },
         {
           "wager_type": "SF",
           "race_span": "8",
-          "winning_combo": "6-1-5-4",
-          "payout_per_2": 228.6,
-          "payout": 114.3
-        },
-        {
-          "wager_type": "SF",
-          "race_span": "9",
-          "winning_combo": "4-12-9-7",
-          "payout_per_2": 663.44,
-          "payout": 331.72
+          "winning_combo": "10-7-9-1",
+          "payout_per_2": 775.6,
+          "payout": 775.6
         },
         {
           "wager_type": "TRI",
           "race_span": "1",
-          "winning_combo": "11-3-4",
-          "payout_per_2": 168.28,
-          "payout": 42.07
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "10",
-          "winning_combo": "8-5-9",
-          "payout_per_2": 1802.76,
-          "payout": 450.69
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "11",
-          "winning_combo": "6-10-1",
-          "payout_per_2": 526.24,
-          "payout": 131.56
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "12",
-          "winning_combo": "19-1-22",
-          "payout_per_2": 22501.56,
-          "payout": 5625.39
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "13",
-          "winning_combo": "8-1-11",
-          "payout_per_2": 216.24,
-          "payout": 54.06
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "14",
-          "winning_combo": "6-8-9",
-          "payout_per_2": 323.12,
-          "payout": 80.78
+          "winning_combo": "6-3-8",
+          "payout_per_2": 295.0,
+          "payout": 295.0
         },
         {
           "wager_type": "TRI",
           "race_span": "2",
-          "winning_combo": "1-2-9",
-          "payout_per_2": 2024.04,
-          "payout": 506.01
+          "winning_combo": "6-1-7",
+          "payout_per_2": 93.12,
+          "payout": 93.12
         },
         {
           "wager_type": "TRI",
           "race_span": "3",
-          "winning_combo": "10-14-6",
-          "payout_per_2": 1408.88,
-          "payout": 352.22
+          "winning_combo": "4-1-11",
+          "payout_per_2": 642.92,
+          "payout": 642.92
         },
         {
           "wager_type": "TRI",
           "race_span": "4",
-          "winning_combo": "6-4-1",
-          "payout_per_2": 162.6,
-          "payout": 40.65
+          "winning_combo": "1-6-9",
+          "payout_per_2": 46.16,
+          "payout": 46.16
         },
         {
           "wager_type": "TRI",
           "race_span": "5",
-          "winning_combo": "7-10-9",
-          "payout_per_2": 171.48,
-          "payout": 42.87
+          "winning_combo": "1-10-9",
+          "payout_per_2": 127.64,
+          "payout": 127.64
         },
         {
           "wager_type": "TRI",
           "race_span": "6",
-          "winning_combo": "6-11-2",
-          "payout_per_2": 156.32,
-          "payout": 39.08
+          "winning_combo": "9-3-11",
+          "payout_per_2": 415.76,
+          "payout": 415.76
         },
         {
           "wager_type": "TRI",
           "race_span": "7",
-          "winning_combo": "5-3-8",
-          "payout_per_2": 212.12,
-          "payout": 53.03
+          "winning_combo": "4-6-12",
+          "payout_per_2": 673.32,
+          "payout": 673.32
         },
         {
           "wager_type": "TRI",
           "race_span": "8",
-          "winning_combo": "6-1-5",
-          "payout_per_2": 75.64,
-          "payout": 18.91
-        },
-        {
-          "wager_type": "TRI",
-          "race_span": "9",
-          "winning_combo": "4-12-9",
-          "payout_per_2": 134.92,
-          "payout": 33.73
+          "winning_combo": "10-7-9",
+          "payout_per_2": 185.6,
+          "payout": 185.6
         }
       ]
     },
@@ -3564,11 +3194,11 @@
       "P3": [
         {
           "race_span": "5-6-7",
-          "times_hit": 48,
-          "avg_payout": 1263.19,
-          "median_payout": 261.38,
-          "value_score": 4.833,
-          "overlay_ratio": 1.96,
+          "times_hit": 49,
+          "avg_payout": 1240.04,
+          "median_payout": 261.24,
+          "value_score": 4.747,
+          "overlay_ratio": 1.94,
           "consistency": "MODERATE"
         }
       ],
@@ -3579,30 +3209,30 @@
           "avg_payout": 26370.65,
           "median_payout": 1126.76,
           "value_score": 23.404,
-          "overlay_ratio": 3.99,
+          "overlay_ratio": 4.02,
           "consistency": "LOTTERY"
         }
       ],
       "P5": [
         {
           "race_span": "4-5-6-7-8",
-          "times_hit": 17,
-          "avg_payout": 64525.92,
-          "median_payout": 15478.68,
-          "value_score": 4.169,
-          "overlay_ratio": 2.43,
+          "times_hit": 18,
+          "avg_payout": 61041.73,
+          "median_payout": 14668.0,
+          "value_score": 4.162,
+          "overlay_ratio": 2.34,
           "consistency": "MODERATE"
         }
       ],
       "P6": [
         {
           "race_span": "3-4-5-6-7-8",
-          "times_hit": 7,
-          "avg_payout": 531536.39,
-          "median_payout": 200609.4,
-          "value_score": 2.65,
-          "overlay_ratio": 2.75,
-          "consistency": "HIGH"
+          "times_hit": 8,
+          "avg_payout": 465830.47,
+          "median_payout": 112603.0,
+          "value_score": 4.137,
+          "overlay_ratio": 2.58,
+          "consistency": "MODERATE"
         }
       ]
     },
@@ -4353,18 +3983,18 @@
     },
     "CD": {
       "DD": {
-        "avg_payout": 91.9,
-        "median_payout": 43.68,
-        "total_hits": 405,
-        "overlay_ratio": 1.041,
+        "avg_payout": 90.91,
+        "median_payout": 43.51,
+        "total_hits": 412,
+        "overlay_ratio": 1.039,
         "wager_base": 2.0,
         "sample_sequences": 10,
         "thin_sequences_excluded": 3,
         "by_position": {
           "1-2": {
-            "times_hit": 48,
-            "avg_payout": 56.32,
-            "median_payout": 31.01,
+            "times_hit": 49,
+            "avg_payout": 55.67,
+            "median_payout": 29.96,
             "max_payout": 435.84,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4373,9 +4003,9 @@
             "thin_sample": false
           },
           "2-3": {
-            "times_hit": 48,
-            "avg_payout": 83.2,
-            "median_payout": 40.47,
+            "times_hit": 49,
+            "avg_payout": 82.09,
+            "median_payout": 40.4,
             "max_payout": 763.52,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4384,42 +4014,42 @@
             "thin_sample": false
           },
           "3-4": {
-            "times_hit": 47,
-            "avg_payout": 88.39,
-            "median_payout": 43.64,
+            "times_hit": 48,
+            "avg_payout": 86.77,
+            "median_payout": 42.47,
             "max_payout": 940.12,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.0,
+            "overlay_ratio": 0.99,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "4-5": {
-            "times_hit": 47,
-            "avg_payout": 78.65,
-            "median_payout": 43.72,
+            "times_hit": 48,
+            "avg_payout": 77.18,
+            "median_payout": 43.45,
             "max_payout": 497.9,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.89,
+            "overlay_ratio": 0.88,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "5-6": {
-            "times_hit": 47,
-            "avg_payout": 92.56,
-            "median_payout": 49.74,
+            "times_hit": 48,
+            "avg_payout": 90.99,
+            "median_payout": 47.33,
             "max_payout": 703.52,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.05,
+            "overlay_ratio": 1.04,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "6-7": {
-            "times_hit": 47,
-            "avg_payout": 110.78,
-            "median_payout": 58.9,
+            "times_hit": 48,
+            "avg_payout": 109.57,
+            "median_payout": 57.66,
             "max_payout": 841.82,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4428,9 +4058,9 @@
             "thin_sample": false
           },
           "7-8": {
-            "times_hit": 47,
-            "avg_payout": 125.86,
-            "median_payout": 50.16,
+            "times_hit": 48,
+            "avg_payout": 125.21,
+            "median_payout": 53.02,
             "max_payout": 1054.92,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4445,7 +4075,7 @@
             "max_payout": 2769.78,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.43,
+            "overlay_ratio": 1.45,
             "consistency": "HIGH",
             "thin_sample": false
           },
@@ -4456,7 +4086,7 @@
             "max_payout": 768.98,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.88,
+            "overlay_ratio": 0.89,
             "consistency": "HIGH",
             "thin_sample": false
           },
@@ -4478,7 +4108,7 @@
             "max_payout": 296.42,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.09,
+            "overlay_ratio": 1.1,
             "consistency": "HIGH",
             "thin_sample": true
           },
@@ -4489,7 +4119,7 @@
             "max_payout": 143.22,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.76,
+            "overlay_ratio": 0.77,
             "consistency": "HIGH",
             "thin_sample": true
           },
@@ -4507,51 +4137,51 @@
         }
       },
       "P3": {
-        "avg_payout": 727.06,
-        "median_payout": 210.22,
-        "total_hits": 378,
-        "overlay_ratio": 1.055,
+        "avg_payout": 718.0,
+        "median_payout": 205.31,
+        "total_hits": 384,
+        "overlay_ratio": 1.051,
         "wager_base": 2.0,
         "sample_sequences": 10,
         "thin_sequences_excluded": 2,
         "by_position": {
           "1-2-3": {
-            "times_hit": 50,
-            "avg_payout": 300.77,
-            "median_payout": 131.32,
+            "times_hit": 51,
+            "avg_payout": 296.34,
+            "median_payout": 130.32,
             "max_payout": 2584.04,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.44,
+            "overlay_ratio": 0.43,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "2-3-4": {
-            "times_hit": 47,
-            "avg_payout": 859.53,
-            "median_payout": 238.44,
+            "times_hit": 48,
+            "avg_payout": 842.37,
+            "median_payout": 219.3,
             "max_payout": 22564.32,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.25,
+            "overlay_ratio": 1.23,
             "consistency": "MODERATE",
             "thin_sample": false
           },
           "3-4-5": {
-            "times_hit": 47,
-            "avg_payout": 487.66,
-            "median_payout": 217.08,
+            "times_hit": 48,
+            "avg_payout": 477.93,
+            "median_payout": 211.78,
             "max_payout": 6010.32,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.71,
+            "overlay_ratio": 0.7,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "4-5-6": {
-            "times_hit": 47,
-            "avg_payout": 679.07,
-            "median_payout": 203.36,
+            "times_hit": 48,
+            "avg_payout": 665.77,
+            "median_payout": 198.84,
             "max_payout": 5874.36,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4560,20 +4190,20 @@
             "thin_sample": false
           },
           "5-6-7": {
-            "times_hit": 48,
-            "avg_payout": 1263.19,
-            "median_payout": 261.38,
+            "times_hit": 49,
+            "avg_payout": 1240.04,
+            "median_payout": 261.24,
             "max_payout": 26128.36,
             "wager_base": 2.0,
             "is_overlay": true,
-            "overlay_ratio": 1.83,
+            "overlay_ratio": 1.82,
             "consistency": "MODERATE",
             "thin_sample": false
           },
           "6-7-8": {
-            "times_hit": 49,
-            "avg_payout": 930.34,
-            "median_payout": 293.2,
+            "times_hit": 50,
+            "avg_payout": 923.41,
+            "median_payout": 306.5,
             "max_payout": 9147.84,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4588,7 +4218,7 @@
             "max_payout": 12178.04,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.32,
+            "overlay_ratio": 1.33,
             "consistency": "MODERATE",
             "thin_sample": false
           },
@@ -4610,7 +4240,7 @@
             "max_payout": 9752.0,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.25,
+            "overlay_ratio": 1.27,
             "consistency": "MODERATE",
             "thin_sample": false
           },
@@ -4621,7 +4251,7 @@
             "max_payout": 1655.48,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.53,
+            "overlay_ratio": 0.54,
             "consistency": "HIGH",
             "thin_sample": false
           },
@@ -4632,7 +4262,7 @@
             "max_payout": 468.72,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.29,
+            "overlay_ratio": 0.3,
             "consistency": "HIGH",
             "thin_sample": true
           },
@@ -4643,25 +4273,25 @@
             "max_payout": 1553.8,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.2,
+            "overlay_ratio": 1.22,
             "consistency": "HIGH",
             "thin_sample": true
           }
         }
       },
       "P4": {
-        "avg_payout": 7252.74,
-        "median_payout": 1285.34,
-        "total_hits": 97,
-        "overlay_ratio": 0.702,
+        "avg_payout": 7115.97,
+        "median_payout": 1282.78,
+        "total_hits": 99,
+        "overlay_ratio": 0.699,
         "wager_base": 2.0,
         "sample_sequences": 4,
         "thin_sequences_excluded": 5,
         "by_position": {
           "2-3-4-5": {
-            "times_hit": 47,
-            "avg_payout": 3233.59,
-            "median_payout": 898.0,
+            "times_hit": 48,
+            "avg_payout": 3167.64,
+            "median_payout": 893.28,
             "max_payout": 55176.32,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4676,7 +4306,7 @@
             "max_payout": 281259.2,
             "wager_base": 2.0,
             "is_overlay": true,
-            "overlay_ratio": 2.56,
+            "overlay_ratio": 2.59,
             "consistency": "LOTTERY",
             "thin_sample": false
           },
@@ -4698,18 +4328,18 @@
             "max_payout": 41871.64,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.4,
+            "overlay_ratio": 0.41,
             "consistency": "HIGH",
             "thin_sample": false
           },
           "5-6-7-8": {
-            "times_hit": 17,
-            "avg_payout": 7407.09,
-            "median_payout": 1696.04,
+            "times_hit": 18,
+            "avg_payout": 7045.45,
+            "median_payout": 1438.8,
             "max_payout": 33302.52,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.72,
+            "overlay_ratio": 0.69,
             "consistency": "MODERATE",
             "thin_sample": false
           },
@@ -4720,7 +4350,7 @@
             "max_payout": 4154.96,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.19,
+            "overlay_ratio": 0.2,
             "consistency": "HIGH",
             "thin_sample": true
           },
@@ -4760,18 +4390,18 @@
         }
       },
       "P5": {
-        "avg_payout": 24046.49,
+        "avg_payout": 23619.94,
         "median_payout": 4828.52,
-        "total_hits": 106,
-        "overlay_ratio": 0.863,
+        "total_hits": 108,
+        "overlay_ratio": 0.869,
         "wager_base": 2.0,
         "sample_sequences": 5,
         "thin_sequences_excluded": 4,
         "by_position": {
           "1-2-3-4-5": {
-            "times_hit": 47,
-            "avg_payout": 9224.33,
-            "median_payout": 3508.8,
+            "times_hit": 48,
+            "avg_payout": 9036.64,
+            "median_payout": 3487.74,
             "max_payout": 36511.48,
             "wager_base": 2.0,
             "is_overlay": false,
@@ -4786,7 +4416,7 @@
             "max_payout": 55466.56,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.49,
+            "overlay_ratio": 0.5,
             "consistency": "HIGH",
             "thin_sample": false
           },
@@ -4797,7 +4427,7 @@
             "max_payout": 148615.0,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.74,
+            "overlay_ratio": 0.76,
             "consistency": "MODERATE",
             "thin_sample": false
           },
@@ -4808,18 +4438,18 @@
             "max_payout": 196460.84,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 1.12,
+            "overlay_ratio": 1.15,
             "consistency": "MODERATE",
             "thin_sample": false
           },
           "4-5-6-7-8": {
-            "times_hit": 17,
-            "avg_payout": 64525.92,
-            "median_payout": 15478.68,
+            "times_hit": 18,
+            "avg_payout": 61041.73,
+            "median_payout": 14668.0,
             "max_payout": 367683.72,
             "wager_base": 2.0,
             "is_overlay": true,
-            "overlay_ratio": 2.32,
+            "overlay_ratio": 2.25,
             "consistency": "MODERATE",
             "thin_sample": false
           },
@@ -4830,7 +4460,7 @@
             "max_payout": 113053.68,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.96,
+            "overlay_ratio": 0.99,
             "consistency": "MODERATE",
             "thin_sample": true
           },
@@ -4841,7 +4471,7 @@
             "max_payout": 110417.08,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.72,
+            "overlay_ratio": 0.74,
             "consistency": "MODERATE",
             "thin_sample": true
           },
@@ -4852,7 +4482,7 @@
             "max_payout": 9404.44,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.27,
+            "overlay_ratio": 0.28,
             "consistency": "HIGH",
             "thin_sample": true
           },
@@ -4863,7 +4493,7 @@
             "max_payout": 29479.8,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 0.57,
+            "overlay_ratio": 0.58,
             "consistency": "HIGH",
             "thin_sample": true
           }
@@ -4923,14 +4553,14 @@
             "thin_sample": true
           },
           "3-4-5-6-7-8": {
-            "times_hit": 7,
-            "avg_payout": 531536.39,
-            "median_payout": 200609.4,
+            "times_hit": 8,
+            "avg_payout": 465830.47,
+            "median_payout": 112603.0,
             "max_payout": 2569827.8,
             "wager_base": 2.0,
             "is_overlay": false,
-            "overlay_ratio": 4.54,
-            "consistency": "HIGH",
+            "overlay_ratio": 3.98,
+            "consistency": "MODERATE",
             "thin_sample": true
           },
           "8-9-10-11-12-13": {
@@ -7528,27 +7158,27 @@
     },
     "CD": {
       "p3_to_p4": {
-        "mean": 12.032,
-        "median": 4.58,
+        "mean": 11.892,
+        "median": 4.571,
         "min": 0.221,
         "max": 302.931,
-        "sample": 135,
+        "sample": 137,
         "confidence": "HIGH"
       },
       "p3_to_p5": {
-        "mean": 200.805,
-        "median": 23.833,
+        "mean": 198.165,
+        "median": 23.452,
         "min": 0.384,
         "max": 10912.517,
-        "sample": 145,
+        "sample": 147,
         "confidence": "HIGH"
       },
       "p4_to_p5": {
-        "mean": 7.808,
-        "median": 5.113,
+        "mean": 7.721,
+        "median": 5.112,
         "min": 0.042,
         "max": 42.649,
-        "sample": 118,
+        "sample": 120,
         "confidence": "HIGH"
       }
     },
@@ -12121,41 +11751,41 @@
     },
     "CD": {
       "P4": {
-        "sample": 47,
-        "mean_ratio": 1.887,
-        "median_ratio": 1.686,
-        "exotic_beat_parlay_pct": 93.6,
-        "avg_edge": -61.72,
+        "sample": 48,
+        "mean_ratio": 1.874,
+        "median_ratio": 1.646,
+        "exotic_beat_parlay_pct": 93.8,
+        "avg_edge": -56.81,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 46,
-            "exotic_win_pct": 93.5,
-            "avg_ratio": 1.857
+            "sample": 47,
+            "exotic_win_pct": 93.6,
+            "avg_ratio": 1.844
           },
           {
             "min_leg": 8,
-            "sample": 45,
-            "exotic_win_pct": 93.3,
-            "avg_ratio": 1.843
+            "sample": 46,
+            "exotic_win_pct": 93.5,
+            "avg_ratio": 1.83
           },
           {
             "min_leg": 10,
-            "sample": 41,
-            "exotic_win_pct": 92.7,
-            "avg_ratio": 1.778
+            "sample": 42,
+            "exotic_win_pct": 92.9,
+            "avg_ratio": 1.765
           },
           {
             "min_leg": 12,
-            "sample": 35,
-            "exotic_win_pct": 91.4,
-            "avg_ratio": 1.772
+            "sample": 36,
+            "exotic_win_pct": 91.7,
+            "avg_ratio": 1.757
           },
           {
             "min_leg": 15,
-            "sample": 27,
-            "exotic_win_pct": 88.9,
-            "avg_ratio": 1.814
+            "sample": 28,
+            "exotic_win_pct": 89.3,
+            "avg_ratio": 1.793
           },
           {
             "min_leg": 20,
@@ -12595,6 +12225,17 @@
             "ratio": 1.26,
             "max_leg": 13.4,
             "avg_field": 9.2
+          },
+          {
+            "date": "2026-05-07",
+            "span": "5-6-7-8",
+            "parlay": 723.22,
+            "exotic": 897.44,
+            "exotic_p2": 897.44,
+            "wager_base": 2.0,
+            "ratio": 1.241,
+            "max_leg": 18.38,
+            "avg_field": 10.8
           },
           {
             "date": "2025-06-18",
@@ -13101,10 +12742,10 @@
             ]
           },
           "5-6-7-8": {
-            "sample": 8,
-            "mean_ratio": 2.108,
-            "median_ratio": 2.278,
-            "exotic_beat_parlay_pct": 87.5,
+            "sample": 9,
+            "mean_ratio": 2.012,
+            "median_ratio": 2.252,
+            "exotic_beat_parlay_pct": 88.9,
             "days": [
               {
                 "date": "2025-06-12",
@@ -13182,6 +12823,17 @@
                 "ratio": 1.26,
                 "max_leg": 13.4,
                 "avg_field": 9.2
+              },
+              {
+                "date": "2026-05-07",
+                "span": "5-6-7-8",
+                "parlay": 723.22,
+                "exotic": 897.44,
+                "exotic_p2": 897.44,
+                "wager_base": 2.0,
+                "ratio": 1.241,
+                "max_leg": 18.38,
+                "avg_field": 10.8
               },
               {
                 "date": "2025-06-26",
@@ -13284,41 +12936,41 @@
         }
       },
       "P5": {
-        "sample": 47,
-        "mean_ratio": 2.431,
-        "median_ratio": 2.191,
+        "sample": 48,
+        "mean_ratio": 2.411,
+        "median_ratio": 2.19,
         "exotic_beat_parlay_pct": 97.9,
-        "avg_edge": -355.61,
+        "avg_edge": -335.35,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 47,
+            "sample": 48,
             "exotic_win_pct": 97.9,
-            "avg_ratio": 2.431
+            "avg_ratio": 2.411
           },
           {
             "min_leg": 8,
-            "sample": 46,
-            "exotic_win_pct": 97.8,
-            "avg_ratio": 2.414
+            "sample": 47,
+            "exotic_win_pct": 97.9,
+            "avg_ratio": 2.395
           },
           {
             "min_leg": 10,
-            "sample": 46,
-            "exotic_win_pct": 97.8,
-            "avg_ratio": 2.414
+            "sample": 47,
+            "exotic_win_pct": 97.9,
+            "avg_ratio": 2.395
           },
           {
             "min_leg": 12,
-            "sample": 41,
+            "sample": 42,
             "exotic_win_pct": 97.6,
-            "avg_ratio": 2.365
+            "avg_ratio": 2.345
           },
           {
             "min_leg": 15,
-            "sample": 32,
-            "exotic_win_pct": 96.9,
-            "avg_ratio": 2.506
+            "sample": 33,
+            "exotic_win_pct": 97.0,
+            "avg_ratio": 2.476
           },
           {
             "min_leg": 20,
@@ -13804,6 +13456,17 @@
             "avg_field": 14.8
           },
           {
+            "date": "2026-05-07",
+            "span": "4-5-6-7-8",
+            "parlay": 1193.31,
+            "exotic": 1810.52,
+            "exotic_p2": 1810.52,
+            "wager_base": 2.0,
+            "ratio": 1.517,
+            "max_leg": 18.38,
+            "avg_field": 10.4
+          },
+          {
             "date": "2025-06-13",
             "span": "5-6-7-8-9",
             "parlay": 1336.52,
@@ -14264,9 +13927,9 @@
             ]
           },
           "4-5-6-7-8": {
-            "sample": 8,
-            "mean_ratio": 2.982,
-            "median_ratio": 2.119,
+            "sample": 9,
+            "mean_ratio": 2.819,
+            "median_ratio": 1.954,
             "exotic_beat_parlay_pct": 100.0,
             "days": [
               {
@@ -14356,6 +14019,17 @@
                 "ratio": 1.549,
                 "max_leg": 36.38,
                 "avg_field": 10.0
+              },
+              {
+                "date": "2026-05-07",
+                "span": "4-5-6-7-8",
+                "parlay": 1193.31,
+                "exotic": 1810.52,
+                "exotic_p2": 1810.52,
+                "wager_base": 2.0,
+                "ratio": 1.517,
+                "max_leg": 18.38,
+                "avg_field": 10.4
               }
             ]
           },
@@ -14447,41 +14121,41 @@
         }
       },
       "P6": {
-        "sample": 39,
-        "mean_ratio": 3.749,
-        "median_ratio": 2.75,
-        "exotic_beat_parlay_pct": 89.7,
-        "avg_edge": 110740.9,
+        "sample": 40,
+        "mean_ratio": 3.704,
+        "median_ratio": 2.675,
+        "exotic_beat_parlay_pct": 90.0,
+        "avg_edge": 108043.83,
         "threshold_analysis": [
           {
             "min_leg": 6,
-            "sample": 39,
-            "exotic_win_pct": 89.7,
-            "avg_ratio": 3.749
+            "sample": 40,
+            "exotic_win_pct": 90.0,
+            "avg_ratio": 3.704
           },
           {
             "min_leg": 8,
-            "sample": 39,
-            "exotic_win_pct": 89.7,
-            "avg_ratio": 3.749
+            "sample": 40,
+            "exotic_win_pct": 90.0,
+            "avg_ratio": 3.704
           },
           {
             "min_leg": 10,
-            "sample": 39,
-            "exotic_win_pct": 89.7,
-            "avg_ratio": 3.749
+            "sample": 40,
+            "exotic_win_pct": 90.0,
+            "avg_ratio": 3.704
           },
           {
             "min_leg": 12,
-            "sample": 33,
-            "exotic_win_pct": 87.9,
-            "avg_ratio": 3.879
+            "sample": 34,
+            "exotic_win_pct": 88.2,
+            "avg_ratio": 3.822
           },
           {
             "min_leg": 15,
-            "sample": 24,
-            "exotic_win_pct": 83.3,
-            "avg_ratio": 4.417
+            "sample": 25,
+            "exotic_win_pct": 84.0,
+            "avg_ratio": 4.318
           },
           {
             "min_leg": 20,
@@ -14783,6 +14457,17 @@
             "ratio": 1.984,
             "max_leg": 19.86,
             "avg_field": 10.2
+          },
+          {
+            "date": "2026-05-07",
+            "span": "3-4-5-6-7-8",
+            "parlay": 3031.01,
+            "exotic": 5889.1,
+            "exotic_p2": 5889.1,
+            "wager_base": 2.0,
+            "ratio": 1.943,
+            "max_leg": 18.38,
+            "avg_field": 10.3
           },
           {
             "date": "2025-05-26",
@@ -15314,10 +14999,10 @@
             ]
           },
           "3-4-5-6-7-8": {
-            "sample": 7,
-            "mean_ratio": 6.815,
-            "median_ratio": 2.601,
-            "exotic_beat_parlay_pct": 85.7,
+            "sample": 8,
+            "mean_ratio": 6.206,
+            "median_ratio": 2.325,
+            "exotic_beat_parlay_pct": 87.5,
             "days": [
               {
                 "date": "2025-05-15",
@@ -15373,6 +15058,17 @@
                 "ratio": 2.049,
                 "max_leg": 13.4,
                 "avg_field": 9.0
+              },
+              {
+                "date": "2026-05-07",
+                "span": "3-4-5-6-7-8",
+                "parlay": 3031.01,
+                "exotic": 5889.1,
+                "exotic_p2": 5889.1,
+                "wager_base": 2.0,
+                "ratio": 1.943,
+                "max_leg": 18.38,
+                "avg_field": 10.3
               },
               {
                 "date": "2025-05-29",
@@ -32841,5 +32537,884 @@
       }
     }
   },
-  "today_entries": {}
+  "today_entries": {
+    "CD": {
+      "date": "2026-05-07",
+      "races": [
+        {
+          "race_num": 1,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1M,\nDirt,\n$30,000 Maiden Claiming",
+          "surface": "Dirt",
+          "field_size": 8,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Consequential",
+              "morning_line": 10.0,
+              "jockey": "Michael A. TomlinsonFlorent Geroux",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Go for Rocket",
+              "morning_line": 3.0,
+              "jockey": "Riley MottTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Bold Stand",
+              "morning_line": 8.0,
+              "jockey": "Eoin G. HartyAlex Achard",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Hill Country",
+              "morning_line": 12.0,
+              "jockey": "J. Keith DesormeauxJames Graham",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "King of Salsa",
+              "morning_line": 15.0,
+              "jockey": "John F. Hill, Jr.Mario Gutierrez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Pampered Prince",
+              "morning_line": 4.0,
+              "jockey": "Albert M. Stall, Jr.Irad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Mula",
+              "morning_line": 2.0,
+              "jockey": "Carlos SantamariaGabriel Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Show Me the Munny",
+              "morning_line": 6.0,
+              "jockey": "Paul J. McGeeEdgar Morales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 2,
+          "race_type": "Open | 4 Year Olds And Up",
+          "distance": "1 1/16M,\nDirt,\n$25,000 Claiming",
+          "surface": "Dirt",
+          "field_size": 8,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "My Noble Knight",
+              "morning_line": 3.0,
+              "jockey": "Kinnon LaRoseJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Slim Slow Slider",
+              "morning_line": 15.0,
+              "jockey": "Jose A. GallegosLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Urban Planner",
+              "morning_line": 10.0,
+              "jockey": "Eoin G. HartyTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "C F V Bullet",
+              "morning_line": 15.0,
+              "jockey": "Cirilo GorostietaConstantino Roman",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "King of Hollywood",
+              "morning_line": 8.0,
+              "jockey": "J. Kent SweezeyEdgar Morales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "De' Medici",
+              "morning_line": 2.0,
+              "jockey": "Michael W. McCarthyIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Time for Trouble",
+              "morning_line": 3.5,
+              "jockey": "Eric N. FosterJaime A. Torres",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Single Dot Yaht",
+              "morning_line": 6.0,
+              "jockey": "Rohan G. CrichtonCristian A. Torres",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 3,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "5F,\nTurf,\nMaiden Special Weight",
+          "surface": "Turf",
+          "field_size": 14,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Dismiss",
+              "morning_line": 12.0,
+              "jockey": "Pavel MatejkaMario Gutierrez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Final Countdown",
+              "morning_line": 30.0,
+              "jockey": "Robert PompellAbel Cedillo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Ink Lies",
+              "morning_line": 3.0,
+              "jockey": "Wesley A. WardJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Gypsy Art",
+              "morning_line": 2.0,
+              "jockey": "Wesley A. WardGerardo Corrales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Zap d'Etat",
+              "morning_line": 12.0,
+              "jockey": "Gary F. HouseAlex Achard",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Ice Wolf",
+              "morning_line": 5.0,
+              "jockey": "Gregory D. FoleyTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Mr. Vaggio",
+              "morning_line": 30.0,
+              "jockey": "John A. HancockFernando De La Cruz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Caragogo",
+              "morning_line": 8.0,
+              "jockey": "George R. Arnold IIEdgar Morales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Himothy",
+              "morning_line": 15.0,
+              "jockey": "Ron MoquettRafael Bejarano",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Tranquillo",
+              "morning_line": 6.0,
+              "jockey": "D. Whitworth BeckmanIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Soulman",
+              "morning_line": null,
+              "jockey": "Chris A. HartmanEdgar Morales",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Halley's Comet",
+              "morning_line": null,
+              "jockey": "Thomas Drury, Jr.Brian Joseph Hernandez, Jr.",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "13",
+              "horse_name": "Mischievous Richie",
+              "morning_line": null,
+              "jockey": "Larry RivelliJareth Loveberry",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "14",
+              "horse_name": "Tattoo",
+              "morning_line": null,
+              "jockey": "Ron ThompsonAndres Calleja",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 4,
+          "race_type": "Open | 4 Year Olds And Up",
+          "distance": "1M,\nDirt,\n$20,000 Starter Allowance",
+          "surface": "Dirt",
+          "field_size": 9,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Awesome Ruta",
+              "morning_line": 1.4,
+              "jockey": "Joe SharpJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Evening News",
+              "morning_line": 20.0,
+              "jockey": "Hugo AndradeOscar Villarreal",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Couperin",
+              "morning_line": 12.0,
+              "jockey": "Jason G. CookRafael Bejarano",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Eye Dee Kay",
+              "morning_line": 2.5,
+              "jockey": "Kinnon LaRoseIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Calycanthus",
+              "morning_line": 15.0,
+              "jockey": "S. Jade CunninghamGabriel Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Trusty Rusty",
+              "morning_line": 4.5,
+              "jockey": "Robert B. Hess, Jr.Luis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Non Fungible",
+              "morning_line": 30.0,
+              "jockey": "Michelle DaltonSummer Pauly",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Itsinmyblood",
+              "morning_line": 15.0,
+              "jockey": "Randy L. MorseTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Pappy's Revenge",
+              "morning_line": 8.0,
+              "jockey": "Genaro GarciaVictor R. Carrasco",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 5,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "6F,\nDirt,\n$30,000 Maiden Claiming",
+          "surface": "Dirt",
+          "field_size": 11,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Llamp",
+              "morning_line": 3.5,
+              "jockey": "Eddie KenneallyBen Curtis",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Cookie's Run",
+              "morning_line": 5.0,
+              "jockey": "Kenneth G. McPeekEmmanuel Esquivel",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Pedital",
+              "morning_line": 8.0,
+              "jockey": "Timothy E. HammLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Cusp of Mischief",
+              "morning_line": 12.0,
+              "jockey": "Thomas D. VanceCorey J. Lanerie",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Noroomformischief",
+              "morning_line": 10.0,
+              "jockey": "John EnnisDanny Sheehy",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Peggie Castle",
+              "morning_line": 30.0,
+              "jockey": "Eugene S. VoslerOrlando Bocachica",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Vino Alla Mora",
+              "morning_line": 30.0,
+              "jockey": "James ButcherMartin Garcia",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Speightsy Rival",
+              "morning_line": 15.0,
+              "jockey": "Lacy PierceLuan Machado",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Lindy Can",
+              "morning_line": 12.0,
+              "jockey": "Dana HancockJann N. Hernandez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Rotisserie",
+              "morning_line": 8.0,
+              "jockey": "Michael E. LauerTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Hot Gamer",
+              "morning_line": 2.5,
+              "jockey": "Steven M. AsmussenJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 6,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1M,\nTurf,\n$80,000 Allowance Optional Claiming",
+          "surface": "Turf",
+          "field_size": 13,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Pineland",
+              "morning_line": 12.0,
+              "jockey": "Lindsay SchultzJulien R. Leparoux",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Demolition Duke",
+              "morning_line": 12.0,
+              "jockey": "Brendan P. WalshJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Esmark",
+              "morning_line": 10.0,
+              "jockey": "Victoria H. OliverLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Otago",
+              "morning_line": 15.0,
+              "jockey": "Kelsey DannerAxel Concepcion",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Pitkin",
+              "morning_line": 2.0,
+              "jockey": "Ian R. WilkesEdgard J. Zayas",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Higgins Boat",
+              "morning_line": 3.0,
+              "jockey": "Larry RivelliJareth Loveberry",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Izzy d'Oro",
+              "morning_line": 8.0,
+              "jockey": "Kenneth G. McPeekIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Alder",
+              "morning_line": 20.0,
+              "jockey": "David JacobsonRafael Bejarano",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Clever Mischief",
+              "morning_line": 4.5,
+              "jockey": "Brendan P. WalshTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Big to Do",
+              "morning_line": 20.0,
+              "jockey": "Troy S. WismerWilliam Antongeorgi III",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Heart Headed",
+              "morning_line": null,
+              "jockey": "Joe SharpIrad Ortiz, Jr.",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "12",
+              "horse_name": "In a Jam",
+              "morning_line": null,
+              "jockey": "Jason G. CookRafael Bejarano",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "13",
+              "horse_name": "Saint in the City",
+              "morning_line": null,
+              "jockey": "Thomas L. Van BergAdam Beschizza",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 7,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "6F,\nDirt,\nMaiden Special Weight",
+          "surface": "Dirt",
+          "field_size": 12,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Poppy Woppy",
+              "morning_line": 12.0,
+              "jockey": "Matthew P. SimsEdgar Morales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Wado Wave",
+              "morning_line": 30.0,
+              "jockey": "James DimmettSara Hess",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Gaga's Girl",
+              "morning_line": 15.0,
+              "jockey": "Timothy E. HammJames Graham",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Don't Even",
+              "morning_line": 4.5,
+              "jockey": "Wesley A. WardIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Muskoka Katt",
+              "morning_line": 10.0,
+              "jockey": "Jordan BlairJaime A. Torres",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "By La Rina",
+              "morning_line": 15.0,
+              "jockey": "Michael A. TomlinsonAxel Concepcion",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Maxi Maxi",
+              "morning_line": 12.0,
+              "jockey": "Danny WerreLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Mighty Nora",
+              "morning_line": 3.5,
+              "jockey": "Dallas StewartJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Once Upon a Time",
+              "morning_line": 30.0,
+              "jockey": "Michelle DaltonSummer Pauly",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Little Bit Angel",
+              "morning_line": 8.0,
+              "jockey": "Thomas Drury, Jr.Brian Joseph Hernandez, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "More Than Hope",
+              "morning_line": 12.0,
+              "jockey": "William E. MoreyWilliam Antongeorgi III",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Sutura",
+              "morning_line": 3.0,
+              "jockey": "Jack SistersonTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 8,
+          "race_type": "Fillies | 3 Year Olds",
+          "distance": "1 1/16M,\nTurf,\n$125,000 Allowance Optional Claiming",
+          "surface": "Turf",
+          "field_size": 13,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Embrace Time",
+              "morning_line": 10.0,
+              "jockey": "Brad H. CoxFlorent Geroux",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Rhythm Lady",
+              "morning_line": 6.0,
+              "jockey": "Michael J. MakerEdgar Morales",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Cooperation (FR)",
+              "morning_line": 15.0,
+              "jockey": "Arnaud DelacourLuan Machado",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Cool American",
+              "morning_line": 20.0,
+              "jockey": "Michelle LovellDanny Sheehy",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Good Family",
+              "morning_line": 3.0,
+              "jockey": "Brad H. CoxIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Nelson's Penny",
+              "morning_line": 12.0,
+              "jockey": "Kinnon LaRoseJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Raiding Party (IRE)",
+              "morning_line": 2.5,
+              "jockey": "Brendan P. WalshTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "More Carats",
+              "morning_line": 30.0,
+              "jockey": "Ian R. WilkesEdgard J. Zayas",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Call On Me",
+              "morning_line": 4.5,
+              "jockey": "George R. Arnold IILuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Turner's Charm",
+              "morning_line": 8.0,
+              "jockey": "Brendan P. WalshBen Curtis",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Soloist",
+              "morning_line": null,
+              "jockey": "Kenneth G. McPeekJose L. Ortiz",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Go to Girl",
+              "morning_line": null,
+              "jockey": "Kenneth G. McPeekEmmanuel Esquivel",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "13",
+              "horse_name": "Callmeyourmajesty",
+              "morning_line": null,
+              "jockey": "Wayne M. CatalanoBrian Joseph Hernandez, Jr.",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        }
+      ],
+      "ae_alerts": []
+    }
+  }
 }
