@@ -242,3 +242,130 @@ Races inserted:  0
 Horses inserted: 0
 No AE horses detected.
 ── morning entries done 16:20:44.34 ── 
+ 
+── MORNING ENTRIES    16:32:38.76 ──────────────────────────────── 
+Tracks: CD GP KEE SA AQU FG OP  (tracks with no card today are skipped) 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-05-07
+  8 race block(s) found
+  Parsed: 8 race(s), 88 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/gulfstream-park/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/fair-grounds/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/oaklawn-park/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/santa-anita-park/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/aqueduct/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+Fetching https://entries.horseracingnation.com/entries-results/keeneland/2026-05-07
+  0 race block(s) found
+  Parsed: 0 race(s), 0 horse(s), 0 AE horse(s)
+
+==============================================
+ENTRIES SUMMARY  ALL TRACKS  2026-05-07
+==============================================
+Races inserted:  8
+Horses inserted: 88
+No AE horses detected.
+── morning entries done 16:34:34.55 ── 
+ 
+============================================================ 
+CD DAILY SCRAPE  2026-05-07  started 20:31:05.06 
+============================================================ 
+NOTE: scrape_entries.py runs separately at 9am each morning  
+      via the "HorseRacing CD Morning Entries" scheduled task. 
+      By 8pm those entries are already in the DB for export.  
+[1/5] scrape_entries.py CD 
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-05-07
+  8 race block(s) found
+  Parsed: 8 race(s), 88 horse(s), 0 AE horse(s)
+
+==============================================
+ENTRIES SUMMARY  CD  2026-05-07
+==============================================
+Races inserted:  0
+Horses inserted: 0
+No AE horses detected.
+[2/5] HorseRacingHRN.py --track CD 2026-05-07 
+Scraping 1 date(s) for CD (churchill-downs)
+Fetching https://entries.horseracingnation.com/entries-results/churchill-downs/2026-05-07
+  8 race block(s) found
+  Parsed: 8 winners, 42 exotic payouts
+  DB: +8 races (0 skipped), +42 exotics (0 skipped)
+
+Done. Total parsed: 8 race winners, 42 exotic payouts.
+[3/5] derby_value.py validate 
+validate_payout_bases: 2 known anomaly/anomalies (non-failing):
+  Track  Type  ActualBase   Count  Date Range               Note
+  --------------------------------------------------------------------------
+  SA     DD          1.00      25  2026-04-17 � 2026-04-19  known anomaly 2026-04-17�19, origin unresolved
+  SA     EX          1.00      28  2026-04-17 � 2026-04-19  known anomaly 2026-04-17�19, origin unresolved
+validate_payout_bases: 10 violation group(s) found:
+  Track  Type  ActualBase   Count  Date Range               Note
+  --------------------------------------------------------------------------
+  CD     DD          1.00      36  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P3          0.50      37  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P3          3.00       5  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P4          0.50      13  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P5          0.50      14  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P6          0.20       3  2026-04-28 � 2026-05-02  expected 2.0
+  CD     P6          1.00       1  2026-05-02 � 2026-05-02  expected 2.0
+  CD     SF          0.10      11  2026-04-28 � 2026-04-29  expected 2.0
+  CD     SF          1.00      26  2026-05-01 � 2026-05-02  expected 2.0
+  CD     TRI         0.50      38  2026-04-28 � 2026-05-02  expected 2.0
+STEP 3 WARNING: validate found hard violations — continuing 
+[4/5] export_dashboard_data.py 
+Exporting overlay data for all tracks...
+  AQU: 3 overlay(s), 44 total sequence span(s)
+  CD: 4 overlay(s), 49 total sequence span(s)
+  FG: 2 overlay(s), 43 total sequence span(s)
+  GP: 4 overlay(s), 50 total sequence span(s)
+  KEE: 5 overlay(s), 34 total sequence span(s)
+  OP: 2 overlay(s), 38 total sequence span(s)
+  SA: 5 overlay(s), 42 total sequence span(s)
+  AQU P4: 62 parlay/exotic pair(s) matched
+  AQU P5: 62 parlay/exotic pair(s) matched
+  AQU P6: 61 parlay/exotic pair(s) matched
+  CD P4: 48 parlay/exotic pair(s) matched
+  CD P5: 48 parlay/exotic pair(s) matched
+  CD P6: 40 parlay/exotic pair(s) matched
+  FG P4: 53 parlay/exotic pair(s) matched
+  FG P5: 53 parlay/exotic pair(s) matched
+  FG P6: 52 parlay/exotic pair(s) matched
+  GP P4: 77 parlay/exotic pair(s) matched
+  GP P5: 77 parlay/exotic pair(s) matched
+  GP P6: 77 parlay/exotic pair(s) matched
+  KEE P4: 29 parlay/exotic pair(s) matched
+  KEE P5: 28 parlay/exotic pair(s) matched
+  KEE P6: 28 parlay/exotic pair(s) matched
+  OP P4: 48 parlay/exotic pair(s) matched
+  OP P5: 47 parlay/exotic pair(s) matched
+  SA P4: 50 parlay/exotic pair(s) matched
+  SA P5: 50 parlay/exotic pair(s) matched
+  SA P6: 49 parlay/exotic pair(s) matched
+  Today's entries: 8 race(s) across 1 track(s)  |  0 AE alert(s)
+
+Wrote C:\Users\jason\Desktop\HorseRacing Project\web\dashboard_data.json
+  Tracks: 7  |  Races: 3532  |  Exotics: 18759  |  Days: 224  |  Sequences: 300
+  Date range: 2025-01-01 to 2026-05-07
+
+Next steps:
+  cd web
+  git add dashboard_data.json
+  git commit -m "update dashboard data"
+  git push
+[5/5] git add / commit / push 
+[main a224f51] daily CD scrape 2026-05-07
+ 1 file changed, 1322 insertions(+), 747 deletions(-)
+error: RPC failed; curl 52 Empty reply from server
+send-pack: unexpected disconnect while reading sideband packet
+fatal: the remote end hung up unexpectedly
+Everything up-to-date
+STEP 5 WARNING: git push exited 1 
+---- done  1:29:01.21 ---- 
