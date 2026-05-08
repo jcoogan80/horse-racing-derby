@@ -6612,9 +6612,10 @@ const WPD_RACE_DATA = {
 
   // ── Init: build default 8-horse table ──
   window.wpdInit = function() {
-    // Populate race dropdown (only once)
+    // Always refresh live entries; only skip re-populate for static days if already populated
     const sel = document.getElementById('wpd-race-select');
-    if (sel.options.length === 0) wpdUpdateRaceSelect();
+    const day = document.getElementById('wpd-day-select').value;
+    if (sel.options.length === 0 || day === 'live') wpdUpdateRaceSelect();
 
     const tbody = document.getElementById('wpd-horse-tbody');
     if (tbody.children.length === 0) {
@@ -7598,7 +7599,7 @@ async function loadDashboard() {
     } catch (_) {}
   }
 
-  if (data) { window._dashData = data; populateTrackSelect(); populateTcTrackSelect(); renderParlayEdge(); renderTrackGuide(); }
+  if (data) { window._dashData = data; populateTrackSelect(); populateTcTrackSelect(); renderParlayEdge(); renderTrackGuide(); if (typeof wpdUpdateRaceSelect === 'function') wpdUpdateRaceSelect(); }
 
   if (!data || !data.db_summary) {
     el.innerHTML = `
