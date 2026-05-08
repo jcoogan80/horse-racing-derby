@@ -6765,21 +6765,25 @@ const WPD_RACE_DATA = {
     // For ticket layer
     const ticketLayerData = [];
 
-    sorted.forEach(h => {
+    // Pre-compute normalized adj conf: (impliedProb[i] * w) / sum(impliedProb[j] * w) * 100
+    // Since w is uniform across all horses, it cancels in the ratio — but we compute explicitly
+    // so the formula is correct if per-horse weights are ever introduced.
+    const adjRaw    = sorted.map(h => h.impliedProb * (poolSum > 0 ? poolWeight : 1.0));
+    const adjRawSum = adjRaw.reduce((a, b) => a + b, 0);
+    const adjNorm   = adjRaw.map(v => adjRawSum > 0 ? (v / adjRawSum) * 100 : 0);
+    const adjColor  = poolTier === 'ELITE' ? '#44cc88' : poolTier === 'SHARP' ? '#ff8844' : poolTier === 'MIXED' ? '#f5c842' : '#8a9bb0';
+
+    sorted.forEach((h, idx) => {
       const sig = classifySignal(h.impliedOdds, h.mlOdds, h.ofig, avgOFIG);
       if (sig.code === 'sharp')   sharpList.push(h.name);
       if (sig.code === 'fade')    fadeList.push(h.name);
       if (sig.code === 'confirm') confirmList.push(h.name);
       if (sig.code === 'overlay') overlayList.push(h.name);
 
-      const implDisp = oddsToDisplay(h.impliedOdds);
-      const mlDisp   = h.mlOdds !== null ? oddsToDisplay(h.mlOdds) : '—';
-      const probPct  = (h.impliedProb * 100).toFixed(1) + '%';
-
-      // Adjusted confidence
-      const adjConf = Math.min(99.9, h.impliedProb * 100 * (poolSum > 0 ? poolWeight : 1.0));
-      const adjConfPct = adjConf.toFixed(1) + '%';
-      const adjColor = poolTier === 'ELITE' ? '#44cc88' : poolTier === 'SHARP' ? '#ff8844' : poolTier === 'MIXED' ? '#f5c842' : '#8a9bb0';
+      const implDisp   = oddsToDisplay(h.impliedOdds);
+      const mlDisp     = h.mlOdds !== null ? oddsToDisplay(h.mlOdds) : '—';
+      const probPct    = (h.impliedProb * 100).toFixed(1) + '%';
+      const adjConfPct = adjNorm[idx].toFixed(1) + '%';
 
       // Delta: implied vs ML
       let deltaHTML = '—';
