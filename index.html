@@ -1241,6 +1241,62 @@
       color:#ff9999; line-height:1.6;
     }
     .tg-fade-advisory strong { color:#ffbbbb; }
+
+    /* ── Yesterday Review ── */
+    .yrv-section { margin-bottom:12px; }
+    .yrv-section-head {
+      display:flex; align-items:center; gap:10px; flex-wrap:wrap;
+      background:var(--card2); border-radius:var(--radius) var(--radius) 0 0;
+      padding:10px 14px; border:1px solid var(--border); border-bottom:none;
+      cursor:pointer; user-select:none;
+    }
+    .yrv-section-head h3 { font-size:.9rem; color:var(--gold); font-weight:700; margin:0; }
+    .yrv-section-body {
+      border:1px solid var(--border); border-radius:0 0 var(--radius) var(--radius);
+      padding:12px; background:var(--card);
+    }
+    .yrv-race { margin-bottom:10px; border:1px solid var(--border); border-radius:8px; overflow:hidden; }
+    .yrv-race-head {
+      display:flex; align-items:center; gap:8px; flex-wrap:wrap;
+      padding:8px 12px; background:var(--card2); cursor:pointer; user-select:none;
+    }
+    .yrv-race-num { font-size:.8rem; font-weight:800; color:var(--gold); min-width:24px; }
+    .yrv-race-type { font-size:.75rem; color:var(--text); font-weight:600; }
+    .yrv-race-purse { font-size:.7rem; color:var(--dim); }
+    .yrv-model-top { font-size:.72rem; background:rgba(201,168,76,.15); color:var(--gold); border:1px solid rgba(201,168,76,.3); border-radius:4px; padding:1px 6px; }
+    .yrv-result-badge { font-size:.7rem; font-weight:700; padding:2px 7px; border-radius:4px; margin-left:auto; }
+    .yrv-hit  { background:rgba(46,204,113,.2);  color:var(--green); border:1px solid rgba(46,204,113,.4); }
+    .yrv-near { background:rgba(240,165,0,.15);  color:var(--yellow); border:1px solid rgba(240,165,0,.35); }
+    .yrv-miss { background:rgba(231,76,60,.12);  color:var(--red);   border:1px solid rgba(231,76,60,.3); }
+    .yrv-pend { background:rgba(100,100,120,.15); color:var(--dim);  border:1px solid var(--border); }
+    .yrv-race-body { padding:8px 12px; }
+    .yrv-table { width:100%; border-collapse:collapse; font-size:.75rem; }
+    .yrv-table th { font-size:.67rem; text-transform:uppercase; letter-spacing:.04em; color:var(--dim); padding:4px 6px; border-bottom:1px solid var(--border); text-align:left; }
+    .yrv-table th.r { text-align:right; }
+    .yrv-table td { padding:5px 6px; border-bottom:1px solid var(--border); vertical-align:middle; }
+    .yrv-table tr:last-child td { border-bottom:none; }
+    .yrv-rank-1 td:first-child { color:var(--gold); font-weight:800; }
+    .yrv-rank-2 td:first-child { color:var(--dim); font-weight:700; }
+    .yrv-rank-3 td:first-child { color:var(--dim); }
+    .yrv-fin-1 { background:rgba(201,168,76,.15); }
+    .yrv-fin-2 { background:rgba(100,149,237,.08); }
+    .yrv-fin-3 { background:rgba(46,204,113,.06); }
+    .yrv-chevron { font-size:.7rem; color:var(--dim); margin-left:auto; transition:transform .2s; }
+    .yrv-race.open .yrv-chevron { transform:rotate(90deg); }
+    .yrv-stats-row { display:flex; gap:12px; flex-wrap:wrap; padding:8px 0 4px; font-size:.75rem; color:var(--dim); }
+    .yrv-stats-row .tv { color:var(--text); font-weight:700; }
+    /* Date switcher in OptixEQ */
+    .oeq-date-row { display:flex; gap:6px; margin-bottom:12px; flex-wrap:wrap; align-items:center; }
+    .oeq-date-btn {
+      padding:5px 12px; border-radius:6px; border:1px solid var(--border);
+      background:var(--card2); color:var(--dim); font-size:.78rem; font-weight:700;
+      cursor:pointer; transition:all .15s;
+    }
+    .oeq-date-btn.active { background:rgba(201,168,76,.15); color:var(--gold); border-color:var(--gold); }
+    .yrv-ticket-section { margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
+    .yrv-ticket-head { font-size:.78rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
+    .yrv-ticket-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:5px 0; border-bottom:1px solid var(--border); font-size:.75rem; }
+    .yrv-ticket-row:last-child { border-bottom:none; }
   </style>
 </head>
 <body>
@@ -1403,6 +1459,20 @@
 
 <!-- ─────────────── TODAY'S CARD TAB ─────────────── -->
 <div id="tab-today" class="tab-pane">
+
+  <!-- ── Yesterday Review ─────────────────────────────────── -->
+  <div class="card" style="margin-bottom:14px">
+    <div style="display:flex;align-items:center;gap:10px;margin-bottom:10px;flex-wrap:wrap;">
+      <h2 style="margin:0">📋 Yesterday's Review — CD 5/7</h2>
+      <span style="font-size:.72rem;color:var(--dim)">8 races · Model vs Results</span>
+      <button class="btn-secondary" style="margin-left:auto;font-size:.75rem;padding:6px 12px" onclick="renderYesterdayReview()">↻ Refresh</button>
+    </div>
+    <div id="yrv-stats" style="display:flex;gap:12px;flex-wrap:wrap;padding:8px 10px;background:var(--card2);border-radius:7px;margin-bottom:10px;font-size:.75rem;color:var(--dim)">
+      <span>Loading results…</span>
+    </div>
+    <div id="yrv-content"></div>
+  </div>
+  <!-- ── End Yesterday Review ─────────────────────────────── -->
 
   <!-- ── Smart Ticket Scanner ─────────────────────────────── -->
   <div class="card" style="margin-bottom:14px">
@@ -4746,6 +4816,29 @@
 .wpd-row-top { background:rgba(68,204,136,.05); }
 .wpd-row-fade { background:rgba(255,102,102,.05); }
 .wpd-empty { text-align:center; padding:30px; color:#4a6a8a; font-size:13px; }
+/* Pool Sharpness Indicator */
+.wpd-pool-inputs { display:flex; align-items:flex-end; gap:12px; flex-wrap:wrap; background:#0d1b2a; border:1px solid #2a3f5a; border-radius:8px; padding:10px 14px; margin-bottom:12px; }
+.wpd-pool-inputs label { font-size:11px; color:#8a9bb0; font-weight:600; text-transform:uppercase; letter-spacing:.5px; display:block; margin-bottom:3px; }
+.wpd-pool-inputs .wpd-pool-pair { display:flex; flex-direction:column; gap:2px; }
+.wpd-pool-badge { display:inline-block; padding:3px 11px; border-radius:10px; font-size:11px; font-weight:700; margin-left:10px; vertical-align:middle; white-space:nowrap; }
+.wpd-pool-badge.public  { background:#2a2a2a; color:#aaaaaa; border:1px solid #444; }
+.wpd-pool-badge.mixed   { background:#2e2800; color:#f5c842; border:1px solid #4a3e00; }
+.wpd-pool-badge.sharp   { background:#2e1800; color:#ff8844; border:1px solid #4a2800; }
+.wpd-pool-badge.elite   { background:#0e2e1a; color:#44cc88; border:1px solid #1a4a2a; }
+/* Ticket Layer */
+.wpd-ticket-layer { margin-top:16px; background:#0d1b2a; border:1px solid #2a3f5a; border-radius:8px; padding:14px 16px; }
+.wpd-ticket-layer .tl-title { font-size:13px; color:#f5c842; font-weight:700; margin-bottom:10px; }
+.wpd-tl-row { display:flex; align-items:center; gap:10px; padding:5px 0; border-bottom:1px solid #1a2d42; font-size:12px; }
+.wpd-tl-row:last-child { border-bottom:none; }
+.wpd-tl-pgm { display:inline-flex; width:22px; height:22px; border-radius:50%; background:#1e3048; align-items:center; justify-content:center; font-size:11px; font-weight:700; color:#f5c842; flex-shrink:0; }
+.wpd-tl-name { color:#e8e0d0; font-weight:600; min-width:120px; }
+.wpd-tl-role { padding:2px 8px; border-radius:8px; font-size:11px; font-weight:700; }
+.wpd-tl-role.anchor { background:#0e2438; color:#66aaff; border:1px solid #1a3d5a; }
+.wpd-tl-role.value  { background:#2e200e; color:#ffaa33; border:1px solid #4a3a1a; }
+.wpd-tl-role.thin   { background:#2e0e0e; color:#ff6666; border:1px solid #4a1a1a; }
+.wpd-tl-role.standard { background:#152232; color:#8a9bb0; border:1px solid #2a3f5a; }
+.wpd-tl-apply-btn { margin-top:12px; padding:7px 18px; background:#44cc88; color:#0d1b2a; border:none; border-radius:6px; font-size:12px; font-weight:700; cursor:pointer; }
+.wpd-tl-apply-btn:hover { background:#5de89a; }
 </style>
 
 <div class="wpd">
@@ -4829,6 +4922,22 @@
     </table>
   </div>
 
+  <!-- Pool Sharpness Inputs -->
+  <div class="wpd-pool-inputs">
+    <div class="wpd-pool-pair">
+      <label>Leg 1 Payout ($)</label>
+      <input class="wpd-input-sm" type="number" id="wpd-leg1-payout" min="0" step="0.01" placeholder="0.00" style="width:90px;">
+    </div>
+    <div class="wpd-pool-pair">
+      <label>Leg 2 Payout ($)</label>
+      <input class="wpd-input-sm" type="number" id="wpd-leg2-payout" min="0" step="0.01" placeholder="0.00" style="width:90px;">
+    </div>
+    <div style="display:flex;flex-direction:column;gap:2px;justify-content:flex-end;">
+      <label style="font-size:10px;color:#4a6a8a;">Leg 1+2 Combined → Pool Sharpness</label>
+      <span style="font-size:11px;color:#6a8aa0;">PUBLIC &lt;$10 · MIXED $10–$50 · SHARP $50–$150 · ELITE $150+</span>
+    </div>
+  </div>
+
   <div style="display:flex;align-items:center;margin-bottom:20px;">
     <button class="wpd-btn wpd-btn-calc" onclick="wpdCalculate()">⚡ Calculate Implied Odds</button>
     <button class="wpd-btn wpd-btn-add" onclick="wpdAddRow()">+ Add Horse</button>
@@ -4839,6 +4948,7 @@
   <div class="wpd-results" id="wpd-results" style="display:none;">
     <div class="wpd-results-header">
       <h3>📊 Implied Odds Analysis</h3>
+      <span id="wpd-pool-badge"></span>
       <span class="wpd-results-meta" id="wpd-results-meta"></span>
     </div>
     <div class="wpd-table-wrap">
@@ -4850,6 +4960,7 @@
             <th>Will Pay</th>
             <th>Implied<br>Odds</th>
             <th>Implied<br>Prob%</th>
+            <th>Adj<br>Conf%</th>
             <th>Morning<br>Line</th>
             <th>Δ vs ML</th>
             <th>oFIG</th>
@@ -4860,6 +4971,12 @@
       </table>
     </div>
     <div class="wpd-insight-box" id="wpd-insight-box"></div>
+    <!-- Ticket Layer -->
+    <div class="wpd-ticket-layer" id="wpd-ticket-layer" style="display:none;">
+      <div class="tl-title">🎫 Ticket Layer</div>
+      <div id="wpd-tl-rows"></div>
+      <button class="wpd-tl-apply-btn" onclick="wpdApplyToTicketGen()">Apply to Ticket Gen →</button>
+    </div>
   </div>
 </div><!-- end .wpd -->
   </div><!-- end willpay-card-content -->
@@ -4937,6 +5054,13 @@
 
 <!-- ─────────────── OPTIXEQ TAB ─────────────── -->
 <div id="tab-optixeq" class="tab-pane">
+  <div class="oeq-date-row">
+    <span style="font-size:.72rem;color:var(--dim);font-weight:600;">Card Date:</span>
+    <button class="oeq-date-btn active" data-date="2026-05-08" onclick="oeqSetDate('2026-05-08')">📅 Today 5/8</button>
+    <button class="oeq-date-btn" data-date="2026-05-07" onclick="oeqSetDate('2026-05-07')">📋 Yesterday 5/7</button>
+    <button class="oeq-date-btn" data-date="derby" onclick="oeqSetDate('derby')">🏆 Derby/Oaks Day</button>
+    <span style="font-size:.68rem;color:var(--dim);margin-left:4px;" id="oeq-date-note">Showing today's CD card — 9 races</span>
+  </div>
   <div class="oeq-sub-nav">
     <button class="oeq-sub-btn active" id="oeq-btn-race"    onclick="oeqSwitch('race')">&#128202; Race Analysis</button>
     <button class="oeq-sub-btn"        id="oeq-btn-tickets" onclick="oeqSwitch('tickets')">&#127915; Exotic Tickets</button>
@@ -6575,6 +6699,23 @@ const WPD_RACE_DATA = {
     const raceNum = document.getElementById('wpd-race-num').value || '?';
     const base    = parseFloat(document.getElementById('wpd-base-cost').value) || 1;
 
+    // ── Pool Sharpness ──
+    const leg1Pay = parseFloat(document.getElementById('wpd-leg1-payout').value) || 0;
+    const leg2Pay = parseFloat(document.getElementById('wpd-leg2-payout').value) || 0;
+    const poolSum = leg1Pay + leg2Pay;
+    let poolTier, poolWeight;
+    if (poolSum < 10)        { poolTier = 'PUBLIC'; poolWeight = 0.7; }
+    else if (poolSum < 50)   { poolTier = 'MIXED';  poolWeight = 1.0; }
+    else if (poolSum < 150)  { poolTier = 'SHARP';  poolWeight = 1.3; }
+    else                     { poolTier = 'ELITE';  poolWeight = 1.6; }
+    const badgeCls  = poolTier.toLowerCase();
+    const poolBadge = document.getElementById('wpd-pool-badge');
+    if (poolSum > 0) {
+      poolBadge.innerHTML = `<span class="wpd-pool-badge ${badgeCls}">⚡ ${poolTier} POOL ($${poolSum.toFixed(2)})</span>`;
+    } else {
+      poolBadge.innerHTML = '';
+    }
+
     // Collect input data
     const horses = [];
     rows.forEach((tr, i) => {
@@ -6627,6 +6768,8 @@ const WPD_RACE_DATA = {
     })).sort((a,b) => parseInt(a.pgm) - parseInt(b.pgm));
 
     let sharpList = [], fadeList = [], confirmList = [], overlayList = [];
+    // For ticket layer
+    const ticketLayerData = [];
 
     sorted.forEach(h => {
       const sig = classifySignal(h.impliedOdds, h.mlOdds, h.ofig, avgOFIG);
@@ -6638,6 +6781,11 @@ const WPD_RACE_DATA = {
       const implDisp = oddsToDisplay(h.impliedOdds);
       const mlDisp   = h.mlOdds !== null ? oddsToDisplay(h.mlOdds) : '—';
       const probPct  = (h.impliedProb * 100).toFixed(1) + '%';
+
+      // Adjusted confidence
+      const adjConf = Math.min(99.9, h.impliedProb * 100 * (poolSum > 0 ? poolWeight : 1.0));
+      const adjConfPct = adjConf.toFixed(1) + '%';
+      const adjColor = poolTier === 'ELITE' ? '#44cc88' : poolTier === 'SHARP' ? '#ff8844' : poolTier === 'MIXED' ? '#f5c842' : '#8a9bb0';
 
       // Delta: implied vs ML
       let deltaHTML = '—';
@@ -6658,6 +6806,14 @@ const WPD_RACE_DATA = {
       const rowClass = (sig.code === 'sharp' || sig.code === 'confirm') ? 'wpd-row-top'
                      : (sig.code === 'fade'  || sig.code === 'overlay') ? 'wpd-row-fade' : '';
 
+      // Ticket layer role
+      let tlRole, tlRoleCls;
+      if (sig.code === 'confirm' || sig.code === 'sharp') { tlRole = 'Anchor 🔒'; tlRoleCls = 'anchor'; }
+      else if (sig.code === 'overlay')                    { tlRole = 'Value 💎'; tlRoleCls = 'value'; }
+      else if (sig.code === 'fade')                       { tlRole = 'Thin ⚠️'; tlRoleCls = 'thin'; }
+      else                                                { tlRole = 'Standard'; tlRoleCls = 'standard'; }
+      ticketLayerData.push({ pgm: h.pgm, name: h.name, role: tlRole, roleCls: tlRoleCls, sigCode: sig.code });
+
       const tr = document.createElement('tr');
       tr.className = rowClass;
       tr.innerHTML = `
@@ -6669,6 +6825,7 @@ const WPD_RACE_DATA = {
           <div class="wpd-bar-wrap"><div class="wpd-bar ${oddsClass}" style="width:${barWidth}%;"></div></div>
         </td>
         <td><span class="wpd-prob">${probPct}</span></td>
+        <td><span style="color:${adjColor};font-weight:700;">${poolSum > 0 ? adjConfPct : '—'}</span></td>
         <td>${mlDisp}</td>
         <td>${deltaHTML}</td>
         <td style="color:#8a9bb0;">${ofigDisp}</td>
@@ -6689,6 +6846,8 @@ const WPD_RACE_DATA = {
     }));
     window._wpdLastRace  = raceKey;
     window._wpdBetType   = betType;
+    // Store ticket layer data for Apply button
+    window._wpdTicketLayer = ticketLayerData;
     // Notify Ticket Generator to refresh its display with the new signals
     if (typeof tgRefreshWpdSignals === 'function') tgRefreshWpdSignals();
 
@@ -6717,12 +6876,77 @@ const WPD_RACE_DATA = {
     </div>`;
     insightEl.innerHTML = insightHTML;
 
+    // ── Ticket Layer ──
+    const tlEl   = document.getElementById('wpd-ticket-layer');
+    const tlRows = document.getElementById('wpd-tl-rows');
+    tlRows.innerHTML = ticketLayerData.map(h =>
+      `<div class="wpd-tl-row">
+        <span class="wpd-tl-pgm">${h.pgm}</span>
+        <span class="wpd-tl-name">${h.name}</span>
+        <span class="wpd-tl-role ${h.roleCls}">${h.role}</span>
+      </div>`
+    ).join('');
+    tlEl.style.display = 'block';
+
     document.getElementById('wpd-results').style.display = 'block';
     document.getElementById('wpd-results').scrollIntoView({ behavior:'smooth', block:'start' });
   };
 
+  window.wpdApplyToTicketGen = function() {
+    const layer = window._wpdTicketLayer;
+    if (!layer || !layer.length) return;
+
+    // Switch to ticketgen tab
+    if (typeof showTab === 'function') showTab('ticketgen');
+
+    // Wait for tab to be visible, then apply selections to the final leg
+    setTimeout(function() {
+      if (!window.tgLegs || !window.tgLegs.length) return;
+
+      // Target the last leg (final leg)
+      const lastLegIdx = window.tgLegs.length - 1;
+      const lastLeg    = window.tgLegs[lastLegIdx];
+      if (!lastLeg) return;
+
+      // Build a lookup: normalized name → role
+      const roleMap = {};
+      layer.forEach(function(h) { roleMap[h.name.toLowerCase().trim()] = h.sigCode; });
+
+      // Set selections: anchor/value/thin all get checked; standard also checked if already sel
+      lastLeg.horses.forEach(function(h) {
+        const sig = roleMap[h.name.toLowerCase().trim()];
+        if (sig === 'confirm' || sig === 'sharp' || sig === 'overlay' || sig === 'fade') {
+          h.sel = true;
+        }
+      });
+
+      if (typeof tgRenorm === 'function') tgRenorm(lastLegIdx);
+      if (typeof tgRenderLegs === 'function') tgRenderLegs();
+
+      // Visual highlight: mark thin horses in the rendered DOM
+      setTimeout(function() {
+        const legEls = document.querySelectorAll('#tg-legs-wrap .tg-leg');
+        const lastLegEl = legEls[lastLegIdx];
+        if (!lastLegEl) return;
+        const trs = lastLegEl.querySelectorAll('tbody tr, tr.tg-sel, tr');
+        trs.forEach(function(tr) {
+          const nameCell = tr.querySelector('.tg-hname');
+          if (!nameCell) return;
+          const rawName = nameCell.textContent.replace(/^#\d+\s*/, '').replace(/✎.*/, '').trim().toLowerCase();
+          const sig = roleMap[rawName];
+          if (sig === 'fade') {
+            tr.style.outline = '1px dashed #ff6666';
+            tr.title = 'WPD: FADE — thin coverage';
+          }
+        });
+      }, 80);
+    }, 200);
+  };
+
   window.wpdClearResults = function() {
     document.getElementById('wpd-results').style.display = 'none';
+    document.getElementById('wpd-ticket-layer').style.display = 'none';
+    document.getElementById('wpd-pool-badge').innerHTML = '';
     document.getElementById('wpd-horse-tbody').innerHTML = '';
     wpdRowCount = 0;
     for (let i = 0; i < 8; i++) wpdBuildRow(document.getElementById('wpd-horse-tbody'), i+1);
@@ -6730,6 +6954,7 @@ const WPD_RACE_DATA = {
     // Clear stored signals and refresh TG
     window._wpdSignals = {};
     window._wpdLastRace = null;
+    window._wpdTicketLayer = null;
     if (typeof tgRefreshWpdSignals === 'function') tgRefreshWpdSignals();
   };
 
@@ -9114,7 +9339,220 @@ function tcSetWagerBase(div) {
 // =============================================================
 //  OPTIXEQ — DATA
 // =============================================================
-const RACES = [
+// =============================================================
+//  OPTIXEQ RACE DATA — CD 2026-05-07 (Yesterday)
+// =============================================================
+const RACES_507 = [
+  { num:1, name:"Maiden Claimer", type:"Md 30000", dist:"8f Dirt", purse:"$57k", date:"2026-05-07", horses:[
+    {name:"Go For Rocket",    ml:3,   ofig:84, ong:"C+",  tags:["VALUE"], notes:"TROUBLE_S MOVE IMPROVE?",              alerts:"GW1 3LO"},
+    {name:"Mula",             ml:2,   ofig:80, ong:"BC+", tags:["KEY"],   notes:"NASAL_S NO_LEAD DROP?",                alerts:"TG30"},
+    {name:"Show Me The Munny",ml:6,   ofig:76, ong:"C",   tags:[],        notes:"NO_KEEP PLODDY COVER MOVE",            alerts:""},
+    {name:"Consequential",    ml:10,  ofig:74, ong:"C+",  tags:[],        notes:"WIDE TROUBLE- COVER FLOW",             alerts:""},
+    {name:"Pampered Prince",  ml:4,   ofig:73, ong:"C+",  tags:[],        notes:"SLOG SAVED MOVE",                      alerts:""},
+    {name:"King Of Salsa",    ml:15,  ofig:64, ong:"C+",  tags:[],        notes:"WARM_UP SAVED NO_KEEP",                alerts:""},
+    {name:"Bold Stand",       ml:8,   ofig:59, ong:"C",   tags:["FADE"],  notes:"TROUBLE SHUFFLE SAVED NO_KEEP COLD",   alerts:""},
+    {name:"Hill Country",     ml:12,  ofig:56, ong:"C+",  tags:["FADE"],  notes:"RUSH COLD PREP?",                      alerts:""},
+  ]},
+  { num:2, name:"Claiming", type:"Clm 25000", dist:"8.5f Dirt", purse:"$64k", date:"2026-05-07", horses:[
+    {name:"My Noble Knight",  ml:3,   ofig:85, ong:"C+",  tags:["VALUE"], notes:"WARM_UP BUNCHED TACTIC- SHUFFLE",      alerts:""},
+    {name:"Time For Trouble", ml:3.5, ofig:84, ong:"C+",  tags:["VALUE"], notes:"NASAL_S WARM WIDE DROP?",              alerts:""},
+    {name:"Single Dot Yaht",  ml:6,   ofig:83, ong:"C+",  tags:["VALUE"], notes:"COVER CLOSE",                          alerts:""},
+    {name:"Urban Planner",    ml:10,  ofig:77, ong:"C+",  tags:[],        notes:"NASAL_S SAVED MOVE",                   alerts:""},
+    {name:"C F V Bullet",     ml:15,  ofig:76, ong:"C+",  tags:[],        notes:"WIDE WARM_UP MANIC SAVED",             alerts:"RW3"},
+    {name:"King Of Hollywood",ml:8,   ofig:75, ong:"C+",  tags:[],        notes:"NASAL_S WARM WARM_UP MOVE",            alerts:"RW2"},
+    {name:"De Medici",        ml:2,   ofig:71, ong:"C",   tags:["FADE"],  notes:"COVER FREE RUSH WIDE NO_KEEP",         alerts:""},
+    {name:"Slim",             ml:15,  ofig:66, ong:"C",   tags:[],        notes:"NO_COVER NO_KEEP",                     alerts:"2LO"},
+  ]},
+  { num:3, name:"Maiden Sp Wt", type:"Md Sp Wt", dist:"5f Turf", purse:"$120k", date:"2026-05-07", horses:[
+    {name:"Gypsy Art",        ml:2,   ofig:79, ong:"C+",  tags:["KEY"],   notes:"TROUBLE_S RUSH",                       alerts:"2LO"},
+    {name:"Ink Lies",         ml:3,   ofig:78, ong:"BC+", tags:["VALUE"], notes:"WARM BOS NO_COVER HOT",                alerts:"TG30"},
+    {name:"Ice Wolf",         ml:5,   ofig:78, ong:null,  tags:["VALUE"], notes:"",                                     alerts:""},
+    {name:"Himothy",          ml:15,  ofig:77, ong:"C+",  tags:[],        notes:"NASAL_S WARM RUSH SAVED X_FLOW",       alerts:"RW1 3LO"},
+    {name:"Tranquillo",       ml:6,   ofig:77, ong:null,  tags:[],        notes:"",                                     alerts:""},
+    {name:"Caragogo",         ml:8,   ofig:75, ong:"C+",  tags:[],        notes:"RANK MOVE LONE SHORTER?",              alerts:"RW1"},
+    {name:"Zap D Etat",       ml:12,  ofig:75, ong:"BC+", tags:[],        notes:"SLOG MOVE WIDE",                       alerts:"TG30"},
+    {name:"Dismiss",          ml:12,  ofig:73, ong:"C+",  tags:[],        notes:"HARD_LEAD SAVED FTQ",                  alerts:"2LO"},
+    {name:"Soulman",          ml:8,   ofig:71, ong:"C+",  tags:[],        notes:"WARM TROUBLE- WIDE DROP?",             alerts:"2LO"},
+    {name:"Final Countdown",  ml:30,  ofig:71, ong:"C+",  tags:[],        notes:"NASAL_S NO_KEEP NO_PUSH",              alerts:""},
+    {name:"Halley S Comet",   ml:12,  ofig:67, ong:"C+",  tags:["FADE"],  notes:"TROUBLE- MANIC WIDE NO_KEEP",          alerts:""},
+    {name:"Mr Vaggio",        ml:30,  ofig:63, ong:"C",   tags:[],        notes:"WARM RUSH SAVED NO_KEEP",              alerts:""},
+  ]},
+  { num:4, name:"Starter Alw", type:"Alw 20000s", dist:"8f Dirt", purse:"$76k", date:"2026-05-07", horses:[
+    {name:"Awesome Ruta",     ml:1.4, ofig:92, ong:"B",   tags:["KEY"],   notes:"WARM BOS GALLOP-",                     alerts:"RW2 3LO"},
+    {name:"Trusty Rusty",     ml:4.5, ofig:91, ong:"B",   tags:["VALUE"], notes:"RUSH POCKET MOVE",                     alerts:"2LO"},
+    {name:"Eye Dee Kay",      ml:2.5, ofig:88, ong:"B",   tags:["VALUE"], notes:"WARM MOVE WIDE HOT",                   alerts:"2LO"},
+    {name:"Calycanthus",      ml:15,  ofig:87, ong:"B",   tags:["BOMB"],  notes:"WEATHER WARM_UP TACTIC+ RUSH COVER",   alerts:"TG45 OF3 RW1"},
+    {name:"Evening News",     ml:20,  ofig:86, ong:"C+",  tags:["BOMB"],  notes:"WARM RUSH FTQ NO_LEAD",                alerts:"RW2 3LO"},
+    {name:"Pappys Revenge",   ml:8,   ofig:85, ong:"B",   tags:[],        notes:"RUSH BOS NO_FINISH WIDE",              alerts:"RW2"},
+    {name:"Itsinmyblood",     ml:15,  ofig:82, ong:"C+",  tags:[],        notes:"TACTIC- WIDE MOVE",                    alerts:""},
+    {name:"Couperin",         ml:12,  ofig:81, ong:"C+",  tags:[],        notes:"RUSH WIDE TROUBLE- PLODDY",            alerts:""},
+    {name:"Non Fungible",     ml:30,  ofig:69, ong:"C",   tags:["FADE"],  notes:"WARM NO_KEEP",                         alerts:"RW2"},
+  ]},
+  { num:5, name:"Maiden Claimer", type:"Md 30000", dist:"6f Dirt", purse:"$57k", date:"2026-05-07", horses:[
+    {name:"Hot Gamer",        ml:2.5, ofig:74, ong:"B-",  tags:["KEY"],   notes:"PERFECT",                              alerts:"RW1"},
+    {name:"Llamp",            ml:3.5, ofig:74, ong:"C+",  tags:["VALUE"], notes:"NO_COVER NO_KEEP",                     alerts:"2LO"},
+    {name:"Noroomformischief",ml:10,  ofig:72, ong:"C",   tags:[],        notes:"NASAL_S SAVED NO_KEEP DROP?",          alerts:"RW2 2LO"},
+    {name:"Rotisserie",       ml:8,   ofig:72, ong:"BC",  tags:[],        notes:"MOVE WEATHER WIDE",                    alerts:"TG30"},
+    {name:"Lindy Can",        ml:12,  ofig:65, ong:"BC+", tags:[],        notes:"RUSH PRESSED X_FLOW",                  alerts:""},
+    {name:"Pedital",          ml:8,   ofig:65, ong:"B-",  tags:[],        notes:"WARM RUSH MOVE SAVED",                 alerts:"2LO"},
+    {name:"Speightsy Rival",  ml:15,  ofig:62, ong:"C+",  tags:[],        notes:"SLOG SAVED KICKBACK-",                 alerts:""},
+    {name:"Cusp Of Mischief", ml:12,  ofig:61, ong:"C+",  tags:[],        notes:"SLOG TROUBLE_S",                       alerts:"TG30"},
+    {name:"Cookies Run",      ml:5,   ofig:58, ong:"C+",  tags:["FADE"],  notes:"SAVED NO_LEAD DROP?",                  alerts:"TG30"},
+    {name:"Vino Alla Mora",   ml:30,  ofig:50, ong:"C",   tags:["FADE"],  notes:"NASAL_S NO_KEEP",                      alerts:""},
+    {name:"Peggie Castle",    ml:30,  ofig:30, ong:"C",   tags:["FADE"],  notes:"RUSH SAVED NO_KEEP",                   alerts:""},
+  ]},
+  { num:6, name:"OClm 80000n2x", type:"ALW", dist:"8f Turf", purse:"$134k", date:"2026-05-07", horses:[
+    {name:"Pitkin",           ml:2,   ofig:96, ong:"B",   tags:["KEY"],   notes:"COVER WARM COVER",                     alerts:""},
+    {name:"Pineland",         ml:12,  ofig:93, ong:"BC+", tags:["VALUE"], notes:"LONE TROUBLE_S RUSH SAVED X_FLOW",     alerts:"TG30 RW1"},
+    {name:"Clever Mischief",  ml:4.5, ofig:89, ong:"BC+", tags:["VALUE"], notes:"WARM WIDE TROUBLE- BLANKET",           alerts:"TG30 2LO"},
+    {name:"Higgins Boat",     ml:3,   ofig:88, ong:null,  tags:["VALUE"], notes:"",                                     alerts:""},
+    {name:"In A Jam",         ml:15,  ofig:87, ong:"B",   tags:["BOMB"],  notes:"POCKET SAVED PLODDY WIDE",             alerts:""},
+    {name:"Esmark",           ml:10,  ofig:86, ong:"C+",  tags:[],        notes:"TROUBLE_S TACTIC- MOVE WIDE CLOSE",    alerts:"GW1 2LO"},
+    {name:"Demolition Duke",  ml:12,  ofig:85, ong:"C+",  tags:[],        notes:"WARM TROUBLE_S DROP?",                 alerts:""},
+    {name:"Otago",            ml:15,  ofig:83, ong:"C+",  tags:[],        notes:"WARM GATE COVER PLODDY",               alerts:""},
+    {name:"Alder",            ml:20,  ofig:83, ong:"C+",  tags:[],        notes:"SLOG MOVE WIDE CLOSE",                 alerts:"2LO"},
+    {name:"Saint In The City",ml:20,  ofig:83, ong:"C+",  tags:[],        notes:"SAVED BOS",                            alerts:"2LO"},
+    {name:"In A Jam",         ml:15,  ofig:87, ong:"B",   tags:["BOMB"],  notes:"POCKET SAVED WIDE",                   alerts:""},
+    {name:"Big To Do",        ml:20,  ofig:81, ong:"C",   tags:[],        notes:"NO_COVER NO_KEEP RUSH",                alerts:"3LO"},
+    {name:"Heart Headed",     ml:10,  ofig:81, ong:"C",   tags:[],        notes:"TROUBLE- DROP?",                       alerts:"2LO"},
+    {name:"Izzy D Oro",       ml:8,   ofig:80, ong:"C+",  tags:[],        notes:"SAVED BLANKET TRAFFIC",                alerts:""},
+  ]},
+  { num:7, name:"Maiden Sp Wt", type:"Md Sp Wt", dist:"6f Dirt", purse:"$92k", date:"2026-05-07", horses:[
+    {name:"Sutura",           ml:3,   ofig:78, ong:"B",   tags:["KEY"],   notes:"BOS SAVED MOVE RUSH LONE",             alerts:"GW3 RW3"},
+    {name:"Mighty Nora",      ml:3.5, ofig:78, ong:"B",   tags:["VALUE"], notes:"SAVED SHUFFLE MOVE TURF? DROP?",       alerts:""},
+    {name:"By La Rina",       ml:15,  ofig:75, ong:"C+",  tags:[],        notes:"SLOG MOVE WIDE",                       alerts:""},
+    {name:"Poppy Woppy",      ml:12,  ofig:71, ong:"C+",  tags:[],        notes:"SLOG COVER DROP?",                     alerts:"2LO"},
+    {name:"Gaga S Girl",      ml:15,  ofig:70, ong:"C+",  tags:[],        notes:"",                                     alerts:"2LO"},
+    {name:"Maxi Maxi",        ml:12,  ofig:70, ong:"C+",  tags:[],        notes:"SLOG WIDE",                            alerts:""},
+    {name:"Muskoka Katt",     ml:10,  ofig:65, ong:"C",   tags:[],        notes:"NASAL_S SAVED FTQ",                    alerts:""},
+    {name:"Don T Even",       ml:4.5, ofig:64, ong:"C",   tags:["FADE"],  notes:"GATE DUEL SAVED NO_KEEP",              alerts:""},
+    {name:"Wado Wave",        ml:30,  ofig:53, ong:"C",   tags:["FADE"],  notes:"LONE NO_LINE NO_KEEP X_FLOW",          alerts:"RW1 RW2 GW3"},
+  ]},
+  { num:8, name:"OClm 125000n1x", type:"ALW", dist:"8.5f Turf", purse:"$127k", date:"2026-05-07", horses:[
+    {name:"Rhythm Lady",      ml:6,   ofig:88, ong:"B",   tags:["KEY"],   notes:"SLOG TROUBLE_S COVER MOVE NO_LEAD",    alerts:""},
+    {name:"Raiding Party",    ml:2.5, ofig:87, ong:"B+",  tags:["KEY"],   notes:"WARM_UP PERFECT SAVED CLOSE HOT",      alerts:"RW1"},
+    {name:"Good Family",      ml:3,   ofig:81, ong:null,  tags:[],        notes:"",                                     alerts:""},
+    {name:"Call On Me",       ml:4.5, ofig:81, ong:"B",   tags:["VALUE"], notes:"NASAL_S TACTIC+ FREE MOVE",            alerts:"TG45 RW1"},
+    {name:"Turner S Charm",   ml:8,   ofig:80, ong:"B",   tags:[],        notes:"GATE TACTIC+ SLOG COVER MOVE",         alerts:"RW1"},
+    {name:"Nelsons Penny",    ml:12,  ofig:80, ong:null,  tags:[],        notes:"NASAL_S SAVED CLOSE",                  alerts:""},
+    {name:"Embrace Time",     ml:10,  ofig:78, ong:"B",   tags:[],        notes:"SLOG CLOSE",                           alerts:""},
+    {name:"Callmeyourmajesty",ml:12,  ofig:78, ong:"C+",  tags:[],        notes:"RUSH POCKET SAVED COVER MOVE",         alerts:"2LO"},
+    {name:"Go To Girl",       ml:15,  ofig:76, ong:"C+",  tags:[],        notes:"WIDE PREP?",                           alerts:"2LO"},
+    {name:"More Carats",      ml:30,  ofig:76, ong:"C",   tags:[],        notes:"WARM WARM_UP WIDE NO_LEAD",            alerts:"RW2 2LO"},
+    {name:"Soloist",          ml:6,   ofig:74, ong:"C+",  tags:[],        notes:"X_WIDE RUSH WARM RUSH",                alerts:"2LO"},
+    {name:"Cool American",    ml:20,  ofig:69, ong:"B",   tags:["BOMB"],  notes:"TACTIC+ MOVE FLOW BLANKET",            alerts:"TG45 RW1"},
+    {name:"Cooperation",      ml:15,  ofig:68, ong:null,  tags:[],        notes:"",                                     alerts:""},
+  ]},
+];
+
+// =============================================================
+//  OPTIXEQ RACE DATA — CD 2026-05-08 (Today)
+// =============================================================
+const RACES_508 = [
+  { num:1, name:"Claiming", type:"Clm 12500", dist:"8.5f Dirt", purse:"$45k", date:"2026-05-08", horses:[
+    {name:"Animal Fries",      ml:null,ofig:82, ong:"B",   tags:["KEY"],   notes:"LONE TROUBLE- RUSH PERFECT FREE MOVE", alerts:"RW1 RW3"},
+    {name:"Gypsan",            ml:null,ofig:82, ong:null,  tags:["VALUE"], notes:"",                                     alerts:""},
+    {name:"Cora S Legacy",     ml:null,ofig:77, ong:"C+",  tags:[],        notes:"TACTIC- COVER RUSH WIDE TROUBLE",      alerts:""},
+    {name:"Argan",             ml:null,ofig:76, ong:"B",   tags:[],        notes:"LONE LONE PRESSED SAVED NO_KEEP",      alerts:"RW1 RW2"},
+    {name:"Night Cry",         ml:null,ofig:73, ong:"B",   tags:[],        notes:"NASAL_S FREE FLOW WIDE",               alerts:""},
+    {name:"Temporarilyforever",ml:null,ofig:71, ong:"B",   tags:[],        notes:"LONE BLANKET",                         alerts:"RW3"},
+  ]},
+  { num:2, name:"Claiming", type:"Clm 16000n2l", dist:"8.5f Dirt", purse:"$36k", date:"2026-05-08", horses:[
+    {name:"Wish Carefully",    ml:null,ofig:81, ong:"B",   tags:["VALUE"], notes:"COVER MOVE PRESSED SAVED",             alerts:"TG45 2LO"},
+    {name:"Fast Joker",        ml:null,ofig:74, ong:"B",   tags:[],        notes:"RUSH WIDE BLANKET WARM_UP COVER",      alerts:""},
+    {name:"Phenomenal Dream",  ml:null,ofig:74, ong:"B",   tags:[],        notes:"COVER CLOSE BLANKET WARM_UP MOVE",     alerts:"TG30"},
+    {name:"Romantic Lead",     ml:null,ofig:74, ong:"C+",  tags:[],        notes:"TACTIC- SLOG TRAFFIC NASAL_S",         alerts:""},
+    {name:"Aubrey S Max",      ml:null,ofig:71, ong:"C",   tags:[],        notes:"WARM SLOG FREE SAVED",                 alerts:""},
+    {name:"Tisum",             ml:null,ofig:68, ong:"C",   tags:[],        notes:"SLOG WEATHER MOVE NO_COVER",           alerts:"2LO"},
+  ]},
+  { num:3, name:"Claiming", type:"Clm 16000b", dist:"7f Dirt", purse:"$37k", date:"2026-05-08", horses:[
+    {name:"Livehappy",         ml:null,ofig:85, ong:"B",   tags:["KEY"],   notes:"PRESSED SAVED RUSH PRESSED HARD",      alerts:"RW2"},
+    {name:"Gallo De Fuego",    ml:null,ofig:84, ong:"C+",  tags:["VALUE"], notes:"SLOG MOVE WIDE DUEL NO_KEEP",          alerts:""},
+    {name:"Odorico",           ml:null,ofig:81, ong:"B",   tags:[],        notes:"WARM RUSH FTQ BOS SAVED",              alerts:"RW3"},
+    {name:"Catamount",         ml:null,ofig:76, ong:"C",   tags:[],        notes:"FTQ WIDE",                             alerts:"2LO"},
+    {name:"You Belong Here",   ml:null,ofig:71, ong:null,  tags:[],        notes:"WARM RUSH FTQ",                        alerts:""},
+    {name:"Aerate",            ml:null,ofig:67, ong:"B",   tags:[],        notes:"TACTIC+ SAVED COVER TROUBLE-",         alerts:"TG30 RW1"},
+    {name:"Mister Banderas",   ml:null,ofig:59, ong:null,  tags:[],        notes:"86 peak oFIG 2 back — recent sharp drop", alerts:""},
+  ]},
+  { num:4, name:"Maiden Sp Wt", type:"Md Sp Wt", dist:"5f Turf", purse:"$120k", date:"2026-05-08", horses:[
+    {name:"Fancy Lady",        ml:null,ofig:79, ong:"B",   tags:["VALUE"], notes:"NASAL_S WIDE TROUBLE_S TRAFFIC MOVE",  alerts:""},
+    {name:"Victor Valley",     ml:null,ofig:76, ong:"B",   tags:["VALUE"], notes:"WARM WIDE WIDE MOVE TROUBLE_S RUSH",   alerts:"TG30 2LO"},
+    {name:"Toast The Star",    ml:null,ofig:76, ong:"B",   tags:["VALUE"], notes:"SLOG TRAFFIC MOVE WIDE CLOSE",         alerts:"2LO"},
+    {name:"Cheddar",           ml:null,ofig:74, ong:null,  tags:[],        notes:"one race only",                        alerts:""},
+    {name:"Spare Me",          ml:null,ofig:77, ong:null,  tags:[],        notes:"",                                     alerts:"AE"},
+    {name:"Cardiff Reef",      ml:null,ofig:76, ong:"C+",  tags:[],        notes:"NASAL_S TACTIC- TRAFFIC",              alerts:"RW2 AE"},
+    {name:"Yes Julia",         ml:null,ofig:70, ong:"C+",  tags:[],        notes:"WARM FTQ WARM BOS",                    alerts:"RW2 RW3"},
+    {name:"Fregata",           ml:null,ofig:68, ong:null,  tags:[],        notes:"",                                     alerts:""},
+    {name:"Cearnach",          ml:null,ofig:55, ong:"C",   tags:["FADE"],  notes:"RUSH WIDE",                            alerts:""},
+    {name:"Fashion Quest",     ml:null,ofig:47, ong:"C",   tags:["FADE"],  notes:"poor figs",                            alerts:""},
+  ]},
+  { num:5, name:"Starter Alw", type:"Alw 20000s", dist:"8f Dirt", purse:"$76k", date:"2026-05-08", horses:[
+    {name:"Big Dig",           ml:null,ofig:88, ong:"B",   tags:["KEY"],   notes:"WIDE HARD POCKET PERFECT",             alerts:"RW2 RW3"},
+    {name:"Cervaro Della Sala",ml:null,ofig:86, ong:"B",   tags:["VALUE"], notes:"NASAL_S RUSH WIDE NO_LEAD",            alerts:"2LO"},
+    {name:"Sassy Princess",    ml:null,ofig:85, ong:"B",   tags:["VALUE"], notes:"PRESSED SAVED OTHER TACTIC+",          alerts:"TG30 RW2"},
+    {name:"Mom S Cheesecake",  ml:null,ofig:83, ong:"B",   tags:["VALUE"], notes:"TROUBLE_S CLOSE MOVE SHUFFLE",         alerts:"TG30"},
+    {name:"Sweet Note",        ml:null,ofig:80, ong:"B",   tags:[],        notes:"TACTIC+ MOVE WIDE",                    alerts:"RW2"},
+    {name:"Ce La Vi Charli",   ml:null,ofig:76, ong:"C+",  tags:[],        notes:"RUSH TRAFFIC TROUBLE-",                alerts:""},
+  ]},
+  { num:6, name:"OClm 80000n2x", type:"ALW", dist:"8f Turf", purse:"$134k", date:"2026-05-08", horses:[
+    {name:"Bracelet",          ml:null,ofig:91, ong:"B",   tags:["KEY"],   notes:"PRERACE+ COVER MOVE BLANKET",          alerts:"TG30"},
+    {name:"Somethinabouther",  ml:null,ofig:91, ong:"B",   tags:["KEY"],   notes:"WARM SAVED TROUBLE- BLANKET",          alerts:"TG30"},
+    {name:"Saratoga Special",  ml:null,ofig:97, ong:"B",   tags:["BOMB"],  notes:"97 peak oFIG · recent trouble/drop",   alerts:"2LO"},
+    {name:"Contrary",          ml:null,ofig:94, ong:"B+",  tags:["VALUE"], notes:"PERFECT GRIT STRONG — 94 peak",        alerts:"RW3"},
+    {name:"Sanctify",          ml:null,ofig:93, ong:"B",   tags:[],        notes:"93 peak — SLOG WIDE recent",           alerts:"2LO"},
+    {name:"Lady Ilze",         ml:null,ofig:89, ong:"B",   tags:["VALUE"], notes:"NASAL_S TROUBLE_S TACTIC- MOVE",       alerts:"TG30"},
+    {name:"Exclusive Star",    ml:null,ofig:87, ong:"B",   tags:["VALUE"], notes:"RUSH BOS SAVED GALLOP- PRESSED",       alerts:"RW1"},
+    {name:"Liam In The Dust",  ml:null,ofig:86, ong:"B",   tags:[],        notes:"RUSH NO_COVER NO_KEEP",                alerts:"2LO"},
+    {name:"Fantastical",       ml:null,ofig:85, ong:"B",   tags:[],        notes:"POCKET SAVED TROUBLE+",                alerts:"GW1"},
+  ]},
+  { num:7, name:"Maiden Sp Wt", type:"Md Sp Wt", dist:"6f Dirt", purse:"$92k", date:"2026-05-08", horses:[
+    {name:"Eleos",             ml:null,ofig:81, ong:"B",   tags:["VALUE"], notes:"WARM PLODDY FTQ",                      alerts:"2LO"},
+    {name:"Tilt A Twirl",      ml:null,ofig:80, ong:"B",   tags:["VALUE"], notes:"NASAL_S WARM_UP VSLOG RUSH",           alerts:""},
+    {name:"Itchy",             ml:null,ofig:78, ong:"B",   tags:[],        notes:"DUEL SAVED NO_KEEP WIDE MOVE",         alerts:""},
+    {name:"Cerberus",          ml:null,ofig:73, ong:"C+",  tags:[],        notes:"SLOG STRONG",                          alerts:""},
+    {name:"Sparked",           ml:null,ofig:63, ong:"C+",  tags:[],        notes:"DUEL NO_KEEP PREP?",                   alerts:""},
+    {name:"Knicks N Stones",   ml:null,ofig:null,ong:null, tags:["FTS"],   notes:"No data",                              alerts:""},
+    {name:"Bandstand",         ml:null,ofig:null,ong:null, tags:["FTS"],   notes:"No data",                              alerts:""},
+    {name:"Chairmanoftheboard",ml:null,ofig:null,ong:null, tags:["FTS"],   notes:"No data",                              alerts:""},
+    {name:"Captain Mercury",   ml:null,ofig:null,ong:null, tags:["FTS"],   notes:"No data",                              alerts:""},
+  ]},
+  { num:8, name:"Alw 127000n1x", type:"ALW", dist:"6f Dirt", purse:"$127k", date:"2026-05-08", horses:[
+    {name:"Madaket Road",      ml:null,ofig:97, ong:"B",   tags:["KEY"],   notes:"TROUBLE_S RUSH BOS NO_COVER X_WIDE",   alerts:"RW3"},
+    {name:"Tap Me A Song",     ml:null,ofig:91, ong:"B",   tags:["KEY"],   notes:"NASAL_S WARM_UP TROUBLES+ COVER CLOSE",alerts:"2LO"},
+    {name:"Editor",            ml:null,ofig:89, ong:"B+",  tags:["KEY"],   notes:"NASAL_S TACTIC+ TROUBLE_S RUSH BOS",   alerts:"TG30 OF3 RW1"},
+    {name:"Tom Cat Tuesday",   ml:null,ofig:84, ong:"C+",  tags:[],        notes:"WARM WARM_UP TROUBLE_S RUSH COVER",    alerts:""},
+    {name:"Antrax",            ml:null,ofig:83, ong:null,  tags:[],        notes:"",                                     alerts:"2LO"},
+    {name:"Ghost Tales",       ml:null,ofig:80, ong:"B",   tags:[],        notes:"NO_COVER POCKET MOVE",                 alerts:"3LO"},
+    {name:"Imagine John",      ml:null,ofig:79, ong:"B",   tags:[],        notes:"RUSH BOS SLOG MOVE WIDE",              alerts:"RW3"},
+  ]},
+  { num:9, name:"OClm 125000n1x", type:"ALW", dist:"8.5f Turf", purse:"$127k", date:"2026-05-08", horses:[
+    {name:"West End Kid",      ml:null,ofig:87, ong:"B",   tags:["KEY"],   notes:"PRERACE+ TROUBLE_S RUSH NO_COVER HOT", alerts:"RW1 GW2"},
+    {name:"Vintur",            ml:null,ofig:87, ong:"B+",  tags:["VALUE"], notes:"SLOG TROUBLE_S TACTIC- TACTIC+ CLOSE", alerts:"RW2"},
+    {name:"Zakinthos",         ml:null,ofig:85, ong:"B",   tags:["VALUE"], notes:"WARM PERFECT SHUFFLE SAVED MOVE",      alerts:"RW1"},
+    {name:"Time For America",  ml:null,ofig:85, ong:"B",   tags:[],        notes:"PRERACE+ WARM_UP SLOG TROUBLE_S SAVED",alerts:""},
+    {name:"Mendels Mate",      ml:null,ofig:86, ong:"B",   tags:["VALUE"], notes:"WARM_UP PERFECT SAVED MOVE PERFECT",   alerts:"RW1 RW3"},
+    {name:"Zeus S Echo",       ml:null,ofig:83, ong:"B",   tags:[],        notes:"PRESSED SAVED PRERACE+ HARD_LEAD",     alerts:"TG30 3LO"},
+    {name:"Chambersville",     ml:null,ofig:82, ong:"B",   tags:[],        notes:"WARM TACTIC- SLOG MOVE X_WIDE",        alerts:"2LO"},
+    {name:"Brave Force",       ml:null,ofig:82, ong:"B",   tags:[],        notes:"WARM COVER SHUFFLE PLODDY MOVE",       alerts:"RW2"},
+    {name:"Classic Tap",       ml:null,ofig:81, ong:null,  tags:[],        notes:"",                                     alerts:""},
+    {name:"Fancy Sailor",      ml:null,ofig:81, ong:"B",   tags:[],        notes:"COVER X_WIDE CLOSE",                   alerts:""},
+    {name:"Mischief Ride",     ml:null,ofig:80, ong:"B",   tags:[],        notes:"X_WIDE MOVE WIDE HOT",                 alerts:""},
+    {name:"Exonerate",         ml:null,ofig:79, ong:"B",   tags:[],        notes:"COVER MOVE TROUBLE_S RUSH",            alerts:""},
+    {name:"Casa Cielo",        ml:null,ofig:76, ong:"C+",  tags:[],        notes:"NO_KEEP",                              alerts:""},
+    {name:"Sunrise",           ml:null,ofig:78, ong:"C",   tags:[],        notes:"WARM TRAFFIC TROUBLE SLOG",            alerts:""},
+  ]},
+];
+
+// =============================================================
+//  ACTIVE RACE SET — switch between dates via oeqSetDate()
+// =============================================================
+var RACES_ACTIVE_DATE = '2026-05-08';
+var RACES = RACES_508; // today by default
+
+// =============================================================
+//  OPTIXEQ RACE DATA — DERBY/OAKS DAY (Historical reference)
+// =============================================================
+const RACES_DERBY = [
   { num:1, name:"Maiden Sp Wt", type:"MSW", dist:"8.5f Dirt", purse:"$120k", contention:"soft", verdict:"Phantom Blue · Episist",
     horses:[
       {name:"Phantom Blue",     ml:28,  ofig:91, ong:"B-", notes:"WARM_UP TROUBLE_S RUSH",         tags:["KEY"]},
@@ -9348,10 +9786,33 @@ const TICKETS = [
 
 // Build lookup: raceNum → horseName → horseObj
 const OEQ_LOOKUP = {};
-for (const race of RACES) {
-  OEQ_LOOKUP[race.num] = {};
-  for (const h of race.horses) OEQ_LOOKUP[race.num][h.name] = h;
+function rebuildOeqLookup() {
+  Object.keys(OEQ_LOOKUP).forEach(k => delete OEQ_LOOKUP[k]);
+  for (const race of RACES) {
+    OEQ_LOOKUP[race.num] = {};
+    for (const h of race.horses) OEQ_LOOKUP[race.num][h.name] = h;
+  }
 }
+rebuildOeqLookup();
+
+// Switch active date
+window.oeqSetDate = function(date) {
+  RACES_ACTIVE_DATE = date;
+  if      (date === '2026-05-08') RACES = RACES_508;
+  else if (date === '2026-05-07') RACES = RACES_507;
+  else                            RACES = RACES_DERBY;
+  rebuildOeqLookup();
+  renderOptixEQ();
+  // Update date buttons and note
+  document.querySelectorAll('.oeq-date-btn').forEach(function(b) {
+    b.classList.toggle('active', b.dataset.date === date);
+  });
+  var noteEl = document.getElementById('oeq-date-note');
+  if (noteEl) {
+    var notes = { '2026-05-08':'Showing today\'s CD card — 9 races', '2026-05-07':'Showing yesterday\'s CD card — 8 races', 'derby':'Showing Derby/Oaks Day historical data' };
+    noteEl.textContent = notes[date] || '';
+  }
+};
 
 // =============================================================
 //  OPTIXEQ — RENDERING
@@ -10571,12 +11032,185 @@ function renderTicketCard(t, isTop) {
 // =============================================================
 //  INIT
 // =============================================================
+// =============================================================
+//  YESTERDAY REVIEW — CD 2026-05-07
+//  Compares OptixEQ model rankings vs actual results
+// =============================================================
+function renderYesterdayReview() {
+  var contentEl = document.getElementById('yrv-content');
+  var statsEl   = document.getElementById('yrv-stats');
+  if (!contentEl) return;
+
+  // Try to get actual finish positions from _dashData
+  // Look for recent_results, historical entries, or yesterday's data
+  var resultsByRace = {};
+  var hasResults = false;
+  if (window._dashData) {
+    // Check multiple possible keys
+    var src = window._dashData.results_507 || window._dashData.yesterday_results
+           || window._dashData.cd_507 || null;
+    if (src) {
+      hasResults = true;
+      // Format: {race_num: [{horse_name, finish_pos}, ...]}
+      (Array.isArray(src) ? src : Object.values(src)).forEach(function(r) {
+        var rn = r.race_num || r.race;
+        if (rn) resultsByRace[rn] = r.horses || r.results || [];
+      });
+    }
+    // Also try today_entries with yesterday flag or old data
+    if (!hasResults && window._dashData.today_entries) {
+      var cd = window._dashData.today_entries['CD'];
+      if (cd && cd.date === '2026-05-07' && cd.races) {
+        hasResults = true;
+        cd.races.forEach(function(r) {
+          resultsByRace[r.race_num] = r.horses || [];
+        });
+      }
+    }
+  }
+
+  // Helper: get finish position for a horse in a race
+  function getFinish(raceNum, horseName) {
+    var horses = resultsByRace[raceNum] || [];
+    var lo = horseName.toLowerCase();
+    for (var i = 0; i < horses.length; i++) {
+      var h = horses[i];
+      var hn = (h.horse_name || h.name || '').toLowerCase();
+      if (hn === lo || hn.replace(/[^a-z]/g,'') === lo.replace(/[^a-z]/g,'')) {
+        return h.finish_pos || h.official_fin || h.fin || null;
+      }
+    }
+    return null;
+  }
+
+  var totalRaces = RACES_507.length;
+  var modelWins = 0, modelTop3 = 0, fadeMisses = 0;
+  var html = '';
+
+  RACES_507.forEach(function(race) {
+    // Sort horses by oFIG desc (model rank)
+    var sorted = race.horses.filter(function(h) { return h.ofig !== null && !h.tags.includes('FTS'); })
+      .sort(function(a,b) { return b.ofig - a.ofig; });
+    var topHorse = sorted[0];
+    var top3Names = sorted.slice(0,3).map(function(h) { return h.name; });
+
+    // Actual results
+    var finishes = {};
+    var winnerName = null, winnerFin = null;
+    sorted.forEach(function(h) {
+      var fin = getFinish(race.num, h.name);
+      if (fin !== null) { finishes[h.name] = fin; hasResults = true; }
+    });
+    // Find winner (fin=1)
+    sorted.forEach(function(h) { if (finishes[h.name] == 1) winnerName = h.name; });
+
+    var topFin = topHorse ? finishes[topHorse.name] : null;
+    var modelHit = (topFin == 1);
+    var modelNear = !modelHit && (topFin == 2 || topFin == 3);
+    if (modelHit) modelWins++;
+    if (topFin && topFin <= 3) modelTop3++;
+
+    // FADE check: did any FADE horse finish top 3?
+    var fadeSurprises = sorted.filter(function(h) {
+      return h.tags.includes('FADE') && finishes[h.name] && finishes[h.name] <= 3;
+    });
+    if (fadeSurprises.length) fadeMisses++;
+
+    // Result badge
+    var resultBadge = '';
+    if (!hasResults || Object.keys(finishes).length === 0) {
+      resultBadge = '<span class="yrv-result-badge yrv-pend">Pending</span>';
+    } else if (modelHit) {
+      resultBadge = '<span class="yrv-result-badge yrv-hit">✅ Model Hit</span>';
+    } else if (modelNear) {
+      resultBadge = '<span class="yrv-result-badge yrv-near">⚠ Near Miss</span>';
+    } else {
+      resultBadge = '<span class="yrv-result-badge yrv-miss">❌ Miss</span>';
+    }
+
+    // Build horse rows
+    var rows = sorted.slice(0, Math.min(6, sorted.length)).map(function(h, rank) {
+      var fin = finishes[h.name];
+      var finDisp = fin ? '<strong style="color:' + (fin==1?'var(--gold)':fin==2?'#7eb8f7':fin==3?'var(--green)':'var(--dim)') + '">' + fin + '</strong>' : '—';
+      var rowCls = fin==1?' yrv-fin-1':fin==2?' yrv-fin-2':fin==3?' yrv-fin-3':'';
+      var rankCls = rank===0?' yrv-rank-1':rank===1?' yrv-rank-2':' yrv-rank-3';
+      var tagHtml = h.tags.map(function(t) {
+        var clr = t==='KEY'?'var(--gold)':t==='VALUE'?'var(--green)':t==='FADE'?'var(--red)':t==='BOMB'?'#c39bd3':'var(--dim)';
+        return '<span style="font-size:.6rem;padding:1px 4px;border-radius:3px;background:rgba(255,255,255,.06);color:'+clr+';margin-left:2px">'+t+'</span>';
+      }).join('');
+      var mlDisp = h.ml ? h.ml + '-1' : '—';
+      var alertDisp = h.alerts ? '<span style="font-size:.65rem;color:var(--yellow)">'+h.alerts+'</span>' : '';
+      return '<tr class="' + rowCls + rankCls + '">' +
+        '<td style="text-align:center;font-size:.7rem;color:var(--dim)">' + (rank+1) + '</td>' +
+        '<td><span style="font-size:.78rem;font-weight:'+(rank<2?700:400)+'">'+h.name+'</span>'+tagHtml+'</td>' +
+        '<td class="r" style="font-size:.75rem;color:var(--dim)">' + mlDisp + '</td>' +
+        '<td class="r" style="font-weight:700;color:var(--gold)">' + (h.ofig||'—') + '</td>' +
+        '<td class="r" style="font-size:.72rem;color:var(--dim)">' + (h.ong||'—') + '</td>' +
+        '<td>' + alertDisp + '</td>' +
+        '<td class="r">' + finDisp + '</td>' +
+        '</tr>';
+    }).join('');
+
+    var fadeSurpHtml = fadeSurprises.length
+      ? '<div style="font-size:.72rem;color:var(--yellow);padding:4px 0">⚠ FADE surprise: ' + fadeSurprises.map(function(h){return h.name+' (fin '+finishes[h.name]+')'}).join(', ') + '</div>'
+      : '';
+
+    html += '<div class="yrv-race" id="yrv-r' + race.num + '">' +
+      '<div class="yrv-race-head" onclick="(function(el){el.closest(\'.yrv-race\').classList.toggle(\'open\');el.querySelector(\'.yrv-chevron\').style.transform=el.closest(\'.yrv-race\').classList.contains(\'open\')?\'rotate(90deg)\':\'\'})(this)">' +
+        '<span class="yrv-race-num">R' + race.num + '</span>' +
+        '<span class="yrv-race-type">' + race.type + '</span>' +
+        '<span class="yrv-race-purse">' + race.purse + ' · ' + race.dist + '</span>' +
+        (topHorse ? '<span class="yrv-model-top">Model #1: ' + topHorse.name + ' (' + topHorse.ofig + ')</span>' : '') +
+        resultBadge +
+        '<span class="yrv-chevron">▶</span>' +
+      '</div>' +
+      '<div class="yrv-race-body" style="display:none">' +
+        fadeSurpHtml +
+        '<div class="table-scroll"><table class="yrv-table">' +
+          '<tr><th>#</th><th>Horse</th><th class="r">ML</th><th class="r">oFIG</th><th class="r">oNg</th><th>Alerts</th><th class="r">Fin</th></tr>' +
+          rows +
+        '</table></div>' +
+      '</div>' +
+    '</div>';
+  });
+
+  // Open yrv-race on click (toggle body display)
+  contentEl.innerHTML = html;
+  contentEl.querySelectorAll('.yrv-race-body').forEach(function(body) {
+    // handled by inline onclick above
+  });
+
+  // Manually wire toggle since inline onclick can't toggle display directly
+  contentEl.querySelectorAll('.yrv-race-head').forEach(function(head) {
+    head.addEventListener('click', function() {
+      var body = head.nextElementSibling;
+      if (body) body.style.display = body.style.display === 'none' ? '' : 'none';
+    });
+  });
+  // Remove the onclick attribute-based toggle (already wired above)
+  contentEl.querySelectorAll('.yrv-race-head').forEach(function(h) {
+    h.removeAttribute('onclick');
+  });
+
+  // Stats bar
+  var statHtml = hasResults
+    ? '<span>Model Wins: <span class="tv">' + modelWins + '/' + totalRaces + '</span></span>' +
+      '<span>Top-3: <span class="tv">' + modelTop3 + '/' + totalRaces + '</span></span>' +
+      '<span>FADE Surprises: <span class="tv" style="color:' + (fadeMisses?'var(--yellow)':'var(--green)') + '">' + fadeMisses + '</span></span>' +
+      '<span style="font-size:.68rem;color:var(--dim)">Click any race to expand · oFIG rank = model order</span>'
+    : '<span style="color:var(--yellow)">Results not yet in dashboard data — check back after races complete. Horse data loaded from OptixEQ 5/7 PDF.</span>' +
+      '<span style="font-size:.68rem;color:var(--dim)">Click any race to expand · oFIG rank = model order</span>';
+  if (statsEl) statsEl.innerHTML = statHtml;
+}
+
 loadDashboard();
 renderTrackGuide();
 updateWpLegs();
 buildTodayLegs();
 renderOptixEQ();
 loadScratches();
+// Run review after dashboard loads (needs results data)
+setTimeout(renderYesterdayReview, 1800);
 </script>
 
 <script>
