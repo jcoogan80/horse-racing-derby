@@ -6481,6 +6481,18 @@ const WPD_RACE_DATA = {
   const BET_LEGS = { DD:2, P3:3, P4:4, P5:5 };
   let wpdRowCount = 0;
 
+  // ── Look up oFIG from active OptixEQ RACES data (global var set by date switcher) ──
+  function wpdLookupOptixOFIG(horseName, raceNum) {
+    const racesArr = window.RACES;
+    if (!racesArr || !horseName) return null;
+    const nameLower = horseName.toLowerCase().trim();
+    const race = racesArr.find(r => r.num === raceNum);
+    if (!race) return null;
+    const horse = (race.horses || []).find(h => h.name.toLowerCase().trim() === nameLower);
+    if (!horse) return null;
+    return (horse.ofig != null && horse.ofig !== '') ? horse.ofig : null;
+  }
+
   // ── Populate race dropdown when day changes ──
   window.wpdUpdateRaceSelect = function() {
     const day = document.getElementById('wpd-day-select').value;
@@ -6545,7 +6557,9 @@ const WPD_RACE_DATA = {
         .map(h => {
           // morning_line is stored as decimal (e.g. 5.0 = 5-1, 4.5 = 9-2)
           const ml = h.morning_line != null ? wpdFormatML(h.morning_line) : '';
-          return { pgm: String(h.program_num), name: h.horse_name || '', ml, ofig: '' };
+          // Look up oFIG from active OptixEQ RACES data by race number + name match
+          const ofig = wpdLookupOptixOFIG(h.horse_name, parseInt(rnum));
+          return { pgm: String(h.program_num), name: h.horse_name || '', ml, ofig: ofig != null ? String(ofig) : '' };
         });
     } else {
       rnum = val;
