@@ -5021,7 +5021,7 @@
               <th style="width:36px;">Rank</th>
               <th class="left">Combination</th>
               <th>WPD Price</th>
-              <th>Pool Efficiency</th>
+              <th>oFIG Efficiency</th>
               <th>Signal</th>
             </tr></thead>
             <tbody id="wpd-exotic-exacta-tbody"></tbody>
@@ -5036,7 +5036,7 @@
               <th style="width:36px;">Rank</th>
               <th class="left">Combination</th>
               <th>WPD Price</th>
-              <th>Pool Efficiency</th>
+              <th>oFIG Efficiency</th>
               <th>Signal</th>
             </tr></thead>
             <tbody id="wpd-exotic-trifecta-tbody"></tbody>
@@ -7021,41 +7021,64 @@ const WPD_RACE_DATA = {
     const rows   = Array.from(tbody.querySelectorAll('tr'));
     const base   = parseFloat(document.getElementById('wpd-base-cost').value) || 1;
 
+    // Collect horses — only include those with both a will pay AND an oFIG score
     const horses = [];
     rows.forEach((tr, i) => {
-      const inputs  = tr.querySelectorAll('input');
-      const pgm     = inputs[0].value.trim() || String(i + 1);
-      const name    = inputs[1].value.trim() || `Horse ${pgm}`;
-      const wpRaw   = inputs[4].value.trim();
-      const willPay = parseFloat(wpRaw);
+      const inputs   = tr.querySelectorAll('input');
+      const pgm      = inputs[0].value.trim() || String(i + 1);
+      const name     = inputs[1].value.trim() || `Horse ${pgm}`;
+      const oFigRaw  = inputs[3].value.trim();
+      const wpRaw    = inputs[4].value.trim();
+      const willPay  = parseFloat(wpRaw);
+      const oFig     = parseFloat(oFigRaw);
       if (!wpRaw || isNaN(willPay) || willPay <= 0) return;
-      horses.push({ pgm, name, willPay1: willPay * (1 / base) });
+      if (!oFigRaw || isNaN(oFig) || oFig <= 0) return;
+      horses.push({ pgm, name, willPay1: willPay * (1 / base), oFig });
     });
 
     if (horses.length < 2) {
-      alert('Enter will pays for at least 2 horses to calculate exotic prices.');
+      alert('Enter will pays and oFIG scores for at least 2 horses to calculate exotics.');
       return;
     }
 
-    // Implied win probs from will pays: 1/WP normalized
+    // Pool probs: 1/WP normalized
     const invWPs   = horses.map(h => 1 / h.willPay1);
     const sumInv   = invWPs.reduce((a, b) => a + b, 0);
     const wpdProbs = invWPs.map(v => v / sumInv);
+
+    // oFIG probs: oFIG score / sum of all oFIG scores
+    const sumFig   = horses.reduce((s, h) => s + h.oFig, 0);
+    const figProbs = horses.map(h => h.oFig / sumFig);
+
+    // Helper: pari-mutuel combo price given probs and takeout
+    function exactaPrice(probs, a, b, takeout) {
+      const pA  = probs[a];
+      const pAB = pA * (probs[b] / (1 - pA));
+      return (2 / pAB) * (1 - takeout);
+    }
+    function trifectaPrice(probs, a, b, c, takeout) {
+      const pA   = probs[a];
+      const pB   = probs[b];
+      const dBC  = 1 - pA - pB;
+      if (dBC <= 0) return null;
+      const pABC = pA * (probs[b] / (1 - pA)) * (probs[c] / dBC);
+      if (!isFinite(pABC) || pABC <= 0) return null;
+      return (2 / pABC) * (1 - takeout);
+    }
 
     // ── Exactas ($2 base, 19% takeout) ─────────────────────────────────────
     const exactas = [];
     for (let a = 0; a < horses.length; a++) {
       for (let b = 0; b < horses.length; b++) {
         if (b === a) continue;
-        const pA       = wpdProbs[a];
-        const pAB      = pA * (wpdProbs[b] / (1 - pA));
-        const wpdPrice = (2 / pAB) * (1 - 0.19);
-        exactas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}`, wpdPrice });
+        const wpdPrice = exactaPrice(wpdProbs, a, b, 0.19);
+        const figPrice = exactaPrice(figProbs, a, b, 0.19);
+        if (!isFinite(wpdPrice) || wpdPrice <= 0 || !isFinite(figPrice) || figPrice <= 0) continue;
+        const oFigEff  = (wpdPrice / figPrice) * 100;
+        exactas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}`, wpdPrice, figPrice, oFigEff });
       }
     }
-    const exactaAvg = exactas.reduce((s, r) => s + r.wpdPrice, 0) / exactas.length;
-    exactas.forEach(r => { r.poolEff = (exactaAvg / r.wpdPrice) * 100; });
-    exactas.sort((a, b) => b.poolEff - a.poolEff);
+    exactas.sort((a, b) => b.oFigEff - a.oFigEff);
 
     // ── Trifectas ($2 base, 25% takeout) ───────────────────────────────────
     const trifectas = [];
@@ -7064,20 +7087,15 @@ const WPD_RACE_DATA = {
         if (b === a) continue;
         for (let c = 0; c < horses.length; c++) {
           if (c === a || c === b) continue;
-          const pA   = wpdProbs[a];
-          const pB   = wpdProbs[b];
-          const dBC  = 1 - pA - pB;
-          if (dBC <= 0) continue;
-          const pABC = pA * (pB / (1 - pA)) * (wpdProbs[c] / dBC);
-          if (!isFinite(pABC) || pABC <= 0) continue;
-          const wpdPrice = (2 / pABC) * (1 - 0.25);
-          trifectas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}-${horses[c].pgm}`, wpdPrice });
+          const wpdPrice = trifectaPrice(wpdProbs, a, b, c, 0.25);
+          const figPrice = trifectaPrice(figProbs, a, b, c, 0.25);
+          if (wpdPrice === null || figPrice === null) continue;
+          const oFigEff  = (wpdPrice / figPrice) * 100;
+          trifectas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}-${horses[c].pgm}`, wpdPrice, figPrice, oFigEff });
         }
       }
     }
-    const trifectaAvg = trifectas.reduce((s, r) => s + r.wpdPrice, 0) / trifectas.length;
-    trifectas.forEach(r => { r.poolEff = (trifectaAvg / r.wpdPrice) * 100; });
-    trifectas.sort((a, b) => b.poolEff - a.poolEff);
+    trifectas.sort((a, b) => b.oFigEff - a.oFigEff);
 
     // ── Render ──────────────────────────────────────────────────────────────
     function renderExoticRows(tbodyId, wrapId, emptyId, combos) {
@@ -7094,13 +7112,13 @@ const WPD_RACE_DATA = {
       wrap.style.display  = '';
       empty.style.display = 'none';
       combos.slice(0, 20).forEach((row, i) => {
-        const eff     = Math.round(row.poolEff);
-        const sigCls  = eff >= 130 ? 'value' : eff < 85 ? 'fade' : 'neutral';
-        const sigTxt  = eff >= 130 ? '🔥 VALUE' : eff < 85 ? '❌ FADE' : '—';
-        const rowCls  = eff >= 130 ? 'wpd-exotic-row-value' : eff < 85 ? 'wpd-exotic-row-fade' : '';
-        const tr      = document.createElement('tr');
-        tr.className  = rowCls;
-        tr.innerHTML  = `
+        const eff    = Math.round(row.oFigEff);
+        const sigCls = eff >= 120 ? 'value' : eff < 80 ? 'fade' : 'neutral';
+        const sigTxt = eff >= 120 ? '🔥 VALUE' : eff < 80 ? '❌ FADE' : '—';
+        const rowCls = eff >= 120 ? 'wpd-exotic-row-value' : eff < 80 ? 'wpd-exotic-row-fade' : '';
+        const tr     = document.createElement('tr');
+        tr.className = rowCls;
+        tr.innerHTML = `
           <td style="color:#8a9bb0;font-size:11px;">${i + 1}</td>
           <td class="left wpd-exotic-combo">${row.combo}</td>
           <td style="font-weight:700;color:#e8e0d0;">$${row.wpdPrice.toFixed(2)}</td>
