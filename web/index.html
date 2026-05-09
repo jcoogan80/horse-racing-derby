@@ -5021,8 +5021,7 @@
               <th style="width:36px;">Rank</th>
               <th class="left">Combination</th>
               <th>WPD Price</th>
-              <th>ML Price</th>
-              <th>Edge vs ML</th>
+              <th>Pool Efficiency</th>
               <th>Signal</th>
             </tr></thead>
             <tbody id="wpd-exotic-exacta-tbody"></tbody>
@@ -5037,8 +5036,7 @@
               <th style="width:36px;">Rank</th>
               <th class="left">Combination</th>
               <th>WPD Price</th>
-              <th>ML Price</th>
-              <th>Edge vs ML</th>
+              <th>Pool Efficiency</th>
               <th>Signal</th>
             </tr></thead>
             <tbody id="wpd-exotic-trifecta-tbody"></tbody>
@@ -7023,38 +7021,15 @@ const WPD_RACE_DATA = {
     const rows   = Array.from(tbody.querySelectorAll('tr'));
     const base   = parseFloat(document.getElementById('wpd-base-cost').value) || 1;
 
-    // Build direct morning_line lookup from today_entries for live races.
-    // Uses the raw decimal "to-1" value (e.g. 4.5 = 9-2, 1.6 = ~8-5) directly,
-    // bypassing the wpdFormatML → parseMLOdds round-trip which loses precision.
-    const mlLookup = {};
-    const dayVal  = document.getElementById('wpd-day-select')?.value;
-    const raceVal = document.getElementById('wpd-race-select')?.value || '';
-    if (dayVal === 'live') {
-      const parts = raceVal.split(':');
-      if (parts.length === 3) {
-        const [, liveTrack, liveRnum] = parts;
-        const te = window._dashData?.today_entries || {};
-        const raceData = (te[liveTrack]?.races || []).find(r => String(r.race_num) === liveRnum);
-        if (raceData) {
-          (raceData.horses || [])
-            .filter(h => !h.is_ae && h.scratched !== true && h.morning_line != null)
-            .forEach(h => { mlLookup[String(h.program_num)] = h.morning_line; });
-        }
-      }
-    }
-
     const horses = [];
     rows.forEach((tr, i) => {
       const inputs  = tr.querySelectorAll('input');
       const pgm     = inputs[0].value.trim() || String(i + 1);
       const name    = inputs[1].value.trim() || `Horse ${pgm}`;
-      const mlRaw   = inputs[2].value.trim();
       const wpRaw   = inputs[4].value.trim();
       const willPay = parseFloat(wpRaw);
       if (!wpRaw || isNaN(willPay) || willPay <= 0) return;
-      // Prefer direct morning_line from source data; fall back to parsing ML input
-      const mlOdds = mlLookup[pgm] != null ? mlLookup[pgm] : parseMLOdds(mlRaw);
-      horses.push({ pgm, name, mlOdds, willPay1: willPay * (1 / base) });
+      horses.push({ pgm, name, willPay1: willPay * (1 / base) });
     });
 
     if (horses.length < 2) {
@@ -7067,28 +7042,6 @@ const WPD_RACE_DATA = {
     const sumInv   = invWPs.reduce((a, b) => a + b, 0);
     const wpdProbs = invWPs.map(v => v / sumInv);
 
-    // ML win probs: 1/(mlOdds+1) normalized; fall back to wpdProbs for missing ML
-    const hasMl = horses.some(h => h.mlOdds !== null);
-    let mlProbs = null;
-    if (hasMl) {
-      const mlInvs = horses.map((h, i) => h.mlOdds !== null ? 1 / (h.mlOdds + 1) : wpdProbs[i]);
-      const mlSum  = mlInvs.reduce((a, b) => a + b, 0);
-      mlProbs = mlInvs.map(v => v / mlSum);
-    }
-
-    // Debug: log computed values to browser console
-    console.group('WPD Single Race Exotics — Debug');
-    console.table(horses.map((h, i) => ({
-      pgm:       h.pgm,
-      name:      h.name,
-      mlOdds:    h.mlOdds != null ? h.mlOdds.toFixed(2) : 'null',
-      mlProb_raw: h.mlOdds != null ? (1/(h.mlOdds+1)).toFixed(4) : 'null',
-      mlProb_norm: mlProbs ? mlProbs[i].toFixed(4) : 'null',
-      willPay1:  h.willPay1.toFixed(3),
-      wpdProb:   wpdProbs[i].toFixed(4),
-    })));
-    console.groupEnd();
-
     // ── Exactas ($2 base, 19% takeout) ─────────────────────────────────────
     const exactas = [];
     for (let a = 0; a < horses.length; a++) {
@@ -7097,19 +7050,12 @@ const WPD_RACE_DATA = {
         const pA       = wpdProbs[a];
         const pAB      = pA * (wpdProbs[b] / (1 - pA));
         const wpdPrice = (2 / pAB) * (1 - 0.19);
-
-        let mlPrice = null, edge = null;
-        if (mlProbs) {
-          const mpA   = mlProbs[a];
-          const mpAB  = mpA * (mlProbs[b] / (1 - mpA));
-          mlPrice = (2 / mpAB) * (1 - 0.19);
-          edge = ((mlPrice / wpdPrice) - 1) * 100;
-        }
-
-        exactas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}`, wpdPrice, mlPrice, edge });
+        exactas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}`, wpdPrice });
       }
     }
-    exactas.sort((a, b) => (b.edge ?? -Infinity) - (a.edge ?? -Infinity));
+    const exactaAvg = exactas.reduce((s, r) => s + r.wpdPrice, 0) / exactas.length;
+    exactas.forEach(r => { r.poolEff = (exactaAvg / r.wpdPrice) * 100; });
+    exactas.sort((a, b) => b.poolEff - a.poolEff);
 
     // ── Trifectas ($2 base, 25% takeout) ───────────────────────────────────
     const trifectas = [];
@@ -7125,26 +7071,13 @@ const WPD_RACE_DATA = {
           const pABC = pA * (pB / (1 - pA)) * (wpdProbs[c] / dBC);
           if (!isFinite(pABC) || pABC <= 0) continue;
           const wpdPrice = (2 / pABC) * (1 - 0.25);
-
-          let mlPrice = null, edge = null;
-          if (mlProbs) {
-            const mpA  = mlProbs[a];
-            const mpB  = mlProbs[b];
-            const mdBC = 1 - mpA - mpB;
-            if (mdBC > 0) {
-              const mpABC = mpA * (mpB / (1 - mpA)) * (mlProbs[c] / mdBC);
-              if (isFinite(mpABC) && mpABC > 0) {
-                mlPrice = (2 / mpABC) * (1 - 0.25);
-                edge = ((mlPrice / wpdPrice) - 1) * 100;
-              }
-            }
-          }
-
-          trifectas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}-${horses[c].pgm}`, wpdPrice, mlPrice, edge });
+          trifectas.push({ combo: `${horses[a].pgm}-${horses[b].pgm}-${horses[c].pgm}`, wpdPrice });
         }
       }
     }
-    trifectas.sort((a, b) => (b.edge ?? -Infinity) - (a.edge ?? -Infinity));
+    const trifectaAvg = trifectas.reduce((s, r) => s + r.wpdPrice, 0) / trifectas.length;
+    trifectas.forEach(r => { r.poolEff = (trifectaAvg / r.wpdPrice) * 100; });
+    trifectas.sort((a, b) => b.poolEff - a.poolEff);
 
     // ── Render ──────────────────────────────────────────────────────────────
     function renderExoticRows(tbodyId, wrapId, emptyId, combos) {
@@ -7161,22 +7094,17 @@ const WPD_RACE_DATA = {
       wrap.style.display  = '';
       empty.style.display = 'none';
       combos.slice(0, 20).forEach((row, i) => {
-        const edgeTxt = row.edge !== null
-          ? (row.edge >= 0 ? `+${row.edge.toFixed(1)}%` : `${row.edge.toFixed(1)}%`) : '—';
-        const edgeCls = row.edge === null ? 'neutral' : row.edge > 15 ? 'pos' : row.edge < -15 ? 'neg' : 'neutral';
-        const sigCls  = row.edge === null ? 'neutral' : row.edge > 15 ? 'value' : row.edge < -15 ? 'fade' : 'neutral';
-        const sigTxt  = row.edge === null ? '—' : row.edge > 15 ? '🔥 VALUE' : row.edge < -15 ? '❌ FADE' : '—';
-        const rowCls  = row.edge !== null && row.edge > 15 ? 'wpd-exotic-row-value'
-                      : row.edge !== null && row.edge < -15 ? 'wpd-exotic-row-fade' : '';
-        const mlDisp  = row.mlPrice !== null ? `$${row.mlPrice.toFixed(2)}` : '—';
+        const eff     = Math.round(row.poolEff);
+        const sigCls  = eff >= 130 ? 'value' : eff < 85 ? 'fade' : 'neutral';
+        const sigTxt  = eff >= 130 ? '🔥 VALUE' : eff < 85 ? '❌ FADE' : '—';
+        const rowCls  = eff >= 130 ? 'wpd-exotic-row-value' : eff < 85 ? 'wpd-exotic-row-fade' : '';
         const tr      = document.createElement('tr');
         tr.className  = rowCls;
         tr.innerHTML  = `
           <td style="color:#8a9bb0;font-size:11px;">${i + 1}</td>
           <td class="left wpd-exotic-combo">${row.combo}</td>
           <td style="font-weight:700;color:#e8e0d0;">$${row.wpdPrice.toFixed(2)}</td>
-          <td style="color:#8a9bb0;">${mlDisp}</td>
-          <td class="wpd-exotic-edge ${edgeCls}">${edgeTxt}</td>
+          <td style="font-weight:700;">${eff}</td>
           <td><span class="wpd-exotic-signal ${sigCls}">${sigTxt}</span></td>
         `;
         tb.appendChild(tr);
