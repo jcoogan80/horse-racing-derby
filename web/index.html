@@ -5133,6 +5133,9 @@
     <button class="oeq-date-btn" data-date="derby" onclick="oeqSetDate('derby')">🏆 Derby/Oaks Day</button>
     <span style="font-size:.68rem;color:var(--dim);margin-left:4px;" id="oeq-date-note">Showing today's CD card — 9 races</span>
   </div>
+  <div id="oeq-pdf-row" class="optix-pdf-links" style="margin-bottom:10px;">
+    <a href="OptixEQ/OptixProgram_CD_2026-05-08.pdf" target="_blank" class="optix-pdf-btn">📊 OptixProgram 5/8</a>
+  </div>
   <div class="oeq-sub-nav">
     <button class="oeq-sub-btn active" id="oeq-btn-race"    onclick="oeqSwitch('race')">&#128202; Race Analysis</button>
     <button class="oeq-sub-btn"        id="oeq-btn-tickets" onclick="oeqSwitch('tickets')">&#127915; Exotic Tickets</button>
@@ -5151,6 +5154,10 @@
     <div class="day-badge oaks-badge">🌹 OAKS DAY</div>
     <h2 class="day-title">Churchill Downs — Friday, May 1, 2026</h2>
     <p class="day-subtitle">13 Races · Kentucky Oaks G1 · Eight Belles G2 · La Troienne G1 · Unbridled Sidney G2 · Modesty G3 · Edgewood G2 · Alysheba G2</p>
+    <div class="optix-pdf-links">
+      <a href="OptixEQ/Oaks_CD_2026-05-01.pdf" target="_blank" class="optix-pdf-btn">📋 Oaks Card</a>
+      <a href="OptixEQ/OptixPlot_CD_2026-05-01.pdf" target="_blank" class="optix-pdf-btn">📊 OptixPlot</a>
+    </div>
   </div>
 
   <!-- RACE 1 -->
@@ -5812,6 +5819,10 @@
     </div>
     <div class="day-header-right">
       <span class="track-condition">Track: Fast (Est.)</span>
+    </div>
+    <div class="optix-pdf-links">
+      <a href="OptixEQ/Derby_CD_2026-05-02.pdf" target="_blank" class="optix-pdf-btn">📋 Derby Card</a>
+      <a href="OptixEQ/OptixPlot_CD_2026-05-02.pdf" target="_blank" class="optix-pdf-btn">📊 OptixPlot</a>
     </div>
   </div>
 
@@ -10733,6 +10744,15 @@ window.oeqSetDate = function(date) {
   if (noteEl) {
     var notes = { '2026-05-08':'Showing today\'s CD card — 9 races', '2026-05-07':'Showing yesterday\'s CD card — 8 races', 'derby':'Showing Derby/Oaks Day historical data' };
     noteEl.textContent = notes[date] || '';
+  }
+  var pdfRow = document.getElementById('oeq-pdf-row');
+  if (pdfRow) {
+    var pdfs = {
+      '2026-05-08': '<a href="OptixEQ/OptixProgram_CD_2026-05-08.pdf" target="_blank" class="optix-pdf-btn">📊 OptixProgram 5/8</a>',
+      '2026-05-07': '<a href="OptixEQ/OptixProgram_CD_2026-05-07.pdf" target="_blank" class="optix-pdf-btn">📊 OptixProgram 5/7</a>',
+      'derby': '<a href="OptixEQ/Oaks_CD_2026-05-01.pdf" target="_blank" class="optix-pdf-btn">📋 Oaks Card</a><a href="OptixEQ/OptixPlot_CD_2026-05-01.pdf" target="_blank" class="optix-pdf-btn">📊 OptixPlot 5/1</a><a href="OptixEQ/Derby_CD_2026-05-02.pdf" target="_blank" class="optix-pdf-btn">📋 Derby Card</a><a href="OptixEQ/OptixPlot_CD_2026-05-02.pdf" target="_blank" class="optix-pdf-btn">📊 OptixPlot 5/2</a>'
+    };
+    pdfRow.innerHTML = pdfs[date] || '';
   }
 };
 
