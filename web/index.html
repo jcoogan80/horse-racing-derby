@@ -4886,6 +4886,8 @@
           <option value="oaks">🌹 Oaks Day (5/1)</option>
           <option value="derby">🏆 Derby Day (5/2)</option>
         </select>
+        <select class="wpd-select" id="wpd-track-filter" onchange="wpFilterRacesByTrack()" style="min-width:100px;display:none;">
+        </select>
         <select class="wpd-select" id="wpd-race-select" style="min-width:220px;">
         </select>
         <button class="wpd-btn wpd-btn-calc" onclick="wpdLoadRace()" style="padding:6px 16px;white-space:nowrap;">⬇ Load Horses</button>
@@ -7278,6 +7280,7 @@ const WPD_RACE_DATA = {
         opt.value = '';
         opt.textContent = 'No live entries — run scraper first';
         sel.appendChild(opt);
+        document.getElementById('wpd-track-filter').style.display = 'none';
       } else {
         allRaces.forEach(r => {
           const opt = document.createElement('option');
@@ -7285,9 +7288,12 @@ const WPD_RACE_DATA = {
           opt.textContent = `${r.track} R${r.raceNum}${r.raceName ? ' — ' + r.raceName : ''} (${r.horses.length} horses)`;
           sel.appendChild(opt);
         });
+        wpPopulateTrackFilter();
+        document.getElementById('wpd-track-filter').style.display = '';
       }
     } else {
       // Fall back to embedded race card data (Derby/Oaks)
+      document.getElementById('wpd-track-filter').style.display = 'none';
       const races = WPD_RACE_DATA[day];
       Object.keys(races).sort((a,b) => parseInt(a)-parseInt(b)).forEach(rnum => {
         const opt = document.createElement('option');
@@ -7296,6 +7302,49 @@ const WPD_RACE_DATA = {
         sel.appendChild(opt);
       });
     }
+  };
+
+  // ── Track filter helpers (live mode only) ──
+  window.wpPopulateTrackFilter = function() {
+    const trackSel = document.getElementById('wpd-track-filter');
+    const raceSel  = document.getElementById('wpd-race-select');
+    if (!trackSel || !raceSel) return;
+
+    const tracks = [...new Set(
+      Array.from(raceSel.options)
+        .map(o => o.value.startsWith('live:') ? o.value.split(':')[1] : null)
+        .filter(Boolean)
+    )].sort();
+
+    trackSel.innerHTML = '<option value="">-- All Tracks --</option>';
+    tracks.forEach(t => {
+      const opt = document.createElement('option');
+      opt.value = t;
+      opt.textContent = t;
+      if (t === 'LRL') opt.selected = true;
+      trackSel.appendChild(opt);
+    });
+
+    wpFilterRacesByTrack();
+  };
+
+  window.wpFilterRacesByTrack = function() {
+    const trackSel = document.getElementById('wpd-track-filter');
+    const raceSel  = document.getElementById('wpd-race-select');
+    if (!trackSel || !raceSel) return;
+
+    const selected = trackSel.value;
+    Array.from(raceSel.options).forEach(opt => {
+      if (!selected || !opt.value.startsWith('live:')) {
+        opt.hidden = false;
+      } else {
+        opt.hidden = opt.value.split(':')[1] !== selected;
+      }
+    });
+
+    // Auto-select first visible race
+    const firstVisible = Array.from(raceSel.options).find(o => !o.hidden && o.value);
+    if (firstVisible) raceSel.value = firstVisible.value;
   };
 
   // ── Load selected race into horse input table ──
