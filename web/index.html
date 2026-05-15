@@ -5685,7 +5685,8 @@
   <div class="tg-top">
     <span class="tg-label">Track</span>
     <select class="tg-select" id="tg-track" onchange="tgOnBetChange()">
-      <option value="CD" selected>CD</option>
+      <option value="LRL" selected>LRL</option>
+      <option value="CD">CD</option>
       <option value="KEE">KEE</option>
       <option value="GP">GP</option>
       <option value="SA">SA</option>
@@ -12707,7 +12708,44 @@ function renderTicketCard(t, isTop) {
     <span class="sct-cost-item">Est. EV: <strong class="${roiColor}">${t.roi > 0 ? '+' : ''}${t.roi.toFixed(0)}%</strong></span>
     <span class="sct-cost-item" style="margin-left:auto;font-size:.68rem;color:var(--dim)">Score: ${t.ticketScore.toFixed(2)} · ${t.seqInfo.hits} hist. hits · Compound edge: ${t.compoundEdge > 0 ? '+' : ''}${t.compoundEdge.toFixed(1)}%</span>
   </div>
+  <div style="padding:8px 14px 12px;text-align:right;">
+    <button onclick="applyToTicketGen()" style="font-size:.72rem;padding:5px 12px;background:#1a3d5a;color:#66aaee;border:1px solid rgba(102,170,238,.4);border-radius:5px;cursor:pointer;">Apply to Ticket Gen →</button>
+  </div>
 </div>`;
+}
+
+function applyToTicketGen() {
+  // Get current track and race from Today tab
+  const track = document.getElementById('sct-track')?.value || 'LRL';
+  const raceEl = document.getElementById('sct-race') ||
+                 document.querySelector('[id*="race"][id*="select"]');
+  const race = raceEl ? raceEl.value : '';
+
+  // Set Ticket Gen track to match
+  const tgTrack = document.getElementById('tg-track');
+  if (tgTrack) {
+    // Add option if missing
+    if (!Array.from(tgTrack.options).find(o => o.value === track)) {
+      const opt = document.createElement('option');
+      opt.value = track;
+      opt.textContent = track;
+      tgTrack.insertBefore(opt, tgTrack.firstChild);
+    }
+    tgTrack.value = track;
+  }
+
+  // Set race if we have one
+  const tgRace = document.getElementById('tg-race') ||
+                 document.querySelector('#tab-ticketgen [id*="race"]');
+  if (tgRace && race) tgRace.value = race;
+
+  // Trigger Ticket Gen to reload with new values
+  if (typeof tgOnBetChange === 'function') tgOnBetChange();
+  if (typeof tgLoad === 'function') tgLoad();
+  if (typeof tgInit === 'function') tgInit();
+
+  // Switch to tab
+  showTab('ticketgen');
 }
 
 // =============================================================
