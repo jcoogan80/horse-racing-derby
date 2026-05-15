@@ -8359,7 +8359,7 @@ function renderBudget(bh, ticketCost) {
 function renderRecentResults(recentResults) {
   if (!recentResults || !recentResults.length) return '';
 
-  const TRACK_ORDER = ['CD','GP','FG','OP','AQU','SA','KEE'];
+  const TRACK_ORDER = ['CD','GP','FG','OP','AQU','SA','KEE','LRL','BEL'];
   const sorted = [...recentResults].sort((a, b) => {
     const ai = TRACK_ORDER.indexOf(a.track);
     const bi = TRACK_ORDER.indexOf(b.track);
