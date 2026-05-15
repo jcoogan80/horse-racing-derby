@@ -33746,6 +33746,1349 @@
       ],
       "ae_alerts": []
     },
+    "LRL": {
+      "date": "2026-05-15",
+      "races": [
+        {
+          "race_num": 1,
+          "race_type": "Open | 3 To 6 Year Olds",
+          "distance": "6 f,\nDirt,\n$35,000 Maiden Claiming",
+          "surface": "Dirt",
+          "field_size": 9,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Good Man Dan",
+              "morning_line": 10.0,
+              "jockey": "Henry WaltersPaco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Isaiah Fiftythree",
+              "morning_line": 6.0,
+              "jockey": "A. Ferris Allen IIIMartin Chuan",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Dr. Buzzy",
+              "morning_line": 20.0,
+              "jockey": "Anthony FarriorJeiron Barbosa",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Regency Tale",
+              "morning_line": 4.0,
+              "jockey": "A. Ferris Allen IIIYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Mister Monday Nite",
+              "morning_line": 8.0,
+              "jockey": "Jamie NessMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "J C's Boys",
+              "morning_line": 3.5,
+              "jockey": "W. Robert BailesJevian Toledo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Hit Zero",
+              "morning_line": 3.0,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Bold Fact",
+              "morning_line": 5.0,
+              "jockey": "Brittany T. RussellIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Tax and Tags",
+              "morning_line": 20.0,
+              "jockey": "John E. Salzman, Jr.Joseph Rocco, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 2,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "5 1/2F,\nTurf,\nAllowance",
+          "surface": "Turf",
+          "field_size": 11,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Parkes",
+              "morning_line": 6.0,
+              "jockey": "Suzanne StettiniusFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Kohoutek",
+              "morning_line": 6.0,
+              "jockey": "Sarah WhiteJorge Ruiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Firmantown",
+              "morning_line": 8.0,
+              "jockey": "Carlos A. MancillaMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Claudee Boy",
+              "morning_line": 30.0,
+              "jockey": "Hassan ElamriJean Gregor Briceno",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Benny Havens",
+              "morning_line": 30.0,
+              "jockey": "Anthony Aguirre, Jr.Jeiron Barbosa",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Jigger",
+              "morning_line": 30.0,
+              "jockey": "A. Ferris Allen IIIHoracio Karamanos",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Built by Khozan",
+              "morning_line": 5.0,
+              "jockey": "Hugh I. McMahonJorge F. Hernandez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Boastfully Irish",
+              "morning_line": 20.0,
+              "jockey": "H. Graham MotionKevin Gomez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Great Heavens",
+              "morning_line": 10.0,
+              "jockey": "Jose J. MaganaForest Boyce",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Without Borders",
+              "morning_line": 4.0,
+              "jockey": "Keri BrionJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Big Tankness",
+              "morning_line": 2.5,
+              "jockey": "Jamie NessYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 3,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1 1/16M,\nDirt,\n$40,000 Allowance Optional Claiming",
+          "surface": "Dirt",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Vance Scholars",
+              "morning_line": 20.0,
+              "jockey": "Phillip CapuanoPaco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Derbyness",
+              "morning_line": 4.0,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Lonesome Road",
+              "morning_line": 1.2,
+              "jockey": "Michael J. TrombettaMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Hittheroadjak",
+              "morning_line": 8.0,
+              "jockey": "Jonathan MaldonadoRaul E. Mena",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Majorca",
+              "morning_line": 10.0,
+              "jockey": "Daniel G. EubanksMartin Chuan",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Surfside Moon",
+              "morning_line": 3.5,
+              "jockey": "Brittany T. RussellJevian Toledo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Statesman",
+              "morning_line": 6.0,
+              "jockey": "Claude R. McGaughey IIIJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 4,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "5 1/2F,\nTurf,\n$20,000 Claiming",
+          "surface": "Turf",
+          "field_size": 11,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Turbulent Force",
+              "morning_line": 12.0,
+              "jockey": "Benjamin M. Feliciano, Jr.Carlos Eduardo Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Catahoula Moon",
+              "morning_line": 20.0,
+              "jockey": "Jose J. MaganaJean Gregor Briceno",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Boss Is a Pal",
+              "morning_line": 12.0,
+              "jockey": "Suzanne StettiniusForest Boyce",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Tough Workout",
+              "morning_line": 15.0,
+              "jockey": "Sarah WhiteJorge Ruiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Hunter Joe",
+              "morning_line": 6.0,
+              "jockey": "Hamilton A. SmithMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Transactional Guy",
+              "morning_line": 15.0,
+              "jockey": "Michael E. Jones, Jr.Jeiron Barbosa",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Noah Chance",
+              "morning_line": 4.5,
+              "jockey": "John J. RobbXavier Perez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Barzini",
+              "morning_line": 1.4,
+              "jockey": "Michael J. TrombettaIsmerio Villalobos",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Noble Jon",
+              "morning_line": 8.0,
+              "jockey": "Emanuel J. GeralisHoracio Karamanos",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Point Liam",
+              "morning_line": 10.0,
+              "jockey": "Gina PerriMatilda Burnham",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Talented Man",
+              "morning_line": null,
+              "jockey": "Michael M. MooreAndy Hernandez",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 5,
+          "race_type": "Open | 3 To 6 Year Olds",
+          "distance": "5 1/2F,\nTurf,\n$35,000 Maiden Claiming",
+          "surface": "Turf",
+          "field_size": 16,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Country Bumpkin",
+              "morning_line": 4.0,
+              "jockey": "Kieron MageeAngel Cruz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Garage Beers",
+              "morning_line": 10.0,
+              "jockey": "Elisha PerezPaco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Long Straw",
+              "morning_line": 30.0,
+              "jockey": "Timothy M. VickMatilda Burnham",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Really Ready",
+              "morning_line": 30.0,
+              "jockey": "Patrick F. NueschXavier Perez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Se Thar Barr",
+              "morning_line": 6.0,
+              "jockey": "Susan S. CooneyHoracio Karamanos",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Kuhner",
+              "morning_line": 12.0,
+              "jockey": "W. Robert BailesJeiron Barbosa",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Hard Stance",
+              "morning_line": 20.0,
+              "jockey": "Anthony FarriorYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Typhoon Kuhn",
+              "morning_line": 10.0,
+              "jockey": "W. Robert BailesCarlos Eduardo Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Bright Time",
+              "morning_line": 15.0,
+              "jockey": "Milan MilosevicJevian Toledo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Guerrilla Magic",
+              "morning_line": 30.0,
+              "jockey": "Robin L. GrahamTais Lyapustina",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Chimney Sweep",
+              "morning_line": 4.5,
+              "jockey": "Anthony Aguirre, Jr.Joseph Rocco, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Golf Cart Ryder",
+              "morning_line": 15.0,
+              "jockey": "Michael J. TrombettaLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "13",
+              "horse_name": "Red Sea",
+              "morning_line": 5.0,
+              "jockey": "A. Ferris Allen IIIMartin Chuan",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "14",
+              "horse_name": "Fortune Hill",
+              "morning_line": 20.0,
+              "jockey": "Irvin G. FloresJean Gregor Briceno",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "15",
+              "horse_name": "Golden Descent",
+              "morning_line": null,
+              "jockey": "Caitlin KeilKevin Gomez",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            },
+            {
+              "program_num": "16",
+              "horse_name": "Start Tappin",
+              "morning_line": null,
+              "jockey": "Miguel VeraJean Gregor Briceno",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 6,
+          "race_type": "Fillies & Mares | 3 To 6 Year Olds",
+          "distance": "1M,\nTurf,\nMaiden Special Weight",
+          "surface": "Turf",
+          "field_size": 11,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "American Tapit",
+              "morning_line": 3.5,
+              "jockey": "Horacio De PazJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Toocoolforschool",
+              "morning_line": 8.0,
+              "jockey": "Michael StidhamLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Hay Grace Brennan",
+              "morning_line": 30.0,
+              "jockey": "A. Ferris Allen IIIYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Raisin Weekend",
+              "morning_line": 10.0,
+              "jockey": "Horacio De PazJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "La Devita",
+              "morning_line": 15.0,
+              "jockey": "Brittany T. RussellJevian Toledo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Gum",
+              "morning_line": 4.0,
+              "jockey": "H. Graham MotionFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Sota Summers",
+              "morning_line": 3.0,
+              "jockey": "Brittany T. RussellIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Daring Grace (GB)",
+              "morning_line": 4.5,
+              "jockey": "Arnaud DelacourTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Resort (FR)",
+              "morning_line": 10.0,
+              "jockey": "Michael J. TrombettaMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Kimmy Got Glasses",
+              "morning_line": 30.0,
+              "jockey": "James L. Lawrence IIMartin Chuan",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Nicksie",
+              "morning_line": null,
+              "jockey": "Thomas Drury, Jr.John R. Velazquez",
+              "trainer": "(Also-eligible)",
+              "is_ae": false,
+              "scratched": true
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 7,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1M,\nTurf,\n$40,000 Allowance Optional Claiming",
+          "surface": "Turf",
+          "field_size": 13,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Wine Collector",
+              "morning_line": 30.0,
+              "jockey": "Joanne ShankleDaniel Centeno",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Cadeau d'Argent",
+              "morning_line": 30.0,
+              "jockey": "Niall SavilleXavier Perez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Noted",
+              "morning_line": 15.0,
+              "jockey": "Jamie NessYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Frosty the Giant",
+              "morning_line": 30.0,
+              "jockey": "Kelly Lynn DeiterEdgar Villasmil",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Sky's Not Falling",
+              "morning_line": 8.0,
+              "jockey": "Michael J. TrombettaJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Primed to Go",
+              "morning_line": 10.0,
+              "jockey": "Jorge Duarte, Jr.Paco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "McCullough",
+              "morning_line": 3.5,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "King Size",
+              "morning_line": 3.0,
+              "jockey": "Michael StidhamJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Hold Out",
+              "morning_line": 15.0,
+              "jockey": "Suzanne StettiniusForest Boyce",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "Sardis",
+              "morning_line": 20.0,
+              "jockey": "Michael J. TrombettaMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "11",
+              "horse_name": "Naptown",
+              "morning_line": 6.0,
+              "jockey": "Jose J. MaganaJorge Ruiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "12",
+              "horse_name": "Light Mood (FR)",
+              "morning_line": 6.0,
+              "jockey": "H. Graham MotionIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "13",
+              "horse_name": "Wow Whata Party",
+              "morning_line": 30.0,
+              "jockey": "James L. Lawrence IIMartin Chuan",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 8,
+          "race_type": "Fillies | 3 Year Olds",
+          "distance": "6 f,\nDirt,\nMiss Preakness S.",
+          "surface": "Dirt",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Little Miss Curlin",
+              "morning_line": 1.8,
+              "jockey": "Steven M. AsmussenJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Peach Tie",
+              "morning_line": 4.0,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Lights Out Leni",
+              "morning_line": 2.5,
+              "jockey": "Chad SummersLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Getting Closer",
+              "morning_line": 20.0,
+              "jockey": "Jack SistersonJose Lezcano",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Tessellate",
+              "morning_line": 4.5,
+              "jockey": "Saffie A. Joseph, Jr.Irad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Late Night Text",
+              "morning_line": 10.0,
+              "jockey": "Saffie A. Joseph, Jr.Tyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Victory Music",
+              "morning_line": 8.0,
+              "jockey": "Michael J. MakerFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 9,
+          "race_type": "Fillies | 3 Year Olds",
+          "distance": "1M,\nTurf,\nHilltop S.",
+          "surface": "Turf",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Use Me (IRE)",
+              "morning_line": 3.5,
+              "jockey": "Brendan P. WalshTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Ultimate Love",
+              "morning_line": 0.8,
+              "jockey": "Michael J. TrombettaJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Coach Mazzula",
+              "morning_line": 6.0,
+              "jockey": "Brittany T. RussellJevian Toledo",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Siouxse",
+              "morning_line": 12.0,
+              "jockey": "H. Graham MotionFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Brat Pack",
+              "morning_line": 8.0,
+              "jockey": "H. Graham MotionJorge Ruiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Unmiztaken",
+              "morning_line": 10.0,
+              "jockey": "Keri BrionJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "I Love Giraffes",
+              "morning_line": 12.0,
+              "jockey": "Chad SummersPaco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 10,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "1 1/8 m,\nDirt,\nAllaire DuPont Distaff S.",
+          "surface": "Dirt",
+          "field_size": 8,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Low Country Magic",
+              "morning_line": 12.0,
+              "jockey": "Horacio De PazTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Margie's Intention",
+              "morning_line": 1.0,
+              "jockey": "Brad H. CoxIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Late Nite Call",
+              "morning_line": 30.0,
+              "jockey": "Niall SavilleXavier Perez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Complexity Jane",
+              "morning_line": 5.0,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Too Many Kisses",
+              "morning_line": 30.0,
+              "jockey": "Timothy L. KeefeForest Boyce",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Queen Azteca",
+              "morning_line": 5.0,
+              "jockey": "Rodolphe BrissetFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Waveless",
+              "morning_line": 6.0,
+              "jockey": "Todd A. PletcherJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Ourdaydreaminggirl",
+              "morning_line": 6.0,
+              "jockey": "Louis C. Linder, Jr.Paco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 11,
+          "race_type": "Fillies & Mares | 3 Year Olds And Up",
+          "distance": "5 1/2F,\nTurf,\nThe Very One S.",
+          "surface": "Turf",
+          "field_size": 9,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Strutsherstuff",
+              "morning_line": 20.0,
+              "jockey": "Madison F. MeyersForest Boyce",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Sporting Lady",
+              "morning_line": 6.0,
+              "jockey": "Keri BrionTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Lost and Found",
+              "morning_line": 3.0,
+              "jockey": "Brittany T. RussellSheldon Russell",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Julee's Legacy",
+              "morning_line": 30.0,
+              "jockey": "Michael E. Jones, Jr.Jeiron Barbosa",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Saturday Flirt",
+              "morning_line": 1.2,
+              "jockey": "Wesley A. WardIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Somnium",
+              "morning_line": 15.0,
+              "jockey": "Elizabeth M. MerrymanJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Malibu Hooch",
+              "morning_line": 30.0,
+              "jockey": "Hugh I. McMahonYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Sunna",
+              "morning_line": 6.0,
+              "jockey": "J. Kent SweezeyLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "Les Reys (FR)",
+              "morning_line": 8.0,
+              "jockey": "Miguel ClementFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 12,
+          "race_type": "Open | 3 Year Olds And Up",
+          "distance": "1 3/16 m,\nDirt,\nPimlico Special S.",
+          "surface": "Dirt",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Maclean's Rook",
+              "morning_line": 4.0,
+              "jockey": "Michael J. TrombettaIsmerio Villalobos",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Navajo Warrior",
+              "morning_line": 2.5,
+              "jockey": "Saffie A. Joseph, Jr.Flavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "San Siro",
+              "morning_line": 6.0,
+              "jockey": "Brendan P. WalshTyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Awesome Aaron",
+              "morning_line": 4.5,
+              "jockey": "Norm W. CasseJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Xcellent Start",
+              "morning_line": 30.0,
+              "jockey": "Wade S. SandersonFredy Peltroche",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Duke of Duval",
+              "morning_line": 5.0,
+              "jockey": "Steven M. AsmussenJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Yo Daddy",
+              "morning_line": 3.0,
+              "jockey": "Linda RiceJose Lezcano",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 13,
+          "race_type": "Fillies | 3 Year Olds",
+          "distance": "1 1/8 m,\nDirt,\nGeorge E. Mitchell Black-Eyed Susan S.",
+          "surface": "Dirt",
+          "field_size": 10,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Miss Fulton Gal",
+              "morning_line": 30.0,
+              "jockey": "Michael E. GorhamJohn R. Velazquez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Ivy Girl",
+              "morning_line": 15.0,
+              "jockey": "Amelia J. GreenVictor R. Carrasco",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Holly's Holiday",
+              "morning_line": 6.0,
+              "jockey": "Kenneth G. McPeekFlavien Prat",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Savor It",
+              "morning_line": 30.0,
+              "jockey": "Uriah St. LewisMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "Braken Poppa",
+              "morning_line": 3.5,
+              "jockey": "Steven M. AsmussenJose L. Ortiz",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Haute Diva",
+              "morning_line": 15.0,
+              "jockey": "Patrick L. BianconeKeith J. Asmussen",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Jumping the Gun",
+              "morning_line": 3.0,
+              "jockey": "Andrew L. SimoffLuis Saez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "8",
+              "horse_name": "Majestic Lucia",
+              "morning_line": 12.0,
+              "jockey": "Victor Barboza, Jr.Junior Alvarado",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "9",
+              "horse_name": "A. P.'s Girl",
+              "morning_line": 5.0,
+              "jockey": "Peter EurtonIrad Ortiz, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "10",
+              "horse_name": "My Miss Mo",
+              "morning_line": 3.5,
+              "jockey": "Saffie A. Joseph, Jr.Tyler Gaffalione",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        },
+        {
+          "race_num": 14,
+          "race_type": "Open | 3 Year Olds",
+          "distance": "1M,\nDirt,\n$62,500 Allowance Optional Claiming",
+          "surface": "Dirt",
+          "field_size": 7,
+          "horses": [
+            {
+              "program_num": "1",
+              "horse_name": "Higher Sense",
+              "morning_line": 8.0,
+              "jockey": "Miguel PenalozaDexter Haddock",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "2",
+              "horse_name": "Street Party",
+              "morning_line": 4.5,
+              "jockey": "Michael V. PinoMychel J. Sanchez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "3",
+              "horse_name": "Tartabull",
+              "morning_line": 3.5,
+              "jockey": "Chad SummersPaco Lopez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "4",
+              "horse_name": "Make It Quick",
+              "morning_line": 30.0,
+              "jockey": "John J. RobbXavier Perez",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "5",
+              "horse_name": "No More Calls",
+              "morning_line": 20.0,
+              "jockey": "Charles A. FrockJean Gregor Briceno",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "6",
+              "horse_name": "Close the Gate",
+              "morning_line": 3.5,
+              "jockey": "John E. Salzman, Jr.Joseph Rocco, Jr.",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            },
+            {
+              "program_num": "7",
+              "horse_name": "Bala de Plata",
+              "morning_line": 3.0,
+              "jockey": "Jamie NessYedsit Hazlewood",
+              "trainer": "",
+              "is_ae": false,
+              "scratched": false
+            }
+          ],
+          "ae_horses": []
+        }
+      ],
+      "ae_alerts": []
+    },
     "SA": {
       "date": "2026-05-15",
       "races": [
