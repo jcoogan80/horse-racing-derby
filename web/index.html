@@ -7125,6 +7125,45 @@
      ============================================================ -->
 
 <div class="optix-day-section" id="oeq-day-lrl-0515">
+<style>
+#oeq-day-lrl-0515 * { box-sizing: border-box; }
+#oeq-day-lrl-0515 .optix-day-header { display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: 10px; background: linear-gradient(135deg, #16213e 0%, #0f3460 100%); border-left: 5px solid #c9a84c; border-radius: 8px; padding: 14px 18px; margin-bottom: 14px; }
+#oeq-day-lrl-0515 .optix-day-title { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+#oeq-day-lrl-0515 .optix-day-name { font-size: 15px; font-weight: 700; color: #e8e0d0; }
+#oeq-day-lrl-0515 .optix-day-meta { font-size: 12px; color: #8a9bb0; }
+#oeq-day-lrl-0515 .optix-track-badge { background: #2c5f8a; color: white; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; margin-right: 8px; }
+#oeq-day-lrl-0515 .optix-chevron { color: #c9a84c; font-size: 14px; cursor: pointer; }
+#oeq-day-lrl-0515 .optix-day-body { padding: 8px 0; }
+#oeq-day-lrl-0515 .optix-legend { padding: 8px 16px; font-size: 12px; color: #aaa; background: rgba(255,255,255,0.03); margin-bottom: 12px; border-radius: 4px; }
+#oeq-day-lrl-0515 .optix-ml-banner { padding: 10px 16px; border-radius: 6px; margin-bottom: 14px; font-size: 13px; }
+#oeq-day-lrl-0515 .optix-ml-banner.pending { background: rgba(201,168,76,0.12); border-left: 4px solid #c9a84c; color: #e8d5a0; }
+#oeq-day-lrl-0515 .optix-ml-banner.loaded { background: rgba(45,138,45,0.12); border-left: 4px solid #2d8a2d; color: #a0e8a0; }
+#oeq-day-lrl-0515 .optix-race-card { background: #0d1b2a; border: 1px solid #1e3048; border-radius: 8px; margin-bottom: 10px; overflow: hidden; }
+#oeq-day-lrl-0515 .optix-stakes-card .optix-race-header { background: linear-gradient(135deg, #1a3a1a, #2d5a2d); }
+#oeq-day-lrl-0515 .stakes-label { color: #f5c518; font-weight: bold; }
+#oeq-day-lrl-0515 .optix-race-header { display: flex; align-items: center; justify-content: space-between; padding: 10px 14px; background: #152232; cursor: pointer; }
+#oeq-day-lrl-0515 .optix-race-info { display: flex; align-items: center; gap: 10px; }
+#oeq-day-lrl-0515 .optix-race-num { background: #c9a84c; color: #000; padding: 2px 8px; border-radius: 4px; font-size: 12px; font-weight: bold; }
+#oeq-day-lrl-0515 .optix-race-detail { font-size: 13px; color: #ccc; }
+#oeq-day-lrl-0515 .optix-race-body { padding: 12px; display: none; }
+#oeq-day-lrl-0515 .optix-table { width: 100%; border-collapse: collapse; font-size: 12px; margin-bottom: 10px; }
+#oeq-day-lrl-0515 .optix-table th { background: #152232; color: #8a9bb0; padding: 6px 10px; text-align: left; font-size: 11px; }
+#oeq-day-lrl-0515 .optix-table td { padding: 7px 10px; border-bottom: 1px solid #1a2d42; color: #ccc; vertical-align: top; }
+#oeq-day-lrl-0515 .optix-table tr:last-child td { border-bottom: none; }
+#oeq-day-lrl-0515 .ml-cell { color: #666; font-style: italic; text-align: center; }
+#oeq-day-lrl-0515 .optix-analysis { background: rgba(255,255,255,0.04); border-left: 3px solid #4a9; padding: 10px 14px; margin: 10px 0; font-size: 13px; line-height: 1.65; color: #ccc; }
+#oeq-day-lrl-0515 .tag-key { background: #c9a84c; color: #000; padding: 2px 7px; border-radius: 3px; font-size: 11px; font-weight: bold; }
+#oeq-day-lrl-0515 .tag-value { background: #2d8a2d; color: #fff; padding: 2px 7px; border-radius: 3px; font-size: 11px; font-weight: bold; }
+#oeq-day-lrl-0515 .tag-fade { background: #c0392b; color: #fff; padding: 2px 7px; border-radius: 3px; font-size: 11px; font-weight: bold; }
+#oeq-day-lrl-0515 .tag-bomb { background: #6c3483; color: #fff; padding: 2px 7px; border-radius: 3px; font-size: 11px; font-weight: bold; }
+#oeq-day-lrl-0515 .tag-pending { background: #444; color: #bbb; padding: 2px 7px; border-radius: 3px; font-size: 11px; font-weight: bold; border: 1px dashed #888; }
+#oeq-day-lrl-0515 .optix-tickets { margin-top: 12px; padding: 10px; background: rgba(255,255,255,0.03); border-radius: 6px; }
+#oeq-day-lrl-0515 .optix-ticket-row { display: flex; align-items: center; gap: 10px; margin: 6px 0; font-size: 13px; }
+#oeq-day-lrl-0515 .optix-ticket-label { background: #2c5f8a; color: #fff; padding: 2px 8px; border-radius: 4px; font-size: 11px; font-weight: bold; min-width: 80px; text-align: center; }
+#oeq-day-lrl-0515 .optix-ticket-horses { flex: 1; color: #ddd; }
+#oeq-day-lrl-0515 .optix-copy-btn { background: #333; color: #aaa; border: 1px solid #555; border-radius: 4px; padding: 3px 10px; cursor: pointer; font-size: 11px; }
+#oeq-day-lrl-0515 .optix-copy-btn:hover { background: #444; color: #fff; }
+</style>
   <div class="optix-day-header" onclick="toggleDay('lrl-fri')">
     <div class="optix-day-title">
       <span class="optix-track-badge">LRL</span>
