@@ -1483,8 +1483,8 @@
     <div class="sct-controls">
       <label>Track</label>
       <select id="sct-track">
-        <option value="CD" selected>CD – Churchill Downs</option>
-        <option value="LRL">LRL – Laurel Park (Preakness 5/15–16)</option>
+        <option value="CD">CD – Churchill Downs</option>
+        <option value="LRL" selected>LRL – Laurel Park (Preakness 5/15–16)</option>
         <option value="SAR">SAR – Saratoga (Belmont 6/6)</option>
         <option value="KEE">KEE – Keeneland</option>
         <option value="GP">GP – Gulfstream</option>
@@ -11523,7 +11523,7 @@ function oeqGapNumeric(ofig, ong) {
 }
 
 function buildSmartTickets(trackOverride) {
-  const track = trackOverride || document.getElementById('sct-track')?.value || 'CD';
+  const track = trackOverride || document.getElementById('sct-track')?.value || 'LRL';
   const minOverlay = parseFloat(document.getElementById('sct-min-overlay')?.value || 1.0);
   const maxCost = parseFloat(document.getElementById('sct-max-cost')?.value || 20);
   const wagerTypes = ['P3','P4','P5'];
@@ -11845,7 +11845,7 @@ function runSmartScan() {
   if (!resultsEl) return;
   resultsEl.innerHTML = '<div class="sct-empty">Scanning…</div>';
 
-  const track = document.getElementById('sct-track')?.value || 'CD';
+  const track = document.getElementById('sct-track')?.value || 'LRL';
 
   // Track profile banners
   const TRACK_PROFILES = {
