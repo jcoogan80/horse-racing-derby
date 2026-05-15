@@ -1301,6 +1301,12 @@
     .yrv-ticket-head { font-size:.78rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
     .yrv-ticket-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:5px 0; border-bottom:1px solid var(--border); font-size:.75rem; }
     .yrv-ticket-row:last-child { border-bottom:none; }
+    #lrl0515-card-content .odc .horse-row {
+      grid-template-columns: 36px 1fr auto 70px;
+    }
+    #lrl0515-card-content .odc .horse-note {
+      grid-column: 2 / -1;
+    }
   </style>
 </head>
 <body>
@@ -5063,15 +5069,7 @@
   </div><!-- end willpay-card-content -->
 
   <!-- ─────────────── LRL 5/15 PANE ─────────────── -->
-  <div id="lrl0515-card-content" class="rd-pane" style="display:none;">
-<style>
-#lrl0515-card-content .odc .horse-row {
-  grid-template-columns: 36px 1fr auto 70px;
-}
-#lrl0515-card-content .odc .horse-note {
-  grid-column: 2 / -1;
-}
-</style>
+  <div id="lrl0515-card-content" class="rd-pane" style="display:none; min-height:200px;">
 <div class="odc">
 <div class="header">
   <div class="rose">🎯</div>
