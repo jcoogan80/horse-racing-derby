@@ -5064,6 +5064,14 @@
 
   <!-- ─────────────── LRL 5/15 PANE ─────────────── -->
   <div id="lrl0515-card-content" class="rd-pane" style="display:none;">
+<style>
+#lrl0515-card-content .odc .horse-row {
+  grid-template-columns: 36px 1fr auto 70px;
+}
+#lrl0515-card-content .odc .horse-note {
+  grid-column: 2 / -1;
+}
+</style>
 <div class="odc">
 <div class="header">
   <div class="rose">🎯</div>
@@ -7825,26 +7833,34 @@ function oeqInitDays() {
 oeqInitDays();
 
 function rdSwitch(mode) {
-  // Safety: if willpay pane is still nested inside derby (HTML parse artifact), move it out
   const wpPane    = document.getElementById('willpay-card-content');
   const derbyPane = document.getElementById('derby-card-content');
   const rdTab     = document.getElementById('tab-raceday');
   if (wpPane && derbyPane && rdTab && derbyPane.contains(wpPane)) {
     rdTab.appendChild(wpPane);
   }
-
-  document.getElementById('oaks-card-content').style.display       = mode === 'oaks'      ? 'block' : 'none';
-  document.getElementById('derby-card-content').style.display      = mode === 'derby'     ? 'block' : 'none';
-  document.getElementById('lrl0515-card-content').style.display    = mode === 'lrl0515'   ? 'block' : 'none';
-  document.getElementById('preakness-card-content').style.display  = mode === 'preakness' ? 'block' : 'none';
-  document.getElementById('belmont-card-content').style.display    = mode === 'belmont'   ? 'block' : 'none';
-  if (wpPane) wpPane.style.display = mode === 'willpay' ? 'block' : 'none';
-  document.getElementById('rd-btn-oaks').classList.toggle('active',      mode === 'oaks');
-  document.getElementById('rd-btn-derby').classList.toggle('active',     mode === 'derby');
-  document.getElementById('rd-btn-lrl0515').classList.toggle('active',   mode === 'lrl0515');
-  document.getElementById('rd-btn-preakness').classList.toggle('active', mode === 'preakness');
-  document.getElementById('rd-btn-belmont').classList.toggle('active',   mode === 'belmont');
-  document.getElementById('rd-btn-willpay').classList.toggle('active',   mode === 'willpay');
+  const panes = {
+    'oaks':      document.getElementById('oaks-card-content'),
+    'derby':     document.getElementById('derby-card-content'),
+    'lrl0515':   document.getElementById('lrl0515-card-content'),
+    'preakness': document.getElementById('preakness-card-content'),
+    'belmont':   document.getElementById('belmont-card-content'),
+    'willpay':   wpPane,
+  };
+  Object.entries(panes).forEach(([key, el]) => {
+    if (el) el.style.display = (key === mode) ? 'block' : 'none';
+  });
+  const btns = {
+    'oaks':      document.getElementById('rd-btn-oaks'),
+    'derby':     document.getElementById('rd-btn-derby'),
+    'lrl0515':   document.getElementById('rd-btn-lrl0515'),
+    'preakness': document.getElementById('rd-btn-preakness'),
+    'belmont':   document.getElementById('rd-btn-belmont'),
+    'willpay':   document.getElementById('rd-btn-willpay'),
+  };
+  Object.entries(btns).forEach(([key, el]) => {
+    if (el) el.classList.toggle('active', key === mode);
+  });
   if (mode === 'willpay') wpdInit();
 }
 
