@@ -1293,6 +1293,10 @@
       cursor:pointer; transition:all .15s;
     }
     .oeq-date-btn.active { background:rgba(201,168,76,.15); color:var(--gold); border-color:var(--gold); }
+    .oeq-tab-bar { display:flex; flex-wrap:wrap; gap:8px; padding:12px 0 16px 0; border-bottom:1px solid rgba(255,255,255,0.1); margin-bottom:16px; }
+    .oeq-tab-btn { background:rgba(255,255,255,0.06); color:#ccc; border:1px solid rgba(255,255,255,0.15); border-radius:6px; padding:7px 16px; font-size:13px; cursor:pointer; transition:all 0.15s; }
+    .oeq-tab-btn:hover { background:rgba(255,255,255,0.12); color:#fff; }
+    .oeq-tab-btn.active { background:#c9a84c; color:#000; border-color:#c9a84c; font-weight:bold; }
     .yrv-ticket-section { margin-top:10px; padding-top:10px; border-top:1px solid var(--border); }
     .yrv-ticket-head { font-size:.78rem; font-weight:700; color:var(--gold); margin-bottom:8px; }
     .yrv-ticket-row { display:flex; gap:8px; align-items:center; flex-wrap:wrap; padding:5px 0; border-bottom:1px solid var(--border); font-size:.75rem; }
@@ -5128,6 +5132,14 @@
 
 <!-- ─────────────── OPTIXEQ TAB ─────────────── -->
 <div id="tab-optixeq" class="tab-pane">
+  <div class="oeq-tab-bar">
+    <button class="oeq-tab-btn" onclick="oeqShowDay('cd-0501', this)">🌹 CD 5/1 Oaks</button>
+    <button class="oeq-tab-btn" onclick="oeqShowDay('cd-0502', this)">🏆 CD 5/2 Derby</button>
+    <button class="oeq-tab-btn" onclick="oeqShowDay('cd-0507', this)">📋 CD 5/7</button>
+    <button class="oeq-tab-btn" onclick="oeqShowDay('cd-0508', this)">📅 CD 5/8</button>
+    <button class="oeq-tab-btn active" onclick="oeqShowDay('lrl-0515', this)">🎯 LRL 5/15</button>
+  </div>
+  <div id="oeq-day-dynamic" style="display:none;">
   <div class="oeq-date-row">
     <span style="font-size:.72rem;color:var(--dim);font-weight:600;">Card Date:</span>
     <button class="oeq-date-btn active" data-date="2026-05-08" onclick="oeqSetDate('2026-05-08')">📅 Today 5/8</button>
@@ -5144,6 +5156,7 @@
   </div>
   <div id="oeq-race-section"></div>
   <div id="oeq-tickets-section" style="display:none"></div>
+  </div><!-- end oeq-day-dynamic -->
 
 <!-- ============================================================
      CD FRIDAY OAKS DAY — MAY 1, 2026 — FULL CARD (13 RACES)
@@ -5151,7 +5164,7 @@
      INJECT THIS BLOCK ABOVE EXISTING 5/1 CONTENT in OptixEQ tab
      ============================================================ -->
 
-<div class="optix-day-section" id="oaks-day-51">
+<div class="optix-day-section" id="oeq-day-cd-0501">
   <div class="optix-day-header oaks-header">
     <div class="day-badge oaks-badge">🌹 OAKS DAY</div>
     <h2 class="day-title">Churchill Downs — Friday, May 1, 2026</h2>
@@ -5768,7 +5781,7 @@
     </div>
   </div>
 
-</div><!-- end oaks-day-51 -->
+</div><!-- end oeq-day-cd-0501 -->
 
 <!-- OAKS DAY STYLES — scoped so they don't break existing layout -->
 <style>
@@ -5812,7 +5825,7 @@
      SATURDAY DERBY DAY — CD 5/2/2026 OptixEQ Section
      ============================================================ -->
 
-<div class="optix-day-section" id="cd-52">
+<div class="optix-day-section" id="oeq-day-cd-0502">
   <div class="optix-day-header derby-day-header">
     <div class="day-header-left">
       <span class="day-badge derby-badge">🏆 DERBY DAY</span>
@@ -6485,13 +6498,13 @@
     </div>
   </div>
 
-</div><!-- end #cd-52 -->
+</div><!-- end oeq-day-cd-0502 -->
 
 <!-- ============================================================
      OPTIXEQ TAB — LRL FRIDAY MAY 15, 2026 (PREAKNESS UNDERCARD)
      ============================================================ -->
 
-<div class="optix-day-section">
+<div class="optix-day-section" id="oeq-day-lrl-0515">
   <div class="optix-day-header" onclick="toggleDay('lrl-fri')">
     <div class="optix-day-title">
       <span class="optix-track-badge">LRL</span>
@@ -7122,7 +7135,7 @@
     </div>
 
   </div><!-- end optix-day-body -->
-</div><!-- end optix-day-section lrl-fri -->
+</div><!-- end oeq-day-lrl-0515 -->
 
 <script>
 // LRL section helper functions (toggleDay + copyText not previously defined)
@@ -7175,6 +7188,10 @@ function showTab(name) {
   const btns  = document.querySelectorAll('.tab-btn');
   const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq', 'raceday', 'ticketgen'];
   btns[names.indexOf(name)].classList.add('active');
+  // Init OptixEQ day tabs when OptixEQ tab is opened
+  if (name === 'optixeq') {
+    if (typeof oeqInitDays === 'function') oeqInitDays();
+  }
   // Auto-run Smart Ticket Scanner when Today tab is opened
   if (name === 'today') {
     // Small delay so tab is visible before rendering
@@ -7185,6 +7202,41 @@ function showTab(name) {
     }, 150);
   }
 }
+
+function oeqShowDay(dayId, btn) {
+  var dyn = document.getElementById('oeq-day-dynamic');
+  if (dyn) dyn.style.display = 'none';
+  document.querySelectorAll('.optix-day-section').forEach(function(el) { el.style.display = 'none'; });
+
+  if (dayId === 'cd-0508') {
+    if (dyn) dyn.style.display = '';
+    if (typeof oeqSetDate === 'function') oeqSetDate('2026-05-08');
+  } else if (dayId === 'cd-0507') {
+    if (dyn) dyn.style.display = '';
+    if (typeof oeqSetDate === 'function') oeqSetDate('2026-05-07');
+  } else {
+    var target = document.getElementById('oeq-day-' + dayId);
+    if (target) target.style.display = 'block';
+  }
+
+  document.querySelectorAll('.oeq-tab-btn').forEach(function(b) { b.classList.remove('active'); });
+  if (btn) btn.classList.add('active');
+}
+
+function oeqInitDays() {
+  var dyn = document.getElementById('oeq-day-dynamic');
+  if (dyn) dyn.style.display = 'none';
+  document.querySelectorAll('.optix-day-section').forEach(function(el) { el.style.display = 'none'; });
+  var latest = document.getElementById('oeq-day-lrl-0515');
+  if (latest) latest.style.display = 'block';
+  // Mark LRL 5/15 tab as active
+  document.querySelectorAll('.oeq-tab-btn').forEach(function(b) {
+    b.classList.toggle('active', b.textContent.includes('LRL 5/15'));
+  });
+}
+
+// Run on page load so static sections start hidden with LRL 5/15 visible
+oeqInitDays();
 
 function rdSwitch(mode) {
   // Safety: if willpay pane is still nested inside derby (HTML parse artifact), move it out
