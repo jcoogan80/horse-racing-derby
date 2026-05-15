@@ -9324,10 +9324,14 @@ function populateTrackSelect() {
   const sel = document.getElementById('tb-track');
   if (!window._dashData || !window._dashData.db_summary) return;
   sel.innerHTML = '';
-  for (const t of window._dashData.db_summary.tracks) {
+  // Always include LRL first as default
+  const dbTracks = window._dashData.db_summary.tracks.map(t => t.track);
+  const allTracks = dbTracks.includes('LRL') ? dbTracks : ['LRL', ...dbTracks];
+  for (const track of allTracks) {
     const opt = document.createElement('option');
-    opt.value = t.track;
-    opt.textContent = t.track;
+    opt.value = track;
+    opt.textContent = track;
+    if (track === 'LRL') opt.selected = true;
     sel.appendChild(opt);
   }
 }
@@ -9937,11 +9941,14 @@ function populateTcTrackSelect() {
   if (!window._dashData || !window._dashData.db_summary) return;
   const cur = sel.value;
   sel.innerHTML = '';
-  for (const t of window._dashData.db_summary.tracks) {
+  // Always include LRL first as default
+  const dbTracks = window._dashData.db_summary.tracks.map(t => t.track);
+  const allTracks = dbTracks.includes('LRL') ? dbTracks : ['LRL', ...dbTracks];
+  for (const track of allTracks) {
     const opt = document.createElement('option');
-    opt.value = t.track;
-    opt.textContent = t.track;
-    if (t.track === cur) opt.selected = true;
+    opt.value = track;
+    opt.textContent = track;
+    if (track === (cur || 'LRL')) opt.selected = true;
     sel.appendChild(opt);
   }
   if (!cur && sel.options.length) sel.value = sel.options[0].value;
