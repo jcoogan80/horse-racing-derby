@@ -2083,8 +2083,8 @@
     <div class="rd-toggle" style="display:flex;gap:8px;flex-wrap:wrap;">
       <button class="rd-btn"        id="rd-btn-oaks"      onclick="rdSwitch('oaks')">📅 Oaks Day (5/1)</button>
       <button class="rd-btn"        id="rd-btn-derby"     onclick="rdSwitch('derby')">🏆 Derby Day (5/2)</button>
-      <button class="rd-btn active" id="rd-btn-lrl0515"   onclick="rdSwitch('lrl0515')">🎯 LRL 5/15 Today</button>
-      <button class="rd-btn"        id="rd-btn-preakness" onclick="rdSwitch('preakness')">🏆 Preakness 5/16</button>
+      <button class="rd-btn"        id="rd-btn-lrl0515"   onclick="rdSwitch('lrl0515')">🎯 LRL 5/15</button>
+      <button class="rd-btn active" id="rd-btn-preakness" onclick="rdSwitch('preakness')">🏆 Preakness 5/16 Today</button>
       <button class="rd-btn"        id="rd-btn-belmont"   onclick="rdSwitch('belmont')">🏇 Belmont 6/7</button>
       <button class="rd-btn"        id="rd-btn-willpay"   onclick="rdSwitch('willpay')" style="margin-left:auto;">📡 Will Pay Decoder</button>
     </div>
@@ -5063,7 +5063,7 @@
   </div><!-- end willpay-card-content -->
 
   <!-- ─────────────── LRL 5/15 PANE ─────────────── -->
-  <div id="lrl0515-card-content" class="rd-pane">
+  <div id="lrl0515-card-content" class="rd-pane" style="display:none;">
 <div class="odc">
 <div class="header">
   <div class="rose">🎯</div>
@@ -5622,7 +5622,7 @@
   </div><!-- end lrl0515-card-content -->
 
   <!-- ─────────────── PREAKNESS 5/16 PANE ─────────────── -->
-  <div id="preakness-card-content" class="rd-pane" style="display:none;">
+  <div id="preakness-card-content" class="rd-pane">
     <div style="padding:40px;text-align:center;color:#888;">
       <div style="font-size:2rem;margin-bottom:12px;">🏆</div>
       <div style="font-size:1.1rem;font-weight:600;color:#ccc;margin-bottom:8px;">Preakness Stakes Day — Saturday, May 16, 2026</div>
@@ -7770,9 +7770,9 @@ function showTab(name) {
   const btns  = document.querySelectorAll('.tab-btn');
   const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq', 'raceday', 'ticketgen'];
   btns[names.indexOf(name)].classList.add('active');
-  // Default Race Day tab to LRL 5/15
+  // Default Race Day tab to Preakness 5/16
   if (name === 'raceday') {
-    if (typeof rdSwitch === 'function') rdSwitch('lrl0515');
+    if (typeof rdSwitch === 'function') rdSwitch('preakness');
   }
   // Init OptixEQ day tabs when OptixEQ tab is opened
   if (name === 'optixeq') {
