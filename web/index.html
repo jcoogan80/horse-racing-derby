@@ -2080,14 +2080,17 @@
 <div id="tab-raceday" class="tab-pane">
   <div class="card" style="margin-bottom:16px;">
     <h2 style="margin-bottom:12px;">Race Day Analysis</h2>
-    <div class="rd-toggle" style="display:flex;gap:8px;">
-      <button class="rd-btn active" id="rd-btn-oaks"    onclick="rdSwitch('oaks')">🌹 Oaks Day (5/1)</button>
-      <button class="rd-btn"        id="rd-btn-derby"   onclick="rdSwitch('derby')">🏆 Derby Day (5/2)</button>
-      <button class="rd-btn"        id="rd-btn-willpay" onclick="rdSwitch('willpay')" style="margin-left:auto;">📡 Will Pay Decoder</button>
+    <div class="rd-toggle" style="display:flex;gap:8px;flex-wrap:wrap;">
+      <button class="rd-btn"        id="rd-btn-oaks"      onclick="rdSwitch('oaks')">📅 Oaks Day (5/1)</button>
+      <button class="rd-btn"        id="rd-btn-derby"     onclick="rdSwitch('derby')">🏆 Derby Day (5/2)</button>
+      <button class="rd-btn active" id="rd-btn-lrl0515"   onclick="rdSwitch('lrl0515')">🎯 LRL 5/15 Today</button>
+      <button class="rd-btn"        id="rd-btn-preakness" onclick="rdSwitch('preakness')">🏆 Preakness 5/16</button>
+      <button class="rd-btn"        id="rd-btn-belmont"   onclick="rdSwitch('belmont')">🏇 Belmont 6/7</button>
+      <button class="rd-btn"        id="rd-btn-willpay"   onclick="rdSwitch('willpay')" style="margin-left:auto;">📡 Will Pay Decoder</button>
     </div>
   </div>
 
-  <div id="oaks-card-content" class="rd-pane active">
+  <div id="oaks-card-content" class="rd-pane" style="display:none;">
 <style>
 .odc * { box-sizing: border-box; margin: 0; padding: 0; }
 .odc { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1b2a; color: #e8e0d0; padding: 20px; border-radius: var(--radius); }
@@ -5058,6 +5061,34 @@
 
 </div><!-- end .wpd -->
   </div><!-- end willpay-card-content -->
+
+  <!-- ─────────────── LRL 5/15 PANE ─────────────── -->
+  <div id="lrl0515-card-content" class="rd-pane">
+    <div style="padding:40px;text-align:center;color:#888;">
+      <div style="font-size:2rem;margin-bottom:12px;">🎯</div>
+      <div style="font-size:1.1rem;font-weight:600;color:#ccc;margin-bottom:8px;">LRL — Friday, May 15, 2026</div>
+      <div style="font-size:0.9rem;">Preakness Undercard · 14 Races · 6 Stakes<br>Full race card available in the <strong style="color:#c9a84c;">OptixEQ tab</strong>.</div>
+    </div>
+  </div><!-- end lrl0515-card-content -->
+
+  <!-- ─────────────── PREAKNESS 5/16 PANE ─────────────── -->
+  <div id="preakness-card-content" class="rd-pane" style="display:none;">
+    <div style="padding:40px;text-align:center;color:#888;">
+      <div style="font-size:2rem;margin-bottom:12px;">🏆</div>
+      <div style="font-size:1.1rem;font-weight:600;color:#ccc;margin-bottom:8px;">Preakness Stakes Day — Saturday, May 16, 2026</div>
+      <div style="font-size:0.9rem;">Race card for Preakness Day will be loaded closer to race day.</div>
+    </div>
+  </div><!-- end preakness-card-content -->
+
+  <!-- ─────────────── BELMONT 6/7 PANE ─────────────── -->
+  <div id="belmont-card-content" class="rd-pane" style="display:none;">
+    <div style="padding:40px;text-align:center;color:#888;">
+      <div style="font-size:2rem;margin-bottom:12px;">🏇</div>
+      <div style="font-size:1.1rem;font-weight:600;color:#ccc;margin-bottom:8px;">Belmont Stakes Day — Saturday, June 7, 2026</div>
+      <div style="font-size:0.9rem;">Race card for Belmont Day will be loaded closer to race day.</div>
+    </div>
+  </div><!-- end belmont-card-content -->
+
   </div><!-- end tab-raceday -->
 </div>
 
@@ -7188,6 +7219,10 @@ function showTab(name) {
   const btns  = document.querySelectorAll('.tab-btn');
   const names = ['dashboard', 'hedge', 'trackguide', 'ticket', 'parlay', 'today', 'howto', 'optixeq', 'raceday', 'ticketgen'];
   btns[names.indexOf(name)].classList.add('active');
+  // Default Race Day tab to LRL 5/15
+  if (name === 'raceday') {
+    if (typeof rdSwitch === 'function') rdSwitch('lrl0515');
+  }
   // Init OptixEQ day tabs when OptixEQ tab is opened
   if (name === 'optixeq') {
     if (typeof oeqInitDays === 'function') oeqInitDays();
@@ -7247,12 +7282,18 @@ function rdSwitch(mode) {
     rdTab.appendChild(wpPane);
   }
 
-  document.getElementById('oaks-card-content').style.display    = mode === 'oaks'    ? 'block' : 'none';
-  document.getElementById('derby-card-content').style.display   = mode === 'derby'   ? 'block' : 'none';
+  document.getElementById('oaks-card-content').style.display       = mode === 'oaks'      ? 'block' : 'none';
+  document.getElementById('derby-card-content').style.display      = mode === 'derby'     ? 'block' : 'none';
+  document.getElementById('lrl0515-card-content').style.display    = mode === 'lrl0515'   ? 'block' : 'none';
+  document.getElementById('preakness-card-content').style.display  = mode === 'preakness' ? 'block' : 'none';
+  document.getElementById('belmont-card-content').style.display    = mode === 'belmont'   ? 'block' : 'none';
   if (wpPane) wpPane.style.display = mode === 'willpay' ? 'block' : 'none';
-  document.getElementById('rd-btn-oaks').classList.toggle('active',    mode === 'oaks');
-  document.getElementById('rd-btn-derby').classList.toggle('active',   mode === 'derby');
-  document.getElementById('rd-btn-willpay').classList.toggle('active', mode === 'willpay');
+  document.getElementById('rd-btn-oaks').classList.toggle('active',      mode === 'oaks');
+  document.getElementById('rd-btn-derby').classList.toggle('active',     mode === 'derby');
+  document.getElementById('rd-btn-lrl0515').classList.toggle('active',   mode === 'lrl0515');
+  document.getElementById('rd-btn-preakness').classList.toggle('active', mode === 'preakness');
+  document.getElementById('rd-btn-belmont').classList.toggle('active',   mode === 'belmont');
+  document.getElementById('rd-btn-willpay').classList.toggle('active',   mode === 'willpay');
   if (mode === 'willpay') wpdInit();
 }
 
