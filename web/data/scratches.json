@@ -1,111 +1,273 @@
 {
-  "track": "CD",
-  "date": "2026-05-02",
-  "generated_at": "06:07 AM ET",
+  "track": "LRL",
+  "date": "2026-05-16",
+  "generated_at": "08:46 AM ET",
   "scratches": [
     {
       "race": 1,
-      "pgm": "1",
-      "horse": "Bhatia",
+      "pgm": "11",
+      "horse": "River Seine (IRE)",
       "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "reason": "Also-Eligible",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
     },
     {
       "race": 1,
       "pgm": "9",
-      "horse": "Winston Ave",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "horse": "Precious Avary",
+      "change_type": "Jockey - Silvestre Gonzalez changed to Mychel J. Sanchez",
+      "reason": "",
+      "time_posted": "7:48 AM ET",
+      "time_posted_dt": "07:48"
     },
     {
       "race": 2,
-      "pgm": "10",
-      "horse": "J J Grey",
+      "pgm": "1",
+      "horse": "Call Me Andy",
+      "change_type": "No longer a Coupled Entry",
+      "reason": "",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 2,
+      "pgm": "12",
+      "horse": "Grand Opening",
       "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 2,
+      "pgm": "1A",
+      "horse": "Blue Kingdom",
+      "change_type": "Scratched",
+      "reason": "Part of Entry",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 2,
+      "pgm": "2",
+      "horse": "All the Hardways",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 2,
+      "pgm": "5",
+      "horse": "Suremeanttoobe",
+      "change_type": "Scratched",
+      "reason": "PrivVet-Illness",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 2,
+      "pgm": "6",
+      "horse": "Radical Right",
+      "change_type": "Scratched",
+      "reason": "PrivVet-Illness",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 3,
+      "pgm": "1",
+      "horse": "Limo",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": "05:00"
+    },
+    {
+      "race": 3,
+      "pgm": "10",
+      "horse": "Drive by Johnny",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": "05:00"
+    },
+    {
+      "race": 3,
+      "pgm": "2",
+      "horse": "Margie's Last",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": "05:00"
     },
     {
       "race": 4,
-      "pgm": "2",
-      "horse": "Haulin Ice",
+      "pgm": "5",
+      "horse": "Sporting Lady",
       "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 4,
+      "pgm": "6",
+      "horse": "Complexity Jane",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 5,
+      "pgm": "10",
+      "horse": "Buzzaway",
+      "change_type": "Jockey - Carlos Eduardo Lopez changed to Jevian Toledo",
+      "reason": "",
+      "time_posted": "7:48 AM ET",
+      "time_posted_dt": "07:48"
+    },
+    {
+      "race": 5,
+      "pgm": "12",
+      "horse": "Sharmin",
+      "change_type": "Jockey - Joseph Rocco, Jr. changed to Forest Boyce",
+      "reason": "",
+      "time_posted": "9:09 AM ET",
+      "time_posted_dt": "09:09"
+    },
+    {
+      "race": 5,
+      "pgm": "13",
+      "horse": "Chilly Girl",
+      "change_type": "Jockey - Hunter Rea changed to Xavier Perez",
+      "reason": "",
+      "time_posted": "8:43 AM ET",
+      "time_posted_dt": "08:43"
+    },
+    {
+      "race": 5,
+      "pgm": "14",
+      "horse": "Lovely Lookin Lili",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 5,
+      "pgm": "3",
+      "horse": "I Love Giraffes",
+      "change_type": "Overweight - 1 lbs",
+      "reason": "",
+      "time_posted": "9:09 AM ET",
+      "time_posted_dt": "09:09"
+    },
+    {
+      "race": 5,
+      "pgm": "5",
+      "horse": "Serenity Song",
+      "change_type": "Overweight - 3 lbs",
+      "reason": "",
+      "time_posted": "9:09 AM ET",
+      "time_posted_dt": "09:09"
+    },
+    {
+      "race": 6,
+      "pgm": "1",
+      "horse": "Minorinconvenience",
+      "change_type": "First Start Since Reported as Gelding",
+      "reason": "",
+      "time_posted": "5:00 AM ET",
+      "time_posted_dt": "05:00"
+    },
+    {
+      "race": 6,
+      "pgm": "7",
+      "horse": "Reagan's Honor",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 7,
+      "pgm": "3",
+      "horse": "Buds Notion",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 7,
+      "pgm": "8",
+      "horse": "Magic Wallet",
+      "change_type": "Jockey - Victor R. Carrasco changed to Jevian Toledo",
+      "reason": "",
+      "time_posted": "9:11 AM ET",
+      "time_posted_dt": "09:11"
     },
     {
       "race": 8,
-      "pgm": "10",
-      "horse": "Great White",
+      "pgm": "5",
+      "horse": "Floodlites",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 8,
+      "pgm": "7",
+      "horse": "Hymn",
       "change_type": "Scratched",
       "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "time_posted": "4:47 AM ET",
+      "time_posted_dt": "04:47"
     },
     {
       "race": 9,
-      "pgm": "5",
-      "horse": "Blackout Time",
+      "pgm": "3",
+      "horse": "Zihnal",
       "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
     },
     {
-      "race": 11,
-      "pgm": "8",
-      "horse": "Astronomer",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
-    },
-    {
-      "race": 12,
-      "pgm": "13",
-      "horse": "Silent Tactic",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
-    },
-    {
-      "race": 12,
-      "pgm": "20",
-      "horse": "Fulleffort",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
-    },
-    {
-      "race": 12,
-      "pgm": "24",
-      "horse": "Corona de Oro",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
-    },
-    {
-      "race": 12,
-      "pgm": "5",
-      "horse": "Right to Party",
-      "change_type": "Scratched",
-      "reason": "Reason Unavailable",
-      "time_posted": "6:02 AM ET",
-      "time_posted_dt": "06:02"
-    },
-    {
-      "race": 13,
+      "race": 10,
       "pgm": "2",
-      "horse": "Heartily",
+      "horse": "Thundering",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 10,
+      "pgm": "6",
+      "horse": "Dresden Row",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 12,
+      "pgm": "7",
+      "horse": "Isivunguvungu (SAF)",
+      "change_type": "Scratched",
+      "reason": "Trainer",
+      "time_posted": "8:42 AM ET",
+      "time_posted_dt": "08:42"
+    },
+    {
+      "race": 12,
+      "pgm": "9",
+      "horse": "Card Trick",
       "change_type": "First Start Since Reported as Gelding",
       "reason": "",
       "time_posted": "5:00 AM ET",
