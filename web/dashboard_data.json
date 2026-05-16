@@ -1,13 +1,13 @@
 {
-  "last_updated": "2026-05-16 08:46",
+  "last_updated": "2026-05-16 08:48",
   "db_summary": {
-    "total_tracks": 7,
-    "total_race_days": 225,
-    "total_races": 3534,
-    "total_exotics": 18764,
+    "total_tracks": 8,
+    "total_race_days": 226,
+    "total_races": 3548,
+    "total_exotics": 18841,
     "date_range": {
       "from": "2025-01-01",
-      "to": "2026-05-08"
+      "to": "2026-05-15"
     },
     "tracks": [
       {
@@ -44,6 +44,13 @@
         "races": 276,
         "exotics": 1483,
         "max_race": 11
+      },
+      {
+        "track": "LRL",
+        "days": 1,
+        "races": 14,
+        "exotics": 77,
+        "max_race": 14
       },
       {
         "track": "OP",
@@ -1882,6 +1889,667 @@
       ]
     },
     {
+      "track": "LRL",
+      "date": "2026-05-15",
+      "race_count": 14,
+      "exotic_count": 77,
+      "races": [
+        {
+          "race_num": 1,
+          "winner": "Bold Fact",
+          "winner_pgm": "8",
+          "win_payout": 9.0,
+          "place_payout": 4.8,
+          "show_payout": 3.4
+        },
+        {
+          "race_num": 2,
+          "winner": "Big Tankness",
+          "winner_pgm": "11",
+          "win_payout": 3.8,
+          "place_payout": 2.6,
+          "show_payout": 2.4
+        },
+        {
+          "race_num": 3,
+          "winner": "Majorca",
+          "winner_pgm": "5",
+          "win_payout": 23.6,
+          "place_payout": 8.0,
+          "show_payout": 3.8
+        },
+        {
+          "race_num": 4,
+          "winner": "Noah Chance",
+          "winner_pgm": "7",
+          "win_payout": 5.8,
+          "place_payout": 4.0,
+          "show_payout": 2.8
+        },
+        {
+          "race_num": 5,
+          "winner": "Golden Descent",
+          "winner_pgm": "15",
+          "win_payout": 14.0,
+          "place_payout": 6.2,
+          "show_payout": 4.4
+        },
+        {
+          "race_num": 6,
+          "winner": "American Tapit",
+          "winner_pgm": "1",
+          "win_payout": 9.8,
+          "place_payout": 5.4,
+          "show_payout": 3.0
+        },
+        {
+          "race_num": 7,
+          "winner": "King Size",
+          "winner_pgm": "8",
+          "win_payout": 4.0,
+          "place_payout": 2.6,
+          "show_payout": 2.4
+        },
+        {
+          "race_num": 8,
+          "winner": "Peach Tie",
+          "winner_pgm": "2",
+          "win_payout": 16.6,
+          "place_payout": 6.0,
+          "show_payout": 2.8
+        },
+        {
+          "race_num": 9,
+          "winner": "Coach Mazzula",
+          "winner_pgm": "3",
+          "win_payout": 11.2,
+          "place_payout": 4.2,
+          "show_payout": 3.0
+        },
+        {
+          "race_num": 10,
+          "winner": "Margie's Intention",
+          "winner_pgm": "2",
+          "win_payout": 3.2,
+          "place_payout": 2.4,
+          "show_payout": 2.1
+        },
+        {
+          "race_num": 11,
+          "winner": "Sunna",
+          "winner_pgm": "8",
+          "win_payout": 4.8,
+          "place_payout": 3.0,
+          "show_payout": 2.4
+        },
+        {
+          "race_num": 12,
+          "winner": "Navajo Warrior",
+          "winner_pgm": "2",
+          "win_payout": 4.6,
+          "place_payout": 3.0,
+          "show_payout": 2.4
+        },
+        {
+          "race_num": 13,
+          "winner": "My Miss Mo",
+          "winner_pgm": "10",
+          "win_payout": 7.0,
+          "place_payout": 4.4,
+          "show_payout": 3.2
+        },
+        {
+          "race_num": 14,
+          "winner": "No More Calls",
+          "winner_pgm": "5",
+          "win_payout": 34.2,
+          "place_payout": 12.8,
+          "show_payout": 3.8
+        }
+      ],
+      "exotics": [
+        {
+          "wager_type": "DD",
+          "race_span": "1-2",
+          "winning_combo": "8-11",
+          "payout_per_2": 22.0,
+          "payout": 11.0
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "10-11",
+          "winning_combo": "2-8",
+          "payout_per_2": 11.8,
+          "payout": 5.9
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "11-12",
+          "winning_combo": "8-2",
+          "payout_per_2": 15.4,
+          "payout": 7.7
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "12-13",
+          "winning_combo": "2-10",
+          "payout_per_2": 17.8,
+          "payout": 8.9
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "2-3",
+          "winning_combo": "11-5",
+          "payout_per_2": 40.8,
+          "payout": 20.4
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "3-4",
+          "winning_combo": "5-7",
+          "payout_per_2": 85.8,
+          "payout": 42.9
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "4-5",
+          "winning_combo": "7-15",
+          "payout_per_2": 97.2,
+          "payout": 48.6
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "5-6",
+          "winning_combo": "15-1",
+          "payout_per_2": 71.6,
+          "payout": 35.8
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "6-7",
+          "winning_combo": "1-8",
+          "payout_per_2": 33.2,
+          "payout": 16.6
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "7-8",
+          "winning_combo": "8-2",
+          "payout_per_2": 37.6,
+          "payout": 18.8
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "8-9",
+          "winning_combo": "2-3",
+          "payout_per_2": 133.6,
+          "payout": 66.8
+        },
+        {
+          "wager_type": "DD",
+          "race_span": "9-10",
+          "winning_combo": "3-2",
+          "payout_per_2": 15.6,
+          "payout": 7.8
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "1",
+          "winning_combo": "8-6",
+          "payout_per_2": 35.6,
+          "payout": 17.8
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "10",
+          "winning_combo": "2-1",
+          "payout_per_2": 13.4,
+          "payout": 6.7
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "11",
+          "winning_combo": "8-5",
+          "payout_per_2": 17.8,
+          "payout": 8.9
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "12",
+          "winning_combo": "2-1",
+          "payout_per_2": 23.4,
+          "payout": 11.7
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "13",
+          "winning_combo": "10-7",
+          "payout_per_2": 47.2,
+          "payout": 23.6
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "14",
+          "winning_combo": "5-6",
+          "payout_per_2": 116.2,
+          "payout": 58.1
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "2",
+          "winning_combo": "11-3",
+          "payout_per_2": 26.2,
+          "payout": 13.1
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "3",
+          "winning_combo": "5-2",
+          "payout_per_2": 104.4,
+          "payout": 52.2
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "4",
+          "winning_combo": "7-11",
+          "payout_per_2": 56.0,
+          "payout": 28.0
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "5",
+          "winning_combo": "15-5",
+          "payout_per_2": 94.6,
+          "payout": 47.3
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "6",
+          "winning_combo": "1-2",
+          "payout_per_2": 81.0,
+          "payout": 40.5
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "7",
+          "winning_combo": "8-11",
+          "payout_per_2": 14.0,
+          "payout": 7.0
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "8",
+          "winning_combo": "2-5",
+          "payout_per_2": 51.4,
+          "payout": 25.7
+        },
+        {
+          "wager_type": "EX",
+          "race_span": "9",
+          "winning_combo": "3-2",
+          "payout_per_2": 36.0,
+          "payout": 18.0
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "1-2-3",
+          "winning_combo": "8-6/11-5",
+          "payout_per_2": 226.0,
+          "payout": 56.5
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "10-11-12",
+          "winning_combo": "2/5/7/8-4/8-2",
+          "payout_per_2": 32.8,
+          "payout": 8.2
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "11-12-13",
+          "winning_combo": "4/8-2-6/10",
+          "payout_per_2": 50.0,
+          "payout": 12.5
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "12-13-14",
+          "winning_combo": "2-6/10-5",
+          "payout_per_2": 483.6,
+          "payout": 120.9
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "2-3-4",
+          "winning_combo": "6/11-5-6/7/8",
+          "payout_per_2": 168.6,
+          "payout": 42.15
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "3-4-5",
+          "winning_combo": "5-6/7/8-15",
+          "payout_per_2": 631.6,
+          "payout": 157.9
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "4-5-6",
+          "winning_combo": "6/7/8-15-1",
+          "payout_per_2": 351.8,
+          "payout": 87.95
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "5-6-7",
+          "winning_combo": "15-1-8/12",
+          "payout_per_2": 162.4,
+          "payout": 40.6
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "6-7-8",
+          "winning_combo": "1-8/12-2",
+          "payout_per_2": 257.6,
+          "payout": 64.4
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "7-8-9",
+          "winning_combo": "8/12-2-3",
+          "payout_per_2": 235.6,
+          "payout": 58.9
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "8-9-10",
+          "winning_combo": "2-3-2/5/7/8",
+          "payout_per_2": 237.0,
+          "payout": 59.25
+        },
+        {
+          "wager_type": "P3",
+          "race_span": "9-10-11",
+          "winning_combo": "3-2/5/7/8-4/8",
+          "payout_per_2": 62.6,
+          "payout": 15.65
+        },
+        {
+          "wager_type": "P4",
+          "race_span": "10-11-12-13",
+          "winning_combo": "2/5/7/8-4/8-2-6/10",
+          "payout_per_2": 113.8,
+          "payout": 28.45
+        },
+        {
+          "wager_type": "P4",
+          "race_span": "11-12-13-14",
+          "winning_combo": "4/8-2-6/10-5",
+          "payout_per_2": 1455.4,
+          "payout": 363.85
+        },
+        {
+          "wager_type": "P4",
+          "race_span": "2-3-4-5",
+          "winning_combo": "6/11-5-6/7/8-15",
+          "payout_per_2": 1193.4,
+          "payout": 298.35
+        },
+        {
+          "wager_type": "P4",
+          "race_span": "4-5-6-7",
+          "winning_combo": "6/7/8-15-1-8/12",
+          "payout_per_2": 857.2,
+          "payout": 214.3
+        },
+        {
+          "wager_type": "P4",
+          "race_span": "6-7-8-9",
+          "winning_combo": "1-8/12-2-3",
+          "payout_per_2": 2098.0,
+          "payout": 524.5
+        },
+        {
+          "wager_type": "P5",
+          "race_span": "1-2-3-4-5",
+          "winning_combo": "8-6/11-5-6/7/8-15",
+          "payout_per_2": 5780.2,
+          "payout": 1445.05
+        },
+        {
+          "wager_type": "P5",
+          "race_span": "3-4-5-6-7",
+          "winning_combo": "5-6/7/8-15-1-8/12",
+          "payout_per_2": 8819.2,
+          "payout": 2204.8
+        },
+        {
+          "wager_type": "P5",
+          "race_span": "5-6-7-8-9",
+          "winning_combo": "15-1-8/12-2-3",
+          "payout_per_2": 10158.2,
+          "payout": 2539.55
+        },
+        {
+          "wager_type": "P5",
+          "race_span": "7-8-9-10-11",
+          "winning_combo": "8/12-2-3-2/5/7/8-4/8",
+          "payout_per_2": 1505.2,
+          "payout": 376.3
+        },
+        {
+          "wager_type": "P5",
+          "race_span": "9-10-11-12-13",
+          "winning_combo": "3-2/5/7/8-4/8-2-6/10",
+          "payout_per_2": 889.8,
+          "payout": 222.45
+        },
+        {
+          "wager_type": "P6",
+          "race_span": "8-9-10-11-12-13",
+          "winning_combo": "2-3-2/5/7/8-4/8-2-6/10",
+          "payout_per_2": 10176.2,
+          "payout": 1017.62
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "1",
+          "winning_combo": "8-6-4-9",
+          "payout_per_2": 1019.0,
+          "payout": 509.5
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "10",
+          "winning_combo": "2-1-3-6",
+          "payout_per_2": 114.6,
+          "payout": 57.3
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "11",
+          "winning_combo": "8-5-3-6",
+          "payout_per_2": 327.8,
+          "payout": 163.9
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "12",
+          "winning_combo": "2-1-3-6",
+          "payout_per_2": 313.4,
+          "payout": 156.7
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "13",
+          "winning_combo": "10-7-9-8",
+          "payout_per_2": 883.2,
+          "payout": 441.6
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "14",
+          "winning_combo": "5-6-3-2",
+          "payout_per_2": 626.6,
+          "payout": 313.3
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "2",
+          "winning_combo": "11-3-1-9",
+          "payout_per_2": 1195.0,
+          "payout": 597.5
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "3",
+          "winning_combo": "5-2-6-4",
+          "payout_per_2": 963.4,
+          "payout": 481.7
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "4",
+          "winning_combo": "7-11-3-5",
+          "payout_per_2": 2257.0,
+          "payout": 1128.5
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "5",
+          "winning_combo": "15-5-11-12",
+          "payout_per_2": 5402.4,
+          "payout": 2701.2
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "6",
+          "winning_combo": "1-2-6-7",
+          "payout_per_2": 396.0,
+          "payout": 198.0
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "7",
+          "winning_combo": "8-11-9-5",
+          "payout_per_2": 302.8,
+          "payout": 151.4
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "8",
+          "winning_combo": "2-5-1-3",
+          "payout_per_2": 198.2,
+          "payout": 99.1
+        },
+        {
+          "wager_type": "SF",
+          "race_span": "9",
+          "winning_combo": "3-2-5-4",
+          "payout_per_2": 625.4,
+          "payout": 312.7
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "1",
+          "winning_combo": "8-6-4",
+          "payout_per_2": 137.8,
+          "payout": 68.9
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "10",
+          "winning_combo": "2-1-3",
+          "payout_per_2": 75.8,
+          "payout": 37.9
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "11",
+          "winning_combo": "8-5-3",
+          "payout_per_2": 53.0,
+          "payout": 26.5
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "12",
+          "winning_combo": "2-1-3",
+          "payout_per_2": 84.8,
+          "payout": 42.4
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "13",
+          "winning_combo": "10-7-9",
+          "payout_per_2": 180.6,
+          "payout": 90.3
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "14",
+          "winning_combo": "5-6-3",
+          "payout_per_2": 238.8,
+          "payout": 119.4
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "2",
+          "winning_combo": "11-3-1",
+          "payout_per_2": 190.0,
+          "payout": 95.0
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "3",
+          "winning_combo": "5-2-6",
+          "payout_per_2": 290.8,
+          "payout": 145.4
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "4",
+          "winning_combo": "7-11-3",
+          "payout_per_2": 385.8,
+          "payout": 192.9
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "5",
+          "winning_combo": "15-5-11",
+          "payout_per_2": 567.2,
+          "payout": 283.6
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "6",
+          "winning_combo": "1-2-6",
+          "payout_per_2": 189.6,
+          "payout": 94.8
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "7",
+          "winning_combo": "8-11-9",
+          "payout_per_2": 80.6,
+          "payout": 40.3
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "8",
+          "winning_combo": "2-5-1",
+          "payout_per_2": 106.0,
+          "payout": 53.0
+        },
+        {
+          "wager_type": "TRI",
+          "race_span": "9",
+          "winning_combo": "3-2-5",
+          "payout_per_2": 205.0,
+          "payout": 102.5
+        }
+      ]
+    },
+    {
       "track": "OP",
       "date": "2025-05-03",
       "race_count": 12,
@@ -3050,6 +3718,7 @@
         }
       ]
     },
+    "LRL": {},
     "OP": {
       "P3": [
         {
@@ -5838,6 +6507,448 @@
         }
       }
     },
+    "LRL": {
+      "DD": {
+        "avg_payout": null,
+        "median_payout": null,
+        "total_hits": 0,
+        "overlay_ratio": null,
+        "wager_base": 1.0,
+        "sample_sequences": 0,
+        "thin_sequences_excluded": 12,
+        "by_position": {
+          "1-2": {
+            "times_hit": 1,
+            "avg_payout": 22.0,
+            "median_payout": 22.0,
+            "max_payout": 22.0,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "2-3": {
+            "times_hit": 1,
+            "avg_payout": 40.8,
+            "median_payout": 40.8,
+            "max_payout": 40.8,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "3-4": {
+            "times_hit": 1,
+            "avg_payout": 85.8,
+            "median_payout": 85.8,
+            "max_payout": 85.8,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "4-5": {
+            "times_hit": 1,
+            "avg_payout": 97.2,
+            "median_payout": 97.2,
+            "max_payout": 97.2,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "5-6": {
+            "times_hit": 1,
+            "avg_payout": 71.6,
+            "median_payout": 71.6,
+            "max_payout": 71.6,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "6-7": {
+            "times_hit": 1,
+            "avg_payout": 33.2,
+            "median_payout": 33.2,
+            "max_payout": 33.2,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "7-8": {
+            "times_hit": 1,
+            "avg_payout": 37.6,
+            "median_payout": 37.6,
+            "max_payout": 37.6,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "8-9": {
+            "times_hit": 1,
+            "avg_payout": 133.6,
+            "median_payout": 133.6,
+            "max_payout": 133.6,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "9-10": {
+            "times_hit": 1,
+            "avg_payout": 15.6,
+            "median_payout": 15.6,
+            "max_payout": 15.6,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "10-11": {
+            "times_hit": 1,
+            "avg_payout": 11.8,
+            "median_payout": 11.8,
+            "max_payout": 11.8,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "11-12": {
+            "times_hit": 1,
+            "avg_payout": 15.4,
+            "median_payout": 15.4,
+            "max_payout": 15.4,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "12-13": {
+            "times_hit": 1,
+            "avg_payout": 17.8,
+            "median_payout": 17.8,
+            "max_payout": 17.8,
+            "wager_base": 1.0,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          }
+        }
+      },
+      "P3": {
+        "avg_payout": null,
+        "median_payout": null,
+        "total_hits": 0,
+        "overlay_ratio": null,
+        "wager_base": 0.5,
+        "sample_sequences": 0,
+        "thin_sequences_excluded": 12,
+        "by_position": {
+          "1-2-3": {
+            "times_hit": 1,
+            "avg_payout": 226.0,
+            "median_payout": 226.0,
+            "max_payout": 226.0,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "2-3-4": {
+            "times_hit": 1,
+            "avg_payout": 168.6,
+            "median_payout": 168.6,
+            "max_payout": 168.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "3-4-5": {
+            "times_hit": 1,
+            "avg_payout": 631.6,
+            "median_payout": 631.6,
+            "max_payout": 631.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "4-5-6": {
+            "times_hit": 1,
+            "avg_payout": 351.8,
+            "median_payout": 351.8,
+            "max_payout": 351.8,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "5-6-7": {
+            "times_hit": 1,
+            "avg_payout": 162.4,
+            "median_payout": 162.4,
+            "max_payout": 162.4,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "6-7-8": {
+            "times_hit": 1,
+            "avg_payout": 257.6,
+            "median_payout": 257.6,
+            "max_payout": 257.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "7-8-9": {
+            "times_hit": 1,
+            "avg_payout": 235.6,
+            "median_payout": 235.6,
+            "max_payout": 235.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "8-9-10": {
+            "times_hit": 1,
+            "avg_payout": 237.0,
+            "median_payout": 237.0,
+            "max_payout": 237.0,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "9-10-11": {
+            "times_hit": 1,
+            "avg_payout": 62.6,
+            "median_payout": 62.6,
+            "max_payout": 62.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "10-11-12": {
+            "times_hit": 1,
+            "avg_payout": 32.8,
+            "median_payout": 32.8,
+            "max_payout": 32.8,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "11-12-13": {
+            "times_hit": 1,
+            "avg_payout": 50.0,
+            "median_payout": 50.0,
+            "max_payout": 50.0,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "12-13-14": {
+            "times_hit": 1,
+            "avg_payout": 483.6,
+            "median_payout": 483.6,
+            "max_payout": 483.6,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          }
+        }
+      },
+      "P4": {
+        "avg_payout": null,
+        "median_payout": null,
+        "total_hits": 0,
+        "overlay_ratio": null,
+        "wager_base": 0.5,
+        "sample_sequences": 0,
+        "thin_sequences_excluded": 5,
+        "by_position": {
+          "2-3-4-5": {
+            "times_hit": 1,
+            "avg_payout": 1193.4,
+            "median_payout": 1193.4,
+            "max_payout": 1193.4,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "4-5-6-7": {
+            "times_hit": 1,
+            "avg_payout": 857.2,
+            "median_payout": 857.2,
+            "max_payout": 857.2,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "6-7-8-9": {
+            "times_hit": 1,
+            "avg_payout": 2098.0,
+            "median_payout": 2098.0,
+            "max_payout": 2098.0,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "10-11-12-13": {
+            "times_hit": 1,
+            "avg_payout": 113.8,
+            "median_payout": 113.8,
+            "max_payout": 113.8,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "11-12-13-14": {
+            "times_hit": 1,
+            "avg_payout": 1455.4,
+            "median_payout": 1455.4,
+            "max_payout": 1455.4,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          }
+        }
+      },
+      "P5": {
+        "avg_payout": null,
+        "median_payout": null,
+        "total_hits": 0,
+        "overlay_ratio": null,
+        "wager_base": 0.5,
+        "sample_sequences": 0,
+        "thin_sequences_excluded": 5,
+        "by_position": {
+          "1-2-3-4-5": {
+            "times_hit": 1,
+            "avg_payout": 5780.2,
+            "median_payout": 5780.2,
+            "max_payout": 5780.2,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "3-4-5-6-7": {
+            "times_hit": 1,
+            "avg_payout": 8819.2,
+            "median_payout": 8819.2,
+            "max_payout": 8819.2,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "5-6-7-8-9": {
+            "times_hit": 1,
+            "avg_payout": 10158.2,
+            "median_payout": 10158.2,
+            "max_payout": 10158.2,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "7-8-9-10-11": {
+            "times_hit": 1,
+            "avg_payout": 1505.2,
+            "median_payout": 1505.2,
+            "max_payout": 1505.2,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          },
+          "9-10-11-12-13": {
+            "times_hit": 1,
+            "avg_payout": 889.8,
+            "median_payout": 889.8,
+            "max_payout": 889.8,
+            "wager_base": 0.5,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          }
+        }
+      },
+      "P6": {
+        "avg_payout": null,
+        "median_payout": null,
+        "total_hits": 0,
+        "overlay_ratio": null,
+        "wager_base": 0.2,
+        "sample_sequences": 0,
+        "thin_sequences_excluded": 1,
+        "by_position": {
+          "8-9-10-11-12-13": {
+            "times_hit": 1,
+            "avg_payout": 10176.2,
+            "median_payout": 10176.2,
+            "max_payout": 10176.2,
+            "wager_base": 0.2,
+            "is_overlay": false,
+            "overlay_ratio": null,
+            "consistency": "HIGH",
+            "thin_sample": true
+          }
+        }
+      }
+    },
     "OP": {
       "DD": {
         "avg_payout": 110.9,
@@ -6951,6 +8062,32 @@
         "max": 32.544,
         "sample": 59,
         "confidence": "HIGH"
+      }
+    },
+    "LRL": {
+      "p3_to_p4": {
+        "mean": 4.272,
+        "median": 3.01,
+        "min": 1.889,
+        "max": 8.905,
+        "sample": 5,
+        "confidence": "HIGH"
+      },
+      "p3_to_p5": {
+        "mean": 29.683,
+        "median": 24.045,
+        "min": 9.152,
+        "max": 54.305,
+        "sample": 5,
+        "confidence": "HIGH"
+      },
+      "p4_to_p5": {
+        "mean": 6.948,
+        "median": 6.331,
+        "min": 4.842,
+        "max": 10.288,
+        "sample": 4,
+        "confidence": "LOW"
       }
     },
     "OP": {
@@ -26277,6 +27414,50 @@
                 "wager_base": 0.2,
                 "ratio": 0.073,
                 "max_leg": 45.36,
+                "avg_field": null
+              }
+            ]
+          }
+        }
+      }
+    },
+    "LRL": {
+      "P4": {
+        "sample": 1,
+        "mean_ratio": 2.203,
+        "median_ratio": 2.203,
+        "exotic_beat_parlay_pct": 100.0,
+        "avg_edge": 794.66,
+        "threshold_analysis": [],
+        "days": [
+          {
+            "date": "2026-05-15",
+            "span": "11-12-13-14",
+            "parlay": 660.74,
+            "exotic": 363.85,
+            "exotic_p2": 1455.4,
+            "wager_base": 0.5,
+            "ratio": 2.203,
+            "max_leg": 34.2,
+            "avg_field": null
+          }
+        ],
+        "by_position": {
+          "11-12-13-14": {
+            "sample": 1,
+            "mean_ratio": 2.203,
+            "median_ratio": 2.203,
+            "exotic_beat_parlay_pct": 100.0,
+            "days": [
+              {
+                "date": "2026-05-15",
+                "span": "11-12-13-14",
+                "parlay": 660.74,
+                "exotic": 363.85,
+                "exotic_p2": 1455.4,
+                "wager_base": 0.5,
+                "ratio": 2.203,
+                "max_leg": 34.2,
                 "avg_field": null
               }
             ]
