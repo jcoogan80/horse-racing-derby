@@ -32366,7 +32366,7 @@
               "jockey": "Jamie NessYedsit Hazlewood",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "2",
@@ -32375,7 +32375,7 @@
               "jockey": "A. Ferris Allen IIIPaco Lopez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "3",
@@ -32402,7 +32402,7 @@
               "jockey": "Michael J. TrombettaMychel J. Sanchez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "6",
@@ -32411,7 +32411,7 @@
               "jockey": "Michael E. GorhamRaul E. Mena",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "7",
@@ -32465,7 +32465,7 @@
               "jockey": "W. Robert BailesCarlos Eduardo Lopez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             }
           ],
           "ae_horses": []
@@ -32629,7 +32629,7 @@
               "jockey": "Keri BrionTyler Gaffalione",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "6",
@@ -32638,7 +32638,7 @@
               "jockey": "Brittany T. RussellJevian Toledo",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "7",
@@ -32783,7 +32783,7 @@
               "jockey": "Daniel G. EubanksJevian Toledo",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "15",
@@ -32865,7 +32865,7 @@
               "jockey": "Cherie DeVauxJose L. Ortiz",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             }
           ],
           "ae_horses": []
@@ -32902,7 +32902,7 @@
               "jockey": "Gary CapuanoJose E. Vargas",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "4",
@@ -33002,7 +33002,7 @@
               "jockey": "Wesley A. WardJohn R. Velazquez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "6",
@@ -33020,7 +33020,7 @@
               "jockey": "Ron MoquettRafael Bejarano",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "8",
@@ -33075,7 +33075,7 @@
               "jockey": "Jonathan ThomasIrad Ortiz, Jr.",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "4",
@@ -33148,7 +33148,7 @@
               "jockey": "Derek S. RyanPaco Lopez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "3",
@@ -33184,7 +33184,7 @@
               "jockey": "Todd A. PletcherFlavien Prat",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "7",
@@ -33348,7 +33348,7 @@
               "jockey": "H. Graham MotionJohn R. Velazquez",
               "trainer": "",
               "is_ae": false,
-              "scratched": false
+              "scratched": true
             },
             {
               "program_num": "8",
