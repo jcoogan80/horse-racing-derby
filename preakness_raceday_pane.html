@@ -1,0 +1,770 @@
+<div id="preakness-card-content" class="rd-pane" style="display:none;">
+<style>
+#preakness-card-content .odc * { box-sizing: border-box; margin: 0; padding: 0; }
+#preakness-card-content .odc { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; background: #0d1b2a; color: #e8e0d0; padding: 20px; border-radius: var(--radius,8px); }
+#preakness-card-content .odc .header { text-align: center; padding: 24px 0 16px; border-bottom: 1px solid #2a3f5a; margin-bottom: 24px; }
+#preakness-card-content .odc .header h1 { font-size: 28px; color: #f5c842; font-weight: 700; letter-spacing: 2px; }
+#preakness-card-content .odc .header .sub { font-size: 13px; color: #8a9bb0; margin-top: 6px; }
+#preakness-card-content .odc .header .rose { font-size: 22px; margin-bottom: 6px; }
+#preakness-card-content .odc .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; padding: 12px 16px; background: #152232; border-radius: 8px; font-size: 12px; }
+#preakness-card-content .odc .leg-item { display: flex; align-items: center; gap: 6px; }
+#preakness-card-content .odc .leg-dot { width: 10px; height: 10px; border-radius: 2px; }
+#preakness-card-content .odc .race-section { margin-bottom: 20px; }
+#preakness-card-content .odc .race-header { display: flex; align-items: baseline; gap: 10px; padding: 8px 14px; background: #152232; border-radius: 8px 8px 0 0; border-left: 4px solid #f5c842; flex-wrap: wrap; }
+#preakness-card-content .odc .race-num { font-size: 13px; font-weight: 700; color: #f5c842; }
+#preakness-card-content .odc .race-name { font-size: 15px; font-weight: 600; color: #e8e0d0; }
+#preakness-card-content .odc .race-meta { font-size: 12px; color: #8a9bb0; margin-left: auto; }
+#preakness-card-content .odc .race-badge { font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 600; }
+#preakness-card-content .odc .badge-g1 { background: #3d1a00; color: #ff9944; }
+#preakness-card-content .odc .badge-g2 { background: #1a2a3d; color: #66aaff; }
+#preakness-card-content .odc .badge-g3 { background: #1a3d2a; color: #44cc88; }
+#preakness-card-content .odc .badge-stake { background: #2a1a3d; color: #bb88ff; }
+#preakness-card-content .odc .horse-list { border: 1px solid #1e3048; border-top: none; border-radius: 0 0 8px 8px; overflow: hidden; }
+#preakness-card-content .odc .horse-row { display: grid; grid-template-columns: 36px 1fr auto 70px; gap: 8px; padding: 10px 14px; align-items: start; border-bottom: 1px solid #1a2d42; }
+#preakness-card-content .odc .horse-row:last-child { border-bottom: none; }
+#preakness-card-content .odc .horse-row.top-pick { background: #0e2438; }
+#preakness-card-content .odc .horse-row.value-play { background: #0e2418; }
+#preakness-card-content .odc .horse-row.bomb-play { background: #2a1e0a; }
+#preakness-card-content .odc .horse-row.fade-horse { opacity: 0.6; }
+#preakness-card-content .odc .pgm { width: 28px; height: 28px; border-radius: 50%; background: #1e3048; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; color: #f5c842; flex-shrink: 0; }
+#preakness-card-content .odc .horse-info { min-width: 0; }
+#preakness-card-content .odc .horse-name { font-size: 14px; font-weight: 600; color: #e8e0d0; }
+#preakness-card-content .odc .horse-tags { display: flex; gap: 4px; margin-top: 3px; flex-wrap: wrap; }
+#preakness-card-content .odc .tag { font-size: 10px; padding: 1px 6px; border-radius: 3px; font-weight: 600; }
+#preakness-card-content .odc .tag-key { background: #1a3d5a; color: #66aaee; }
+#preakness-card-content .odc .tag-val { background: #1a3d1a; color: #66cc66; }
+#preakness-card-content .odc .tag-bomb { background: #3d2a00; color: #ffaa33; }
+#preakness-card-content .odc .tag-fade { background: #3d1a1a; color: #ff6666; }
+#preakness-card-content .odc .tag-pod { background: #2a1a4a; color: #cc88ff; }
+#preakness-card-content .odc .fig-col { text-align: center; }
+#preakness-card-content .odc .ofig { font-size: 15px; font-weight: 700; color: #e8e0d0; }
+#preakness-card-content .odc .ong { font-size: 11px; color: #8a9bb0; margin-top: 1px; }
+#preakness-card-content .odc .prob-col { text-align: right; }
+#preakness-card-content .odc .pct { font-size: 18px; font-weight: 700; }
+#preakness-card-content .odc .pct.high { color: #44cc88; }
+#preakness-card-content .odc .pct.med { color: #66aaff; }
+#preakness-card-content .odc .pct.spec { color: #ffaa33; }
+#preakness-card-content .odc .pct.low { color: #8a9bb0; }
+#preakness-card-content .odc .ml-odds { font-size: 11px; color: #8a9bb0; margin-top: 1px; }
+#preakness-card-content .odc .bar-wrap { height: 3px; background: #1e3048; border-radius: 2px; margin-top: 4px; }
+#preakness-card-content .odc .bar-fill { height: 3px; border-radius: 2px; }
+#preakness-card-content .odc .bar-high { background: #44cc88; }
+#preakness-card-content .odc .bar-med { background: #66aaff; }
+#preakness-card-content .odc .bar-spec { background: #ffaa33; }
+#preakness-card-content .odc .bar-low { background: #666; }
+#preakness-card-content .odc .horse-note { grid-column: 2 / -1; font-size: 11px; color: #6a8aa0; margin-top: 2px; }
+#preakness-card-content .odc .upgrade { color: #44cc88; font-weight: 600; }
+#preakness-card-content .odc .downgrade { color: #ff6666; font-weight: 600; }
+#preakness-card-content .odc .summary-box { background: #152232; border: 1px solid #2a3f5a; border-radius: 0 0 8px 8px; padding: 12px 16px; font-size: 12px; color: #8a9bb0; border-top: 1px solid #1e3048; margin-top: -1px; }
+#preakness-card-content .odc .summary-box strong { color: #f5c842; }
+#preakness-card-content .odc .footer { text-align: center; padding: 24px 0; font-size: 11px; color: #4a6a8a; border-top: 1px solid #1e3048; margin-top: 24px; }
+</style>
+<div class="odc">
+<div class="header">
+  <div class="rose">🏆</div>
+  <h1>PREAKNESS DAY — LRL</h1>
+  <div class="sub">Laurel Park · Saturday, May 16, 2026 · 14 Races · 9 Stakes · Preakness G1 R13 · oFIG + oNg Analysis</div>
+</div>
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#66aaee"></div> KEY = top oFIG + B/B+ oNg confirmed</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#66cc66"></div> VALUE = good oNg + longer odds than quality implies</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ffaa33"></div> BOMB = long odds + B+ grade + clean trip</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#ff6666"></div> FADE = weak oNg + short odds (overbet)</div>
+</div>
+
+<!-- R1 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R1</span><span class="race-name">OClm 40k N2X F&amp;M</span><span class="race-badge badge-stake">CLM</span><span class="race-meta">5.5f Turf · $58k · F&amp;M</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Boujee Bubblez</div><div class="horse-tags"><span class="tag tag-key">TOP FIG</span></div></div>
+      <div class="fig-col"><div class="ofig">81</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 7-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note">Consistent 81/77/81 figs · no oNg but no negatives · best confirmed form in field at reasonable price</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Epic Style</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">83</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct high">38%</div><div class="ml-odds">ML 8-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:38%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE confirmed:</span> C+ oNg on middle start (69 fig) · no oNg on best fig (83) · likely favorite on figures that aren't confirmed</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Cairo Street</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">80</div><div class="ong">C+/C+/B</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+/C+ on two most recent · B only on oldest start · NASAL_S COVER PLODDY notes · declining pattern</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">11</div>
+      <div class="horse-info"><div class="horse-name">River Seine (IRE)</div><div class="horse-tags"><span class="tag tag-bomb">BOMB AE</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">B</div></div>
+      <div class="prob-col"><div class="pct low">—</div><div class="ml-odds">ML 12-1 AE</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:8%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB if draws in:</span> B on most recent 85 oFIG · 12-1 with confirmed grade · best oNg/price combination in race if she gets in</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #2 Boujee Bubblez · EX 2/7 fade Epic Style · include AE #11 if draws in</div>
+</div>
+
+<!-- R2 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R2</span><span class="race-name">OClm 40k N2X</span><span class="race-badge badge-stake">CLM</span><span class="race-meta">6f Dirt · $58k</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row value-play">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Freeze the Fire</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">B/B-</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> B on 93 oFIG · B- on 81 (TROUBLE_S SAVED COVER) · earned grades in adversity · two confirmed starts at 10-1 · top pick with Blue Kingdom and Grand Opening scratched</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Wickeddivine</div><div class="horse-tags"><span class="tag tag-key">TOP FIG</span></div></div>
+      <div class="fig-col"><div class="ofig">98</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">29%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:29%"></div></div></div>
+      <div class="horse-note">Best single fig (98) · no oNg confirmation but no negative flags · use in exotics</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Call Me Andy</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">83</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct high">38%</div><div class="ml-odds">ML 6-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:38%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE confirmed:</span> 304-day layoff (10-month absence) · only grade is C+ on 83 fig (LONE X_FLOW NO_KEEP) · 6-5 on ancient stale form · dangerous price for this profile</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">10</div>
+      <div class="horse-info"><div class="horse-name">Dean Delivers</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct low">9%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:9%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> 2LO alert · DLR 34 · no recent oNg · recency concern</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Uncle Cat</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct low">7%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:7%"></div></div></div>
+      <div class="horse-note">No oNg data · use only deep in exotics</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #4 Freeze the Fire · EX 4/3 · TRI 4→3,9→3,9,1 · FADE Call Me Andy at 6-5 (304-day layoff)</div>
+</div>
+
+<!-- R3 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R3</span><span class="race-name">Maiden Sp Wt</span><span class="race-badge badge-stake">MSW</span><span class="race-meta">8f Turf · $52k</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row fade-horse">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Limo</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">81</div><div class="ong">C+/C+</div></div>
+      <div class="prob-col"><div class="pct high">29%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:29%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE confirmed:</span> C+/C+ on two starts · 5-2 favorite with weak oNg · public overvaluing the 81 oFIG</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Master Sommelier</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">84</div><div class="ong">C+/B-</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">B- on second start · C+ on best (84) with WARM SAVED TROUBLE notes = excuses · best oNg in field · 3LO alert but talent confirmed</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Munny Problem</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">78</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note">C+ on 71 fig · SLOG WIDE = excuse · modest figs but adversity explains it · include in exotics</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #4 · EX 4/6 · TRI 4→6,5→6,5,3 · FADE #1 Limo at 5-2</div>
+</div>
+
+<!-- R4 SKIPAT -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R4</span><span class="race-name">🏆 Skipat L125k F&amp;M</span><span class="race-badge badge-stake">STK</span><span class="race-meta">6f Dirt · $125k · F&amp;M</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Modo</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">B/B+</div></div>
+      <div class="prob-col"><div class="pct high">36%</div><div class="ml-odds">ML 9-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:36%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">KEY confirmed:</span> B/B+ on two starts · LONE SPACED = ran clean and unimpeded · figures are real · best oNg/oFIG pairing in race</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Passage East</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">100</div><div class="ong">B-/B+/B</div></div>
+      <div class="prob-col"><div class="pct med">25%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:25%"></div></div></div>
+      <div class="horse-note">B+ on 100 oFIG · B/B- on other starts · FREE MOVE SLOG STRONG notes · top raw fig in field · KEY at 3-1</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Striker Has Dial</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">B/B-</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> B on 93 (PRESSED OTHER) · B- on 91 (STRONG NO_KEEP) · two confirmed grades at 8-1 · was hidden behind Sporting Lady scratch · now stands out as the price play</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Kappa Kappa</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">98</div><div class="ong">C+/B/B+</div></div>
+      <div class="prob-col"><div class="pct med">29%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:29%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent (Comely G3 — PRESSED BUNCHED NO_FINISH) · B/B+ only on older starts · declining oNg at 5-2 is the mismatch · public on old form</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Benedetta</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">C+/B-/B-</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent (GATE SLOG) · B-/B- on prior but declining · avoid</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX BOX 7/2 · TRI 7,2→7,2,1→7,2,1,3 · WIN #1 Striker Has Dial VALUE small at 8-1 · FADE Kappa Kappa at 5-2</div>
+</div>
+
+<!-- R5 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R5</span><span class="race-name">Allowance N1X F&amp;M</span><span class="race-badge badge-stake">ALW</span><span class="race-meta">8f Turf · $54k · F&amp;M</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Sassari</div><div class="horse-tags"><span class="tag tag-key">TOP FIG</span></div></div>
+      <div class="fig-col"><div class="ofig">78</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">29%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:29%"></div></div></div>
+      <div class="horse-note">Won maiden · single start · no oNg but no negatives · take on form</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Mambo Queen</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">82</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note">Best raw fig (82) · consistent 82/79/76 · no oNg · use underneath</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Tideoftime</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">77</div><div class="ong">C/B-/C+</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE confirmed:</span> C/B-/C+ declining oNg · 3LO · NASAL_S SLOG · avoid</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">So Darn Pretty (IRE)</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">66</div><div class="ong">C/C+</div></div>
+      <div class="prob-col"><div class="pct low">—</div><div class="ml-odds">ML 12-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:6%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C/C+ declining · RANK SHORTER? · long layoff · avoid</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX 4/7 · TRI 4→7,3→7,3,1 · fade #9 and #8</div>
+</div>
+
+<!-- R6 SIR BARTON -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R6</span><span class="race-name">🏆 Sir Barton B100k</span><span class="race-badge badge-stake">STK</span><span class="race-meta">8.5f Dirt · $100k · 3yo</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Final Story</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">B/B</div></div>
+      <div class="prob-col"><div class="pct med">36%</div><div class="ml-odds">ML 2-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:36%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">KEY confirmed:</span> B/B on both starts · BOS SAVED HOT FLOW = earned both grades · clear race leader now with Reagan's Honor scratched · most confirmed horse in field</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Big Cuddle</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B-/B</div></div>
+      <div class="prob-col"><div class="pct spec">22%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:22%"></div></div></div>
+      <div class="horse-note">B on most recent · B- on second · SLOG MOVE X_WIDE CLOSE = confirmed in adversity · KEY at 9-2</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Pont Aven</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B/B/C+</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB confirmed:</span> B/B on two starts (DUEL NO_LINE · PRESSED DUEL WARM) · earned both grades in contested trips · even more compelling without Reagan's Honor as the dominant top favorite · 30-1</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Let's Go Lando</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">96</div><div class="ong">C+/B-/B</div></div>
+      <div class="prob-col"><div class="pct spec">22%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:22%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent on 90 (SPACED SAVED) · declining from B/B- · oNg trend is wrong direction · avoid at 6-1</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Minorinconvenience</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">87</div><div class="ong">C/B-/B</div></div>
+      <div class="prob-col"><div class="pct low">9%</div><div class="ml-odds">ML 12-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:9%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C most recent (SPACED KICKBACK- DROP? SHORTER? 3LO) · declining B/B-/C pattern · avoid</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Falcon Jet</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">89</div><div class="ong">B/C+/C+</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note">B on most recent only · C+/C+ on prior two = one-race form · use only deep in exotics</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #4 Final Story · EX 4/2 · TRI 4→2,6→2,6,5 · WIN #6 Pont Aven BOMB small at 30-1 · FADE Let's Go Lando and Minorinconvenience</div>
+</div>
+
+<!-- R7 CHICK LANG -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R7</span><span class="race-name">🏆 Chick Lang L150k</span><span class="race-badge badge-stake">STK</span><span class="race-meta">6f Dirt · $150k · 3yo</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Shane's Wonder</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">B+/B/B+</div></div>
+      <div class="prob-col"><div class="pct med">25%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:25%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">ABSOLUTE KEY — most consistent in race:</span> B+/B/B+ three straight · LONE GREEN TG30 = ran clean every time · three-start confirmed oNg is the best profile in the field · 3-1 is value vs Obliteration at 6-5</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Igniter</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">B/B/C+</div></div>
+      <div class="prob-col"><div class="pct med">29%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:29%"></div></div></div>
+      <div class="horse-note">B/B on top two starts · C+ only on oldest · DUEL MOVE confirmed · KEY at 5-2</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Obliteration</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">96</div><div class="ong">B+/B-</div></div>
+      <div class="prob-col"><div class="pct high">42%</div><div class="ml-odds">ML 6-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:42%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> 6-5 favorite · 91-day layoff (DLR 91) · TROUBLE RUSH WIDE on best start · B+ is real but layoff + trip issues = significant risk vs Shane's Wonder at 3-1 with three clean confirmed starts</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Fulmine</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">86</div><div class="ong">B/B</div></div>
+      <div class="prob-col"><div class="pct low">5%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:5%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> B on 86 (WIDE MOVE) · B on 83 (WIDE MOVE) · two confirmed B grades at 20-1 · earned both in wide trips · replaces Buds Notion as the price play</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Magic Wallet</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">83</div><div class="ong">B/B/B-</div></div>
+      <div class="prob-col"><div class="pct low">7%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:7%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> Three B-range grades at 15-1 · SHUFFLE GREEN WIDE MOVE = earned in adversity · consistent confirmed oNg across three starts at a big price</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Top Manipulator</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">84</div><div class="ong">B/B-/B-</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB:</span> Three B-range grades at 30-1 · GREEN WEAK NO_LEAD NO_LINE TROUBLE_S = consistent effort with adversity notes · 30-1 with three oNg-confirmed starts is textbook BOMB</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Hollywood Import</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">C+/C+/B</div></div>
+      <div class="prob-col"><div class="pct low">5%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:5%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent (PLODDY SAVED BLANKET 3LO) · C+ prior · B only on oldest · declining form · avoid</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX BOX 6/5 · TRI 5,6→5,6,8,1→5,6,8,1,7 · WIN #8 Magic Wallet VALUE small · WIN #7 Top Manipulator BOMB small · FADE Obliteration at 6-5</div>
+</div>
+
+<!-- R8 MARYLAND SPRINT G3 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R8</span><span class="race-name">🏆 Maryland Sprint G3</span><span class="race-badge badge-g3">G3</span><span class="race-meta">6f Dirt · $150k · 3:20pm</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Haileysfirstnotion</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">107</div><div class="ong">B+/B-/B</div></div>
+      <div class="prob-col"><div class="pct spec">22%</div><div class="ml-odds">ML 7-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:22%"></div></div></div>
+      <div class="horse-note">B+ on career-best 107 oFIG · B/B- on other starts · HARD_LEAD GRIT confirmed · top figure in field · KEY at 7-2 · now co-leading pick with Floodlites scratched</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Faust</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">98</div><div class="ong">B+/B+/B-</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB confirmed:</span> B+/B+/B- three starts · PERFECT GATE RUSH HOT on best runs · BOS WIDE = earned despite trip issues · elite oNg grades at 8-1 · now the top pick with Floodlites scratched</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Celtic Contender</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">107</div><div class="ong">B+/B-/B-</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note">B+ on best start (107 oFIG, EASY_LEAD) · B-/B- on prior · DUEL SAVED confirmed · KEY at 9-2</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Bring the Smoke</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">94</div><div class="ong">B/B</div></div>
+      <div class="prob-col"><div class="pct low">9%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:9%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> B on 94 (PRERACE+ WARM_UP BOS) · B on 91 (WEATHER RUSH BOS) · two confirmed B grades at 10-1 · was overlooked when Floodlites dominated the race · now a clear value angle</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Slam Notion</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">100</div><div class="ong">C+/B/B</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent (WIDE OTHER) · declining from B/B · avoid at 5-1</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Faster Gator</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE concern:</span> 173-day layoff (6-month absence, DLR 173) · only grade is B- on 85 (NASAL_S WARM PRESSED SAVED) from old form · significant recency risk at 9-2</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">S S Sinatra</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">92</div><div class="ong">C+/C+/C+</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">CONFIRMED FADE:</span> Three straight C+ grades · BUNCHED PLODDY · toss</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #3 Faust BOMB · EX BOX 3/4 · TRI 3,4→3,4,6,1→3,4,6,1,2 · VALUE #1 Bring the Smoke at 10-1 · FADE Slam Notion and S S Sinatra</div>
+</div>
+
+<!-- R9 JW MURPHY -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R9</span><span class="race-name">🏆 JW Murphy B100k</span><span class="race-badge badge-stake">STK</span><span class="race-meta">8f Turf · $100k · 3yo</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">My Favorite Bird</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">81</div><div class="ong">B-/B-/B-</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 10-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> B- on three straight starts · TROUBLE_S ROOM on each = adversity every time, still graded B- · 10-1 vs 9-5 Proton with weaker oNg is the mismatch</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Proton</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">C+/B/B-</div></div>
+      <div class="prob-col"><div class="pct high">36%</div><div class="ml-odds">ML 9-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:36%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent · 3LO · PRERACE+ WARM SAVED = trip-dependent · 9-5 favorite with declining oNg · public overvaluing the name</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Turf Star</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">C/C+/B</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C/C+ on two of three starts · RUSH SAVED NO_KEEP TURF? flag · declining pattern at 5-2 · avoid</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Jessica's Eyes</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">76</div><div class="ong">B/B-</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB confirmed:</span> B on most recent · B- on prior · POCKET TRAFFIC ROOM = ran in traffic both times · figures understated · 30-1 with B grades = textbook BOMB</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Thebabeslayer</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">C/B</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C on most recent (BthHseRowB200k, FTQ SAVED TROUBLE-) · B only on prior · declining at 6-1 · avoid</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Attfield</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">C+/C+/B</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent (TROUBLE_S SAVED 3LO) · C+ prior (TROUBLE_S RUSH DUEL) · B only on oldest · declining C+/C+/B pattern at 9-2 · avoid</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">J Cody</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">—</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note">No oNg data · use only in deep exotics</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #1 My Favorite Bird VALUE · WIN #7 Jessica's Eyes BOMB small · TRI 1→7,2→7,2,4 · FADE Proton, Turf Star, Thebabeslayer</div>
+</div>
+
+<!-- R10 DINNER PARTY G3 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R10</span><span class="race-name">🏆 Dinner Party G3</span><span class="race-badge badge-g3">G3</span><span class="race-meta">9f Turf · $250k · 4:28pm</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Cruise the Nile</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">B/B/B</div></div>
+      <div class="prob-col"><div class="pct high">38%</div><div class="ml-odds">ML 9-5</div><div class="bar-wrap"><div class="bar-fill bar-high" style="width:38%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">DOMINANT KEY — clear race leader:</span> Three straight B grades · LONE STRONG WIDE CLOSE = clean trips · three wins in a row · Dresden Row scratched makes this his race to lose · most consistent oNg on the card</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">A Bourbon for Toby</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">B-/B/B+</div></div>
+      <div class="prob-col"><div class="pct spec">9%</div><div class="ml-odds">ML 12-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:9%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB confirmed:</span> Improving trajectory B-/B/B+ (oldest to recent) · TACTIC+ TRAFFIC SHUFFLE CLOSE = earned every grade with adversity · 3LO alert · 12-1 with B+ on best start is a significant mismatch</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">What Say Thee</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B/B/B</div></div>
+      <div class="prob-col"><div class="pct low">6%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:6%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE confirmed:</span> Three straight B grades · POCKET PERFECT WARM COVER MOVE = honest racing style · 15-1 with the same oNg profile as Cruise the Nile at 9-5 is a massive gap · best overlay in race</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Fort Washington</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B-/B-/C+</div></div>
+      <div class="prob-col"><div class="pct spec">22%</div><div class="ml-odds">ML 7-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:22%"></div></div></div>
+      <div class="horse-note">B-/B- on top two starts · C+ only on oldest · three confirmed B-range starts · secondary KEY at 7-2 · now second choice with Dresden Row gone</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Harrow</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">89</div><div class="ong">B-/B-/C+</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 12-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ on oldest · B-/B- on middle two · declining from C+ start · MOVE X_FLOW WIDE · mild fade at 12-1</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #3 Cruise the Nile · WIN #5 A Bourbon for Toby BOMB · EX BOX 3/5 · TRI 3→5,1,4→5,1,4,7 · FADE Harrow</div>
+</div>
+
+<!-- R11 GALLORETTE G3 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R11</span><span class="race-name">🏆 Gallorette G3 F&amp;M</span><span class="race-badge badge-g3">G3</span><span class="race-meta">8.5f Turf · $150k · F&amp;M · 5:02pm</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Awesome Czech</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">92</div><div class="ong">B/B/B</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">KEY + VALUE:</span> Three straight B grades on 87-92 figs · NO_COVER SAVED BLANKET = ran clean each time · most consistent oNg in field at 5-1 · best oNg/price combination in race</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">Child of the Moon (FR)</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">95</div><div class="ong">B-/B-/B</div></div>
+      <div class="prob-col"><div class="pct med">29%</div><div class="ml-odds">ML 5-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:29%"></div></div></div>
+      <div class="horse-note">B-/B-/B three starts · TRAFFIC MOVE TROUBLE on most recent = earned despite adversity · KEY at 5-2</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Mahra's Love (IRE)</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">87</div><div class="ong">B/C+</div></div>
+      <div class="prob-col"><div class="pct spec">9%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:9%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE:</span> B on most recent (87 oFIG) · FLOW note = clean trip · 15-1 with a B grade is mispriced · C+ on older start is old noise</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Accent (GB)</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">87</div><div class="ong">C+/B/B</div></div>
+      <div class="prob-col"><div class="pct med">25%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:25%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent despite being 3-1 · B/B on prior starts = declining · TRAFFIC NO_KEEP STRONG · public on old form · avoid at this price</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Austere</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">89</div><div class="ong">C+/B-/C+</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 7-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE confirmed:</span> C+/B-/C+ declining on both ends · SHORTER? flag · avoid at 7-2</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX BOX 8/7 · TRI 7,8→7,8,1→7,8,1,6 · WIN #8 Awesome Czech VALUE · FADE Accent and Austere</div>
+</div>
+
+<!-- R12 TURF SPRINT -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R12</span><span class="race-name">🏆 Turf Sprint L125k</span><span class="race-badge badge-stake">STK</span><span class="race-meta">5.5f Turf · $125k · 5:37pm</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Chasing Liberty</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">94</div><div class="ong">B/B-/B-</div></div>
+      <div class="prob-col"><div class="pct med">25%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:25%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">KEY confirmed:</span> B on most recent · B-/B- on prior · WIDE FLOW notes · confirmed oNg on all three starts · KEY at 3-1</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Jean Valjean</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">90</div><div class="ong">B/C+/B</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE:</span> B on two of three starts · won last · C+ only on middle (BOS notes = excuse) · 5-1 vs 3-1 Chasing Liberty with comparable oNg</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Outlaw Kid (ON)</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">B/C+/C+</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note">B on most recent · SAVED TACTIC+ · C+ on prior two = one-race hot form · use underneath</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Run Curtis Run</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">92</div><div class="ong">B-/C/B-</div></div>
+      <div class="prob-col"><div class="pct med">22%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:22%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE concern:</span> C on middle start (SLOG) + 2LO alert · B- on most recent (RUSH TROUBLE MOVE) and oldest (92) · patchy oNg pattern at 4-1 · avoid as a top play</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Determined Kingdom</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">88</div><div class="ong">C/C+/B-</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C most recent · declining C/C+/B- · SHUFFLE WIDE NO_FINISH · avoid</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX 4/3 VALUE · TRI 4→3,8→3,8,1 · FADE Run Curtis Run (C grade middle start) and Determined Kingdom</div>
+</div>
+
+<!-- R13 PREAKNESS G1 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R13</span><span class="race-name">🏆 PREAKNESS STAKES G1</span><span class="race-badge badge-g1">G1</span><span class="race-meta">9.5f Dirt · $2,000,000 · 3yo · 6:14pm</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">2</div>
+      <div class="horse-info"><div class="horse-name">Ocelli</div><div class="horse-tags"><span class="tag tag-key">KEY</span><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">B-/B-/B</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">KEY + VALUE:</span> Three straight B-range grades · TACTIC+ TROUBLE FLOW = ran into traffic and still confirmed · 6-1 with consistent oNg vs shorter-priced horses without three confirmed starts · Derby runner</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">1</div>
+      <div class="horse-info"><div class="horse-name">Taj Mahal</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">101</div><div class="ong">B+/B/B+</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note">B+/B/B+ three starts · NASAL_S WARM RUSH WIDE = earned in adversity · top local horse · three wins including a stakes · KEY at 5-1</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">12</div>
+      <div class="horse-info"><div class="horse-name">Incredibolt</div><div class="horse-tags"><span class="tag tag-key">KEY</span></div></div>
+      <div class="fig-col"><div class="ofig">100</div><div class="ong">B/B+/C</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note">B+ on 100 oFIG · B on Derby · C only on oldest · WARM SLOG TROUBLE = trip issues · Derby runner · KEY but C on oldest is a minor flag</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Robusta</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">C/C/B</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">CONFIRMED FADE:</span> Two straight C grades on recent starts · NASAL_S WIDE NO_KEEP DROP? · toss even at 30-1</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">5</div>
+      <div class="horse-info"><div class="horse-name">Talkin</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B-/C+/C</div></div>
+      <div class="prob-col"><div class="pct low">5%</div><div class="ml-odds">ML 20-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:5%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> Declining B-/C+/C · SHORTER? DROP? flags · 3LO · avoid</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Chip Honcho</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">97</div><div class="ong">C+/B/B-</div></div>
+      <div class="prob-col"><div class="pct spec">17%</div><div class="ml-odds">ML 5-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:17%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ most recent · RANK WIDE SHORTER? on current form · 5-1 with declining oNg · avoid</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">9</div>
+      <div class="horse-info"><div class="horse-name">Iron Honor</div><div class="horse-tags"><span class="tag tag-pod">WATCH</span></div></div>
+      <div class="fig-col"><div class="ofig">99</div><div class="ong">C+/B/B+</div></div>
+      <div class="prob-col"><div class="pct spec">18%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:18%"></div></div></div>
+      <div class="horse-note">B+ on best start (99 oFIG) · C+ most recent but SPACED WIDE = excuse · improving trajectory possible · use underneath</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Crupper</div><div class="horse-tags"><span class="tag tag-pod">WATCH</span></div></div>
+      <div class="fig-col"><div class="ofig">89</div><div class="ong">B/B-/B</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note">B/B-/B three starts confirmed · 30-1 · lower figs but consistent oNg · use small in multi-race exotics</div>
+    </div>
+    <div class="horse-row">
+      <div class="pgm">10</div>
+      <div class="horse-info"><div class="horse-name">Napoleon Solo</div><div class="horse-tags"><span class="tag tag-pod">WATCH</span></div></div>
+      <div class="fig-col"><div class="ofig">98</div><div class="ong">B-/C+/B+</div></div>
+      <div class="prob-col"><div class="pct spec">11%</div><div class="ml-odds">ML 8-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:11%"></div></div></div>
+      <div class="horse-note">B+ on best (98, LONE MOVE) · C+ on middle · B- most recent (SPACED X_FLOW PRESSED) · mixed — B+ is real but declining oNg trend is a flag · WATCH at 8-1</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">7</div>
+      <div class="horse-info"><div class="horse-name">The Hell We Did</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">93</div><div class="ong">A-/B-</div></div>
+      <div class="prob-col"><div class="pct low">7%</div><div class="ml-odds">ML 15-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:7%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">WATCH/BOMB:</span> A- on 93 (6f Alw, SLOG MOVE NO_PUSH) · B- on 87 (Lex G3, DUEL 3LO) · A- grade is elite · confirmed in G3 · 15-1 with two graded oNg starts · dart throw</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Bull by the Horns</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">B/B-/C</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB:</span> B on most recent (WARM TROUBLE_S FREE MOVE TROUBLE- FLOW) · B-/C on prior · earned the B with adversity · 30-1 with confirmed B = BOMB candidate · use tiny in multi-race</div>
+    </div>
+    <div class="horse-row bomb-play">
+      <div class="pgm">11</div>
+      <div class="horse-info"><div class="horse-name">Corona de Oro</div><div class="horse-tags"><span class="tag tag-bomb">BOMB</span></div></div>
+      <div class="fig-col"><div class="ofig">91</div><div class="ong">B-/B</div></div>
+      <div class="prob-col"><div class="pct low">3%</div><div class="ml-odds">ML 30-1</div><div class="bar-wrap"><div class="bar-fill bar-low" style="width:3%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">BOMB:</span> B-/B two confirmed grades at 30-1 · B- on 86 (NASAL_S TROUBLE_S RUSH DUEL SAVED SHORTER?) · B on 91 · two-start confirmed oNg at massive price · include tiny in exotics</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> WIN #2 Ocelli VALUE · EX BOX 1/2 · TRI 1,2→1,2,12,9→1,2,12,9,3 · Rainbow P6 leg: 1,2 · BOMB longshots: #7 #8 #11 · FADE 4,5,6</div>
+</div>
+
+<!-- R14 -->
+<div class="race-section">
+  <div class="race-header">
+    <span class="race-num">R14</span><span class="race-name">Maiden Sp Wt</span><span class="race-badge badge-stake">MSW</span><span class="race-meta">6f Dirt · $52k · 3yo</span>
+  </div>
+  <div class="horse-list">
+    <div class="horse-row top-pick">
+      <div class="pgm">8</div>
+      <div class="horse-info"><div class="horse-name">Holy Moly Mitole</div><div class="horse-tags"><span class="tag tag-key">TOP FIG</span></div></div>
+      <div class="fig-col"><div class="ofig">85</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 9-2</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">Best single oFIG (85) in field · one start · no oNg but top raw figure</div>
+    </div>
+    <div class="horse-row value-play">
+      <div class="pgm">3</div>
+      <div class="horse-info"><div class="horse-name">Love Yourself</div><div class="horse-tags"><span class="tag tag-val">VALUE</span></div></div>
+      <div class="fig-col"><div class="ofig">81</div><div class="ong">B-</div></div>
+      <div class="prob-col"><div class="pct spec">14%</div><div class="ml-odds">ML 6-1</div><div class="bar-wrap"><div class="bar-fill bar-spec" style="width:14%"></div></div></div>
+      <div class="horse-note"><span class="upgrade">VALUE:</span> B- on recent start · WEATHER TROUBLE_S RUSH COVER MOVE = adversity, figures understated · 6-1 with a confirmed B- grade is the best oNg/price in the race</div>
+    </div>
+    <div class="horse-row top-pick">
+      <div class="pgm">4</div>
+      <div class="horse-info"><div class="horse-name">Bruno</div><div class="horse-tags"></div></div>
+      <div class="fig-col"><div class="ofig">81</div><div class="ong">—</div></div>
+      <div class="prob-col"><div class="pct med">20%</div><div class="ml-odds">ML 4-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:20%"></div></div></div>
+      <div class="horse-note">81 oFIG · single start · no oNg · use in exotics</div>
+    </div>
+    <div class="horse-row fade-horse">
+      <div class="pgm">6</div>
+      <div class="horse-info"><div class="horse-name">Grant the Great</div><div class="horse-tags"><span class="tag tag-fade">FADE</span></div></div>
+      <div class="fig-col"><div class="ofig">76</div><div class="ong">C+</div></div>
+      <div class="prob-col"><div class="pct med">25%</div><div class="ml-odds">ML 3-1</div><div class="bar-wrap"><div class="bar-fill bar-med" style="width:25%"></div></div></div>
+      <div class="horse-note"><span class="downgrade">FADE:</span> C+ on only oNg-graded start at 3-1 · DUEL note · public likely prices him short · weak oNg at a short price is the definition of a fade play</div>
+    </div>
+  </div>
+  <div class="summary-box"><strong>Tickets:</strong> EX 8/3 VALUE · TRI 8→3,4→3,4,6 · FADE #6 Grant the Great</div>
+</div>
+
+<div class="footer">LRL · Preakness Day May 16 2026 · oFIG + oNg Analysis · Derby Value · 9 Stakes</div>
+</div>
+</div>
