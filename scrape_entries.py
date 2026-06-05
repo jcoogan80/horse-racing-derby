@@ -39,7 +39,10 @@ TRACK_SLUGS = {
     "OP":  "oaklawn-park",
     "SA":  "santa-anita-park",
     "AQU": "aqueduct",
+    "LRL": "laurel-park",
+    "PIM": "pimlico",
     "KEE": "keeneland",
+    "SAR": "saratoga",
 }
 
 HEADERS = {
