@@ -1,6 +1,14 @@
 {
   "rules": {
     ".read": true,
-    ".write": true
+    ".write": false,
+
+    "live_card": { ".write": true },
+
+    "inbox": { ".write": true },
+
+    "archive": {
+      "$date": { ".write": true }
+    }
   }
 }
