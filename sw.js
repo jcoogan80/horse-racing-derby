@@ -2,7 +2,7 @@
 // Caches the app shell on install; serves offline after first load.
 // dashboard_data.json is NEVER cached — always fetched live from the network.
 
-const CACHE_NAME = 'derby-v3';
+const CACHE_NAME = 'derby-v4';
 const SHELL = [
   '/',
   '/index.html',
@@ -35,8 +35,8 @@ self.addEventListener('activate', event => {
 self.addEventListener('fetch', event => {
   const url = new URL(event.request.url);
 
-  // dashboard_data.json: always network, never cache, no fallback
-  if (url.pathname.includes('dashboard_data.json')) {
+  // dashboard_data.json and data/*.json (scratches, KEE BC model): always network, never cache
+  if (url.pathname.includes('dashboard_data.json') || url.pathname.includes('/data/')) {
     event.respondWith(fetch(event.request));
     return;
   }
