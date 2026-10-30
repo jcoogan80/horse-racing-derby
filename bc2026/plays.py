@@ -50,7 +50,10 @@ for r in M:
         notes.append(f"Favorite {nm(fav)} ({fav['ml']}) rates below its price: lean against it on top.")
     elif 'AGAINST' in fav['tags']:
         who = ', '.join(s for s, ro in fav['cons'] if ro == 'against')
-        notes.append(f"{who} is against favorite {nm(fav)} ({fav['ml']}), but the model still has it on top; the Against tickets cover that view.")
+        if fav is top:
+            notes.append(f"{who} is against favorite {nm(fav)} ({fav['ml']}), but the model still has it on top; the Against tickets cover that view.")
+        else:
+            notes.append(f"{who} is against favorite {nm(fav)} ({fav['ml']}), and the model also rates it below the top choice.")
     if not any(p['type'].startswith('Win') for p in plays):
         notes.append("No straight bet: nothing beats the morning line by enough. Use this race for exotics and multi-race spreads.")
     fts = [h for h in hs if 'imputed' in (h.get('fig_note') or '')]

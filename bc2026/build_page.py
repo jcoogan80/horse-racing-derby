@@ -4,6 +4,7 @@ old=json.load(open('page_data.json'))
 NOTES={(r['day'],r['num']):r['note'] for r in old['races'] if r.get('covered',True) and r['num']>=4 or (r['day']=='fri' and r['num']>=6)}
 NOTES={k:v for k,v in NOTES.items() if not v.startswith('No podcast')}
 PLAYS=json.load(open('plays.json'))
+NOTES[('fri',9)] = NOTES[('fri',9)].replace('Gaudreau scratched.','Gaudreau and Earth Song scratched (field of 6).')
 NOTES[('fri',8)] = NOTES[('fri',8)].split(' Go for Launch')[0] + " Go for Launch is missing from the Optix program, so it's treated as scratched and Silent Beauty drawn in."
 import re as _re
 MON={'â':'Jan','á':'Feb','à':'Mar','ß':'Apr','Ü':'May','Þ':'Jun','Û':'Jul','Ý':'Aug','æ':'Sep','å':'Oct','ä':'Nov','ã':'Dec'}
