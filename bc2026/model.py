@@ -64,6 +64,12 @@ CONS = {
                   'Magic': {'6': 'top', '5': 'use'},
                   'Jon': {'2': 'top', '5': '2', '7': '3', '4': '4'}},
 }
+
+# Racing Dudes official Friday card (Win/Place/Show/Next Best), received Fri 10/30 AM
+RD_FRI = {1: ['6', '1', '2', '5'], 2: ['3', '9', '6', '7'], 3: ['6', '2', '3', '8'], 4: ['10', '7', '4', '1'], 5: ['8', '2', '1', '11'], 6: ['4', '3', '5', '9'], 7: ['10', '5', '2', '8'], 8: ['9', '10', '12', '6'], 9: ['5', '7', '6', '3'], 10: ['10', '4', '5', '2']}
+for _n, _p in RD_FRI.items():
+    CONS.setdefault(('fri', _n), {})['RD'] = dict(zip(_p, ['top', '2', '3', '4']))
+
 ROLE_PTS = {'single': 4.0, 'top': 3.0, '2': 2.0, '3': 1.5, '4': 1.0, 'use': 1.0, 'bomb': 0.8, 'against': 0.0}
 
 SHORT = {'Allowance Optional Claiming (N2X)': 'Alw OC N2X', 'Maiden Special Weight': 'Maiden', 'Thoroughbred Aftercare Alliance S.': 'TAA Stakes',

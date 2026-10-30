@@ -4,6 +4,10 @@ old=json.load(open('page_data.json'))
 NOTES={(r['day'],r['num']):r['note'] for r in old['races'] if r.get('covered',True) and r['num']>=4 or (r['day']=='fri' and r['num']>=6)}
 NOTES={k:v for k,v in NOTES.items() if not v.startswith('No podcast')}
 PLAYS=json.load(open('plays.json'))
+RDN={1:'Memory over Emerging Market, Stowaway, Admiral Dennis',2:'Honor Is Mine over Groves, Niosa, Maitresse',3:'Majik Mooney (10-1) over Canada, Real Goodbar, Roscoe Goose',4:'Campobasso over Cornwall Boss, Ghazaaly, High Camp',5:'Mission Integrity over Kingside, Yacht Master, McCoy'}
+for _n,_t in RDN.items(): NOTES[('fri',_n)] = 'Racing Dudes card: ' + _t + '.'
+for _n,_t in {6:'Brickyard Belle-Libertango-Mussab-Final Objective',7:'Emphatic-Miss Monica-Domain Expansion-Manuka Honey',8:'Sun Goddess-Amusingly-Domestic Agenda-Alwaysanangel; multi-race 9,10',9:'Hughes-Coach Pope-American History-Salahudin; multi-race 5,7',10:'Folsom Blues-Haffner-How\'s Al Today-Avec Toi'}.items():
+    NOTES[('fri',_n)] = NOTES[('fri',_n)] + ' Racing Dudes card: ' + _t + '.'
 NOTES[('fri',9)] = NOTES[('fri',9)].replace('Gaudreau scratched.','Gaudreau and Earth Song scratched (field of 6).')
 NOTES[('fri',8)] = NOTES[('fri',8)].split(' Go for Launch')[0] + " Go for Launch is missing from the Optix program, so it's treated as scratched and Silent Beauty drawn in."
 import re as _re
