@@ -13,7 +13,7 @@ Usage:
     python kee_live_watcher.py --once    # one full fetch, print a summary, push
     python kee_live_watcher.py --print   # run, print, don't push
 
-Requires: pip install requests
+Requires: pip install requests curl_cffi
 """
 import sys, time, json
 from datetime import datetime, timezone
@@ -37,14 +37,40 @@ HOT_MTP = 20
 FULL_EVERY = 5
 DONE = ("official", "closed", "final", "resulted")
 
-S = requests.Session()
-S.headers.update(HEADERS)
+# TwinSpires' bot shield stalls plain Python requests (read timeouts) because their TLS handshake
+# doesn't look like a browser's. curl_cffi makes the same request with Chrome's handshake.
+PROGRAM_PAGE = "https://www.twinspires.com/bet/program/classic/breeders-cup-at-keeneland/kee/Thoroughbred/1/basic"
+try:
+    from curl_cffi import requests as browser_requests
+    S = browser_requests.Session(impersonate="chrome")
+    S.headers.update({"Accept": "application/json, text/plain, */*", "Referer": HEADERS["Referer"]})
+    ENGINE = "curl_cffi (Chrome handshake)"
+except ImportError:
+    S = requests.Session()
+    S.headers.update(HEADERS)
+    ENGINE = "requests (may be blocked; pip install curl_cffi)"
+_warm = {"done": False}
+
+
+def warm_up():
+    """Load the program page once, like a browser would, to pick up the site's cookies."""
+    try:
+        S.get(PROGRAM_PAGE, timeout=20, headers={"Accept": "text/html,application/xhtml+xml,*/*;q=0.8"})
+    except Exception as ex:
+        print(f"warm-up: {ex}", flush=True)
+    _warm["done"] = True
 
 
 def get(path):
-    r = S.get(f"{BASE}{path}", params={"affid": "2800"}, timeout=15)
-    r.raise_for_status()
-    return r.json()
+    if not _warm["done"]:
+        warm_up()
+    try:
+        r = S.get(f"{BASE}{path}", params={"affid": "2800"}, timeout=20)
+        r.raise_for_status()
+        return r.json()
+    except Exception:
+        _warm["done"] = False   # re-warm on the next call
+        raise
 
 
 def entries(n):
@@ -90,6 +116,7 @@ def push(d):
 def main():
     once, dry = "--once" in sys.argv, "--print" in sys.argv
     prev, i = {}, 0
+    print(f"KEE live watcher: {ENGINE}. Writing to Firebase every {POLL_SECONDS} s. Leave this window open.", flush=True)
     while True:
         try:
             d, lst = cycle(once or i % FULL_EVERY == 0, prev)

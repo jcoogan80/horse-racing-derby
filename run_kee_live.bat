@@ -5,7 +5,7 @@
 setlocal
 set PROJECT=C:\Users\jason\Desktop\HorseRacing Project
 set PYTHON=C:\Users\jason\AppData\Local\Python\pythoncore-3.14-64\python.exe
-"%PYTHON%" -m pip install --quiet requests
+"%PYTHON%" -m pip install --quiet --disable-pip-version-check requests curl_cffi
 :run
 "%PYTHON%" "%PROJECT%\kee_live_watcher.py"
 if errorlevel 3 goto done
