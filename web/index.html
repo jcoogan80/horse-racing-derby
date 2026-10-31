@@ -14394,18 +14394,17 @@ async function kbcInit() {
     KBC.loading = false; return;
   }
   try { const r = await fetch('dashboard_data.json?t=' + Date.now()); const d = await r.json(); KBC.kee = (d.sequences || {}).KEE || null; } catch (e) {}
-  await kbcLoadWatcher(); await kbcLivePoll(true);
+  await kbcLoadWatcher(); await kbcLivePoll();
   // default day: Saturday once Friday's card is over (local date)
   const today = new Date().toISOString().slice(0, 10);
   if (today >= KBC.data.meta.dates.sat) KBC.day = 'sat';
   KBC.loading = false;
   kbcRender();
   setInterval(async () => { if (document.getElementById('tab-keebc').classList.contains('active')) { await kbcLoadWatcher(); kbcRender(); } }, 120000);
-  setInterval(async () => { if (document.getElementById('tab-keebc').classList.contains('active')) { await kbcLivePoll(false); kbcRender(); } }, 60000);
+  setInterval(async () => { if (document.getElementById('tab-keebc').classList.contains('active')) { await kbcLivePoll(); kbcRender(); } }, 60000);
 }
 
-// ── Live tote odds (Netlify function kee-live → TwinSpires program API) ──
-// Polls every 60 s while the tab is open; full card (scratches) every 5th poll, otherwise only races within 20 MTP.
+// ── Live tote odds: kee_live_watcher.py (your PC) reads TwinSpires every 60 s and writes Firebase; the tab reads it every 60 s ──
 function kbcOddsDec(s) {
   if (s == null) return null; s = String(s).trim().toLowerCase();
   if (!s || s === 'scr' || s === '-') return null;
@@ -14413,18 +14412,18 @@ function kbcOddsDec(s) {
   const m = s.match(/^(\d+(?:\.\d+)?)\s*[\/\-]\s*(\d+(?:\.\d+)?)$/); if (m) return +m[2] ? +m[1] / +m[2] : null;
   return isFinite(+s) ? +s : null;
 }
-async function kbcLivePoll(force) {
+const KBC_LIVE_URL = 'https://caw-live-default-rtdb.firebaseio.com/archive/kee-live.json';
+async function kbcLivePoll() {
   const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
   if (!KBC.data || !Object.values(KBC.data.meta.dates).includes(today)) return;   // only on race days
-  const full = force || !KBC.live || KBC.livePolls % 5 === 0;
-  KBC.livePolls++;
   try {
-    const r = await fetch('/.netlify/functions/kee-live' + (full ? '?full=1' : '') + (full ? '&' : '?') + 't=' + Date.now());
+    const r = await fetch(KBC_LIVE_URL + '?t=' + Date.now());
     const d = await r.json();
-    if (d.error) throw new Error(d.error);
-    const prev = KBC.live || { entries: {} };
-    d.entries = Object.assign({}, full ? {} : prev.entries, d.entries);
-    KBC.live = d; KBC.liveErr = null;
+    if (!d || !d.races) { KBC.live = null; KBC.liveErr = 'feed not started — run run_kee_live.bat on your PC'; return; }
+    d.entries = d.entries || {};
+    KBC.live = d;
+    const age = (Date.now() - new Date(d.fetched_at).getTime()) / 60000;
+    KBC.liveErr = age > 3 ? `feed paused ${Math.round(age)} min — is run_kee_live.bat still running?` : null;
   } catch (e) { KBC.liveErr = e.message; }
 }
 function kbcLiveRace(day, num) {
@@ -14652,11 +14651,11 @@ function kbcRender() {
 }
 function kbcLiveStatus() {
   const L = KBC.live;
-  if (KBC.liveErr) return `<br><span class="warn">Live odds unavailable (${kbcEsc(KBC.liveErr)})</span>. Odds shown are morning line.`;
+  if (KBC.liveErr) return `<br><span class="warn">Live odds: ${kbcEsc(KBC.liveErr)}</span>${KBC.live ? '. Showing the last odds received.' : '. Odds shown are morning line.'}`;
   if (!L) return '<br>Live odds start on race day. Odds shown are morning line.';
   const t = new Date(L.fetched_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
   const nx = (L.races || []).filter(x => x.date === KBC.data.meta.dates[KBC.day] && x.mtp != null && !/official|closed|final/i.test(x.status || '')).sort((a, b) => a.num - b.num)[0];
-  return `<br><span class="ok">Live odds on</span> (TwinSpires, updated ${t}, every 60 s)${nx ? ` · next: <b>R${nx.num}</b> ${nx.mtp <= 60 ? nx.mtp + ' MTP' : 'post ' + new Date(nx.post).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}` : ''}. Scratches from the tote are applied automatically.`;
+  return `<br><span class="ok">Live odds on</span> (TwinSpires tote, updated ${t}, refreshes every 60 s)${nx ? ` · next: <b>R${nx.num}</b> ${nx.mtp <= 60 ? nx.mtp + ' MTP' : 'post ' + new Date(nx.post).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}` : ''}. Scratches from the tote are applied automatically.`;
 }
 function kbcClearManual() { Object.keys(KBC.manual).forEach(k => { if (k.startsWith(KBC.day + '|')) delete KBC.manual[k]; }); kbcSaveManual(); kbcRender(); }
 function kbcToggle(day, num, pgm) { const k = `${day}|${num}|${pgm}`; KBC.manual[k] = !KBC.manual[k]; if (!KBC.manual[k]) delete KBC.manual[k]; kbcSaveManual(); kbcRender(); }
