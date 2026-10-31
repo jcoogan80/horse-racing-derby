@@ -11,7 +11,11 @@ const HDRS = {
 };
 
 async function getJson(path) {
-  const r = await fetch(`${BASE}${path}${path.includes('?') ? '&' : '?'}affid=2800`, { headers: HDRS });
+  const ctl = new AbortController(); const tm = setTimeout(() => ctl.abort(), 7000);
+  let r;
+  try { r = await fetch(`${BASE}${path}${path.includes('?') ? '&' : '?'}affid=2800`, { headers: HDRS, signal: ctl.signal }); }
+  catch (e) { throw new Error(`${path} -> ${e.name === 'AbortError' ? 'timed out (TwinSpires did not answer the server)' : e.message}`); }
+  finally { clearTimeout(tm); }
   if (!r.ok) throw new Error(`${path} -> HTTP ${r.status}`);
   return r.json();
 }
