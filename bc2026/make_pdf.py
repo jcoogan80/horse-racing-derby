@@ -53,8 +53,15 @@ def race_block(r):
     return f"""<div class="race"><div class="rh"><span class="rn">R{r['num']}</span> <b>{e(r['name'])}</b>
       <span class="rf">{e(r['dist'])} {'turf' if r['turf'] else 'dirt'} · Post {e(r['post'])} ET · {r['field']} run</span></div>{scrl}
       <table class="mini"><tr><th></th><th>Top 5 (model)</th><th class='n'>ML</th><th class='n'>Win</th><th class='n'>Fair</th><th>Tags</th></tr>{trs}</table>
-      <div class="plays">{plays}</div>{notes}{nostr}{hc}
-      <div class="write">Result: ______ ______ ______ &nbsp; Bet: $______ &nbsp; Return: $______</div></div>"""
+      {'<div class="nt">• Race run: plays at post were scored under that time\'s rules (see result).</div>' if r.get('result') else f'<div class="plays">{plays}</div>{notes}{nostr}'}{hc}
+      {res_line(r)}</div>"""
+
+def res_line(r):
+    x = r.get('result')
+    if not x: return '<div class="write">Result: ______ ______ ______ &nbsp; Bet: $______ &nbsp; Return: $______</div>'
+    pays = x.get('pays', {})
+    return (f"<div class='res'><b>Result:</b> {' – '.join(chip(p) for p in x['order'][:4])} &nbsp; exacta ${pays.get('exacta_1', 0):g} ($1) · "
+            f"tri ${pays.get('trifecta_0.50', 0):g} (50¢) &nbsp; <b class='{'pos' if (x.get('net_units') or 0) > 0 else 'neg'}'>{(x.get('net_units') or 0):+g}u</b></div>")
 
 def tix_table(day):
     groups = {}
@@ -65,9 +72,16 @@ def tix_table(day):
     for (bet, rs), v in groups.items():
         def line(t): return ' / '.join(','.join(l['pgms']) for l in t['legs'])
         m, w, a = v.get('main'), v.get('wide') or v.get('tight'), v.get('against')
+        WIN = {r['num']: r['result']['order'][0] for r in races if r.get('result')}
+        def stat(t):
+            done = [l for l in t['legs'] if l['race'] in WIN]
+            if not done: return ''
+            if all(WIN[l['race']] in l['pgms'] for l in done):
+                return " <b class='pos'>HIT</b>" if len(done) == len(t['legs']) else f" <b class='pos'>ALIVE {len(done)}/{len(t['legs'])}</b>"
+            return " <b class='neg'>DEAD</b>"
         out += f"""<tr><td><b>{e(bet)}</b><br><span class='u'>R{rs[0]}–R{rs[-1]}</span></td>
-          <td class='tk'>{e(line(m))}<br><span class='u'>{m['combos']} combos · ${m['combos']*0.5:.2f} @ 50¢ · hit {m['hit']*100:.1f}%</span></td>
-          <td class='tk'>{e(line(w))}<br><span class='u'>{w['combos']} combos · ${w['combos']*0.5:.2f} @ 50¢ · hit {w['hit']*100:.1f}%</span>
+          <td class='tk'>{e(line(m))}{stat(m)}<br><span class='u'>{m['combos']} combos · ${m['combos']*0.5:.2f} @ 50¢ · hit {m['hit']*100:.1f}%</span></td>
+          <td class='tk'>{e(line(w))}{stat(w)}<br><span class='u'>{w['combos']} combos · ${w['combos']*0.5:.2f} @ 50¢ · hit {w['hit']*100:.1f}%</span>
           {f"<br><b>Against:</b> {e(line(a))} <span class='u'>({a['combos']} combos, hit {a['hit']*100:.1f}%)</span>" if a else ''}</td></tr>"""
     return f"<table class='tix'><tr><th>Bet</th><th>Main ticket (saver rules)</th><th>Tight backup</th></tr>{out}</table>"
 
@@ -76,7 +90,7 @@ body = f"""
 <div class="cover">
  <div class="eb">Keeneland · Breeders' Cup · October 30–31, 2026</div>
  <h1>Saturday Betting Sheet</h1>
- <div class="sub">Model: DRF figures + OptixEQ + Racing Dudes (Aaron Halterman, Magic, Jon White) + morning line. Printed Sat 10/31 morning, retuned from Friday's results. Odds are morning line: re-check the board, and skip a win bet if the price drops below fair odds.</div>
+ <div class="sub">Model: DRF figures + OptixEQ + Racing Dudes (Aaron Halterman, Magic, Jon White) + morning line. Updated Sat 10/31 1:25 PM CT after R5: results R1–R5 filled in, ticket status marked, model #1 back on top in non-KEY races, tote scratches applied. Odds are morning line: re-check the board, and skip a win bet if the price drops below fair odds.</div>
  <div class="box"><b>Scratches applied (tote, Sat 8 AM CT):</b> R1 Candor · R3 Jimmy Rules, Lips Say Bliss, Extra Anejo · R4 Praying, Nooni · R7 Eccentric · R10 Splendora · R12 Magnitude · Sat R7 Evershed · Sat R9 Zulu Kingdom · Sat R10 Scottish Lassie · Sat R11 Test Score. Also-eligibles not drawn in are left out.</div>
  <h2>Saturday rules (from Friday's results)</h2>
  <ul class="rules">{rules_html}</ul>
@@ -125,6 +139,7 @@ td { padding: 2.2pt 3pt; border-bottom: .4pt solid #ccc; vertical-align: middle;
 .nt { font-size: 7.1pt; color: #6b4a00; margin-top: 1.5pt; }
 .hc { font-size: 7pt; color: #333; margin-top: 3pt; font-style: italic; }
 .scr { font-size: 7.2pt; color: #a32020; }
+.res { margin-top: 4pt; font-size: 7.6pt; } .pos { color: #1d7a3a; } .neg { color: #a32020; }
 .write { margin-top: 4pt; font-size: 7.2pt; color: #666; }
 .tix td { font-size: 7.8pt; }
 .tix .tk { font-family: 'DejaVu Sans Mono', monospace; font-size: 7.6pt; }
