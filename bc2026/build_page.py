@@ -57,7 +57,7 @@ LESSONS={'fri':['The winner has been in the model top 4 in most races, but the m
  'Track fast and fair. No clear speed or post bias yet.'],
  'sat':['Saturday rules come from Friday\'s full results (see the BC 2026 Friday Takeaways doc).',
  'KEY singles: Friday KEYs won 3 of 4. Saturday singles need 40%: Englishman (R8) and Nitrogen (R10). Ways and Means (36%) is paired.',
- 'Model #1 under 35% went 0 for 6 on top Friday but ran 2nd or 3rd in 4. Those horses go underneath in the exactas and trifectas.',
+ 'Updated after Sat R3: the model #1 under 35% is back on top with the next two. Putting it underneath missed in R1 (ran 3rd), R2 (won) and R3 (ran 2nd).',
  'Europeans took 9 of 9 top-3 spots in Friday\'s BC turf races. Foreign-based runners get a 1.5x boost on turf and fill the 2nd slot; US horses outside the model top 2 are 3rd-slot only.',
  'The top late-pace dirt horse ran 2nd in 4 of 6 Friday dirt races: it goes in the 2nd slot. The lone-speed bonus is off (0 for 3).',
  'Saver tickets made the money (+228 at $1 base). The saver is now the main ticket, with a tight backup. No adjusted or Against tickets (Magic\'s against calls went 0 for 2).',

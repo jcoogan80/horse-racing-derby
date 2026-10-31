@@ -14536,21 +14536,23 @@ function kbcSatPlays(r, live) {
     plays.push({ type: 'Exacta (saver)', sel: [S.map(h => h.pgm), [top.pgm]], units: 0.5, combos: S.length, why: `${nm(top)} 2nd behind the two most likely upsetters` });
     A = [top]; Bt = B.slice(); C = add(B.slice(), live.slice(1, 7).concat(euros.slice(0, 3))).filter(h => h !== top);
   } else {
+    // Sat R1-R3: putting the non-KEY model #1 underneath missed (3rd, 1st, 2nd). It goes back on top.
     let W = live.slice(1, 5).filter(okMid);
     if (r.turf) W = add(euros.filter(h => h !== top).slice(0, 3), W);
-    W = add(W.slice(0, 3), val.slice(0, 1)).filter(h => h !== top).slice(0, 4);
-    plays.push({ type: 'Exacta', sel: [W.map(h => h.pgm), [top.pgm]], units: 1, combos: W.length, why: `Model #1 ${nm(top)} underneath: ` + W.map(nm).join(', ') + ` over ${nm(top)}` });
-    plays.push({ type: 'Exacta (saver)', sel: [[top.pgm], W.map(h => h.pgm)], units: 0.5, combos: W.length, why: `Smaller saver in case ${nm(top)} does win` });
-    A = W.slice(0, 2);
-    Bt = add([top].concat(W.slice(0, 3)), [cl]).slice(0, 5);
+    const T3 = [top].concat(W.filter(h => h !== top).slice(0, 2));
+    const B = add(T3.slice(), [cl].concat(val.slice(0, 1))).slice(0, 5);
+    let ex = 0; T3.forEach(a => B.forEach(b => { if (a !== b) ex++; }));
+    plays.push({ type: 'Exacta part-wheel', sel: [T3.map(h => h.pgm), B.map(h => h.pgm)], units: 0.5, combos: ex,
+      why: 'Model top three over the same' + (cl && B.includes(cl) && !T3.includes(cl) ? ' plus the best closer' : '') + (val.slice(0, 1).some(v => B.includes(v) && !T3.includes(v)) ? ' and VALUE' : '') });
+    A = T3; Bt = B.slice();
     C = add(Bt.slice(), live.filter(h => !Bt.includes(h)).slice(0, 3)).slice(0, 7);
   }
   let tc = 0; A.forEach(a => Bt.forEach(b => C.forEach(c => { if (new Set([a.pgm, b.pgm, c.pgm]).size === 3) tc++; })));
   plays.push({ type: 'Trifecta', sel: [A.map(h => h.pgm), Bt.map(h => h.pgm), C.map(h => h.pgm)], units: tc <= 24 ? 0.5 : 0.2, combos: tc,
-    why: (key ? 'KEY on top' : `${nm(top)} 2nd/3rd only`) + '; VALUE and ' + (r.turf ? 'Europeans' : 'the best closer') + ' underneath' });
+    why: (key ? 'KEY on top' : 'model top three on top') + '; VALUE and ' + (r.turf ? 'Europeans' : 'the best closer') + ' underneath' });
   if (cl && cl !== top) notes.push(`Best closer: ${nm(cl)} (${cl.ml}). On Friday the top late-pace dirt horse ran 2nd in 4 of 6 races; it's in the 2nd slot.`);
   if (r.turf && euros.length) notes.push("Europeans took 9 of 9 top-3 spots in Friday's BC turf races; foreign-based runners get a 1.5x boost here and fill the 2nd slot. US horses outside the model top 2 are 3rd-slot only.");
-  if (!key) notes.push(`No KEY: model #1 ${nm(top)} (${kbcPct(top.p)}) goes underneath. Non-KEY model #1s went 0 for 6 on top Friday but 4 ran 2nd or 3rd.`);
+  if (!key) notes.push(`No KEY: model #1 ${nm(top)} (${kbcPct(top.p)}) is back on top with the next two (the underneath rule missed in Sat R1-R3).`);
   else if (top.p >= 0.40) notes.push(`KEY single for multi-race tickets: ${nm(top)} at ${kbcPct(top.p)} (Friday KEYs won 3 of 4).`);
   else notes.push(`${nm(top)} is a KEY at ${kbcPct(top.p)} but under the 40% single line: paired in multi-race tickets.`);
   const ov = live.slice(0, 6).filter(h => h.tags.includes('OVERLAY'));

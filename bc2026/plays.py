@@ -43,24 +43,24 @@ def sat_plays(r, hs):
         A = [top]; Bt = list(B); C = add(list(B), hs[1:7] + euros[:3])
         C = [h for h in C if h is not top]
     else:
-        # model #1 below 35% went 0 for 6 on top Friday but ran 2nd/3rd in 4: play it underneath
+        # Sat R1-R3: putting the non-KEY model #1 underneath missed (it ran 3rd, 1st, 2nd). It goes back on top.
         W = [h for h in hs[1:5] if ok_mid(h)]
         if r['turf']: W = add([h for h in euros if h is not top][:3], W)
-        W = add(W[:3], val[:1]); W = [h for h in W if h is not top][:4]
-        plays.append({'type': 'Exacta', 'sel': [[h['pgm'] for h in W], [top['pgm']]], 'units': 1, 'combos': len(W),
-                      'why': f"Model #1 {nm(top)} underneath: " + ', '.join(nm(h) for h in W) + f" over {nm(top)}"})
-        plays.append({'type': 'Exacta (saver)', 'sel': [[top['pgm']], [h['pgm'] for h in W]], 'units': 0.5, 'combos': len(W),
-                      'why': f"Smaller saver in case {nm(top)} does win"})
-        A = W[:2]
-        Bt = add([top] + W[:3], [cl])[:5]
+        T3 = [top] + [h for h in W if h is not top][:2]
+        B = add(list(T3), [cl] + val[:1])[:5]
+        ex = sum(1 for a in T3 for b in B if a is not b)
+        plays.append({'type': 'Exacta part-wheel', 'sel': [[h['pgm'] for h in T3], [h['pgm'] for h in B]], 'units': 0.5, 'combos': ex,
+                      'why': 'Model top three over the same' + (' plus the best closer' if cl and cl in B and cl not in T3 else '') + (' and VALUE' if any(v in B and v not in T3 for v in val[:1]) else '')})
+        A = T3
+        Bt = list(B)
         C = add(list(Bt), [h for h in hs if h not in Bt][:3])[:7]
     combos = sum(1 for a in A for b in Bt for c in C if len({a['pgm'], b['pgm'], c['pgm']}) == 3)
     u = 0.5 if combos <= 24 else 0.2
     plays.append({'type': 'Trifecta', 'sel': [[h['pgm'] for h in A], [h['pgm'] for h in Bt], [h['pgm'] for h in C]], 'units': u,
-                  'combos': combos, 'why': ('KEY on top' if key else f"{nm(top)} 2nd/3rd only") + '; VALUE and ' + ('Europeans' if r['turf'] else 'the best closer') + ' underneath'})
+                  'combos': combos, 'why': ('KEY on top' if key else 'model top three on top') + '; VALUE and ' + ('Europeans' if r['turf'] else 'the best closer') + ' underneath'})
     if cl and cl is not top: notes.append(f"Best closer: {nm(cl)} ({cl['ml']}). On Friday the top late-pace dirt horse ran 2nd in 4 of 6 races; it's in the 2nd slot.")
     if r['turf'] and euros: notes.append('Europeans took 9 of 9 top-3 spots in Friday\'s BC turf races; foreign-based runners get a 1.5x boost here and fill the 2nd slot. US horses outside the model top 2 are 3rd-slot only.')
-    if not key: notes.append(f"No KEY: model #1 {nm(top)} ({top['p']*100:.0f}%) goes underneath. Non-KEY model #1s went 0 for 6 on top Friday but 4 ran 2nd or 3rd.")
+    if not key: notes.append(f"No KEY: model #1 {nm(top)} ({top['p']*100:.0f}%) is back on top with the next two (the underneath rule missed in Sat R1-R3).")
     elif top['p'] >= 0.40: notes.append(f"KEY single for multi-race tickets: {nm(top)} at {top['p']*100:.0f}% (Friday KEYs won 3 of 4).")
     else: notes.append(f"{nm(top)} is a KEY at {top['p']*100:.0f}% but under the 40% single line: paired in multi-race tickets.")
     if not any(p['type'] == 'Win' for p in plays): notes.append('No straight bet (Saturday rule: win bets only on an overlaid KEY). Use exotics and multi-race savers.')
