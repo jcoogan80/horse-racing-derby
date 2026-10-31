@@ -1373,6 +1373,8 @@
     .kbc-copy { border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 6px; font-size: .66rem; padding: 4px 8px; cursor: pointer; }
     .kbc-ovl { font-size: .68rem; padding: 2px 6px; border-radius: 4px; background: var(--input-bg); color: var(--dim); }
     .kbc-ovl.hot { color: var(--green); }
+    .kbc-mtp { display: inline-block; font-size: .62rem; font-weight: 800; color: #1a1a2e; background: var(--yellow); border-radius: 4px; padding: 1px 5px; margin-left: 4px; }
+    .kbc-tag.OVERLAY { background: rgba(46,204,113,.3); color: var(--green); }
     @media (max-width: 560px) { .kbc-hide { display: none; } .kbc-play { grid-template-columns: 1fr; } .kbc-play .w { grid-column: 1; } }
 
 /*</kbc-css>*/
@@ -14364,7 +14366,7 @@ setTimeout(renderYesterdayReview, 1800);
 //  plus any scratches tapped in on this device, then re-prices each race
 //  and rebuilds plays + multi-race tickets with the Smart Scanner rules.
 // =============================================================
-const KBC = { data: null, kee: null, watcher: null, day: 'fri', view: 'races', race: null, tf: 'big', base: 0.5, manual: {}, loading: false };
+const KBC = { data: null, kee: null, watcher: null, day: 'fri', view: 'races', race: null, tf: 'big', base: 0.5, manual: {}, loading: false, live: null, liveErr: null, livePolls: 0 };
 const KBC_SC = {1:['#d0202e','#fff'],2:['#ffffff','#111'],3:['#1f4fbf','#fff'],4:['#f6d32d','#111'],5:['#1e7b3a','#fff'],6:['#111','#f6d32d'],
   7:['#f28c1b','#111'],8:['#f6a1c0','#111'],9:['#2bc3c8','#111'],10:['#6c2c91','#fff'],11:['#9aa0a6','#b4141d'],12:['#a6d84a','#111'],
   13:['#6b4423','#fff'],14:['#7b1e2b','#f6d32d'],15:['#c3b091','#111'],16:['#7fb8e6','#b4141d'],17:['#1c2b5a','#fff'],18:['#2f6b3a','#f6d32d']};
@@ -14392,13 +14394,46 @@ async function kbcInit() {
     KBC.loading = false; return;
   }
   try { const r = await fetch('dashboard_data.json?t=' + Date.now()); const d = await r.json(); KBC.kee = (d.sequences || {}).KEE || null; } catch (e) {}
-  await kbcLoadWatcher();
+  await kbcLoadWatcher(); await kbcLivePoll(true);
   // default day: Saturday once Friday's card is over (local date)
   const today = new Date().toISOString().slice(0, 10);
   if (today >= KBC.data.meta.dates.sat) KBC.day = 'sat';
   KBC.loading = false;
   kbcRender();
   setInterval(async () => { if (document.getElementById('tab-keebc').classList.contains('active')) { await kbcLoadWatcher(); kbcRender(); } }, 120000);
+  setInterval(async () => { if (document.getElementById('tab-keebc').classList.contains('active')) { await kbcLivePoll(false); kbcRender(); } }, 60000);
+}
+
+// ── Live tote odds (Netlify function kee-live → TwinSpires program API) ──
+// Polls every 60 s while the tab is open; full card (scratches) every 5th poll, otherwise only races within 20 MTP.
+function kbcOddsDec(s) {
+  if (s == null) return null; s = String(s).trim().toLowerCase();
+  if (!s || s === 'scr' || s === '-') return null;
+  if (s === 'even' || s === 'evn' || s === 'e') return 1;
+  const m = s.match(/^(\d+(?:\.\d+)?)\s*[\/\-]\s*(\d+(?:\.\d+)?)$/); if (m) return +m[2] ? +m[1] / +m[2] : null;
+  return isFinite(+s) ? +s : null;
+}
+async function kbcLivePoll(force) {
+  const today = new Date().toLocaleDateString('en-CA', { timeZone: 'America/New_York' });
+  if (!KBC.data || !Object.values(KBC.data.meta.dates).includes(today)) return;   // only on race days
+  const full = force || !KBC.live || KBC.livePolls % 5 === 0;
+  KBC.livePolls++;
+  try {
+    const r = await fetch('/.netlify/functions/kee-live' + (full ? '?full=1' : '') + (full ? '&' : '?') + 't=' + Date.now());
+    const d = await r.json();
+    if (d.error) throw new Error(d.error);
+    const prev = KBC.live || { entries: {} };
+    d.entries = Object.assign({}, full ? {} : prev.entries, d.entries);
+    KBC.live = d; KBC.liveErr = null;
+  } catch (e) { KBC.liveErr = e.message; }
+}
+function kbcLiveRace(day, num) {
+  const L = KBC.live; if (!L) return null;
+  const rr = (L.races || []).find(x => x.num === num && x.date === KBC.data.meta.dates[day]);
+  if (!rr) return null;
+  const es = L.entries[num]; const by = {};
+  if (Array.isArray(es)) es.forEach(e => { by[e.pgm] = e; });
+  return { ...rr, by };
 }
 
 async function kbcLoadWatcher() {
@@ -14412,6 +14447,8 @@ function kbcScratched(day, num) {
   if (w && w.track === 'KEE' && w.date === date) {
     (w.scratches || []).forEach(s => { if (+s.race === num && /scratch/i.test(s.change_type || '')) out.add(String(s.pgm).replace(/^0+/, '')); });
   }
+  const lr = kbcLiveRace(day, num);
+  if (lr) Object.values(lr.by).forEach(e => { if (e.scr) out.add(e.pgm); });
   Object.keys(KBC.manual).forEach(k => { const [d, n, p] = k.split('|'); if (d === day && +n === num && KBC.manual[k]) out.add(p); });
   return out;
 }
@@ -14421,17 +14458,20 @@ function kbcPrice(r) {
   const scr = kbcScratched(r.day, r.num);
   const live = r.horses.filter(h => h.status === 'run' && !scr.has(h.pgm)).map(h => ({ ...h, ml_dec: kbcMlDec(h.ml) }));
   const sp = live.reduce((a, h) => a + h.p, 0) || 1, sm = live.reduce((a, h) => a + h.p_ml, 0) || 1;
+  const lr = kbcLiveRace(r.day, r.num);
   live.forEach(h => {
+    const le = lr && lr.by[h.pgm]; h.live = le ? le.live : null; h.live_dec = kbcOddsDec(h.live); h.live_fav = le ? le.fav : false;
     h.p = h.p / sp; h.p_ml = h.p_ml / sm; h.edge = h.p / h.p_ml - 1; h.fair = 1 / h.p - 1;
     const keep = (h.tags || []).filter(t => ['BOMB', 'AGAINST', 'OPTIX'].includes(t));
     const t = [];
     if (h.p >= 0.35) t.push('KEY');
     if (h.edge >= 0.25 && h.ml_dec >= 4) t.push('VALUE');
     if (h.ml_dec <= 2.5 && h.edge <= -0.15) t.push('FADE');
+    if (h.live_dec != null && h.live_dec >= 1.33 * h.fair) t.push('OVERLAY');
     h.tags = t.concat(keep);
   });
   live.sort((a, b) => b.p - a.p);
-  return { live, scr };
+  return { live, scr, lr };
 }
 
 // ── Plays (port of bc2026/plays.py) ──
@@ -14480,14 +14520,14 @@ function kbcCloser(r, live) {
 }
 function kbcSatPlays(r, live) {
   const plays = [], notes = [];
-  const top = live[0], key = top.p >= 0.35, over = h => h.ml_dec >= 1.33 * h.fair;
+  const top = live[0], key = top.p >= 0.35, over = h => (h.live_dec != null ? h.live_dec : h.ml_dec) >= 1.33 * h.fair;
   const cl = kbcCloser(r, live);
   const euros = live.filter(h => h.foreign_based && h.p >= 0.04);
   const val = live.slice(1, 8).filter(h => h.tags.includes('VALUE') && h.p >= 0.05);
   const add = (lst, extra) => { extra.forEach(h => { if (h && !lst.includes(h)) lst.push(h); }); return lst; };
   const okMid = h => !r.turf || h.foreign_based || live.indexOf(h) < 2;
   const nm = kbcName;
-  if (key && over(top)) plays.push({ type: 'Win', sel: [top.pgm], units: 1, combos: 1, why: `${nm(top)}: KEY at ${kbcPct(top.p)}, fair ${kbcOdds(top.fair)} vs ML ${top.ml} (only if odds hold)` });
+  if (key && over(top)) plays.push({ type: 'Win', sel: [top.pgm], units: 1, combos: 1, why: `${nm(top)}: KEY at ${kbcPct(top.p)}, fair ${kbcOdds(top.fair)} vs ${top.live ? 'live ' + top.live : 'ML ' + top.ml} (only if odds hold)` });
   let A, Bt, C;
   if (key) {
     let B = live.slice(1, 5).filter(okMid);
@@ -14514,6 +14554,8 @@ function kbcSatPlays(r, live) {
   if (!key) notes.push(`No KEY: model #1 ${nm(top)} (${kbcPct(top.p)}) goes underneath. Non-KEY model #1s went 0 for 6 on top Friday but 4 ran 2nd or 3rd.`);
   else if (top.p >= 0.40) notes.push(`KEY single for multi-race tickets: ${nm(top)} at ${kbcPct(top.p)} (Friday KEYs won 3 of 4).`);
   else notes.push(`${nm(top)} is a KEY at ${kbcPct(top.p)} but under the 40% single line: paired in multi-race tickets.`);
+  const ov = live.slice(0, 6).filter(h => h.tags.includes('OVERLAY'));
+  if (ov.length) notes.push('Live overlays (board ≥ 1.33× fair): ' + ov.map(h => `${nm(h)} ${h.live} (fair ${kbcOdds(h.fair)})`).join(', ') + '. Use them more in the exotics; a win bet only if it is the KEY.');
   if (!plays.some(p => p.type === 'Win')) notes.push('No straight bet (Saturday rule: win bets only on an overlaid KEY). Use exotics and multi-race savers.');
   const nfts = live.filter(h => /imputed/.test(h.fig_note || '')).length;
   if (nfts) notes.push(`${nfts} runner(s) without speed figures are priced off the morning line; watch the board and paddock.`);
@@ -14603,9 +14645,17 @@ function kbcRender() {
   if (w && w.track === 'KEE' && w.date === date) ws = `<span class="ok">Live scratches on</span> · watcher file ${kbcEsc(w.date)} updated ${kbcEsc(w.generated_at || '')} · ${(w.scratches || []).filter(s => /scratch/i.test(s.change_type || '')).length} scratches`;
   else ws = `<span class="warn">Watcher not running for KEE ${date}</span>${w ? ` (scratches.json is ${kbcEsc(w.track)} ${kbcEsc(w.date)})` : ''}. Tap “Scr” on a horse to scratch it by hand.`;
   const nman = Object.keys(KBC.manual).filter(k => KBC.manual[k] && k.startsWith(KBC.day + '|')).length;
-  document.getElementById('kbc-status').innerHTML = `${ws}${nman ? ` · <b>${nman}</b> tapped in on this device <button class="kbc-x" onclick="kbcClearManual()">Clear</button>` : ''}<br>Model built ${kbcEsc(D.meta.generated_at)} · ${kbcEsc(D.meta.model)}. Odds are morning line; check the board.`;
+  document.getElementById('kbc-status').innerHTML = `${ws}${nman ? ` · <b>${nman}</b> tapped in on this device <button class="kbc-x" onclick="kbcClearManual()">Clear</button>` : ''}<br>Model built ${kbcEsc(D.meta.generated_at)} · ${kbcEsc(D.meta.model)}. ${kbcLiveStatus()}`;
   const body = document.getElementById('kbc-body');
   body.innerHTML = KBC.view === 'races' ? kbcRacesHtml() : kbcTixHtml();
+}
+function kbcLiveStatus() {
+  const L = KBC.live;
+  if (KBC.liveErr) return `<br><span class="warn">Live odds unavailable (${kbcEsc(KBC.liveErr)})</span>. Odds shown are morning line.`;
+  if (!L) return '<br>Live odds start on race day. Odds shown are morning line.';
+  const t = new Date(L.fetched_at).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit', second: '2-digit' });
+  const nx = (L.races || []).filter(x => x.date === KBC.data.meta.dates[KBC.day] && x.mtp != null && !/official|closed|final/i.test(x.status || '')).sort((a, b) => a.num - b.num)[0];
+  return `<br><span class="ok">Live odds on</span> (TwinSpires, updated ${t}, every 60 s)${nx ? ` · next: <b>R${nx.num}</b> ${nx.mtp <= 60 ? nx.mtp + ' MTP' : 'post ' + new Date(nx.post).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })}` : ''}. Scratches from the tote are applied automatically.`;
 }
 function kbcClearManual() { Object.keys(KBC.manual).forEach(k => { if (k.startsWith(KBC.day + '|')) delete KBC.manual[k]; }); kbcSaveManual(); kbcRender(); }
 function kbcToggle(day, num, pgm) { const k = `${day}|${num}|${pgm}`; KBC.manual[k] = !KBC.manual[k]; if (!KBC.manual[k]) delete KBC.manual[k]; kbcSaveManual(); kbcRender(); }
@@ -14614,9 +14664,10 @@ function kbcRacesHtml() {
   const rs = KBC.data.races.filter(r => r.day === KBC.day);
   if (KBC.race == null) KBC.race = rs.find(r => r.covered) ? rs.find(r => r.covered).num : rs[0].num;
   const chips = rs.map(r => { const { live } = kbcPrice(r); const t = live[0];
-    return `<button class="${r.num === KBC.race ? 'on' : ''}" onclick="KBC.race=${r.num};kbcRender()">R${r.num} ${kbcEsc(r.short)}<small>${t ? kbcEsc(kbcName(t)) + ' ' + kbcPct(t.p) : ''}</small></button>`; }).join('');
+    const lrc = kbcLiveRace(r.day, r.num); const mtpTxt = lrc && lrc.mtp != null && lrc.mtp <= 30 && !/official|closed|final/i.test(lrc.status || '') ? ` <span class="kbc-mtp">${lrc.mtp} MTP</span>` : (lrc && /official|final/i.test(lrc.status || '') ? ' <span class="kbc-jt">done</span>' : '');
+    return `<button class="${r.num === KBC.race ? 'on' : ''}" onclick="KBC.race=${r.num};kbcRender()">R${r.num} ${kbcEsc(r.short)}${mtpTxt}<small>${t ? kbcEsc(kbcName(t)) + ' ' + kbcPct(t.p) : ''}</small></button>`; }).join('');
   const r = rs.find(x => x.num === KBC.race);
-  const { live, scr } = kbcPrice(r);
+  const { live, scr, lr } = kbcPrice(r);
   const P = kbcPlays(r, live);
   const mx = Math.max(...live.map(h => h.p), 0.01);
   let rows = '';
@@ -14624,7 +14675,8 @@ function kbcRacesHtml() {
     const figs = (h.figs || []).map(Math.round).join('·');
     const vel = h.opt_vel == null ? '—' : `<span class="${h.opt_vel >= 0.5 ? 'kbc-pos' : (h.opt_vel <= -0.5 ? 'kbc-neg' : '')}">${h.opt_vel > 0 ? '+' : ''}${h.opt_vel.toFixed(1)}</span>`;
     rows += `<tr><td>${kbcChip(h.pgm)}</td><td><div class="kbc-hn">${kbcEsc(h.name)}</div><div class="kbc-jt">${kbcEsc(h.jockey || '')} · ${kbcEsc(h.trainer || '')}</div></td>
-      <td class="n"><b>${kbcEsc(h.ml)}</b></td>
+      <td class="n">${kbcEsc(h.ml)}</td>
+      <td class="n"><b class="${h.live_dec == null ? '' : (h.live_dec >= 1.33 * h.fair ? 'kbc-pos' : (h.live_dec < 0.75 * h.fair ? 'kbc-neg' : ''))}">${h.live ? kbcEsc(h.live) : '—'}</b>${h.live_fav ? '<span class="kbc-jt"> fav</span>' : ''}</td>
       <td><div class="kbc-bar2"><i><b style="width:${(h.p / mx * 100).toFixed(0)}%"></b></i>${kbcPct(h.p)}</div></td>
       <td class="n">${kbcOdds(h.fair)}</td>
       <td class="n ${h.edge >= 0 ? 'kbc-pos' : 'kbc-neg'}">${h.edge >= 0 ? '+' : ''}${Math.round(h.edge * 100)}%</td>
@@ -14634,17 +14686,17 @@ function kbcRacesHtml() {
   });
   r.horses.filter(h => h.status !== 'run' || scr.has(h.pgm)).forEach(h => {
     const manual = KBC.manual[`${r.day}|${r.num}|${h.pgm}`];
-    rows += `<tr class="scr"><td>${kbcChip(h.pgm)}</td><td><div class="kbc-hn">${kbcEsc(h.name)}</div></td><td class="n">${kbcEsc(h.ml)}</td><td colspan="6">${h.status !== 'run' ? kbcEsc(h.status) : (manual ? 'Scratched (tapped)' : 'Scratched (watcher)')}</td>
+    rows += `<tr class="scr"><td>${kbcChip(h.pgm)}</td><td><div class="kbc-hn">${kbcEsc(h.name)}</div></td><td class="n">${kbcEsc(h.ml)}</td><td colspan="7">${h.status !== 'run' ? kbcEsc(h.status) : (manual ? 'Scratched (tapped)' : (lr && lr.by[h.pgm] && lr.by[h.pgm].scr ? 'Scratched (tote)' : 'Scratched (watcher)'))}</td>
       <td>${manual ? `<button class="kbc-x on" onclick="kbcToggle('${r.day}',${r.num},'${h.pgm}')">Undo</button>` : ''}</td></tr>`;
   });
   const sel = p => p.type.startsWith('Win') ? kbcChip(p.sel[0]) : (p.type === 'Exacta box' ? p.sel.map(kbcChip).join('') + ' <span class="kbc-jt">box</span>' : p.sel.map(l => l.map(kbcChip).join('')).join(' / '));
   const plays = P.plays.map(p => `<div class="kbc-play"><span class="t">${kbcEsc(p.type)}</span><span class="s">${sel(p)} <span class="kbc-jt">${p.units}u × ${p.combos}</span></span><span class="w">${kbcEsc(p.why)}</span></div>`).join('');
   return `<div class="kbc-chips">${chips}</div>
   <div class="kbc-card">
-    <div class="kbc-rh"><h3>R${r.num} · ${kbcEsc(r.name)}</h3><div class="kbc-facts"><span>${kbcEsc(r.dist)} ${r.turf ? 'turf' : 'dirt'}</span><span>Post ${kbcEsc(r.post)} ET</span><span>Par ${r.par ?? '—'}</span><span>Pace: ${kbcEsc(r.pace)}</span><span>${live.length} running</span></div></div>
+    <div class="kbc-rh"><h3>R${r.num} · ${kbcEsc(r.name)}</h3><div class="kbc-facts"><span>${kbcEsc(r.dist)} ${r.turf ? 'turf' : 'dirt'}</span><span>Post ${kbcEsc(r.post)} ET</span><span>Par ${r.par ?? '—'}</span><span>Pace: ${kbcEsc(r.pace)}</span><span>${live.length} running</span>${lr && lr.mtp != null && !/official|final/i.test(lr.status || '') ? `<span class="kbc-mtp">${lr.mtp} MTP</span>` : ''}</div></div>
     <div class="kbc-note">${kbcEsc(r.note)}</div>
     <div class="kbc-plays"><div class="kbc-h4">Plays · ${P.units} units</div>${plays}${P.notes.map(n => `<div class="kbc-pn">${kbcEsc(n)}</div>`).join('')}</div>
-    <div class="kbc-scroll"><table class="kbc-t"><thead><tr><th>#</th><th>Horse</th><th class="n">ML</th><th>Win %</th><th class="n">Fair</th><th class="n">Edge</th><th class="n kbc-hide">Last 3 figs</th><th class="n kbc-hide">Optix</th><th>Tags</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
+    <div class="kbc-scroll"><table class="kbc-t"><thead><tr><th>#</th><th>Horse</th><th class="n">ML</th><th class="n">Live</th><th>Win %</th><th class="n">Fair</th><th class="n">Edge</th><th class="n kbc-hide">Last 3 figs</th><th class="n kbc-hide">Optix</th><th>Tags</th><th></th></tr></thead><tbody>${rows}</tbody></table></div>
   </div>`;
 }
 

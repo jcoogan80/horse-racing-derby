@@ -63,4 +63,6 @@
     .kbc-copy { border: 1px solid var(--border); background: var(--card); color: var(--text); border-radius: 6px; font-size: .66rem; padding: 4px 8px; cursor: pointer; }
     .kbc-ovl { font-size: .68rem; padding: 2px 6px; border-radius: 4px; background: var(--input-bg); color: var(--dim); }
     .kbc-ovl.hot { color: var(--green); }
+    .kbc-mtp { display: inline-block; font-size: .62rem; font-weight: 800; color: #1a1a2e; background: var(--yellow); border-radius: 4px; padding: 1px 5px; margin-left: 4px; }
+    .kbc-tag.OVERLAY { background: rgba(46,204,113,.3); color: var(--green); }
     @media (max-width: 560px) { .kbc-hide { display: none; } .kbc-play { grid-template-columns: 1fr; } .kbc-play .w { grid-column: 1; } }
