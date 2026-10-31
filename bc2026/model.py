@@ -18,15 +18,19 @@ OUT = {
     ('fri', 8): {'2', '16', '17'},                            # Go for Launch out (not in Optix program) -> Silent Beauty (15) in; 16-17 AEs
     ('fri', 9): {'2', '4'},                                   # Gaudreau, Earth Song scr                                        # Gaudreau scr
     ('fri', 10): {'1'},                                       # Induction scr -> Popcorn (15) in
+    ('sat', 1): {'1'},                                        # Sat-morning tote scratches (TwinSpires): Candor
+    ('sat', 3): {'3', '4', '5'},                              # Jimmy Rules, Lips Say Bliss, Extra Anejo
+    ('sat', 4): {'3', '13'},                                  # Praying, Nooni
+    ('sat', 12): {'6'},                                       # Magnitude
     ('sat', 5): {'15', '16', '17', '18'},                     # AEs
-    ('sat', 7): {'2'},                                        # Evershed scr -> Vina Arana (15) in
+    ('sat', 7): {'2', '9'},                                   # Evershed scr -> Vina Arana (15) in
     ('sat', 9): {'6', '15'},                                  # Zulu Kingdom scr; Vina Arana runs F&M Turf
-    ('sat', 10): {'5'},                                       # Scottish Lassie scr
+    ('sat', 10): {'5', '8'},                                  # Scottish Lassie scr
     ('sat', 11): {'8', '16'},                                 # Test Score scr -> Map of Stars (15) in; Telescopic AE
 }
 SCR_NOTE = {('fri', 9, '4'): 'Scratched', ('fri', 8, '2'): 'Scratched (missing from Optix program)', ('fri', 9, '2'): 'Scratched', ('fri', 10, '1'): 'Scratched', ('sat', 7, '2'): 'Scratched',
             ('sat', 9, '6'): 'Scratched', ('sat', 10, '5'): 'Scratched', ('sat', 11, '8'): 'Scratched',
-            ('sat', 9, '15'): 'Running in F&M Turf'}
+            ('sat', 9, '15'): 'Running in F&M Turf', ('sat', 1, '1'): 'Scratched', ('sat', 3, '3'): 'Scratched', ('sat', 3, '4'): 'Scratched', ('sat', 3, '5'): 'Scratched', ('sat', 4, '3'): 'Scratched', ('sat', 4, '13'): 'Scratched', ('sat', 7, '9'): 'Scratched', ('sat', 10, '8'): 'Scratched', ('sat', 12, '6'): 'Scratched'}
 
 # --- handicapper opinions: race -> {source: {pgm: role}} ; roles: top, 2,3,4, use, single, bomb, against
 CONS = {
