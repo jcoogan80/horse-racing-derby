@@ -7,6 +7,7 @@ def _norm(n): return re.sub(r'\s*\([A-Z]{2,3}\)\s*$', '', n.upper()).replace("'"
 OPTIX = {(d, int(rn)): {_norm(h['name']): h for h in hs} for d, x in _OPT.items() for rn, hs in x.items()}
 
 TF_OFFSET = 12          # Timeform rating -> Beyer-equivalent
+EURO_TURF_BOOST = 1.5   # Saturday turf: multiply foreign-based runners' win% before renormalizing
 T_SOFT = 4.5            # softmax temperature (points)
 W_FIG, W_CONS, W_ML = 0.45, 0.25, 0.30
 
@@ -185,7 +186,7 @@ def run(day, races):
             adj, why = 0.0, []
             e, l = x['tfus_early'], x['tfus_late']
             if e and early:
-                if lone and e == early[0]:
+                if lone and e == early[0] and day == 'fri':   # Saturday: no lone-speed bonus (0 for 3 on Friday)
                     adj += 2.5; why.append('lone speed')
                 if hot >= 3 and e >= thr:
                     adj -= 1.5; why.append('speed duel risk')
@@ -265,6 +266,10 @@ def run(day, races):
             for x in no: x['p_opt'] = x['p_ml'] / mlsh * share if mlsh else x['p_opt']
         for x in run_h:
             x['p'] = wf * x['p_fig'] + wc * (x['p_cons'] or 0) + wm * x['p_ml'] + (wo * x['p_opt'] if x['p_opt'] is not None else 0)
+        if day == 'sat' and turf:   # Friday: Europeans took 9 of 9 top-3 spots in the BC turf races
+            for x in run_h:
+                if x.get('foreign_based'):
+                    x['p'] *= EURO_TURF_BOOST; x['adj_why'] = x['adj_why'] + ['European on turf (x%.1f)' % EURO_TURF_BOOST]
         s3 = sum(x['p'] for x in run_h)
         for x in run_h:
             x['p'] /= s3

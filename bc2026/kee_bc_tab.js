@@ -79,6 +79,7 @@ function kbcPrice(r) {
 function kbcPlays(r, live) {
   const plays = [], notes = [];
   if (!live.length) return { plays, notes, units: 0 };
+  if (r.day === 'sat') return kbcSatPlays(r, live);
   const top = live[0], key = top.p >= 0.35;
   const fav = live.reduce((a, h) => (h.ml_dec < a.ml_dec ? h : a), live[0]);
   const nfts = live.filter(h => /imputed/.test(h.fig_note || '')).length;
@@ -112,6 +113,71 @@ function kbcPlays(r, live) {
   return { plays, notes, units: +plays.reduce((a, p) => a + p.units * p.combos, 0).toFixed(2) };
 }
 
+// ── Saturday rules (from Friday's results; port of plays.py sat_plays / tickets.py leg_sat_*) ──
+function kbcCloser(r, live) {
+  if (r.turf) return null;
+  const c = live.filter(h => h.tfus_late && h.p >= 0.03);
+  return c.length ? c.reduce((a, h) => (h.tfus_late > a.tfus_late ? h : a), c[0]) : null;
+}
+function kbcSatPlays(r, live) {
+  const plays = [], notes = [];
+  const top = live[0], key = top.p >= 0.35, over = h => h.ml_dec >= 1.33 * h.fair;
+  const cl = kbcCloser(r, live);
+  const euros = live.filter(h => h.foreign_based && h.p >= 0.04);
+  const val = live.slice(1, 8).filter(h => h.tags.includes('VALUE') && h.p >= 0.05);
+  const add = (lst, extra) => { extra.forEach(h => { if (h && !lst.includes(h)) lst.push(h); }); return lst; };
+  const okMid = h => !r.turf || h.foreign_based || live.indexOf(h) < 2;
+  const nm = kbcName;
+  if (key && over(top)) plays.push({ type: 'Win', sel: [top.pgm], units: 1, combos: 1, why: `${nm(top)}: KEY at ${kbcPct(top.p)}, fair ${kbcOdds(top.fair)} vs ML ${top.ml} (only if odds hold)` });
+  let A, Bt, C;
+  if (key) {
+    let B = live.slice(1, 5).filter(okMid);
+    B = add(B, [cl].concat(val.slice(0, 1), r.turf ? euros.slice(0, 2) : [])).filter(h => h !== top);
+    plays.push({ type: 'Exacta', sel: [[top.pgm], B.map(h => h.pgm)], units: 1, combos: B.length, why: `Key ${nm(top)} over ` + B.map(nm).join(', ') });
+    const S = live.slice(1, 3);
+    plays.push({ type: 'Exacta (saver)', sel: [S.map(h => h.pgm), [top.pgm]], units: 0.5, combos: S.length, why: `${nm(top)} 2nd behind the two most likely upsetters` });
+    A = [top]; Bt = B.slice(); C = add(B.slice(), live.slice(1, 7).concat(euros.slice(0, 3))).filter(h => h !== top);
+  } else {
+    let W = live.slice(1, 5).filter(okMid);
+    if (r.turf) W = add(euros.filter(h => h !== top).slice(0, 3), W);
+    W = add(W.slice(0, 3), val.slice(0, 1)).filter(h => h !== top).slice(0, 4);
+    plays.push({ type: 'Exacta', sel: [W.map(h => h.pgm), [top.pgm]], units: 1, combos: W.length, why: `Model #1 ${nm(top)} underneath: ` + W.map(nm).join(', ') + ` over ${nm(top)}` });
+    plays.push({ type: 'Exacta (saver)', sel: [[top.pgm], W.map(h => h.pgm)], units: 0.5, combos: W.length, why: `Smaller saver in case ${nm(top)} does win` });
+    A = W.slice(0, 2);
+    Bt = add([top].concat(W.slice(0, 3)), [cl]).slice(0, 5);
+    C = add(Bt.slice(), live.filter(h => !Bt.includes(h)).slice(0, 3)).slice(0, 7);
+  }
+  let tc = 0; A.forEach(a => Bt.forEach(b => C.forEach(c => { if (new Set([a.pgm, b.pgm, c.pgm]).size === 3) tc++; })));
+  plays.push({ type: 'Trifecta', sel: [A.map(h => h.pgm), Bt.map(h => h.pgm), C.map(h => h.pgm)], units: tc <= 24 ? 0.5 : 0.2, combos: tc,
+    why: (key ? 'KEY on top' : `${nm(top)} 2nd/3rd only`) + '; VALUE and ' + (r.turf ? 'Europeans' : 'the best closer') + ' underneath' });
+  if (cl && cl !== top) notes.push(`Best closer: ${nm(cl)} (${cl.ml}). On Friday the top late-pace dirt horse ran 2nd in 4 of 6 races; it's in the 2nd slot.`);
+  if (r.turf && euros.length) notes.push("Europeans took 9 of 9 top-3 spots in Friday's BC turf races; foreign-based runners get a 1.5x boost here and fill the 2nd slot. US horses outside the model top 2 are 3rd-slot only.");
+  if (!key) notes.push(`No KEY: model #1 ${nm(top)} (${kbcPct(top.p)}) goes underneath. Non-KEY model #1s went 0 for 6 on top Friday but 4 ran 2nd or 3rd.`);
+  else if (top.p >= 0.40) notes.push(`KEY single for multi-race tickets: ${nm(top)} at ${kbcPct(top.p)} (Friday KEYs won 3 of 4).`);
+  else notes.push(`${nm(top)} is a KEY at ${kbcPct(top.p)} but under the 40% single line: paired in multi-race tickets.`);
+  if (!plays.some(p => p.type === 'Win')) notes.push('No straight bet (Saturday rule: win bets only on an overlaid KEY). Use exotics and multi-race savers.');
+  const nfts = live.filter(h => /imputed/.test(h.fig_note || '')).length;
+  if (nfts) notes.push(`${nfts} runner(s) without speed figures are priced off the morning line; watch the board and paddock.`);
+  return { plays, notes, units: +plays.reduce((a, p) => a + p.units * p.combos, 0).toFixed(2) };
+}
+function kbcLegSatTight(live) {
+  if (live[0].p < 0.40 && live[0].p >= 0.35) {
+    let pick = live.slice(0, 2), why = `pair (KEY under 40%: ${kbcPct(live[0].p)})`;
+    const v = live.slice(2).find(h => h.tags.includes('VALUE') && h.p >= 0.08); if (v) { pick = pick.concat([v]); why += ' + value add'; }
+    return { pick, why };
+  }
+  return kbcLegMain(live);
+}
+function kbcLegSatMain(r, live) {
+  if (live[0].p >= 0.40) return { pick: live.slice(0, 1), why: `single (model ${kbcPct(live[0].p)})` };
+  const base = kbcLegSatTight(live); let why = base.why; const pick = base.pick.slice();
+  const extra = live.filter(h => !pick.includes(h));
+  if (extra[0]) pick.push(extra[0]);
+  if (r.turf) { const e = live.slice(0, 8).find(h => h.foreign_based && !pick.includes(h)); if (e) { pick.push(e); why += ' + Euro'; } }
+  extra.forEach(h => { if (!pick.includes(h) && (h.cons || []).some(c => c[1] === 'bomb')) pick.push(h); });
+  return { pick: pick.slice(0, 6), why: why.split(' (')[0].replace('single', 'pair') + ' + saver' };
+}
+
 // ── Tickets (port of bc2026/tickets.py) ──
 function kbcLegMain(live) {
   const p = live.map(h => h.p); let n, why;
@@ -137,15 +203,17 @@ function kbcLegAgainst(live) {
 function kbcTickets(day) {
   const seqs = []; const seen = new Set();
   KBC.data.tickets.filter(t => t.day === day).forEach(t => { const k = t.bet + '|' + t.races.join('-'); if (!seen.has(k)) { seen.add(k); seqs.push({ bet: t.bet, races: t.races }); } });
-  const byNum = {}; KBC.data.races.filter(r => r.day === day).forEach(r => { byNum[r.num] = kbcPrice(r).live; });
+  const byNum = {}, raceBy = {}; KBC.data.races.filter(r => r.day === day).forEach(r => { byNum[r.num] = kbcPrice(r).live; raceBy[r.num] = r; });
   return seqs.map(s => {
-    const kinds = ['main', 'wide'];
-    if (s.races.length >= 4 && s.races.some(n => kbcLegAgainst(byNum[n]).pressed)) kinds.push('against');
+    const kinds = day === 'sat' ? ['main', 'tight'] : ['main', 'wide'];
+    if (day !== 'sat' && s.races.length >= 4 && s.races.some(n => kbcLegAgainst(byNum[n]).pressed)) kinds.push('against');
     const vars = kinds.map(kind => {
       let combos = 1, hit = 1, hitMl = 1; const legs = [];
       s.races.forEach(n => {
         const live = byNum[n]; let pick, why;
-        if (kind === 'main') ({ pick, why } = kbcLegMain(live));
+        if (kind === 'main' && day === 'sat') ({ pick, why } = kbcLegSatMain(raceBy[n], live));
+        else if (kind === 'tight') ({ pick, why } = kbcLegSatTight(live));
+        else if (kind === 'main') ({ pick, why } = kbcLegMain(live));
         else if (kind === 'against') ({ pick, why } = kbcLegAgainst(live));
         else { pick = kbcLegWide(live, kbcLegMain(live).pick); why = 'saver'; }
         const c = pick.reduce((a, h) => a + h.p, 0), cm = pick.reduce((a, h) => a + h.p_ml, 0);
@@ -227,7 +295,7 @@ function kbcTixHtml() {
   const names = {}; KBC.data.races.filter(r => r.day === KBC.day).forEach(r => { names[r.num] = r.short; });
   let html = `<div class="kbc-bar">${seg([['big', 'Pick 4–6'], ['p3', 'Pick 3s'], ['all', 'All']], KBC.tf, 'kbcSetTf')}${seg([['0.2', '$0.20'], ['0.5', '$0.50'], ['1', '$1'], ['2', '$2']], String(KBC.base), 'kbcSetBase')}</div>
     <div class="kbc-jt">Hit % = model chance the ticket wins. "If ML right" = same ticket priced by the morning line. KEE history = this sequence's past payout vs. parlay at the regular meet (BC pools are bigger, so treat it as directional).</div>`;
-  const KN = { main: 'Main', wide: 'Saver', against: 'Against the chalk' };
+  const KN = { main: KBC.day === 'sat' ? 'Main (saver rules)' : 'Main', wide: 'Saver', tight: 'Tight backup', against: 'Against the chalk' };
   T.forEach(s => {
     const ov = kbcOverlay(s.races);
     html += `<div class="kbc-slip"><div class="kbc-rh"><h3>${kbcEsc(s.bet)} · R${s.races.join(', R')}</h3>${ov ? `<span class="kbc-ovl ${ov.overlay_ratio >= 1.2 ? 'hot' : ''}">KEE history ${ov.overlay_ratio}× · ${ov.times_hit} hits${ov.thin_sample ? ' (thin)' : ''}</span>` : ''}</div>

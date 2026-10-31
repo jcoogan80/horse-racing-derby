@@ -30,7 +30,7 @@ races=[]
 for r in M:
     hs=[]
     for h in r['horses']:
-        d={k:h.get(k) for k in ['pgm','name','ml','jockey','trainer','status','p','p_fig','p_cons','p_ml','p_opt','edge','fair','tags','rank','tfus_early','tfus_late','days_off','adj_why','fig_note','fig_raw','adj','opt_vel','opt_pos','opt_std','opt_sd','ofigs','ongs','rs']}
+        d={k:h.get(k) for k in ['pgm','name','ml','jockey','trainer','status','p','p_fig','p_cons','p_ml','p_opt','edge','fair','tags','rank','tfus_early','tfus_late','foreign_based','days_off','adj_why','fig_note','fig_raw','adj','opt_vel','opt_pos','opt_std','opt_sd','ofigs','ongs','rs']}
         d.update({'cons':[[s,ro] for s,ro in h['cons']], 'figs':h['figs'][:3],
                   'lr':[[x['date'][5:],x['track'],x['surf'],x['fin'],x['field'],x['fig'],x['kind']] for x in h['last_races'][:5]],
                   'kee':(h.get('records') or {}).get('Kee'),'dst':(h.get('records') or {}).get('Dst'),'life':(h.get('records') or {}).get('Life'),
@@ -43,7 +43,26 @@ for t in T:
     for l in t['legs']:
         l['cov']=round(l['cov'],4); l['cov_ml']=round(l['cov_ml'],4)
     t['hit']=round(t['hit'],5); t['hit_ml']=round(t['hit_ml'],5); t['edge']=round(t['edge'],3)
-json.dump({'races':races,'tickets':T},open('page_data.json','w'),separators=(',',':'))
+RES=json.load(open('results.json'))
+NOTE={('fri',1):'4 of 8 scratched',('fri',5):'Dormie drew off by 7 from a 5-horse group'}
+for rr in races:
+    x=RES.get(rr['day'],{}).get(str(rr['num']))
+    if x: rr['result']={'order':x['order'],'pays':x.get('pays',{}),'net_units':x.get('net_units'),'note':NOTE.get((rr['day'],rr['num']))}
+MULTI={'fri':[{'label':'R1–3 Pick 3 saver ($190, $1 base)','net':170},{'label':'R6–8 Pick 3 main ($24, $1 base)','net':12},{'label':'R7–10 Pick 4 saver ($54, $1 base)','net':29},{'label':'R6–10 Pick 5 saver ($125, $1 base)','net':25}]}
+LESSONS={'fri':['The winner has been in the model top 4 in most races, but the model #1 keeps losing: play wider tickets, two or three on top.',
+ 'Model singles and favorites keep getting beaten (Niosa 37% unplaced). Single only Sun Goddess and Hughes, and back them up.',
+ 'Europeans ran 1-2-3-4 in the Juvenile Turf Sprint (Hell of A Spin was model #9). Add Europeans in the turf races.',
+ 'Long layoffs (High Camp, 230 days) and big form jumps (Dormie by 7) beat us. The layoff penalty will be eased for Saturday.',
+ 'Price plays from figures and Optix are 0 for 6 on win bets. Straight bets cut to half size for the rest of Friday.',
+ 'Track fast and fair. No clear speed or post bias yet.'],
+ 'sat':['Saturday rules come from Friday\'s full results (see the BC 2026 Friday Takeaways doc).',
+ 'KEY singles: Friday KEYs won 3 of 4. Saturday singles need 40%: Englishman (R8) and Nitrogen (R10). Ways and Means (36%) is paired.',
+ 'Model #1 under 35% went 0 for 6 on top Friday but ran 2nd or 3rd in 4. Those horses go underneath in the exactas and trifectas.',
+ 'Europeans took 9 of 9 top-3 spots in Friday\'s BC turf races. Foreign-based runners get a 1.5x boost on turf and fill the 2nd slot; US horses outside the model top 2 are 3rd-slot only.',
+ 'The top late-pace dirt horse ran 2nd in 4 of 6 Friday dirt races: it goes in the 2nd slot. The lone-speed bonus is off (0 for 3).',
+ 'Saver tickets made the money (+228 at $1 base). The saver is now the main ticket, with a tight backup. No adjusted or Against tickets (Magic\'s against calls went 0 for 2).',
+ 'Straight bets only on an overlaid KEY. Price win bets went 0 for 6+ on Friday.']}
+json.dump({'races':races,'tickets':T,'multi':MULTI,'lessons':LESSONS},open('page_data.json','w'),separators=(',',':'))
 t=open('template.html').read()
 open('bc_card.html','w').write(t.replace('__DATA__',open('page_data.json').read().replace('</','<\\/')))
 print('built')

@@ -65,6 +65,49 @@ def leg_against(r):
     return leg_main(r)
 
 
+def leg_adjusted(r):
+    # Friday lesson: never a lone single (add the next horse), and on turf add the top European not already used
+    hs = runners(r)
+    main, why = leg_main(r)
+    pick = list(main)
+    extra = [h for h in hs if h not in pick]
+    if len(pick) == 1 and extra:
+        pick.append(extra[0])
+    if r['turf']:
+        euro = next((h for h in hs[:8] if h.get('foreign_based') and h not in pick), None)
+        if euro: pick.append(euro)
+    return pick, 'adjusted' + (' + Euro' if r['turf'] else '')
+
+
+def leg_sat_tight(r):
+    # Saturday tight backup: Friday main rules, but a single needs 40%
+    hs = runners(r)
+    if hs[0]['p'] < 0.40 and hs[0]['p'] >= 0.35:
+        pick = hs[:2]; why = 'pair (KEY under 40%%: %.0f%%)' % (hs[0]['p'] * 100)
+        v = next((h for h in hs[2:] if 'VALUE' in h['tags'] and h['p'] >= 0.08), None)
+        if v: pick = pick + [v]; why += ' + value add'
+        return pick, why
+    return leg_main(r)
+
+
+def leg_sat_main(r):
+    # Saturday default = the saver: singles only at 40%+, otherwise next horse + bombs, top European on turf
+    hs = runners(r)
+    if hs[0]['p'] >= 0.40:
+        return hs[:1], 'single (model %.0f%%)' % (hs[0]['p'] * 100)
+    base, why = leg_sat_tight(r)
+    pick = list(base)
+    extra = [h for h in hs if h not in pick]
+    if extra: pick.append(extra[0])
+    if r['turf']:
+        euro = next((h for h in hs[:8] if h.get('foreign_based') and h not in pick), None)
+        if euro: pick.append(euro); why += ' + Euro'
+    for h in extra:
+        if h not in pick and any(role == 'bomb' for _, role in h['cons']): pick.append(h)
+    pick = pick[:6]
+    return pick, why.split(' (')[0].replace('single', 'pair') + ' + saver'
+
+
 def summarize(day, name, legs, picker):
     out_legs, combos, cov, cov_ml = [], 1, 1.0, 1.0
     for num in legs:
@@ -73,6 +116,12 @@ def summarize(day, name, legs, picker):
             pick, why = leg_main(r)
         elif picker == 'against':
             pick, why = leg_against(r)
+        elif picker == 'sat_main':
+            pick, why = leg_sat_main(r)
+        elif picker == 'tight':
+            pick, why = leg_sat_tight(r)
+        elif picker == 'adjusted':
+            pick, why = leg_adjusted(r)
         else:
             mp, _ = leg_main(r)
             pick, why = leg_wide(r, mp), 'saver'
@@ -87,8 +136,14 @@ def summarize(day, name, legs, picker):
 
 tickets = []
 for day, name, legs in SEQS:
+    if day == 'sat':   # Saturday: saver is the default ticket, tight backup, no Against / adjusted
+        t = summarize(day, name, legs, 'sat_main'); t['kind'] = 'main'; tickets.append(t)
+        tickets.append(summarize(day, name, legs, 'tight'))
+        continue
     tickets.append(summarize(day, name, legs, 'main'))
     tickets.append(summarize(day, name, legs, 'wide'))
+    if day == 'fri' and min(legs) >= 6:
+        tickets.append(summarize(day, name, legs, 'adjusted'))
     if any(leg_against(R[(day, n)])[1].startswith('press') for n in legs) and len(legs) >= 4:
         tickets.append(summarize(day, name, legs, 'against'))
 
