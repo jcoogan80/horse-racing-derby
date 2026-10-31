@@ -282,6 +282,7 @@ function kbcRender() {
   const w = KBC.watcher, date = D.meta.dates[KBC.day];
   let ws;
   if (w && w.track === 'KEE' && w.date === date) ws = `<span class="ok">Live scratches on</span> · watcher file ${kbcEsc(w.date)} updated ${kbcEsc(w.generated_at || '')} · ${(w.scratches || []).filter(s => /scratch/i.test(s.change_type || '')).length} scratches`;
+  else if (KBC.live && !KBC.liveErr) ws = `<span class="ok">Scratches from the tote</span> (scratch watcher file not running for KEE; not needed while live odds are on)`;
   else ws = `<span class="warn">Watcher not running for KEE ${date}</span>${w ? ` (scratches.json is ${kbcEsc(w.track)} ${kbcEsc(w.date)})` : ''}. Tap “Scr” on a horse to scratch it by hand.`;
   const nman = Object.keys(KBC.manual).filter(k => KBC.manual[k] && k.startsWith(KBC.day + '|')).length;
   document.getElementById('kbc-status').innerHTML = `${ws}${nman ? ` · <b>${nman}</b> tapped in on this device <button class="kbc-x" onclick="kbcClearManual()">Clear</button>` : ''}<br>Model built ${kbcEsc(D.meta.generated_at)} · ${kbcEsc(D.meta.model)}. ${kbcLiveStatus()}`;
